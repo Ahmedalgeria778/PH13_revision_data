@@ -82,15 +82,15 @@ Aucune simulation LBM nouvelle n’a été lancée. Les chiffres des rapports so
 
 ### 7.2 Résultats chiffrés verrouillés
 
-* **Support commun** : $\\varepsilon_D=0.72$–$20.02\\%$ sur 9\,488–15\,168 nœuds du masque ; $D_{\\rm FEM}^{\\Omega}/D_{\\rm FEM}^{M}=1.63$–$2.06$. La convention est $2\\nu S:S$ des deux côtés, avec $\\nu=2/Re$ en unités papier et $U_{\\rm lid}=0.05$ pour LBM / $1$ pour FEM.
-* **Ancienne colonne `rel. D error`** : $|D_{\\rm FD,lattice}-D_{\\rm exact,lattice}|/D_{\\rm exact,lattice}$ ; elle ne mesure pas une validation LBM/FEM.
-* **FEM** : maillages 4/5/6 = 1\,024/4\,096/16\,384 triangles et 4\,771/18\,755/74\,371 inconnues ; Picard $10^{-9}$ ; 36/36 solves convergés en 14–34 itérations. Jonction gauche $y=+1.22\\times10^{-16}$ (mobile), jonction droite $y=0$ (fixe) sous le test strict $y>0$.
-* **Courbure** : cercle unité $\\kappa=1.000000$, $f_{\\rm sharp}=0$ ; 190 lignes recalculées. Le seuil reste $\\kappa_w\\ge2\\langle|\\kappa|\\rangle_\\Gamma$ avec $w=0.05L_c$. La corrélation de Pearson $\\kappa_{w,\\rm rms}$/$D/A$ à $Re=1000$ passe de $+0.892$ à $+0.709$ ; $f_{\\rm sharp}$ change de signe.
-* **Budget cœur/paroi** : 506 lignes, résidu additif maximal $2.78\\times10^{-17}$. Pour $Re=1000$, $N=256$, $\\delta=0.05L_c$, $n=4\\to8$, la part du cœur dans l'augmentation est $87.8\\%$ ; la part absolue du cœur est $28.1\\%$ à $n=4$ et $30.7\\%$ à $n=8$. La plage disponible est $61.5$–$99.8\\%$.
+* **Support commun** : $\varepsilon_D=0.72$–$20.02\%$ sur 9\,488–15\,168 nœuds du masque ; $D_{\rm FEM}^{\Omega}/D_{\rm FEM}^{M}=1.63$–$2.06$. La convention est $2\nu S:S$ des deux côtés, avec $\nu=2/Re$ en unités papier et $U_{\rm lid}=0.05$ pour LBM / $1$ pour FEM.
+* **Ancienne colonne `rel. D error`** : $|D_{\rm FD,lattice}-D_{\rm exact,lattice}|/D_{\rm exact,lattice}$ ; elle ne mesure pas une validation LBM/FEM.
+* **FEM** : maillages 4/5/6 = 1\,024/4\,096/16\,384 triangles et 4\,771/18\,755/74\,371 inconnues ; Picard $10^{-9}$ ; 36/36 solves convergés en 14–34 itérations. Jonction gauche $y=+1.22\times10^{-16}$ (mobile), jonction droite $y=0$ (fixe) sous le test strict $y>0$.
+* **Courbure** : cercle unité $\kappa=1.000000$, $f_{\rm sharp}=0$ ; 190 lignes recalculées. Le seuil reste $\kappa_w\ge2\langle|\kappa|\rangle_\Gamma$ avec $w=0.05L_c$. La corrélation de Pearson $\kappa_{w,\rm rms}$/$D/A$ à $Re=1000$ passe de $+0.892$ à $+0.709$ ; $f_{\rm sharp}$ change de signe.
+* **Budget cœur/paroi** : 506 lignes, résidu additif maximal $2.78\times10^{-17}$. Pour $Re=1000$, $N=256$, $\delta=0.05L_c$, $n=4\to8$, la part du cœur dans l'augmentation est $87.8\%$ ; la part absolue du cœur est $28.1\%$ à $n=4$ et $30.7\%$ à $n=8$. La plage disponible est $61.5$–$99.8\%$.
 * **Campagnes** : `data_all190` = 190 champs ; `data_refine` = 50 champs et 8 valeurs de $Re$ ; $N=256$ = 63 champs et 62 appariés ; seul $(n,Re)=(4.25,300)$ est non apparié.
-* **$L_{\\rm mov}$** : $2.8789718432636$ ($n=1.25$), $\\pi$ ($n=2$), $3.5088489717820$ ($n=4$), $3.7389869262423$ ($n=8$), avec validation losange/cercle/limite carrée.
-* **$P_{\\rm lid}$** : non coté comme grandeur vérifiée. 810 champs finaux sans $f$ ; 148 checkpoints avec $f,it$ ; le rapport de flux archivé est $-4.419$ au lieu de $+1$. La valeur requise $P/\\Phi$ varie de $4.268$ à $1.465$ entre $N=64$ et $512$, donc n'est pas convergée.
-* **Bilan d'énergie** : distinction maintenue entre identité continue, bilan discret LBM exact non reconstruit et diagnostic de champs archivés non fermé. Convention $p_{\\rm LBM}=c_s^2(\\rho_{\\rm LBM}-1)$, $c_s^2=1/3$, et $p=(\\rho-1)/(3U_{\\rm lid}^2)$ en unités papier.
+* **$L_{\rm mov}$** : $2.8789718432636$ ($n=1.25$), $\pi$ ($n=2$), $3.5088489717820$ ($n=4$), $3.7389869262423$ ($n=8$), avec validation losange/cercle/limite carrée.
+* **$P_{\rm lid}$** : non coté comme grandeur vérifiée. 810 champs finaux sans $f$ ; 148 checkpoints avec $f,it$ ; le rapport de flux archivé est $-4.419$ au lieu de $+1$. La valeur requise $P/\Phi$ varie de $4.268$ à $1.465$ entre $N=64$ et $512$, donc n'est pas convergée.
+* **Bilan d'énergie** : distinction maintenue entre identité continue, bilan discret LBM exact non reconstruit et diagnostic de champs archivés non fermé. Convention $p_{\rm LBM}=c_s^2(\rho_{\rm LBM}-1)$, $c_s^2=1/3$, et $p=(\rho-1)/(3U_{\rm lid}^2)$ en unités papier.
 
 ### 7.3 Dépôt public
 
