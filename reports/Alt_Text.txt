@@ -46,8 +46,8 @@ Caption: Wall-band refinement.
 Alt text: Wall-band refinement.
 
 [MAIN ARTICLE item 10; figure/table]
-Caption: Complementary evidence. (a) Integrated kinetic energy saturates at high $n$. (b) The independent P2/P1 solver agrees with the LBM field; the archived comparison at $Re=400$, $N=128$ reports $1.39\%$ at $n=1.25$ and $0.78\%$ at $n=4$. (c) The wall-band diagnostics remain resolution-sensitive, so the reference grid is used for ordering rather than converged amplitudes.
-Alt text: Complementary evidence. (a) Integrated kinetic energy saturates at high $n$. (b) The independent P2/P1 solver agrees with the LBM field; the archived comparison at $Re=400$, $N=128$ reports $1.39\%$ at $n=1.25$ and $0.78\%$ at $n=4$. (c) The wall-band diagnostics remain resolution-sensitive, so the reference grid is used for ordering rather than converged amplitudes.
+Caption: Complementary evidence. (a) Integrated kinetic energy saturates at high $n$. (b) The independent P2/P1 solver agrees with the LBM field; the independent comparison at $Re=400$, $N=128$ reports $1.39\%$ at $n=1.25$ and $0.78\%$ at $n=4$. (c) The wall-band diagnostics remain resolution-sensitive, so the reference grid is used for ordering rather than converged amplitudes.
+Alt text: Complementary evidence. (a) Integrated kinetic energy saturates at high $n$. (b) The independent P2/P1 solver agrees with the LBM field; the independent comparison at $Re=400$, $N=128$ reports $1.39\%$ at $n=1.25$ and $0.78\%$ at $n=4$. (c) The wall-band diagnostics remain resolution-sensitive, so the reference grid is used for ordering rather than converged amplitudes.
 
 [MAIN ARTICLE item 11; figure/table]
 Caption: Integrated kinetic energy at $Re=1000$, $N=128$, with the two area normalizations kept distinct.
@@ -78,8 +78,8 @@ Caption: Bracketed crossings of adjacent-exponent ratios. ``No crossing'' means 
 Alt text: Bracketed crossings of adjacent-exponent ratios. ``No crossing'' means the ratio keeps its sign over the available bracket; the estimator is linear interpolation of $\log$(ratio).
 
 [MAIN ARTICLE item 18; figure/table]
-Caption: Fit-window sensitivity of $n^*_{D/A}$ on the same archived fields.
-Alt text: Fit-window sensitivity of $n^*_{D/A}$ on the same archived fields.
+Caption: Fit-window sensitivity of $n^*_{D/A}$ on the same computed fields.
+Alt text: Fit-window sensitivity of $n^*_{D/A}$ on the same computed fields.
 
 [MAIN ARTICLE item 19; figure/table]
 Caption: Common-support dissipation at $N=128$ and $n_{\rm ref}=6$. Here $\varepsilon_D=100|D_{\rm LBM}^{M}-D_{\rm FEM}^{M}|/D_{\rm FEM}^{M}$; the last column integrates the same FEM strain over the full domain.
@@ -162,8 +162,8 @@ Caption: Grid dependence of the LBM--FEM interior relative $L_2$ discrepancy for
 Alt text: Grid dependence of the LBM--FEM interior relative $L_2$ discrepancy for the circular cavity at $Re=100$ as the LBM resolution is refined from $N=32$ to $N=96$. The observed decrease is consistent with a reduction of discretization error over the tested resolutions.
 
 [SUPPLEMENT item 16; figure/table]
-Caption: Database quality-control summary ($190$ cases analysed, $N=128$).
-Alt text: Database quality-control summary ($190$ cases analysed, $N=128$).
+Caption: Dataset consistency-check summary ($190$ cases analysed, $N=128$).
+Alt text: Dataset consistency-check summary ($190$ cases analysed, $N=128$).
 
 [SUPPLEMENT item 17; figure/table]
 Caption: Relative area error of the discretized domain over the $n\times Re$ grid of the analysed subset. All values are below the $1\,\%$ threshold.
@@ -210,8 +210,8 @@ Caption: Correlations with $D/A_{\rm mask}$ at fixed $Re$. Spearman values are s
 Alt text: Correlations with $D/A_{\rm mask}$ at fixed $Re$. Spearman values are shown only for $Re=1000$.
 
 [SUPPLEMENT item 28; figure/table]
-Caption: Wall-curvature diagnostic, wall-band dissipation share and $D/A_{\rm mask}$ versus wall-band localization on the reference grid. Axes and tick labels are enlarged for review; the panels use the final periodic arclength interpolation.
-Alt text: Wall-curvature diagnostic, wall-band dissipation share and $D/A_{\rm mask}$ versus wall-band localization on the reference grid. Axes and tick labels are enlarged for review; the panels use the final periodic arclength interpolation.
+Caption: Wall-curvature diagnostic, wall-band dissipation share and $D/A_{\rm mask}$ versus wall-band localization on the reference grid. Axes and tick labels are enlarged for clarity; the panels use the periodic arclength interpolation.
+Alt text: Wall-curvature diagnostic, wall-band dissipation share and $D/A_{\rm mask}$ versus wall-band localization on the reference grid. Axes and tick labels are enlarged for clarity; the panels use the periodic arclength interpolation.
 
 [SUPPLEMENT item 29; figure/table]
 Caption: Additive budget for the detailed case $Re=1000$, $N=256$, $\delta=0.05L_c$. All denominators are $A_{\rm mask}$, never $A_{\rm core}$ or the exact geometric area.
@@ -246,8 +246,8 @@ Caption: Upper-half moving-wall arclength for $L_c=2$. The $n=2$ value is $\pi$;
 Alt text: Upper-half moving-wall arclength for $L_c=2$. The $n=2$ value is $\pi$; the diamond and square limits are validated separately below.
 
 [SUPPLEMENT item 37; figure/table]
-Caption: Verified campaign inventory. ``Distinct'' counts unique $(n,Re)$ pairs. The projected-lid set has manifests but no final fields.
-Alt text: Verified campaign inventory. ``Distinct'' counts unique $(n,Re)$ pairs. The projected-lid set has manifests but no final fields.
+Caption: Campaign inventory. ``Distinct'' counts unique $(n,Re)$ pairs. The projected-lid definition has no converged fields.
+Alt text: Campaign inventory. ``Distinct'' counts unique $(n,Re)$ pairs. The projected-lid definition has no converged fields.
 
 [SUPPLEMENT item 38; figure/table]
 Caption: Fit-window sensitivity on the $N=128$ union at the three central Reynolds numbers. The margin is the relative depth difference between the fitted vertex and the sampled argmin; a negative value means the fitted vertex lies above the sample minimum.

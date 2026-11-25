@@ -43,9 +43,10 @@ The publication-ready supplement is a **single coherent document**:
 * `supplement/PH13_supplementary_final.pdf`
 * `supplement/supp_*.tex` — external table fragments required to compile the supplement
 * `supplement/Marked-Up_Supplementary.tex` / `.pdf` — marked-up version against the
-  25 September 2026 supplementary submission (blue = new/revised, red appendix = removed)
+  25 September 2026 supplementary submission (blue = new/revised; removed material
+  summarised in a final prose section, no raw LaTeX printed)
 
-It contains only supporting fluid-physics material: solver verification, database quality control, observable definitions, the reference-field atlas, wall-curvature diagnostics, the additive wall/core budget, common-support LBM/FEM dissipation, FEM mesh and junction conventions, energy and pressure conventions, moving-wall geometry, campaign inventory, fit diagnostics, corner-eddy analysis, and the projected-lid boundary-law convention. It contains no addendum, no revision history, no operator-learning material and no training/provenance discussion.
+It contains only supporting fluid-physics material: solver verification, dataset consistency checks, observable definitions, the reference-field atlas, wall-curvature diagnostics, the additive wall/core budget, common-support LBM/FEM dissipation, FEM mesh and junction conventions, energy and pressure conventions, moving-wall geometry, campaign inventory, fit diagnostics, corner-eddy analysis, and the projected-lid boundary-law convention. It contains no addendum, no revision history, no operator-learning material and no training/provenance discussion. Neither the article nor the supplement refers to external file names, paths or the repository in the body text; such references appear only in the Data availability statements.
 
 The supplement figures are in `figures/final_supplement/`; the final article figures `curve_dissipation_vs_n.png`, `map_dissipation.png`, `fig_fields_plate.png`, `fig_curvature.png` and `fig_nearwall_large_axes.png` are in `figures/`. The journal highlight image is supplied as `figures/Highlight_Image.tif` and `figures/Highlight_Image.jpeg` (2404 x 1882 px, 300 dpi).
 
