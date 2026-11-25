@@ -78,7 +78,7 @@ Aucune simulation LBM nouvelle n’a été lancée. Les chiffres des rapports so
 
 * `PH13_manuscript_physics_only.tex` : **17 pages**, **sept sections** (`Introduction`, `Geometry, boundary law and numerical method`, `Geometry-induced reorganization of the reference flow`, `Flow organization beyond the dissipation minimum`, `Why the area-normalized dissipation is non-monotonic`, `Resolution, fit windows and finite-element validation`, `Conclusions`) plus la sous-section `Scope and limitations`. Deux compilations successives ; aucune référence indéfinie. Seul subsiste l'avertissement bénin `microtype` sur la patch `footnote`.
 * `PH13_supplementary_enriched.tex` : **54 pages**. Le préfixe est identique octet pour octet au supplément original. La seule différence est l'ajout de `\input{revision_addendum}` juste avant `\end{document}`. Aucune référence indéfinie ; deux avertissements bénins `hyperref` hérités de chaînes Unicode et des messages `ignored error: Infinite glue shrinkage found in box being split` hérités des longs tableaux originaux.
-* `revision_addendum.tex` : huit sous-sections nouvelles — support commun LBM/FEM, budget cœur/paroi étendu, courbure corrigée, audit FEM/jonctions, conventions d'énergie, `L_mov`/`P_lid`, inventaire des campagnes, ajustements/croisements et reproduction.
+* `revision_addendum.tex` : neuf sous-sections nouvelles — support commun LBM/FEM, budget cœur/paroi étendu, courbure corrigée, audit FEM/jonctions, conventions d'énergie, `L_mov`/`P_lid`, inventaire des campagnes, ajustements/croisements et reproduction.
 
 ### 7.2 Résultats chiffrés verrouillés
 
