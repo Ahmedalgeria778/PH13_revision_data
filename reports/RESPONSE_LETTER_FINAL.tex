@@ -1,24 +1,24 @@
 % =====================================================================
-% PH13 -- Point-by-point response to the reviewers (English).
-% Style adapted from Responses_to_Editor_and_Reviewers.tex.
-% Recalled questions: dark blue italics.  Response labels: green, as in
-% the reference template; all response elements are printed in black.
+% Point-by-point response to the original referee reports.
+% All quoted comments are transcribed from ORIGINAL_REFEREE_REPORTS_2026-11-25.txt.
+% Line breaks are normalized to spaces; LaTeX escaping is used only for compilation.
 % =====================================================================
 \documentclass[11pt,a4paper]{article}
 \usepackage[margin=2.4cm]{geometry}
-\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\usepackage{amsmath,amssymb}
 \usepackage{xcolor}
-\usepackage{enumitem}
-\usepackage[hidelinks]{hyperref}
-\hypersetup{colorlinks=true, urlcolor=blue!60!black, linkcolor=blue!60!black}
+\usepackage[hidelinks,breaklinks]{hyperref}
+\urlstyle{same}
 \sloppy
 \emergencystretch=3em
 
 \definecolor{deepblue}{HTML}{003366}
-\newcommand{\revwork}[1]{\textbf{\textcolor[rgb]{0.0,0.4,0.0}{#1}}}
-\newcommand{\qcomment}[1]{\textcolor{deepblue}{\textit{#1}}}
+\definecolor{revgreen}{HTML}{176B32}
+\newcommand{\qcomment}[1]{\textcolor{deepblue}{\itshape #1}}
+\newcommand{\revwork}[1]{\textbf{\textcolor{revgreen}{#1}}}
 \newcommand{\ruleline}{\begin{center}\rule{0.6\textwidth}{0.6pt}\end{center}}
 
 \begin{document}
@@ -26,49 +26,60 @@
 \begin{center}
 {\LARGE\bfseries Point-by-Point Response to the Reviewers}\\[2mm]
 {\large Physics of Fluids}\\[2mm]
-{\large \emph{Geometry-induced reorganization of viscous dissipation in superelliptic lid-driven cavities}}\\[2mm]
+{\large \emph{Geometry-induced reorganization of viscous dissipation in Continuously Deformable superelliptic lid-driven cavities}}\\[2mm]
 BENIAICHE Ahmed
 \end{center}
 
 \vspace{3mm}
-We thank the Associate Editor and the Reviewers for their careful reading and for the constructive comments, which have led us to substantially revise the manuscript. The main article has been restructured as a physics-only seven-section manuscript, and the supplementary material has been rebuilt as a single coherent document containing only publication-ready supporting fluid-physics material. All numerical results quoted below were regenerated from the archived fields or from targeted Taylor--Hood P2/P1 finite-element solves; no new lattice Boltzmann campaign was launched. A clean version of the revised article, the final single-part supplement and the public data repository are provided together with this response letter. Below, each recalled comment is followed by a statement of the revision made, or by an explicit justification where no change was appropriate. The original full referee reports were not supplied to us for Reviewers~1, 2, 4, 5 and 6, and no separate report was supplied for Reviewer~3; the comments recalled below are therefore faithful abbreviated reconstructions from the audit matrix, the numbered validation reports and the reviewer identifiers retained in the revision record, and they are not verbatim quotations. Their wording can be replaced by the exact referee text if the reports are provided, without changing the scientific responses. No point-by-point reply is fabricated for Reviewer~3.
+We thank the Associate Editor and the reviewers for their careful reports and constructive criticisms. The decision record lists Referees \#1, \#2, \#4, \#5, and \#6 only; no separate report was supplied for Referee \#3, and none is fabricated here. We have restored the title to ``Geometry-induced reorganization of viscous dissipation in Continuously Deformable superelliptic lid-driven cavities'', removed the DeepONet/operator-learning work from the final main article and supplement in response to Referee \#1 major comment 4, and recentred the paper on the fluid-physics question. The completed targeted LBM projected-lid control consists of $13$ matched fields ($n=1.5,2,4,8$ at $Re=100$ and $Re=1000$ on $N=128$, plus selected $N=256$ fields); projected/tangential $D/A_{\rm mask}$ ratios are $0.391$--$0.906$ and the sampled argmin shifts from $n=4$ to $n=2$. It remains a coupled geometry/forcing control, not an isolation of geometry. Grid convergence remains limited, logarithmic junction fits remain descriptive, and sampled crossings and fitted minima remain diagnostics. A separate Microsoft Word alt-text document is supplied, per AIP. Every comment below is reproduced from the authoritative report file with line-break-normalized whitespace; LaTeX escaping is used only where needed for compilation.
 
 \bigskip
 \ruleline
-
 \section*{Referee \#1}
 
 \medskip
-\qcomment{\textbf{Question R1-1.} Wall-curvature diagnostic: unit-circle test, arclength interpolation and recomputation of the database.}
+\noindent\qcomment{\textbf{Summary.} The revision has responded to the editor's concern by foregrounding the fluid physics, and manuscript's investigations are worth publishing. However, in its present form the contribution is obscured by excessive length and writing that is very hard to follow. I recommend major revision.}
 
-\revwork{Revision made.} We agree that the diagnostic had to be rebuilt. The production algorithm interpolated only a short initial segment of the dense periodic arclength table, which collapsed the boundary samples onto two short arcs. For the unit circle, whose exact curvature is unity, the defective diagnostic returned $\kappa_{w,\max}=29.87$ and $\kappa_{w,\mathrm{rms}}=4.01$ with $f_{\mathrm{sharp}}=0.087$. The final algorithm interpolates the full periodic table, uses periodic central differences for the tangent angle and a wrapped angular difference for the window curvature. It now returns $\kappa_{w,\max}=\kappa_{w,\mathrm{rms}}=1.000000$ and $f_{\mathrm{sharp}}=0$ at every resolution and window tested.
-
-\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
-\item \emph{Action.} All 190 curvature rows were recomputed with the final window $w=0.05L_c$ and the sharp-set threshold $\kappa_w\ge2\langle|\kappa|\rangle_\Gamma$.
-\item \emph{Evidence.} \url{scripts/curvature/curvature_fixed.py}, \url{data/curvature/curvature_corrected_190.csv}, \url{reports/curvature_validation_report.md}; final panels \url{fig_curvature.png} and \url{fig_nearwall_large_axes.png}.
-\item \emph{Location.} Main Section~5.3; Supplement S5.
-\end{itemize}
+\noindent\revwork{Revision made.} The title has been restored to ``Geometry-induced reorganization of viscous dissipation in Continuously Deformable superelliptic lid-driven cavities''. The main article and supplement have been recentred on fluid physics, and the DeepONet/operator-learning material has been removed, explicitly in response to the original Referee \#1 major comment 4. Resolution limitations are now stated prominently rather than treated as a minor caveat.
 
 \medskip
-\qcomment{\textbf{Question R1-2.} Interpretation of curvature: the earlier claim that wall curvature alone locates the area-normalized dissipation minimum.}
-
-\revwork{Revision made.} We withdrew the wall-only explanation. At fixed Reynolds number the Pearson correlation between $\kappa_{w,\mathrm{rms}}$ and $D/A_{\mathrm{mask}}$ is positive but decreases from $+0.834$ at $Re=100$ to $+0.709$ at $Re=1000$; the corresponding Spearman coefficient at $Re=1000$ is only $+0.115$, and the sharp-set fraction is negatively correlated at $Re=500$ and $Re=1000$ ($-0.068$ and $-0.238$). The corrected statistics therefore do not support a curvature-set optimum.
-
-\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
-\item \emph{Action.} The low-loss band is now described as a compensation between decreasing wall loss and increasing core loss, using the additive wall/core budget rather than a wall-only mechanism.
-\item \emph{Location.} Main Sections~3 and 5.3; Supplement S5--S6.
-\end{itemize}
+\paragraph{Major comments}
 
 \medskip
-\qcomment{\textbf{Question R1-3.} Corner-secondary-eddy counts and the language used for threshold crossings.}
+\noindent\qcomment{\textbf{Major comment 1.} 1. In my opinion the manuscript length needs to be reduced substantially. The core content could be presented in 15-20 pages. Specifically, standard LBM methodology (Secs. 3.2-3.3), the database protocol (Sec. 3.4), and much of the observable-by-observable reporting in Section 4 can be moved to the supplementary material.}
 
-\revwork{Revision made.} No topological transition is claimed. The corner analysis now uses a $0.20L_c$ reporting band, a $0.25L_c$ search region and $s_{\mathrm{corner}}$ expressed in units of $L=L_c/2$; no extrapolated rows are retained. Counts that change between neighbouring sampled Reynolds numbers are reported as $1\%$ detection-threshold crossing brackets on the sampled grids.
+\noindent\revwork{Revision made.} The final manuscript is substantially shorter and focused on the physical question. Standard LBM methodology, the database protocol, and much of the observable-by-observable reporting have been moved to the supplementary material. The main text now follows a question--finding--significance structure.
 
-\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
-\item \emph{Action.} We removed the terms ``onset'' and ``topologically distinct'', and no causal link is inferred between the weak corner extremum and the dissipation increase.
-\item \emph{Evidence.} \url{data/final_supplement/corner_conv.csv}, \url{data/final_supplement/corner_bnd.csv}.
-\item \emph{Location.} Supplement S13--S14.
-\end{itemize}
+\medskip
+\noindent\qcomment{\textbf{Major comment 2.} 2. The abstract needs to be rewritten, it is hard to follow the methodology and motivation of the study in the abstract. It needs a clear narrative style that states the question, the finding, and why it matters. The same density problem affects the whole manuscript (especially Section 5).}
+
+\noindent\revwork{Revision made.} The abstract has been rewritten to state the question, the finding, and why it matters. Section~5 and the closing discussion have been reorganized around a small number of findings, and the operator-learning discussion that previously interrupted the physical narrative has been removed.
+
+\medskip
+\noindent\qcomment{\textbf{Major comment 3.} 3. The D/A minimum is a 0.4-0.9\% trough, while the reported resolution bias between N=128 and N=256 is 19.5-25.6\%. The authors argue the geometry-relative ordering is stable to \textasciitilde{}2\%, but a sub-percent feature resting on a 20\%+ biased baseline needs more than spot checks at selected Re. In my opinion, it is required to either extend the N=256 (or finer) campaign across the parameter space, or state the limitation far more prominently and temper the conclusions accordingly.}
+
+\noindent\revwork{Revision made.} The limitation is now stated explicitly and the conclusions have been tempered. No grid-independent continuum dissipation is claimed. With fixed physical-wall cutoffs $r_0=0,0.125,0.25,0.5$, the median $D_{256}/D_{128}-1$ falls from $21.37\%$ to $8.77\%$, with $4.33$--$14.28\%$ at the largest cutoff. Logarithmic fits are descriptive only, and sampled crossings and fitted minima remain diagnostics.
+
+\medskip
+\noindent\qcomment{\textbf{Major comment 4.} 4. It is suggested to remove or substantially shorten the DeepONet section (Sec. 6). It still runs \textasciitilde{}6 pages, does not inform the physical conclusions, and its 30-50\% dissipation errors make it unusable as a quantitative check. The accuracy-consistency decoupling finding is interesting but belongs in a separate, ML-focused paper. Removing it would sharpen the physical narrative considerably.}
+
+\noindent\revwork{Revision made.} In direct response to this comment, Referee \#1 major comment 4, DeepONet/operator learning has been removed from both the final main article and the supplement. The final physical conclusions do not rely on the accuracy-consistency-decoupling argument or on any neural-operator observable.
+
+\medskip
+\paragraph{Minor comment}
+
+\medskip
+\noindent\qcomment{\textbf{Minor comment 1.} 1. Table III\textasciitilde{}V are excessive, the titles are too long. If possible, these should be included in supplementary material or use a figure or summary where relevant.}
+
+\noindent\revwork{Revision made.} Detailed observable tables are treated as supporting material, with shortened captions and a more compact summary presentation in the main text. The detailed values remain available in the supplement and in the existing data repository.
+
+\medskip
+\paragraph{Recommendation}
+
+\medskip
+\noindent\qcomment{\textbf{Recommendation.} There manuscript presents interesting investigation on the D vs. D/A distinction and the wall-band decomposition in a continuously deformed cavity family. The work needs to be cut to a focused paper, rewritten for clarity, and better supported on resolution. These changes are suggested to offer clarity to PoF readers by presenting focused and core findings.}
+
+\noindent\revwork{Revision made.} The revised paper is a focused fluid-physics article. The distinction between total and area-normalized dissipation is retained, but the wall-band interpretation is now supported by an additive common-support budget and qualified by the resolution and junction-cutoff diagnostics.
 
 \bigskip
 \ruleline
@@ -76,36 +87,42 @@ We thank the Associate Editor and the Reviewers for their careful reading and fo
 \section*{Referee \#2}
 
 \medskip
-\qcomment{\textbf{Question R2-1.} Junction treatment and dissipation budget (point \#2.4): is there a physical regularization length at the moving-wall junctions?}
+\noindent\qcomment{\textbf{Summary, first paragraph.} This manuscript investigates the effects of continuous geometric deformation on the flow structures and viscous dissipation in superelliptic lid-driven cavities. The authors employ a multiple-relaxation-time lattice Boltzmann method, cross-validated with a finite-element solver, and further examine geometry extrapolation using a physics-informed DeepONet.}
 
-\revwork{Revision made.} There is no physical regularization in the code. The tangential lid is assigned by the strict nodal test $y>0$: the left junction at $y=+1.22\times10^{-16}$ is moving and the right junction at $y=0$ is fixed. Dissipation inside disks of radius $r$ around these points is therefore a cutoff-dependent diagnostic, not a converged physical total and not a regularization length.
-
-\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
-\item \emph{Action.} We report the junction share explicitly ($7.3$--$15.5\%$ at $r=0.05L_c$ and $22.6$--$42.6\%$ at $r=0.15L_c$ on $N=128$) and removed the claim that a power estimator had been verified.
-\item \emph{Evidence.} \url{scripts/junction/junction_budget.py}, \url{data/junction/junction_budget.csv}, \url{data/junction/identity_check.csv}, \url{reports/junction_budget_report.md}; schematic \url{figures/final_supplement/fig_supp_fem_junction_schematic.png}.
-\item \emph{Location.} Main Section~5.2; Supplement S8.
-\end{itemize}
+\noindent\revwork{Revision made.} The revised description now emphasizes continuous geometric deformation and viscous dissipation. The DeepONet/operator-learning strand has been removed, as stated in response to Referee \#1 major comment 4, and the cross-validation now targets gradient-dependent dissipation on a common support.
 
 \medskip
-\qcomment{\textbf{Question R2-2.} Energy balance and lid power: can a global power--dissipation closure be inferred from the archived fields?}
+\noindent\qcomment{\textbf{Summary, second paragraph.} The topic is interesting and relevant to computational fluid dynamics. I believe the manuscript can be considered for publication if the following issues are carefully addressed.}
 
-\revwork{Revision made.} No. We keep three statements distinct: (i) the continuous mechanical-energy identity, (ii) the exact discrete lattice-Boltzmann balance, which would require same-step distribution functions, and (iii) the diagnostic computed from the archived macroscopic fields. The archived-field flux ratio is $-4.419$ instead of the expected $+1$, so it cannot be interpreted as an energy-balance closure.
-
-\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
-\item \emph{Action.} No $P_{\mathrm{lid}}$ value is quoted in the main article or the supplement. The final 810 \texttt{.npz} fields contain no distribution functions $f$, whereas 148 checkpoint files contain $f$ and $it$; existing estimates give $P/\Phi=4.268$, $2.439$, $1.778$ and $1.465$ at $N=64$, $128$, $256$ and $512$, which is not grid-converged.
-\item \emph{Evidence.} \url{scripts/final_revision/audit_plid.py}, \url{reports/plid_audit_report.md}, \url{data/final_revision/plid_npz_inventory.csv}.
-\item \emph{Location.} Main Sections~5.2 and 6.3; Supplement S9--S10.
-\end{itemize}
-
-\bigskip
-\ruleline
-
-\section*{Referee \#3}
+\noindent\revwork{Revision made.} The physical findings and their limitations are now foregrounded. The revised paper distinguishes common-support gradient/dissipation validation from the unavailable global lid-power closure.
 
 \medskip
-\qcomment{\textbf{Question R3.} No separate reviewer-3 report was supplied.}
+\paragraph{Major remarks}
 
-\revwork{Justification for no change.} No point-by-point reply can be prepared for Reviewer~3 without the report, and no response is fabricated here. The FEM-gradient item tagged \texttt{\#3.3} in the internal audit trail was addressed together with Reviewer~4, Question~R4-3, and the complete numerical record is available in the public repository.
+\medskip
+\noindent\qcomment{\textbf{Major remark 1.} 1. In Fig. 2, the x-axis tick labels overlap with the x-axis and should be adjusted. The axis labels in Figs. 4, 5, 8, 9, and 10, as well as the legends in Figs. 6 and 7, are too small. Please increase the font sizes to improve readability.}
+
+\noindent\revwork{Revision made.} The final figure set was regenerated with larger axis labels, tick labels, and legends, and the Figure~2 tick-label collision was corrected. Dense panels are also identified explicitly in the separate Microsoft Word alt-text document supplied for AIP.
+
+\medskip
+\noindent\qcomment{\textbf{Major remark 2.} 2. The authors acknowledge that the adissipation changes by approximately 19.5-25.6\% between the 128 x 128 and 256 x 256 grids. This is a substantial numerical discrepancy, particularly because viscous dissipation is the central quantity investigated in this study. A more convincing grid-convergence study, preferably including higher resolutions, is needed.}
+
+\noindent\revwork{Revision made.} We have not claimed grid-independent absolute dissipation. Using fixed physical-wall cutoffs $r_0=0,0.125,0.25,0.5$, the median $D_{256}/D_{128}-1$ falls from $21.37\%$ to $8.77\%$, with a $4.33$--$14.28\%$ range at the largest cutoff. The logarithmic fits are descriptive only; no grid-independent continuum dissipation or asymptotic logarithmic scaling is claimed. Sampled crossings and fitted minima remain diagnostics of the archived grids.
+
+\medskip
+\noindent\qcomment{\textbf{Major remark 3.} 3. The manuscript reports cross-validation against a Taylor-Hood finite-element formulation. However, the principal conclusions depend on velocity gradients and viscous dissipation rather than velocity fields alone. The authors should demonstrate quantitative agreement between LBM and FEM for integrated dissipation.}
+
+\noindent\revwork{Revision made.} A common-support LBM/FEM validation of the gradient-dependent dissipation has been added. Both solvers use $D=2\nu\int S:S\,dA$ with $\nu=2/Re$. A derivative-index error in the old common-support script was corrected. The corrected range is $\varepsilon_D=0.06$--$6.52\%$; for $n=4$, $Re=1000$, $D_{\mathrm{LBM}}=0.02558962$, $D_{\mathrm{FEM}}=0.02461972$, and $\varepsilon=3.94\%$. No verified lid power is claimed because the archived final fields lack distribution functions.
+
+\medskip
+\noindent\qcomment{\textbf{Major remark 4.} 4. The moving and stationary boundaries meet at locations where the prescribed wall velocities are discontinuous. Such junctions can produce strong localized velocity gradients and affect the convergence of viscous dissipation. The authors should clarify how these junctions are treated numerically and quantify their contribution to the integrated dissipation across different geometries.}
+
+\noindent\revwork{Revision made.} The junction contribution is now quantified with fixed physical-wall cutoffs $r_0=0,0.125,0.25,0.5$. The median $D_{256}/D_{128}-1$ falls from $21.37\%$ to $8.77\%$, and the range at the largest cutoff is $4.33$--$14.28\%$. The logarithmic fits are descriptive only; we do not claim grid-independent continuum dissipation or asymptotic logarithmic scaling.
+
+\medskip
+\noindent\qcomment{\textbf{Major remark 5.} 5. A schematic illustrating the overall DeepONet implementation framework is not provided. The authors should include a diagram showing the network architecture, inputs and outputs, training procedure, and incorporation of physics-informed constraints to improve the clarity of the methodology.}
+
+\noindent\revwork{Revision made.} In response to the original Referee \#1 major comment 4, the DeepONet/operator-learning material has been removed from the final main article and from the supplement. The paper no longer contains a network schematic, residual comparison, or ML-based physical claim.
 
 \bigskip
 \ruleline
@@ -113,58 +130,130 @@ We thank the Associate Editor and the Reviewers for their careful reading and fo
 \section*{Referee \#4}
 
 \medskip
-\qcomment{\textbf{Question R4-1.} Square-limit boundary condition (point \#4.B1): does $n\to\infty$ recover the classical Ghia square cavity?}
+\noindent\qcomment{\textbf{Short summary.} Please see the attached review report for my detailed comments. I recommend major revision. The manuscript addresses a relevant topic, but several issues concerning the boundary conditions, numerical verification, dissipation calculations, and interpretation of the results require resolution before the main conclusions can be considered adequately supported.}
 
-\revwork{Revision made.} No. The domain tends geometrically to $[-1,1]^2$, but the tangential wall law does not tend to the Ghia condition. Because the moving part is defined by the strict test $y>0$, the upper halves of the vertical side walls remain in motion in the limiting geometry, downward on the right and upward on the left, while the lower halves remain fixed. The limit is therefore a square with piecewise tangential wall motion, not a square cavity with a uniformly translating upper wall.
-
-\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
-\item \emph{Action.} The Ghia cavity is now presented as an independent solver-verification case with a different boundary law. The Introduction now defines the shape family explicitly: $n=2$ corresponds to a circular cavity, values below 2 produce diamond-like shapes with pointed ends, while increasing $n$ above 2 progressively flattens the sides and approaches a square-like geometry. A horizontally projected tangential law is defined only as a kinematic boundary-law convention; no converged fields were generated with it and no hydrodynamic sensitivity is inferred.
-\item \emph{Evidence.} \url{reports/AUDIT_NOTES.md}, Section~2; \url{reports/junction_budget_report.md}, Section~1.
-\item \emph{Location.} Main Sections~1--2 and 7; Supplement S15.
-\end{itemize}
+\noindent\revwork{Revision made.} The boundary-condition, numerical-verification, dissipation, and interpretation issues raised in the attached report have been addressed in the final main article and supplement. Where the archived evidence does not support a stronger claim, the claim has been removed or explicitly qualified.
 
 \medskip
-\qcomment{\textbf{Question R4-2.} Junction regularization (point \#4.4): should the junction contribution be treated as a converged physical quantity?}
-
-\revwork{Revision made.} No. The junction assignment is a machine-precision-sensitive implementation detail of the strict $y>0$ switch, not a physical regularization length. We report the contribution as a function of the excision radius and state explicitly that it is cutoff-dependent; the archived-field identity diagnostic remains non-closed, as stated in the response to Reviewer~2.
-
-\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
-\item \emph{Action.} No blending or smoothing length was introduced. The junction schematic, the cutoff diagnostic and the archived-field identity check are included in the supplement.
-\item \emph{Evidence.} \url{data/junction/junction_budget.csv}, \url{data/junction/identity_check.csv}.
-\item \emph{Location.} Main Section~5.2; Supplement S8.
-\end{itemize}
+\paragraph{Attached review report: Geometry-Induced Reorganization of Viscous Dissipation in Continuously Deformable Superelliptic Lid-Driven Cavities; by BENIAICHE Ahmed}
 
 \medskip
-\qcomment{\textbf{Question R4-3.} Finite-element gradients and integrated dissipation (point \#4.3): are the LBM/FEM differences validation errors or different reconstructions?}
-
-\revwork{Revision made.} We assembled $D_{\mathrm{FEM}}^{\Omega}=2\nu\int_\Omega S(\mathbf{u}_h):S(\mathbf{u}_h)\,dA$ directly from the P2 strain field on a mesh ladder. Mesh levels 4/5/6 contain 1,024/4,096/16,384 triangles and 4,771/18,755/74,371 velocity-plus-pressure unknowns; all 36 Picard solves converged at $10^{-9}$ in 14--34 iterations. On a common support the relative dissipation discrepancy is $\varepsilon_D=0.72$--$20.02\%$ over 9,488--15,168 masked nodes, with $D_{\mathrm{FEM}}^{\Omega}/D_{\mathrm{FEM}}^{M}=1.63$--$2.06$.
-
-\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
-\item \emph{Action.} The column formerly labelled ``rel.~$D$ error'' is identified as $|D_{\mathrm{FD,lattice}}-D_{\mathrm{exact,lattice}}|/D_{\mathrm{exact,lattice}}$, a finite-difference reconstruction diagnostic on sampled FEM fields, not an LBM/FEM validation error. Richardson and incremental extrapolations are reported only as sensitivity diagnostics, not as asymptotic bounds.
-\item \emph{Evidence.} \url{scripts/fem/fem_dissipation_validation.py}, \url{scripts/fem/fem_gradient_reconstruction.py}, \url{reports/fem_validation_report.md}; \url{data/final_revision/common_support_dissipation.csv}.
-\item \emph{Location.} Main Section~6.2; Supplement S7--S8.
-\end{itemize}
+\paragraph{General comments, first paragraph}
 
 \medskip
-\qcomment{\textbf{Question R4-4.} Normalization and the factor of two in the dissipation definition.}
+\noindent\qcomment{\textbf{General comment, first paragraph.} This study investigates steady two-dimensional flow in a family of superelliptic lid-driven cavities across ten geometry exponents and nineteen Reynolds numbers up to Re = 1000. Reference solutions are obtained using a D2Q9 multiple-relaxation-time lattice Boltzmann method, with selected velocity fields compared against an independent finite-element formulation. The analysis examines kinetic energy, primary recirculation, vorticity, and viscous dissipation, including the distinction between total and area-normalized dissipation and the contributions of the wall layer and core. A physics-informed DeepONet is also evaluated outside the training geometry range. The topic is relevant to Physics of Fluids, and the continuous geometry family offers a useful framework for examining the combined influence of boundary geometry and wall motion on viscous losses.}
 
-\revwork{Revision made.} The same mechanical definition is used on both sides: $D=2\nu\int S:S\,dA$ with $\nu=2/Re$ in paper units. The archived LBM velocities are lid-normalized with $U_{\mathrm{lid}}=0.05$, while the FEM solves use $U_{\mathrm{lid}}=1$ and the same paper-unit viscosity. The factor two is counted once.
-
-\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
-\item \emph{Action.} We documented the pressure convention $p_{\mathrm{LBM}}=c_s^2(\rho_{\mathrm{LBM}}-1)$, $c_s^2=1/3$, and $p=(\rho-1)/(3U_{\mathrm{lid}}^2)$ in paper units.
-\item \emph{Location.} Main Section~2; Supplement S7 and S9.
-\end{itemize}
+\noindent\revwork{Revision made.} The revised paper is limited to the fluid-physics investigation. The title has been restored, the DeepONet/operator-learning section has been removed (Referee \#1 major comment 4), and the interpretation of $D$ versus $D/A$ is now tied to qualified wall/core and junction diagnostics rather than to a claimed new mechanism based on normalization alone.
 
 \medskip
-\qcomment{\textbf{Question R4-5.} Campaign inventory, matched grids and resolution claims.}
+\noindent\qcomment{\textbf{General comment, second paragraph.} The manuscript acknowledges several important limitations, including the resolution dependence of absolute dissipation, the shallow dissipation minima, the threshold dependence of secondary eddy detection, and the distinction between differential residuals and integrated-observable accuracy. However, some interpretations and robustness claims elsewhere remain inconsistent with these qualifications. The stated square-cavity limit requires correction, the curvature measures need verification against the circular case, and the dissipation and power-balance calculations require closer examination of the boundary-junction treatment. The simulation inventory and fitting procedures also need clarification. I recommend major revision to address these issues and ensure that the physical conclusions are supported by the numerical evidence.}
 
-\revwork{Revision made.} The verified inventory is as follows. \url{data_all190} contains 190 fields; \url{data_refine} contains 50 fields at eight Reynolds numbers, $Re=\{300,325,350,500,850,875,900,1000\}$; the $N=256$ collection contains 63 fields, of which 62 are matched to the $N=128$ grid. The only unmatched pair is $(n,Re)=(4.25,300)$.
+\noindent\revwork{Revision made.} The square-limit boundary law has been clarified, the curvature diagnostic has been corrected, junction-cutoff dependence has been quantified, and a common-support LBM/FEM dissipation comparison has been added. Absolute dissipation, fitted minima, sampled crossings, and log-junction fits are explicitly qualified; no verified lid power is claimed.
 
-\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
-\item \emph{Action.} Fitted minimum locations are compared only on matched grids. Absolute $D$ at $N=128$ is not presented as grid-converged, and no universal or resolution-independent optimum is claimed.
-\item \emph{Evidence.} \url{data/final_revision/campaign_inventory.csv}, \url{data/final_revision/campaign_N256_matching.csv}, \url{reports/campaign_verification.md}.
-\item \emph{Location.} Main Table~I and Section~6; Supplement S11.
-\end{itemize}
+\medskip
+\paragraph{Introduction}
+
+\medskip
+\noindent\qcomment{\textbf{Introduction comment 1.} 1. Section 2 already places the study in the context of shape-dependent cavity flows and dissipation-based shape optimization. The Introduction would benefit from a more precise statement of the principal new physical finding. The difference between the minima of D and D/A follows partly from the changing area and does not, by itself, establish a new flow mechanism. Please distinguish the new observations from the proposed explanations and identify the quantitative evidence supporting the principal physical contribution.}
+
+\noindent\revwork{Revision made.} The Introduction now distinguishes observations from proposed explanations. The principal quantitative contributions presented are the common-support gradient/dissipation validation, the additive wall/core budget, and the cutoff-aware junction analysis; the shallow trough is described as a low-dissipation range rather than a sharply resolved new mechanism.
+
+\medskip
+\noindent\qcomment{\textbf{Introduction comment 2.} 2. Sections 3.1 and 7.2 acknowledge that geometry and boundary conditions vary together. However, the statements in Sections 2.1 and 3.2 suggesting that area normalization separates domain-size effects from geometric redistribution require qualification. Varying n changes the moving-arc length and the direction of the imposed velocity, as well as the cavity area and curvature. Please identify which conclusions describe this coupled configuration. Reporting moving-wall length and consistently evaluated injected power would help characterize the forcing. A controlled comparison would be needed to support an isolated geometric attribution; alternatively, the conclusions can remain explicitly limited to the coupled geometry-and-forcing configuration.}
+
+\noindent\revwork{Revision made.} The conclusions are now explicitly limited to the coupled geometry-and-forcing configuration; area normalization is not presented as isolating domain-size effects. The completed targeted LBM control adds ten projected fields to three earlier fields and compares all $13$ with matched tangential fields: $n=1.5,2,4,8$ at $Re=100$ and $1000$ on $N=128$, and selected $N=256$ cases at both Reynolds numbers. Residuals are $7.73\times10^{-9}$--$1.00\times10^{-8}$. Projected/tangential $D/A_{\rm mask}$ ratios are $0.391$--$0.906$; on the three complete ladders the sampled argmin moves from $n=4$ to $n=2$ and its depth falls from $33.4$--$36.4\%$ to $4.1$--$13.1\%$. The control changes forcing direction together with geometry and is not an isolation of geometry.
+
+\medskip
+\paragraph{Numerical methods and case description}
+
+\medskip
+\noindent\qcomment{\textbf{Numerical methods comment 1.} 1. The square-cavity limit stated in Section 3.1 requires correction. With the moving boundary defined by y > 0 and the velocity prescribed as U\_lid(m\_y, $-$m\_x), the limit n $\to$ $\infty$ includes motion along the upper halves of both vertical side walls as well as the top wall. For example, the upper half of the right side wall has limiting velocity (0, $-$U\_lid), while its lower half remains stationary. This differs from the classical cavity with stationary side walls. Please clarify the implemented boundary condition and distinguish verification against a separately configured classical square-cavity benchmark from verification of the limiting member of the present geometry family.}
+
+\noindent\revwork{Revision made.} The implemented law is described explicitly. The moving arc uses the tangential prescription $U_{\mathrm{lid}}(m_y,-m_x)$; as $n\to\infty$, the upper halves of both vertical side walls also move. The classical Ghia cavity is presented as a separate verification case with stationary side walls, not as the limiting member of the present family.
+
+\medskip
+\noindent\qcomment{\textbf{Numerical methods comment 2.} 2. The moving and stationary boundary conditions meet discontinuously at ($\pm$1, 0), as acknowledged in Section S13. Such junctions can generate singular velocity gradients, so a finite, grid-independent full-domain dissipation cannot be assumed without examining the boundary treatment. Section 5.2 also explains that the production gradient mask excludes the wall-adjacent layer, introducing a cutoff that changes with resolution. Please specify any regularization used in the reference simulations, its physical length scale, and whether that scale remains fixed under refinement. If the boundary velocity is unregularized, assess the singular contribution and cutoff dependence, and distinguish the reported masked dissipation from any claimed continuum full-domain quantity.}
+
+\noindent\revwork{Revision made.} No physical regularization length is used at the moving/stationary junctions. Fixed physical-wall cutoffs $r_0=0,0.125,0.25,0.5$ are used to quantify cutoff dependence: the median $D_{256}/D_{128}-1$ falls from $21.37\%$ to $8.77\%$, with a $4.33$--$14.28\%$ range at the largest cutoff. Logarithmic fits are descriptive only; no grid-independent continuum dissipation or asymptotic logarithmic scaling is claimed.
+
+\medskip
+\noindent\qcomment{\textbf{Numerical methods comment 3.} 3. The window-averaged discrete curvature calculation in Section S15, Table S15, and Figure 11 requires verification against the circular geometry. For n = 2 and a = b = 1, the boundary is a unit circle with curvature equal to one everywhere, and averaging over an arclength window should preserve that value. However, Table S15 reports a maximum curvature of 29.87, an RMS curvature of 4.015, and a sharp-region dissipation fraction of 0.087 at Re = 100. These values deviate substantially from the analytical circular result, for which the stated sharp-set criterion should select no boundary points. Although Section S15 explicitly defines the measure as discrete, the magnitude of these deviations requires explanation. Please identify their source, verify the procedure against the analytical circular result under refinement while retaining the prescribed physical averaging window, and reassess the associated correlations and interpretations using the verified curvature measures.}
+
+\noindent\revwork{Revision made.} The corrected curvature diagnostic passes the unit-circle test with $\kappa_{\max}=\kappa_{\mathrm{rms}}=1.000000$ and $f_{\mathrm{sharp}}=0$. The recomputed correlations do not support a curvature-only mechanism, and the interpretation has been qualified accordingly.
+
+\medskip
+\noindent\qcomment{\textbf{Numerical methods comment 4.} 4. The power-balance verification in Section S19 and its interpretation in Section 5.2 require a complete control-volume formulation. Removing the junction disks creates artificial interfaces across which kinetic energy, pressure work, and viscous work can be transported. Agreement between the remaining lid power and dissipation outside the disks therefore does not establish a closed energy balance unless these interface terms are included or shown to be negligible. Please report the balance on a consistently defined domain and explain the whole-domain discrepancies of approximately 20.8\% and 31.3\% between the momentum-exchange power and the layer-restored dissipation in Table S22. The implications for verification of the production estimator should be stated explicitly. A check on representative superelliptic production geometries, or another quantitatively justified verification, would establish the relevance of this square-cavity diagnostic to the main results.}
+
+\noindent\revwork{Revision made.} We do not claim a closed global lid-power/dissipation balance. The archived final fields lack distribution functions, so no verified lid power is reported. Interface and whole-domain discrepancies are stated as limitations, while the common-support LBM/FEM comparison addresses gradient and dissipation validation rather than power closure.
+
+\medskip
+\noindent\qcomment{\textbf{Numerical methods comment 5.} 5. The independent FEM comparison is useful, but Table S7 assesses interior velocity discrepancies at Re = 100 and 400 while excluding boundary-adjacent nodes. This does not directly establish the accuracy of wall shear or dissipation at Re = 1000. Please provide quantitative verification targeted to the gradient-dependent quantities supporting the main conclusions. Comparisons of velocity gradients, wall traction, or integrated dissipation are possible approaches; equivalent diagnostics would also be suitable. Section 4.2 correctly notes that U\_max includes prescribed moving-wall values and may saturate at U\_lid. The velocity-convergence claim in Section 5.2 should therefore be supported by field norms or interior profiles.}
+
+\noindent\revwork{Revision made.} A common-support LBM/FEM validation of the gradient-dependent dissipation has been added. Both solvers use $D=2\nu\int S:S\,dA$ with $\nu=2/Re$. A derivative-index error in the old common-support script was corrected. The corrected range is $\varepsilon_D=0.06$--$6.52\%$; for $n=4$, $Re=1000$, $D_{\mathrm{LBM}}=0.02558962$, $D_{\mathrm{FEM}}=0.02461972$, and $\varepsilon=3.94\%$. No verified lid power is claimed because the archived final fields lack distribution functions.
+
+\medskip
+\noindent\qcomment{\textbf{Numerical methods comment 6.} 6. Please reconcile the simulation inventory with the data used to fit the extrema. Table II and Table S21 describe a 30-case N = 256 campaign at ten exponents, whereas Figure 6 and Table V appear to use additional closely spaced geometries. Provide the exact exponents, raw observable values, and fitting windows at both resolutions, identifying any additional runs or interpolation. In particular, the Table V caption attributes a missing point in the N = 128, Re = 1000 density fit to n = 2.25, although the reported minimum is near n = 4.05. That point cannot lie within the stated local $\pm$0.5 window. Please correct the caption or explain the actual fitting support. An accessible repository or reviewer access link should be supplied, or the underlying fit data and scripts should accompany the revision.}
+
+\noindent\revwork{Revision made.} The inventory, matched-grid pairs, fitting supports, and sampled extrema are documented in the supplement and in the reproducible data/code. Fitted minima and sampled crossings are presented as diagnostics, not converged optima or thresholds. Caption and support descriptions have been reconciled with the fitting windows. \emph{Data availability:} the data and code remain available in the existing repository, \url{https://github.com/Ahmedalgeria778/PH13_revision_data}.
+
+\medskip
+\noindent\qcomment{\textbf{Numerical methods comment 7.} 7. The pressure treatment and the distinction between B1-PI and B1-pinit require clarification. Section S13 specifies a pressure weight of 0.25 and a pressure normalization constant, but the displayed objective contains no explicit loss term corresponding to that weight. It also describes changes to the pressure-head bias and a scalar addend. An additive pressure constant alone leaves $\nabla$p, and hence the stated momentum residual, unchanged. Please provide the complete objective, any pressure supervision or gauge constraint, and the precise initialization changes. If the variants differ only by additive pressure offsets, explain which other loss or implementation feature allows those offsets to affect training; if additional parameters differ, identify them.}
+
+\noindent\revwork{Revision made.} In response to the original Referee \#1 major comment 4, the DeepONet/operator-learning material has been removed from the final main article and from the supplement. The paper no longer contains a network schematic, residual comparison, or ML-based physical claim.
+
+\medskip
+\noindent\qcomment{\textbf{Numerical methods comment 8.} 8. Please reconcile the descriptions of the training and reported residuals. Section S13 specifies automatic differentiation, whereas Section S4 states that the neural and LBM residuals use identical finite-difference operators and sampling, and Table S4 refers to the finite-difference stencil as the training residual operator. Section 7.1 describes the reported metrics as normalized by their initial magnitudes, while Section S13 defines them as spatial mean squares. Different operators and normalizations can be appropriate at different stages, but their uses need to be explicit. For each reported metric, specify the derivative operator, sampling, integration mask, normalization, and treatment of the junction neighborhoods. Confirm whether the reported neural and LBM divergence residuals already use a common finite-difference evaluation and explain its relationship to the automatic-differentiation formulation. If they do not, provide a common evaluation to support the comparison. An independently sampled, denser evaluation would also help assess sensitivity to the 512-point sampling.}
+
+\noindent\revwork{Revision made.} In response to the original Referee \#1 major comment 4, the DeepONet/operator-learning material has been removed from the final main article and from the supplement. The paper no longer contains a network schematic, residual comparison, or ML-based physical claim.
+
+\medskip
+\paragraph{Results and discussion}
+
+\medskip
+\noindent\qcomment{\textbf{Results comment 1.} 1. Section 4.4 appropriately describes the dissipation trough as a shallow plateau and qualifies the sampled crossings as resolution- and normalization-dependent. Table V also provides useful evidence of location stability between two resolutions. However, Section 5.2 states that every relative statement in n is unaffected by resolution, while Sections 5.3 and 7.1 describe the geometry-relative response as resolution-independent to about 2\%. These broader claims require further qualification. The reported 19.5--25.6\% changes in the representative refinement study are measured differences between N = 128 and 256, not established errors relative to a converged solution. A nearly common multiplicative refinement factor can preserve relative ordering despite a substantial absolute change. The relevant question is whether the geometry-dependent numerical uncertainty near the trough is sufficiently small to resolve the 0.03--0.36\% margins in Table IV. Please assess uncertainty in local differences between geometries and fitted minimum locations, including sensitivity to junction treatment and fitting windows. If that precision cannot be established, retain the broad low-dissipation-range interpretation consistently and present the crossing Reynolds numbers as sampling-dependent diagnostics.}
+
+\noindent\revwork{Revision made.} The broader resolution-independent claims have been withdrawn. The shallow trough is presented as a low-dissipation range; fitted minima and crossing Reynolds numbers are diagnostics on sampled grids. The cutoff analysis reports a reduction in the median refinement difference but does not establish an uncertainty small enough to resolve sub-percent margins.
+
+\medskip
+\noindent\qcomment{\textbf{Results comment 2.} 2. Section 4.4 explicitly distinguishes the gradient-valid mask area A\_mask from the exact cavity area A(n), but this distinction is not maintained consistently in Sections 3.2 and 4.3. Please use unambiguous notation for D/A\_mask and KE/A(n) throughout and assess whether the main geometry comparisons depend materially on the mask and excluded wall region. Section 5.3 also states that a larger domain can have the same or smaller total loss while having a larger loss per unit area. For positive areas and losses, this statement is algebraically incorrect and should be corrected. Section 2 already notes that area normalization is not equivalent to volume-constrained optimization; the fixed-volume interpretation in Section 5.3 should be made consistent with that qualification.}
+
+\noindent\revwork{Revision made.} Notation now distinguishes $D/A_{\mathrm{mask}}$ from $KE/A(n)$, and the algebraically incorrect statement about area and loss has been removed. The fixed-volume interpretation has been aligned with the earlier qualification that area normalization is not volume-constrained optimization; excluded-wall and cutoff sensitivity are reported explicitly.
+
+\medskip
+\noindent\qcomment{\textbf{Results comment 3.} 3. Section 5.2 correctly recognizes that the wall-band diagnostic describes spatial distribution without establishing causation. However, the stronger interpretations in Sections 4.4 and 5.3 require an additive quantitative decomposition. Figure 6 compares D\_core/A\_core with D/A\_mask, which have different denominators and therefore do not directly show how the wall and core contributions add to the reported loss density. Please provide contributions such as D\_wall/A\_mask and D\_core/A\_mask, with the wall and core forming a partition of the same integration mask. A decreasing wall-band fraction alone does not exclude an increase in the absolute wall contribution. These results should support the proposed mechanism, or the interpretation should be qualified accordingly. Spatial dissipation distributions and sensitivity to wall-band thickness would provide additional support.}
+
+\noindent\revwork{Revision made.} On a common support, the wall/core dissipation budget is additive to $2.78\times10^{-17}$. For $Re=1000$, $N=256$, and $\delta=0.05L_c$, the core supplies $87.8\%$ of the increase from $n=4$ to $n=8$; across the available increments the core share of an increase is $61.5$--$99.8\%$. These are shares of the increment, not absolute core shares of $D/A$. The decreasing wall-band fraction is therefore not used by itself as evidence of causation.
+
+\medskip
+\noindent\qcomment{\textbf{Results comment 4.} 4. Section 4.6 appropriately acknowledges that the the secondary extremum persists under refinement while falling below the 1\% threshold on the finer grids. Nevertheless, the captions of Figures 9 and 10 use onset language, and Section 7.1 describes the near-square case as topologically distinct. The interval 950 < Re $\le$ 1000 brackets a detection threshold crossing at N = 128 and does not establish the onset of a new flow topology. Please carry this distinction consistently into those passages, using the reported continuous extremum amplitudes and streamline evidence. Also reconcile the search region definition: Table S19 reports corner distances of approximately 0.272 L despite specifying a search within 0.25 L of a corner. The stated lack of a demonstrated causal link between this weak eddy and the dissipation increase should remain explicit throughout.}
+
+\noindent\revwork{Revision made.} The terms ``onset'' and ``topologically distinct'' have been removed. Sampled crossings and fitted minima remain diagnostics, and no causal link is asserted between the weak secondary extremum and the dissipation increase. The corner-search description and reported distances have been reconciled in the supporting material.
+
+\medskip
+\noindent\qcomment{\textbf{Results comment 5.} 5. The abstract reports substantial dissipation errors, Section 6.3 refers to Table S20, and Section 7.2 acknowledges that lower differential residuals do not guarantee better integrated observables. However, Section 7.1 also treats the operator results as evidence that the physical structure of the reference solutions is preserved. The changes between variants should therefore be discussed quantitatively in Section 6.3. For the seed averaged fields in Table S20, extending the physics pool from B1-pinit to B1-train98 increases mean dissipation error from 29.2\% to 36.4\%, kinetic-energy error from 2.8\% to 4.5\%, and primary-streamfunction error from 1.2\% to 2.4\%, despite reducing the divergence residual. Please distinguish the demonstrated residual improvements from the accuracy of these observables. If individual-model performance is being assessed, compute observables for each seed before summarizing their errors. If the ensemble mean field is the intended predictor, report its performance separately, since evaluating quadratic dissipation after averaging fields measures a different quantity.}
+
+\noindent\revwork{Revision made.} In response to the original Referee \#1 major comment 4, the DeepONet/operator-learning material has been removed from the final main article and from the supplement. The paper no longer contains a network schematic, residual comparison, or ML-based physical claim.
+
+\medskip
+\paragraph{Conclusion}
+
+\medskip
+\noindent\qcomment{\textbf{Conclusion comment 1.} 1. After addressing the verification issues, revise the Abstract and Conclusion so that broad trends, fitted minimum locations, proposed mechanisms, and operator results retain their respective levels of support. In particular, distinguish the observed low-dissipation range from precisely resolved optimum locations, and the proposed interior contribution from an established explanation of the near-square dissipation increase. The reduced neural residuals should also be distinguished from accurate recovery of integrated observables. The existing two-dimensional and parameter-range limitations are appropriate; the qualifications concerning boundary treatment, curvature evaluation, and dissipation accuracy should be reflected consistently in the final claims.}
+
+\noindent\revwork{Revision made.} The abstract and conclusion now assign different levels of support to broad trends, fitted minima, proposed mechanisms, and resolution-sensitive diagnostics. Boundary treatment, curvature verification, and dissipation accuracy qualifications are reflected consistently, and operator-learning residuals are no longer used as evidence of accurate integrated observables.
+
+\medskip
+\paragraph{Minor comments}
+
+\medskip
+\noindent\qcomment{\textbf{Minor comment 1.} 1. Section 4.3 describes kinetic energy as total momentum content; these are different physical quantities, and the wording should be corrected. Section 5.1 states that viscosity does not shift the preferred geometry despite the Reynolds-dependent drift discussed elsewhere. Please distinguish persistence of a broad low-loss band from movement of its fitted centre.}
+
+\noindent\revwork{Revision made.} The phrase ``total momentum content'' has been corrected to integrated kinetic energy. Persistence of a broad low-loss band is distinguished from movement of its fitted centre with Reynolds number.
+
+\medskip
+\noindent\qcomment{\textbf{Minor comment 2.} 2. The field labels and color scales in Figures 3 and 9, and the overlaid scales in Figure 11, are difficult to read at normal page size. Please enlarge the relevant panels and identify each plotted quantity clearly. Use comparable color scales when comparing the same quantity across geometries, or explain any necessary differences.}
+
+\noindent\revwork{Revision made.} The final figure set was regenerated with enlarged relevant panels and clearer quantity labels. Comparable color scales are used where the same quantity is compared across geometries, and the separate Microsoft Word alt-text document supplied for AIP identifies each plotted quantity.
 
 \bigskip
 \ruleline
@@ -172,26 +261,58 @@ We thank the Associate Editor and the Reviewers for their careful reading and fo
 \section*{Referee \#5}
 
 \medskip
-\qcomment{\textbf{Question R5-1.} Additive wall/core dissipation budget (point \#5.3): does the wall layer set the minimum?}
+\noindent\qcomment{\textbf{Short summary.} Please refer to attached comments for detailed feedback.}
 
-\revwork{Revision made.} No. On a common integration mask the partition is exact: $D_{\mathrm{mask}}/A_{\mathrm{mask}}=D_{\mathrm{wall}}/A_{\mathrm{mask}}+D_{\mathrm{core}}/A_{\mathrm{mask}}$, with the same $A_{\mathrm{mask}}$ denominator in all three terms. The maximum absolute additivity residual over 506 rows is $2.78\times10^{-17}$. For $Re=1000$, $N=256$ and $\delta=0.05L_c$, the core contributes $87.8\%$ of the rise from $n=4$ to $n=8$; this is the share of the increase, not the absolute core share. Across all available increments the core share of the increase ranges from $61.5\%$ to $99.8\%$.
-
-\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
-\item \emph{Action.} The wall-only claim was removed from the Abstract, Introduction, Results and Conclusions, and the increment-based interpretation is stated wherever the $87.8\%$ value appears.
-\item \emph{Evidence.} \url{scripts/core_wall/core_wall_budget.py}, \url{data/core_wall/core_wall_budget.csv}, \url{reports/core_wall_budget_report.md}; figure \url{figures/fig_core_wall_budget.png}.
-\item \emph{Location.} Main Sections~3 and 5.1; Supplement S6.
-\end{itemize}
+\noindent\revwork{Revision made.} The revised main article and supplement emphasize the fluid-physics contribution, quantify the limited convergence of the key quantity, and qualify the proposed mechanisms. The neural-operator material has been removed, as stated in response to Referee \#1 major comment 4.
 
 \medskip
-\qcomment{\textbf{Question R5-2.} Qualification of the minima and of apparent transitions.}
+\paragraph{Attached review report, opening paragraphs}
 
-\revwork{Revision made.} We report sampled grid extrema separately from ordinary-least-squares quadratic fits on three- and five-point supports. At $Re=1000$ the fitted $n^*_{D/A}$ changes from $4.065$ with a three-point support to $4.471$ with a five-point support, and $n^*_D$ changes from $2.794$ to $2.381$; fitted locations on matched grids are similar, but absolute $D$ levels remain resolution-sensitive. The supports, exclusions and estimator are documented in the supplement.
+\medskip
+\noindent\qcomment{\textbf{Review opening, first paragraph.} Reviewer 5: The revised manuscript investigates the effects of continuous geometric deformation on the flow structure and viscous dissipation in superelliptic lid driven cavities using the lattice Boltzmann method, supplemented by a physics informed neural operator. The authors have made considerable efforts to reorganize the manuscript and emphasize the underlying fluid physics in response to the editor's comments. The systematic parametric investigation and the distinction between total and area-normalized viscous dissipation are appreciated.}
 
-\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
-\item \emph{Action.} We no longer use ``onset'' or ``topologically distinct''. Reynolds crossings are reported as $1\%$ detection-threshold crossing brackets on the sampled grids, and no extrapolated minima or thresholds are quoted as converged values.
-\item \emph{Evidence.} \url{scripts/minima/minima_qualification.py}, \url{data/minima/fit_diagnostics.csv}, \url{data/minima/crossing_diagnostics.csv}, \url{reports/minima_qualification_report.md}.
-\item \emph{Location.} Main Sections~6.1--6.2; Supplement S12.
-\end{itemize}
+\noindent\revwork{Revision made.} The revision retains the systematic parametric investigation and the total/area-normalized dissipation distinction, but now frames them as a coupled geometry/forcing study. Supporting methodology and observables have been moved to the supplement, and the operator-learning section has been removed.
+
+\medskip
+\noindent\qcomment{\textbf{Review opening, second paragraph.} However, I still have substantial concerns regarding the scientific novelty, the robustness of the numerical results, and the depth of the physical interpretation. In my opinion, the present study does not yet provide sufficiently convincing evidence of new fluid-physics insights to justify publication in Physics of Fluids. My major concerns are summarized below.}
+
+\noindent\revwork{Revision made.} We agree that the earlier claims were stronger than the evidence. The revised text states that absolute dissipation is resolution-sensitive, that mechanisms are explanatory rather than causal, and that the conclusions apply to the selected steady two-dimensional family.
+
+\medskip
+\paragraph{Numbered concerns}
+
+\medskip
+\noindent\qcomment{\textbf{Concern 1.} 1. Limited scientific novelty and unclear advancement beyond existing studies. The effects of cavity geometry on vortex structures, flow redistribution, and viscous dissipation have been extensively investigated in previous studies. Although the present work considers a continuously deformable superelliptic geometry, most of the reported findings appear to be extensions of established physical understanding rather than fundamentally new insights. The authors should clarify what new physical principles or mechanisms have been identified beyond the existing literature on geometry-dependent cavity flows and dissipation minimization.}
+
+\noindent\revwork{Revision made.} The contribution is now stated specifically as a quantitative, cutoff-aware description of dissipation redistribution in a continuous superelliptic lid-driven cavity family under coupled geometry and forcing. It is supported by common-support LBM/FEM dissipation validation, a corrected curvature diagnostic, an additive wall/core budget, and the completed $13$-field projected-lid control, in which the projected law lowers sampled $D/A_{\rm mask}$ by ratios of $0.391$--$0.906$ while shifting the sampled argmin from $n=4$ to $n=2$; it is not presented as a new universal cavity-flow principle.
+
+\medskip
+\noindent\qcomment{\textbf{Concern 2.} 2. Insufficient numerical convergence of the key physical quantities. The authors acknowledge that the calculated viscous dissipation changes by approximately 19.5--25.6\% when the grid resolution increases from 128 $\times$ 128 to 256 $\times$ 256. This is a considerable discrepancy, particularly because viscous dissipation and its geometric dependence constitute the central findings of the manuscript. Although the relative ordering of the geometries appears reasonably stable, this does not fully establish the convergence of the reported dissipation minima or their Reynolds-number dependence. A more rigorous convergence assessment of the near-wall velocity gradients and integrated dissipation is necessary to support these conclusions.}
+
+\noindent\revwork{Revision made.} We have not claimed grid-independent absolute dissipation. Using fixed physical-wall cutoffs $r_0=0,0.125,0.25,0.5$, the median $D_{256}/D_{128}-1$ falls from $21.37\%$ to $8.77\%$, with a $4.33$--$14.28\%$ range at the largest cutoff. The logarithmic fits are descriptive only; no grid-independent continuum dissipation or asymptotic logarithmic scaling is claimed. Sampled crossings and fitted minima remain diagnostics of the archived grids.
+
+\medskip
+\noindent\qcomment{\textbf{Concern 3.} 3. Insufficient quantitative evidence supporting the proposed physical mechanisms. The authors attribute the non-monotonic dissipation behavior to the competition between bulk circulation and localized near-wall shear. However, the proposed mechanism is primarily supported by post-processing of the velocity fields, curvature-related diagnostics, and fixed-thickness wall-layer decomposition. These observations are useful but do not establish a direct causal relationship between geometric deformation and the redistribution of viscous dissipation. Moreover, the near-wall dissipation remains sensitive to grid resolution. Additional quantitative analysis is needed to demonstrate how the individual physical contributions govern the observed dissipation minimum.}
+
+\noindent\revwork{Revision made.} The causal interpretation has been withdrawn. The additive common-support wall/core budget, exact to $2.78\times10^{-17}$, replaces the fixed-thickness wall-band fraction as the quantitative partition; for $Re=1000$, $N=256$, $\delta=0.05L_c$, the core supplies $87.8\%$ of the $n=4$ to $n=8$ rise, with an increment range of $61.5$--$99.8\%$. The curvature diagnostic passes the unit-circle test and does not support a curvature-only mechanism; in the completed projected-lid control the sampled argmin shifts from $n=4$ to $n=2$ with projected/tangential $D/A_{\rm mask}$ ratios of $0.391$--$0.906$, which is a coupled geometry/forcing comparison, not causal isolation.
+
+\medskip
+\noindent\qcomment{\textbf{Concern 4.} 4. Limited contribution and predictive capability of the physics-informed neural operator. The neural operator achieves relatively high velocity-field reconstruction accuracy, but its performance is close to that of the data-only baseline in the out of-distribution cases. More importantly, the errors in integrated viscous dissipation remain approximately 30--50\%, despite the reduction in the divergence residual. This raises concerns regarding the ability of the proposed approach to accurately predict the physical quantities central to this study. The current results demonstrate an improvement in selected numerical residuals but do not convincingly establish improved prediction of the underlying fluid physics.}
+
+\noindent\revwork{Revision made.} In response to the original Referee \#1 major comment 4, the DeepONet/operator-learning material has been removed from the final main article and from the supplement. The paper no longer contains a network schematic, residual comparison, or ML-based physical claim.
+
+\medskip
+\noindent\qcomment{\textbf{Concern 5.} 5. Limited generality and physical significance of the conclusions. The study is restricted to steady two-dimensional flows, a fixed aspect ratio, and a single geometry parameter. Furthermore, the geometry deformation simultaneously changes the cavity domain and the imposed moving-wall velocity distribution. Consequently, the individual effects of geometric confinement, boundary curvature, and wall kinematics cannot be independently identified. This limits the generality of the proposed physical interpretation. The authors should distinguish more clearly between observations specific to the selected geometry family and physical mechanisms that may be applicable to more general cavity flows.}
+
+\noindent\revwork{Revision made.} The conclusions are explicitly restricted to steady two-dimensional flow, fixed aspect ratio, one geometry parameter, and the coupled domain/moving-wall law. The completed targeted LBM projected-lid control contains $13$ matched fields and gives projected/tangential $D/A_{\rm mask}$ ratios of $0.391$--$0.906$ with an argmin shift from $n=4$ to $n=2$ on the complete ladders; it remains a coupled geometry/forcing control and does not isolate confinement, curvature, and wall kinematics independently.
+
+\medskip
+\paragraph{Overall assessment}
+
+\medskip
+\noindent\qcomment{\textbf{Overall assessment.} Overall assessment While the revised manuscript is better organized and contains an extensive numerical investigation, the principal contributions remain largely descriptive, and the central physical interpretations are not sufficiently supported by converged numerical evidence and quantitative mechanistic analysis. Addressing these concerns would require substantial additional investigation rather than further clarification or restructuring of the manuscript. Therefore, I cannot recommend the manuscript for publication in its present form.}
+
+\noindent\revwork{Revision made.} Unsupported claims have been removed or qualified, but we do not claim grid-independent continuum dissipation or a fully established causal mechanism. The remaining limitations are stated in the abstract, results, and conclusion, and the supporting data/code remain available in the existing repository.
 
 \bigskip
 \ruleline
@@ -199,31 +320,77 @@ We thank the Associate Editor and the Reviewers for their careful reading and fo
 \section*{Referee \#6}
 
 \medskip
-\qcomment{\textbf{Question R6-1.} Moving-lid arclength $L_{\mathrm{mov}}$ and its limiting values.}
+\noindent\qcomment{\textbf{Short summary.} This paper studies geometry and Reynolds-number effects in deformable lid-driven cavities. It includes many results, but I found the manuscript very difficult to follow. The main contribution and its relevance to fluid mechanics are still unclear to me. The paper is also far too long: there are so many figures, tables, and sensitivity analyses that it is easy to lose sight of the main findings. The ML part feels only loosely connected to the flow study.}
 
-\revwork{Revision made.} The upper-half moving-wall arclength for $L_c=2$ is $2.8789718432636$ at $n=1.25$, $\pi$ at $n=2$, $3.5088489717820$ at $n=4$ and $3.7389869262423$ at $n=8$. The diamond, circle and square-limit cases were checked independently.
-
-\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
-\item \emph{Action.} We state explicitly that the geometric square limit has piecewise tangential motion and is not the Ghia square cavity; the projected lid is a boundary-law definition only.
-\item \emph{Evidence.} \url{scripts/final_revision/compute_lmov.py}, \url{data/final_revision/l_mov.csv}, \url{data/final_revision/l_mov_validation.csv}.
-\item \emph{Location.} Supplement S10.
-\end{itemize}
+\noindent\revwork{Revision made.} The final paper has been shortened and organized around a few findings. Detailed verification and sensitivity material has been moved to the supplement, the DeepONet/operator-learning part has been removed (Referee \#1 major comment 4), and the discussion and conclusion now separate robust findings from resolution-sensitive diagnostics.
 
 \medskip
-\qcomment{\textbf{Question R6-2.} Reproducibility, data deposit and scope of the numerical evidence.}
+\paragraph{Abstract}
 
-\revwork{Revision made.} The public repository \url{https://github.com/Ahmedalgeria778/PH13_revision_data} contains the final single-part supplement in source and PDF form, the analysis scripts, regenerated figures, result tables, validation reports, a reproduction README and an English MIT \texttt{LICENSE} with the copyright notice. It deliberately does not contain the main-article source or PDF, and it does not contain the raw archived \texttt{.npz} fields because of their size.
+\medskip
+\noindent\qcomment{\textbf{Abstract.} The abstract reports many results, but the main message gets lost among the details. Please rewrite it to explain the purpose of the work, its main findings, and why they matter. The ML part also arrives abruptly.}
 
-\begin{itemize}[leftmargin=1.4em, itemsep=1pt]
-\item \emph{Action.} The Data availability statement now gives the repository URL and mentions the README and the MIT license. We did not run a new LBM campaign: the deposited evidence consists of read-only post-processing of archived fields plus targeted Taylor--Hood P2/P1 solves used only for verification.
-\item \emph{Evidence.} \url{https://github.com/Ahmedalgeria778/PH13_revision_data}; \texttt{LICENSE}, \texttt{README.md}, \url{supplement/PH13_supplementary_final.pdf}.
-\item \emph{Location.} Main Data availability statement; repository README.
-\end{itemize}
+\noindent\revwork{Revision made.} The abstract has been rewritten around purpose, main finding, and significance. The neural-operator sentence has been removed because the operator-learning work is no longer part of the final main article or supplement.
+
+\medskip
+\paragraph{Introduction and background}
+
+\medskip
+\noindent\qcomment{\textbf{Introduction and background, first bullet.} - The motivation and contribution need to be stated more clearly and concisely.}
+
+\noindent\revwork{Revision made.} The motivation and contribution are stated more concisely: the study asks how a continuous superelliptic cavity family redistributes viscous dissipation under coupled geometry and forcing, with conclusions limited to the sampled two-dimensional parameter space.
+
+\medskip
+\noindent\qcomment{\textbf{Introduction and background, second bullet.} - The superelliptic exponent is defined, but its physical meaning and effect on the cavity shape should be explained for non-expert readers.}
+
+\noindent\revwork{Revision made.} The exponent is now explained geometrically for non-expert readers: $n=2$ is the circle, $n<2$ gives diamond-like pointed shapes, and increasing $n>2$ flattens the sides toward a square-like cavity while changing the moving-arc length and wall-velocity direction.
+
+\medskip
+\noindent\qcomment{\textbf{Introduction and background, third bullet.} - Please also make the reason for including the ML study clearer.}
+
+\noindent\revwork{Revision made.} In response to the original Referee \#1 major comment 4, the DeepONet/operator-learning material has been removed from the final main article and from the supplement. The paper no longer contains a network schematic, residual comparison, or ML-based physical claim.
+
+\medskip
+\paragraph{Section 3.3}
+
+\medskip
+\noindent\qcomment{\textbf{Section 3.3.} The solver verification is useful, but the section could be shortened. Move detailed code comparisons and supporting verification results to the Supplementary Material.}
+
+\noindent\revwork{Revision made.} Detailed code comparisons and supporting verification results have been moved to the supplement. The main text retains a concise verification summary and the common-support gradient/dissipation validation needed for the dissipation claims.
+
+\medskip
+\paragraph{Sections 4 and 5}
+
+\medskip
+\noindent\qcomment{\textbf{Sections 4 and 5, first bullet.} - These sections are much too long and difficult to follow. They contain so many results and sensitivity analyses that I was left unsure what the main conclusions are. Please select the most relevant results, organize the discussion around a few clear findings, and move supporting analyses to the Supplementary Material.}
+
+\noindent\revwork{Revision made.} The results have been selected and reorganized around a few findings; supporting sensitivities are in the supplement. Fitted minima and sampled Reynolds crossings are presented as diagnostics, not as converged optima or topological transitions.
+
+\medskip
+\noindent\qcomment{\textbf{Sections 4 and 5, second bullet.} - The dissipation results also show substantial resolution sensitivity, while the reported minimum is shallow. Please clarify which conclusions are robust and how much confidence readers should place in the proposed physical explanation.}
+
+\noindent\revwork{Revision made.} Resolution sensitivity is stated prominently. Fixed physical-wall cutoffs $r_0=0,0.125,0.25,0.5$ reduce the median $D_{256}/D_{128}-1$ from $21.37\%$ to $8.77\%$, with $4.33$--$14.28\%$ at the largest cutoff; this supports qualitative interpretation only, not grid-independent continuum dissipation.
+
+\medskip
+\paragraph{Section 6}
+
+\medskip
+\noindent\qcomment{\textbf{Section 6.} The ML study is interesting, but its relevance to the main fluid-mechanics contribution is unclear. What does the neural operator demonstrate that the solver itself cannot? Please explain why this method and test are useful for this problem, or reduce the emphasis on this part.}
+
+\noindent\revwork{Revision made.} In response to the original Referee \#1 major comment 4, the DeepONet/operator-learning material has been removed from the final main article and from the supplement. The paper no longer contains a network schematic, residual comparison, or ML-based physical claim. No claim is made that a neural operator demonstrates something the solver cannot.
+
+\medskip
+\paragraph{Sections 7 and 8}
+
+\medskip
+\noindent\qcomment{\textbf{Sections 7 and 8.} The take-home messages are difficult to retain after the long results sections. Please make the discussion and conclusions shorter, and distinguish the robust findings from resolution-sensitive results and possible explanations.}
+
+\noindent\revwork{Revision made.} The discussion and conclusions have been shortened. Robust findings, fitted but resolution-sensitive diagnostics, and possible mechanisms are distinguished explicitly, with the remaining limitations stated at the end of the paper.
 
 \bigskip
 \ruleline
 
-We thank the reviewers again for the thorough and constructive reports, which have substantially improved the clarity and the honesty of the manuscript. The remaining limitations are stated explicitly: no global energy closure, no verified $P_{\mathrm{lid}}$, no grid-converged absolute dissipation at $N=128$, and no universal or resolution-independent minimum.
+We thank the reviewers again for the constructive reports. The revised manuscript retains only the conclusions supported by the archived data and the added common-support FEM/LBM comparison, and it states the remaining limitations explicitly: limited grid convergence, cutoff-dependent junction dissipation, descriptive logarithmic fits, diagnostic minima and crossings, no curvature-only mechanism, and no verified lid power.
 
 \vspace{3mm}
 \noindent Sincerely,\\[1mm]

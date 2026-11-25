@@ -1,0 +1,401 @@
+Dear Dr. BENIAICHE,
+
+We have determined that your submission falls within the scope of Physics of Fluids, and its chosen article type is appropriate.
+
+We have received the reviewer comments on your paper titled Geometry-Induced Reorganization of Viscous Dissipation in Continuously Deformable Superelliptic Lid-Driven Cavities. Their reports are attached or shown below. As you will see, the reports point to issues that require clarification and revision.
+
+Please revise your manuscript and submit a detailed, point-by-point response to the reviewer comments. Each response should include the original comment followed by a description of the corresponding revision made (or a justification if no change was made). The revised manuscript and response are due by 14-Dec-2026 via the PXP web site. The Editors will then make a decision as to the next step in the review process.
+
+When submitting your revision, please upload two versions of your manuscript: a clean version labeled "Article File" and a marked-up version labeled "Marked-Up Manuscript," which should clearly show all changes made from the previous submission. Please do not provide separate markups for each referee.
+
+Revisions must be submitted in the proper file formats. When submitting your revision, please upload the source file for your revised manuscript. Figures must be embedded in the text and visible in the PDF. An author-generated PDF must also be provided since individual figure files are not being uploaded. You will also be asked to upload a highlight image that will be used in the table of contents if your manuscript is published. The highlight image should be a visually interesting figure representing your manuscript and may also be selected for the Cover Image. Further instructions will appear on the file upload screen.
+
+Please go to the URL below to submit your revised manuscript:
+https://pof.peerx-press.org/cgi-bin/main.plex?el=A7E5POWI6B7aGQy7I5A9ftdFdVAVmxqnBJdgXb7tXbZ4gY
+
+To support accessibility AIP Publishing is now asking all authors to submit alt text for their figures and tables. When submitting your revision, please upload a Microsoft Word document with alt text for your figures and tables.
+
+Please feel free to contact the Editorial Office if you have any questions or concerns.
+
+Sincerely,
+Kelly Schultz
+Professor
+Davidson School of Chemical Engineering
+Purdue University
+480 Stadium Mall Drive
+West Lafayette, IN 47907-4300 USA
+
+kmschultz@purdue.edu
+Website: schultzlab.io
+
+AIP Publishing
+1305 Walt Whitman Road
+Suite 110
+Melville, NY 11747-4300 USA
+
+phone: +1-516-576-2343
+e-mail: pof-edoffice@aip.org
+
+
+Manuscript PF#POF26-AR-14659R:
+
+ASSOCIATE EDITOR COMMENTS:
+
+
+Referee Comments:
+Referee #1 (Comments to Both Author and Editor):
+
+The revision has responded to the editor's concern by foregrounding the fluid physics, and manuscript's investigations are worth publishing. However, in its present form the contribution is obscured by excessive length and writing that is very hard to follow. I recommend major revision.
+
+Major Comments:
+
+1. In my opinion the manuscript length needs to be reduced substantially. The core content could be presented in 15-20 pages. Specifically, standard LBM methodology (Secs. 3.2-3.3), the database protocol (Sec. 3.4), and much of the observable-by-observable reporting in Section 4 can be moved to the supplementary material.
+
+2. The abstract needs to be rewritten, it is hard to follow the methodology and motivation of the study in the abstract. It needs a clear narrative style that states the question, the finding, and why it matters. The same density problem affects the whole manuscript (especially Section 5).
+
+3. The D/A minimum is a 0.4-0.9% trough, while the reported resolution bias between N=128 and N=256 is 19.5-25.6%. The authors argue the geometry-relative ordering is stable to ~2%, but a sub-percent feature resting on a 20%+ biased baseline needs more than spot checks at selected Re. In my opinion, it is required to either extend the N=256 (or finer) campaign across the parameter space, or state the limitation far more prominently and temper the conclusions accordingly.
+
+4. It is suggested to remove or substantially shorten the DeepONet section (Sec. 6). It still runs ~6 pages, does not inform the physical conclusions, and its 30-50% dissipation errors make it unusable as a quantitative check. The accuracy-consistency decoupling finding is interesting but belongs in a separate, ML-focused paper. Removing it would sharpen the physical narrative considerably.
+
+Minor Comments:
+
+1. Table III~V are excessive, the titles are too long. If possible, these should be included in supplementary material or use a figure or summary where relevant.
+
+Recommendation:
+
+There manuscript presents interesting investigation on the D vs. D/A distinction and the wall-band decomposition in a continuously deformed cavity family. The work needs to be cut to a focused paper, rewritten for clarity, and better supported on resolution. These changes are suggested to offer clarity to PoF readers by presenting focused and core findings.
+
+
+Referee #2 (Comments to Both Author and Editor):
+
+This manuscript investigates the effects of continuous geometric deformation on the flow structures and viscous dissipation in superelliptic lid-driven cavities. The authors employ a multiple-relaxation-time lattice Boltzmann method, cross-validated with a finite-element solver, and further examine geometry extrapolation using a physics-informed DeepONet.
+
+The topic is interesting and relevant to computational fluid dynamics. I believe the manuscript can be considered for publication if the following issues are carefully addressed.
+
+Major remarks:
+1. In Fig. 2, the x-axis tick labels overlap with the x-axis and should be adjusted. The axis labels in Figs. 4, 5, 8, 9, and 10, as well as the legends in Figs. 6 and 7, are too small. Please increase the font sizes to improve readability.
+2. The authors acknowledge that the adissipation changes by approximately 19.5-25.6% between the 128 x 128 and 256 x 256 grids. This is a substantial numerical discrepancy, particularly because viscous dissipation is the central quantity investigated in this study. A more convincing grid-convergence study, preferably including higher resolutions, is needed.
+3. The manuscript reports cross-validation against a Taylor-Hood finite-element formulation. However, the principal conclusions depend on velocity gradients and viscous dissipation rather than velocity fields alone. The authors should demonstrate quantitative agreement between LBM and FEM for integrated dissipation.
+4. The moving and stationary boundaries meet at locations where the prescribed wall velocities are discontinuous. Such junctions can produce strong localized velocity gradients and affect the convergence of viscous dissipation. The authors should clarify how these junctions are treated numerically and quantify their contribution to the integrated dissipation across different geometries.
+5. A schematic illustrating the overall DeepONet implementation framework is not provided. The authors should include a diagram showing the network architecture, inputs and outputs, training procedure, and incorporation of physics-informed constraints to improve the clarity of the methodology.
+
+
+Referee #4 (Comments to Both Author and Editor):
+
+Please see the attached review report for my detailed comments. I recommend major revision. The manuscript addresses a relevant topic, but several issues concerning the boundary conditions, numerical verification, dissipation calculations, and interpretation of the results require resolution before the main conclusions can be considered adequately supported.
+
+
+Referee #5 (Comments to Both Author and Editor):
+
+Please refer to attached comments for detailed feedback.
+
+
+Referee #6 (Comments to Both Author and Editor):
+
+This paper studies geometry and Reynolds-number effects in deformable lid-driven cavities. It includes many results, but I found the manuscript very difficult to follow. The main contribution and its relevance to fluid mechanics are still unclear to me. The paper is also far too long: there are so many figures, tables, and sensitivity analyses that it is easy to lose sight of the main findings. The ML part feels only loosely connected to the flow study.
+
+## Abstract
+
+The abstract reports many results, but the main message gets lost among the details. Please rewrite it to explain the purpose of the work, its main findings, and why they matter. The ML part also arrives abruptly.
+
+## Introduction and background
+
+- The motivation and contribution need to be stated more clearly and concisely.
+- The superelliptic exponent is defined, but its physical meaning and effect on the cavity shape should be explained for non-expert readers.
+- Please also make the reason for including the ML study clearer.
+
+## Section 3.3
+
+The solver verification is useful, but the section could be shortened. Move detailed code comparisons and supporting verification results to the Supplementary Material.
+
+## Sections 4 and 5
+
+- These sections are much too long and difficult to follow. They contain so many results and sensitivity analyses that I was left unsure what the main conclusions are. Please select the most relevant results, organize the discussion around a few clear findings, and move supporting analyses to the Supplementary Material.
+
+- The dissipation results also show substantial resolution sensitivity, while the reported minimum is shallow. Please clarify which conclusions are robust and how much confidence readers should place in the proposed physical explanation.
+
+## Section 6
+
+The ML study is interesting, but its relevance to the main fluid-mechanics contribution is unclear. What does the neural operator demonstrate that the solver itself cannot? Please explain why this method and test are useful for this problem, or reduce the emphasis on this part.
+
+## Section 7 and 8
+
+The take-home messages are difficult to retain after the long results sections. Please make the discussion and conclusions shorter, and distinguish the robust findings from resolution-sensitive results and possible explanations.
+
+Reviewer 4: Review Report 
+Geometry-Induced Reorganization of Viscous Dissipation in Continuously 
+Deformable Superelliptic Lid-Driven Cavities 
+By BENIAICHE Ahmed 
+General Comments: 
+This study investigates steady two-dimensional flow in a family of superelliptic lid-driven 
+cavities across ten geometry exponents and nineteen Reynolds numbers up to Re = 1000. 
+Reference solutions are obtained using a D2Q9 multiple-relaxation-time lattice Boltzmann 
+method, with selected velocity fields compared against an independent finite-element 
+formulation. The analysis examines kinetic energy, primary recirculation, vorticity, and viscous 
+dissipation, including the distinction between total and area-normalized dissipation and the 
+contributions of the wall layer and core. A physics-informed DeepONet is also evaluated outside 
+the training geometry range. The topic is relevant to Physics of Fluids, and the continuous 
+geometry family offers a useful framework for examining the combined influence of boundary 
+geometry and wall motion on viscous losses. 
+The manuscript acknowledges several important limitations, including the resolution dependence 
+of absolute dissipation, the shallow dissipation minima, the threshold dependence of secondary
+eddy detection, and the distinction between differential residuals and integrated-observable 
+accuracy. However, some interpretations and robustness claims elsewhere remain inconsistent with 
+these qualifications. The stated square-cavity limit requires correction, the curvature measures 
+need verification against the circular case, and the dissipation and power-balance calculations 
+require closer examination of the boundary-junction treatment. The simulation inventory and 
+fitting procedures also need clarification. I recommend major revision to address these issues and 
+ensure that the physical conclusions are supported by the numerical evidence. 
+Comments: 
+INTRODUCTION 
+1. Section 2 already places the study in the context of shape-dependent cavity flows and 
+dissipation-based shape optimization. The Introduction would benefit from a more 
+precise statement of the principal new physical finding. The difference between the 
+minima of D and D/A follows partly from the changing area and does not, by itself, 
+establish a new flow mechanism. Please distinguish the new observations from the 
+proposed explanations and identify the quantitative evidence supporting the principal 
+physical contribution. 
+2. Sections 3.1 and 7.2 acknowledge that geometry and boundary conditions vary together. 
+However, the statements in Sections 2.1 and 3.2 suggesting that area normalization 
+separates domain-size effects from geometric redistribution require qualification. Varying 
+n changes the moving-arc length and the direction of the imposed velocity, as well as the 
+cavity area and curvature. Please identify which conclusions describe this coupled 
+configuration. Reporting moving-wall length and consistently evaluated injected power 
+would help characterize the forcing. A controlled comparison would be needed to support 
+an isolated geometric attribution; alternatively, the conclusions can remain explicitly 
+limited to the coupled geometry-and-forcing configuration. 
+NUMERICAL METHODS & CASE DESCRIPTION 
+1. The square-cavity limit stated in Section 3.1 requires correction. With the moving 
+boundary defined by y > 0 and the velocity prescribed as U_lid(m_y, −m_x), the limit n 
+→ ∞ includes motion along the upper halves of both vertical side walls as well as the top 
+wall. For example, the upper half of the right side wall has limiting velocity (0, −U_lid), 
+while its lower half remains stationary. This differs from the classical cavity with 
+stationary side walls. Please clarify the implemented boundary condition and distinguish 
+verification against a separately configured classical square-cavity benchmark from 
+verification of the limiting member of the present geometry family. 
+2. The moving and stationary boundary conditions meet discontinuously at (±1, 0), as 
+acknowledged in Section S13. Such junctions can generate singular velocity gradients, so 
+a finite, grid-independent full-domain dissipation cannot be assumed without examining 
+the boundary treatment. Section 5.2 also explains that the production gradient mask 
+excludes the wall-adjacent layer, introducing a cutoff that changes with resolution. Please 
+specify any regularization used in the reference simulations, its physical length scale, and 
+whether that scale remains fixed under refinement. If the boundary velocity is 
+unregularized, assess the singular contribution and cutoff dependence, and distinguish the 
+reported masked dissipation from any claimed continuum full-domain quantity. 
+3. The window-averaged discrete curvature calculation in Section S15, Table S15, and 
+Figure 11 requires verification against the circular geometry. For n = 2 and a = b = 1, the 
+boundary is a unit circle with curvature equal to one everywhere, and averaging over an 
+arclength window should preserve that value. However, Table S15 reports a maximum 
+curvature of 29.87, an RMS curvature of 4.015, and a sharp-region dissipation fraction of 
+0.087 at Re = 100. These values deviate substantially from the analytical circular result, 
+for which the stated sharp-set criterion should select no boundary points. Although 
+Section S15 explicitly defines the measure as discrete, the magnitude of these deviations 
+requires explanation. Please identify their source, verify the procedure against the 
+analytical circular result under refinement while retaining the prescribed physical 
+averaging window, and reassess the associated correlations and interpretations using the 
+verified curvature measures. 
+4. The power-balance verification in Section S19 and its interpretation in Section 5.2 
+require a complete control-volume formulation. Removing the junction disks creates 
+artificial interfaces across which kinetic energy, pressure work, and viscous work can be 
+transported. Agreement between the remaining lid power and dissipation outside the 
+disks therefore does not establish a closed energy balance unless these interface terms are 
+included or shown to be negligible. Please report the balance on a consistently defined 
+domain and explain the whole-domain discrepancies of approximately 20.8% and 31.3% 
+between the momentum-exchange power and the layer-restored dissipation in Table S22. 
+The implications for verification of the production estimator should be stated explicitly. 
+A check on representative superelliptic production geometries, or another quantitatively 
+justified verification, would establish the relevance of this square-cavity diagnostic to the 
+main results. 
+5. The independent FEM comparison is useful, but Table S7 assesses interior velocity 
+discrepancies at Re = 100 and 400 while excluding boundary-adjacent nodes. This does 
+not directly establish the accuracy of wall shear or dissipation at Re = 1000. Please 
+provide quantitative verification targeted to the gradient-dependent quantities supporting 
+the main conclusions. Comparisons of velocity gradients, wall traction, or integrated 
+dissipation are possible approaches; equivalent diagnostics would also be suitable. 
+Section 4.2 correctly notes that U_max includes prescribed moving-wall values and may 
+saturate at U_lid. The velocity-convergence claim in Section 5.2 should therefore be 
+supported by field norms or interior profiles. 
+6. Please reconcile the simulation inventory with the data used to fit the extrema. Table II 
+and Table S21 describe a 30-case N = 256 campaign at ten exponents, whereas Figure 6 
+and Table V appear to use additional closely spaced geometries. Provide the exact 
+exponents, raw observable values, and fitting windows at both resolutions, identifying 
+any additional runs or interpolation. In particular, the Table V caption attributes a missing 
+point in the N = 128, Re = 1000 density fit to n = 2.25, although the reported minimum is 
+near n = 4.05. That point cannot lie within the stated local ±0.5 window. Please correct 
+the caption or explain the actual fitting support. An accessible repository or reviewer
+access link should be supplied, or the underlying fit data and scripts should accompany 
+the revision. 
+7. The pressure treatment and the distinction between B1-PI and B1-pinit require 
+clarification. Section S13 specifies a pressure weight of 0.25 and a pressure normalization 
+constant, but the displayed objective contains no explicit loss term corresponding to that 
+weight. It also describes changes to the pressure-head bias and a scalar addend. An 
+additive pressure constant alone leaves ∇p, and hence the stated momentum residual, 
+unchanged. Please provide the complete objective, any pressure supervision or gauge 
+constraint, and the precise initialization changes. If the variants differ only by additive 
+pressure offsets, explain which other loss or implementation feature allows those offsets 
+to affect training; if additional parameters differ, identify them. 
+8. Please reconcile the descriptions of the training and reported residuals. Section S13 
+specifies automatic differentiation, whereas Section S4 states that the neural and LBM 
+residuals use identical finite-difference operators and sampling, and Table S4 refers to the 
+finite-difference stencil as the training residual operator. Section 7.1 describes the 
+reported metrics as normalized by their initial magnitudes, while Section S13 defines 
+them as spatial mean squares. Different operators and normalizations can be appropriate 
+at different stages, but their uses need to be explicit. For each reported metric, specify the 
+derivative operator, sampling, integration mask, normalization, and treatment of the 
+junction neighborhoods. Confirm whether the reported neural and LBM divergence 
+residuals already use a common finite-difference evaluation and explain its relationship 
+to the automatic-differentiation formulation. If they do not, provide a common evaluation 
+to support the comparison. An independently sampled, denser evaluation would also help 
+assess sensitivity to the 512-point sampling. 
+RESULTS AND DISCUSSION 
+1. Section 4.4 appropriately describes the dissipation trough as a shallow plateau and 
+qualifies the sampled crossings as resolution- and normalization-dependent. Table V also 
+provides useful evidence of location stability between two resolutions. However, Section 
+5.2 states that every relative statement in n is unaffected by resolution, while Sections 
+5.3 and 7.1 describe the geometry-relative response as resolution-independent to about 2%. 
+These broader claims require further qualification. The reported 19.5–25.6% changes in 
+the representative refinement study are measured differences between N = 128 and 256, 
+not established errors relative to a converged solution. A nearly common multiplicative 
+refinement factor can preserve relative ordering despite a substantial absolute change. 
+The relevant question is whether the geometry-dependent numerical uncertainty near the 
+trough is sufficiently small to resolve the 0.03–0.36% margins in Table IV. Please assess 
+uncertainty in local differences between geometries and fitted minimum locations, 
+including sensitivity to junction treatment and fitting windows. If that precision cannot be 
+established, retain the broad low-dissipation-range interpretation consistently and present 
+the crossing Reynolds numbers as sampling-dependent diagnostics. 
+2. Section 4.4 explicitly distinguishes the gradient-valid mask area A_mask from the exact 
+cavity area A(n), but this distinction is not maintained consistently in Sections 3.2 and 
+4.3. Please use unambiguous notation for D/A_mask and KE/A(n) throughout and assess 
+whether the main geometry comparisons depend materially on the mask and excluded 
+wall region. Section 5.3 also states that a larger domain can have the same or smaller total 
+loss while having a larger loss per unit area. For positive areas and losses, this statement 
+is algebraically incorrect and should be corrected. Section 2 already notes that area 
+normalization is not equivalent to volume-constrained optimization; the fixed-volume 
+interpretation in Section 5.3 should be made consistent with that qualification. 
+3. Section 5.2 correctly recognizes that the wall-band diagnostic describes spatial 
+distribution without establishing causation. However, the stronger interpretations in 
+Sections 4.4 and 5.3 require an additive quantitative decomposition. Figure 6 compares 
+D_core/A_core with D/A_mask, which have different denominators and therefore do not 
+directly show how the wall and core contributions add to the reported loss density. Please 
+provide contributions such as D_wall/A_mask and D_core/A_mask, with the wall and 
+core forming a partition of the same integration mask. A decreasing wall-band fraction 
+alone does not exclude an increase in the absolute wall contribution. These results should 
+support the proposed mechanism, or the interpretation should be qualified accordingly. 
+Spatial dissipation distributions and sensitivity to wall-band thickness would provide 
+additional support. 
+4. Section 4.6 appropriately acknowledges that the the secondary extremum persists under 
+refinement while falling below the 1% threshold on the finer grids. Nevertheless, the 
+captions of Figures 9 and 10 use onset language, and Section 7.1 describes the near-
+square case as topologically distinct. The interval 950 < Re ≤ 1000 brackets a detection
+threshold crossing at N = 128 and does not establish the onset of a new flow topology. 
+Please carry this distinction consistently into those passages, using the reported 
+continuous extremum amplitudes and streamline evidence. Also reconcile the search
+region definition: Table S19 reports corner distances of approximately 0.272 L despite 
+specifying a search within 0.25 L of a corner. The stated lack of a demonstrated causal 
+link between this weak eddy and the dissipation increase should remain explicit 
+throughout. 
+5. The abstract reports substantial dissipation errors, Section 6.3 refers to Table S20, and 
+Section 7.2 acknowledges that lower differential residuals do not guarantee better 
+integrated observables. However, Section 7.1 also treats the operator results as evidence 
+that the physical structure of the reference solutions is preserved. The changes between 
+variants should therefore be discussed quantitatively in Section 6.3. For the seed
+averaged fields in Table S20, extending the physics pool from B1-pinit to B1-train98 
+increases mean dissipation error from 29.2% to 36.4%, kinetic-energy error from 2.8% to 
+4.5%, and primary-streamfunction error from 1.2% to 2.4%, despite reducing the 
+divergence residual. Please distinguish the demonstrated residual improvements from the 
+accuracy of these observables. If individual-model performance is being assessed,
+compute observables for each seed before summarizing their errors. If the ensemble
+mean field is the intended predictor, report its performance separately, since evaluating 
+quadratic dissipation after averaging fields measures a different quantity. 
+CONCLUSION 
+1. After addressing the verification issues, revise the Abstract and Conclusion so that broad 
+trends, fitted minimum locations, proposed mechanisms, and operator results retain their 
+respective levels of support. In particular, distinguish the observed low-dissipation range 
+from precisely resolved optimum locations, and the proposed interior contribution from 
+an established explanation of the near-square dissipation increase. The reduced neural 
+residuals should also be distinguished from accurate recovery of integrated observables. 
+The existing two-dimensional and parameter-range limitations are appropriate; the 
+qualifications concerning boundary treatment, curvature evaluation, and dissipation 
+accuracy should be reflected consistently in the final claims. 
+MINOR COMMENTS 
+1. Section 4.3 describes kinetic energy as total momentum content; these are different 
+physical quantities, and the wording should be corrected. Section 5.1 states that viscosity 
+does not shift the preferred geometry despite the Reynolds-dependent drift discussed 
+elsewhere. Please distinguish persistence of a broad low-loss band from movement of its 
+fitted centre. 
+2. The field labels and color scales in Figures 3 and 9, and the overlaid scales in Figure 11, 
+are difficult to read at normal page size. Please enlarge the relevant panels and identify 
+each plotted quantity clearly. Use comparable color scales when comparing the same 
+quantity across geometries, or explain any necessary differences. 
+Reviewer 5: The revised manuscript investigates the effects of continuous geometric 
+deformation on the flow structure and viscous dissipation in superelliptic lid
+driven cavities using the lattice Boltzmann method, supplemented by a physics
+informed neural operator. The authors have made considerable efforts to 
+reorganize the manuscript and emphasize the underlying fluid physics in 
+response to the editor's comments. The systematic parametric investigation and 
+the distinction between total and area-normalized viscous dissipation are 
+appreciated. 
+However, I still have substantial concerns regarding the scientific novelty, the 
+robustness of the numerical results, and the depth of the physical interpretation. 
+In my opinion, the present study does not yet provide sufficiently convincing 
+evidence of new fluid-physics insights to justify publication in Physics of Fluids. 
+My major concerns are summarized below. 
+1. Limited scientific novelty and unclear advancement beyond existing 
+studies. 
+The effects of cavity geometry on vortex structures, flow redistribution, and 
+viscous dissipation have been extensively investigated in previous studies. 
+Although the present work considers a continuously deformable superelliptic 
+geometry, most of the reported findings appear to be extensions of established 
+physical understanding rather than fundamentally new insights. The authors 
+should clarify what new physical principles or mechanisms have been identified 
+beyond the existing literature on geometry-dependent cavity flows and dissipation 
+minimization. 
+2. Insufficient numerical convergence of the key physical quantities. 
+The authors acknowledge that the calculated viscous dissipation changes by 
+approximately 19.5–25.6% when the grid resolution increases from 128 × 128 to 
+256 × 256. This is a considerable discrepancy, particularly because viscous 
+dissipation and its geometric dependence constitute the central findings of the 
+manuscript. Although the relative ordering of the geometries appears reasonably 
+stable, this does not fully establish the convergence of the reported dissipation 
+minima or their Reynolds-number dependence. A more rigorous convergence 
+assessment of the near-wall velocity gradients and integrated dissipation is 
+necessary to support these conclusions. 
+3. Insufficient quantitative evidence supporting the proposed physical 
+mechanisms. 
+The authors attribute the non-monotonic dissipation behavior to the competition 
+between bulk circulation and localized near-wall shear. However, the proposed 
+mechanism is primarily supported by post-processing of the velocity fields, 
+curvature-related diagnostics, and fixed-thickness wall-layer decomposition. 
+These observations are useful but do not establish a direct causal relationship 
+between geometric deformation and the redistribution of viscous dissipation. 
+Moreover, the near-wall dissipation remains sensitive to grid resolution. 
+Additional quantitative analysis is needed to demonstrate how the individual 
+physical contributions govern the observed dissipation minimum. 
+4. Limited contribution and predictive capability of the physics-informed 
+neural operator. 
+The neural operator achieves relatively high velocity-field reconstruction 
+accuracy, but its performance is close to that of the data-only baseline in the out
+of-distribution cases. More importantly, the errors in integrated viscous 
+dissipation remain approximately 30–50%, despite the reduction in the 
+divergence residual. This raises concerns regarding the ability of the proposed 
+approach to accurately predict the physical quantities central to this study. The 
+current results demonstrate an improvement in selected numerical residuals but 
+do not convincingly establish improved prediction of the underlying fluid physics. 
+5. Limited generality and physical significance of the conclusions. 
+The study is restricted to steady two-dimensional flows, a fixed aspect ratio, and 
+a single geometry parameter. Furthermore, the geometry deformation 
+simultaneously changes the cavity domain and the imposed moving-wall velocity 
+distribution. Consequently, the individual effects of geometric confinement, 
+boundary curvature, and wall kinematics cannot be independently identified. This 
+limits the generality of the proposed physical interpretation. The authors should 
+distinguish more clearly between observations specific to the selected geometry 
+family and physical mechanisms that may be applicable to more general cavity 
+flows. 
+Overall assessment 
+While the revised manuscript is better organized and contains an extensive 
+numerical investigation, the principal contributions remain largely descriptive, and 
+the central physical interpretations are not sufficiently supported by converged 
+numerical evidence and quantitative mechanistic analysis. Addressing these 
+concerns would require substantial additional investigation rather than further 
+clarification or restructuring of the manuscript. Therefore, I cannot recommend 
+the manuscript for publication in its present form.
