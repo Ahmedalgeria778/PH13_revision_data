@@ -1,0 +1,1264 @@
+% =====================================================================
+% PH13 -- Supplementary Material (single final document)
+% Companion to "Geometry-Induced Reorganization of Viscous Dissipation in
+% Superelliptic Lid-Driven Cavities".
+% =====================================================================
+\documentclass[11pt]{article}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\usepackage{placeins}
+\usepackage{etoolbox}
+\usepackage{caption}
+
+\AtBeginEnvironment{table}{\scriptsize}
+\newcommand{\tabbox}[1]{\resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{#1}}
+\graphicspath{{figs_new/}{figs/}}
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\captionsetup[figure]{name=Figure}
+\captionsetup[table]{name=Table,font=normalsize}
+\newcommand{\alttext}[1]{\par\smallskip\noindent{\small\itshape Alt text: #1}\par\smallskip}
+
+\title{\bfseries Supplementary Material\\[6pt]
+\large Supporting data, figures and verification for:\\
+``Geometry-Induced Reorganization of Viscous Dissipation in Superelliptic Lid-Driven Cavities''}
+\author{BENIAICHE Ahmed\\[2pt]
+\small Laboratory of Fluid Mechanics, Ecole Militaire Polytechnique, Algiers, Algeria}
+\date{\today}
+
+\raggedbottom
+\begin{document}
+\maketitle
+
+\noindent\textbf{Content.} This document contains only supporting fluid-physics material: solver verification, database quality control, observable definitions, the reference-field atlas, corrected curvature, the additive wall/core budget, common-support LBM/FEM dissipation, junction and energy conventions, moving-wall geometry, campaign inventory, fit diagnostics, corner-eddy analysis, and the projected-lid boundary-law convention. Sections, figures and tables are numbered S1, S2, \ldots{} and are cited by these numbers in the main article.
+
+\section{Reference solver verification}\label{sec:solver}
+The reference fields of the database are produced by the lattice-Boltzmann
+method (LBM) solver described in the main manuscript. This section documents
+the verification chain of that solver: (i) the square-cavity baseline against the
+classic data of Ghia et al.\ (1982) (Table~\ref{tab:ghia}, Fig.~\ref{fig:ghia});
+(ii) the curved-boundary test against the exact rigid-rotation solution
+(Table~\ref{tab:rotation}); and (iii) the cross-validation of representative LBM
+fields against an independent finite-element (FEM) formulation
+(Table~\ref{tab:lbmfem}, Figs.~\ref{fig:lbmfem100}--\ref{fig:lbmfemconv}).
+Resolution changes are reported as sensitivity checks, not as asymptotic error
+bounds.
+
+\subsection{LBM formulation details}
+The production solver is a two-dimensional nine-velocity (D2Q9) multiple-relaxation-time
+(MRT) lattice Boltzmann scheme with the moment set and collision matrix of
+Lallemand and Luo (2000). The diagonal relaxation-rate matrix used in
+production is
+$\mathbf{S}=\operatorname{diag}(0,\,1.4,\,1.4,\,0,\,1.2,\,0,\,1.2,\,\omega,\,\omega)$,
+where the shear-mode frequency is $\omega=1/\tau$ and the relaxation time is
+set from the lattice viscosity by the standard relation
+$\tau=3\,\nu_{\mathrm{lbm}}+0.5$. The lattice viscosity is
+$\nu_{\mathrm{lbm}}=U_{\mathrm{ref}}L_{\mathrm{char}}/Re$ with
+$U_{\mathrm{ref}}=0.05$ and characteristic length $L_{\mathrm{char}}=N-1$
+lattice units, i.e.\ the diameter of the discrete $N=128$ cavity
+($L_{\mathrm{char}}=127$; 2 in the continuous units of the main manuscript).
+The continuous normalization of the
+main manuscript uses $U_{\mathrm{lid}}=1$ and $L=2$, i.e.\
+$\nu=U_{\mathrm{lid}}L/Re=2/Re$; the conversions
+$u_{\mathrm{lbm}}=u\,U_{\mathrm{ref}}$ and
+$x_{\mathrm{lbm}}=x\,L_{\mathrm{char}}/2$ (a coordinate running over
+$x\in[-a,a]=[-1,1]$ therefore spans $L_{\mathrm{char}}$ lattice units)
+relate the two reference systems and
+give the same physical Reynolds number, at every resolution. The curved superelliptic
+boundary is treated with the interpolated bounce-back scheme of Bouzidi et
+al.\ (2001); the moving-lid velocity enters through the momentum-exchange
+correction, which imposes the tangential lid condition
+$\mathbf{u}_{\mathrm{lid}}=U_{\mathrm{lid}}(m_y,-m_x)$ on the interpolated
+boundary nodes. Steady state is declared when the maximum over the fluid
+nodes of the change of the streamwise velocity, measured at every 100th
+iteration, satisfies
+$\mathrm{d}u_{\max}<10^{-8}$, the check becoming active only after 500
+iterations. No iteration cap is applied to any run: convergence is the only
+stopping criterion, and every archived field therefore stores its own
+iteration count together with the residual at which it stopped. Auditing the
+archived fields (772 files covering 376 distinct
+configurations, each indexed by its exponent, Reynolds number, resolution and
+lid law), every stopping residual stays strictly below the threshold,
+spanning $7.20\times10^{-9}$ to $9.9999\times10^{-9}$, while the iteration
+counts needed to reach it span $3.86\times10^{4}$ to $7.76\times10^{5}$, 181
+of the 376 configurations exceeding $2\times10^{5}$; the longest run is the
+$n=2.0$, $Re=1000$ case at $N=512$. The square-cavity baseline of
+Table~\ref{tab:ghia} obeys the same convergence-only policy through the same
+code path, at the stricter threshold $10^{-9}$.
+
+\subsection{FEM verification details}
+The FEM verification solves the steady incompressible Navier--Stokes
+equations of the main manuscript with Taylor--Hood $\mathbb{P}_2/\mathbb{P}_1$
+velocity--pressure elements and Picard linearization, using quadrature order
+4 and a relative tolerance of $10^{-9}$ on the $L_2$ velocity norm for the
+fixed-point iteration; the lid velocity is $U_{\mathrm{lid}}=1$ and the
+viscosity is $\nu=2/Re$, consistent with the main manuscript. The LBM and FEM
+fields are evaluated at the LBM fluid nodes, and the interior relative $L_2$
+discrepancy is defined as
+\[
+\delta_{\mathrm{int}} =
+\frac{\sqrt{\left\langle\,|\mathbf{u}_{\mathrm{LBM}}-\mathbf{u}_{\mathrm{FEM}}|^{2}\,\right\rangle}}
+{\sqrt{\left\langle\,|\mathbf{u}_{\mathrm{LBM}}|^{2}\,\right\rangle}},
+\]
+where $\langle\cdot\rangle$ denotes the mean over the interior node set. The
+interior set excludes the fluid nodes whose kinetic links touch the curved
+boundary (links with non-zero interpolated fraction $q>0$), so that the
+discrete near-wall treatment of the two solvers does not dominate the
+comparison. All FEM solves reported in Table~\ref{tab:lbmfem} converged to the
+prescribed tolerance.
+
+
+% ------------------------------------------------------------------
+\begin{table}[H]
+\centering
+\caption{Square-cavity LBM baseline versus Ghia et al.\ (1982):
+center-line $L_2$/$L_\infty$ errors in $u$ and $v$ at $N=256$, with solver
+iterations and final residual ($\mathrm{res}<\mathrm{tol}=10^{-9}$ for
+$Re=100$; $Re=1000$ stopped at the same tolerance).}
+\alttext{Square-cavity LBM baseline versus Ghia et al.\ (1982): center-line $L_2$/$L_\infty$ errors in $u$ and $v$ at $N=256$, with solver iterations and final residual ($res<tol=10^{-9}$ for $Re=100$; $Re=1000$ stopped at the same tolerance).}
+
+
+
+\label{tab:ghia}
+\begin{tabular}{@{}lccccccc@{}}
+\toprule
+$Re$ & $L_2(u)$ & $L_\infty(u)$ & $L_2(v)$ & $L_\infty(v)$ & Iterations & Residual \\
+\midrule
+100   & $5.06\times10^{-3}$ & $1.28\times10^{-2}$ & $6.75\times10^{-3}$ &
+$1.14\times10^{-2}$ & 148\,000 & $9.69\times10^{-10}$ \\
+1000  & $9.60\times10^{-3}$ & $2.95\times10^{-2}$ & $1.40\times10^{-2}$ &
+$2.81\times10^{-2}$ & 794\,000 & $9.64\times10^{-10}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figS9_ghia_validation.png}
+\caption{Square-cavity LBM center-line velocity profiles versus Ghia et al.\
+(1982), $Re=100$ (left) and $Re=1000$ (right), uniform lid, $N=256$.
+The in-panel $L_2$ values correspond to the center-line errors reported in
+Table~\ref{tab:ghia}.}
+\alttext{Square-cavity LBM center-line velocity profiles versus Ghia et al.\ (1982), $Re=100$ (left) and $Re=1000$ (right), uniform lid, $N=256$. The in-panel $L_2$ values correspond to the center-line errors reported in Table~.}
+
+
+
+\label{fig:ghia}
+\end{figure}
+
+
+\subsection{Curved-boundary test (exact rigid rotation)}
+The curved-boundary implementation is verified against the exact stationary
+solution $u=(y,-x)$ of a fully rotating disk, which is independent of $Re$.
+At fixed lid velocity the $L_2$ error of this test stagnates near $10^{-3}$ as
+the grid is refined, because the residual error is set by the lattice Mach
+number of the fixed $U_{\mathrm{lid}}$. Table~\ref{tab:rotation} reports the same
+test in a diffusive scaling, $U_{\mathrm{lid}}(N)=0.05\times32/N$, which keeps
+$Re=100$ and $\tau\simeq0.547$ fixed while the lattice Mach number decreases as
+$1/N$. The error then decreases monotonically, with observed orders $1.88$,
+$1.90$ and $1.93$ between successive grids. The companion
+fixed-$U_{\mathrm{lid}}$ runs corroborate the lattice-Mach interpretation
+through the wall-normal leakage $\max|u\cdot m|$, which decreases from
+$4.41\times10^{-5}$ at $N=32$ to $2.06\times10^{-5}$ at $N=96$. Because the
+production campaign holds $U_{\mathrm{lid}}=0.05$ at every resolution, the same
+lattice-Mach offset (of order $10^{-3}$ in this $L_2$) is present in all of its
+fields; being constant in $N$, it cannot explain the $18.1$--$25.4\,\%$ drift
+of $D/A$ between $N=128$ and $N=256$.
+% ------------------------------------------------------------------
+\begin{table}[H]
+\centering
+\caption{Curved-boundary verification on the exact rigid-rotation solution
+$u=(y,-x)$ of a rotating disk at $Re=100$, in diffusive scaling
+$U_{\mathrm{lid}}(N)=0.05\times32/N$: $L_2$/$L_\infty$ errors, lid velocity,
+iterations and final residual.}
+\alttext{Curved-boundary verification on the exact rigid-rotation solution $u=(y,-x)$ of a rotating disk at $Re=100$, in diffusive scaling $U_{lid}(N)=0.05\times32/N$: $L_2$/$L_\infty$ errors, lid velocity, iterations and final residual.}
+
+
+
+\label{tab:rotation}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+$N$ & $U_{\mathrm{lid}}$ & $L_2$ & $L_\infty$ & Iterations & Residual \\
+\midrule
+32 & 0.0500 & $9.35\times10^{-4}$ & $1.29\times10^{-3}$ & 18\,500 & $9.57\times10^{-11}$ \\
+48 & 0.0333 & $4.36\times10^{-4}$ & $5.95\times10^{-4}$ & 38\,900 & $9.96\times10^{-11}$ \\
+64 & 0.0250 & $2.52\times10^{-4}$ & $3.42\times10^{-4}$ & 65\,800 & $9.78\times10^{-11}$ \\
+96 & 0.0167 & $1.15\times10^{-4}$ & $1.55\times10^{-4}$ & 136\,700 & $9.97\times10^{-11}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{LBM--FEM cross-validation over the superelliptic family}
+\label{sec:solverc}
+
+To validate the MRT-LBM solver across the geometric family, an independent cross-validation is performed against a Taylor--Hood quadratic-velocity/linear-pressure (P2/P1) finite-element solver. Table~\ref{tab:lbmfem} reports interior relative $L_2$ discrepancies at the available $(N,Re)$ comparison levels, including the reference resolution $N=128$ at $Re=400$ for the sharpest ($n=1.25$, $1.39\,$%) and near-square ($n=4$, $0.78\,$%) members. At fixed finite-element mesh, halving the lattice spacing reduces the $n=4$ discrepancy from $1.45\,$% to $0.78\,$%, locating the dominant remaining difference on the lattice side. The pointed tip remains the worst case, consistent with the tighter radius of curvature resolved by the interpolated bounce-back scheme. The additional $N=256$ comparison decreases the discrepancy to $0.60\,$% and $0.25\,$%, but refines both discretisations and therefore does not attribute the residual to either side.
+
+The resolution study in Fig.~\ref{fig:lbmfemconv} shows that the interior LBM--FEM discrepancy decreases from $1.48\times10^{-2}$ at $N=32$ to $2.20\times10^{-3}$ at $N=96$ on the circle at $Re=100$. This decrease is reported as a sensitivity check over the tested grids; it is not used to claim a converged asymptotic error or to transfer a formal convergence rate to the production cases.
+
+
+% ------------------------------------------------------------------
+\begin{table}[H]
+\centering
+\caption{Interior relative $L_2$ discrepancy (\%) between MRT-LBM and the
+independent Taylor--Hood $\mathbb{P}_2/\mathbb{P}_1$ FEM solution, tabulated by
+comparison level. The lattice resolution $N$ and the finite-element refinement
+$n_{\mathrm{refs}}$ are independent discretisation levels and are not matched
+to one another; each row therefore states the mesh it actually used, as
+triangle and total-unknown counts ($2(V+E)+V$) measured on the assembled
+mesh, so that the finite-element side of every comparison is fully specified.
+$N=64$ at $Re=100$ and $N=96$ at $Re=400$ are the original cross-checks;
+$N=128$ at $Re=400$ brings the comparison to the reference resolution of the
+database and $n=1.25$ to the family, and it is made against the same
+$74\,371$-unknown mesh as the $N=96$ row; $N=256$ at $Re=400$ is an additional refined comparison, and because it refines the
+lattice and the finite-element mesh together ($65\,536$ triangles, $296\,195$
+unknowns) it cannot attribute the residual to either side --- it only checks
+that the discrepancy decreases and that the pointed tip stays the worst of the
+family. At that level the discrepancy is evaluated on the intersection of the
+two discretisations: $24$ of the $60\,132$ LBM fluid nodes of the $n=4$ case
+fall outside the assembled triangulation and are excluded from both metrics,
+against $0$ for $n=1.25$. All LBM residuals below $10^{-8}$;
+every FEM solve converged, in $22$ Picard iterations at
+$n_{\mathrm{refs}}=6$ and in $18$ and $22$ at $n_{\mathrm{refs}}=7$.}
+\alttext{Interior relative $L_2$ discrepancy (\%) between MRT-LBM and the independent Taylor--Hood $\mathbb{P}_2/\mathbb{P}_1$ FEM solution, tabulated by comparison level. The lattice resolution $N$ and the finite-element refinement $n_{refs}$ are independent discretisation levels and are not matched to one another; each row therefore states the mesh it actually used, as triangle and total-unknown counts ($2(V+E)+V$) measured on the assembled mesh, so that the finite-element side of every comparison is fully specified. $N=64$ at $Re=100$ and $N=96$ at $Re=400$ are the original cross-checks; $N=128$ at $Re=400$ brings the comparison to the reference resolution of the database and $n=1.25$ to the family, and it is made against the same $74\,371$-unknown mesh as the $N=96$ row; $N=256$ at $Re=400$ is an additional refined comparison, and because it refines the lattice and the finite-element mesh together ($65\,536$ triangles, $296\,195$ unknowns) it cannot attribute the residual to either side --- it only checks that the discrepancy decreases and that the pointed tip stays the worst of the family. At that level the discrepancy is evaluated on the intersection of the two discretisations: $24$ of the $60\,132$ LBM fluid nodes of the $n=4$ case fall outside the assembled triangulation and are excluded from both metrics, against $0$ for $n=1.25$. All LBM residuals below $10^{-8}$; every FEM solve converged, in $22$ Picard iterations at $n_{refs}=6$ and in $18$ and $22$ at $n_{refs}=7$.}
+
+
+
+\label{tab:lbmfem}
+\tabbox{%
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+comparison level & $n=1.25$ & $n=1.5$ & $n=2$ & $n=4$ & square \\
+\midrule
+$Re=100$, $N=64$, $n_{\mathrm{refs}}=5$, $4\,096$ triangles, $18\,755$ unknowns & -- & 1.06 & 0.93 & 0.96 & 0.87 \\
+$Re=400$, $N=96$, $n_{\mathrm{refs}}=6$, $16\,384$ triangles, $74\,371$ unknowns & -- & 1.20 & 1.20 & 1.45 & 1.21 \\
+$Re=400$, $N=128$, $n_{\mathrm{refs}}=6$, $16\,384$ triangles, $74\,371$ unknowns & 1.39 & -- & -- & 0.78 & -- \\
+$Re=400$, $N=256$, $n_{\mathrm{refs}}=7$, $65\,536$ triangles, $296\,195$ unknowns & 0.60 & -- & -- & 0.25 & -- \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[b]{0.48\textwidth}
+\includegraphics[width=\textwidth]{lbm_fem_circle_Re100_N64.png}
+\caption{Circle ($n=2$), $Re=100$}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\includegraphics[width=\textwidth]{lbm_fem_ell1.5_Re100_N64.png}
+\caption{Ellipse ($n=1.5$), $Re=100$}
+\end{subfigure}
+\vspace{0.3cm}
+\begin{subfigure}[b]{0.48\textwidth}
+\includegraphics[width=\textwidth]{lbm_fem_ell4_Re100_N64.png}
+\caption{Super-ellipse ($n=4$), $Re=100$}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\includegraphics[width=\textwidth]{lbm_fem_square_Re100_N64.png}
+\caption{Square, $Re=100$}
+\end{subfigure}
+\caption{LBM--FEM velocity-field comparison at $Re=100$ for four cavity geometries
+(lattice $N=64$, finite-element mesh $n_{\mathrm{refs}}=5$, $4\,096$ triangles). Each panel overlays the LBM and FEM
+streamlines on the LBM velocity magnitude. The corresponding interior relative
+$L_2$ discrepancies are reported in Table~\ref{tab:lbmfem}.}
+\alttext{LBM--FEM velocity-field comparison at $Re=100$ for four cavity geometries (lattice $N=64$, finite-element mesh $n_{refs}=5$, $4\,096$ triangles). Each panel overlays the LBM and FEM streamlines on the LBM velocity magnitude. The corresponding interior relative $L_2$ discrepancies are reported in Table~.}
+
+
+
+\label{fig:lbmfem100}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[b]{0.48\textwidth}
+\includegraphics[width=\textwidth]{lbm_fem_circle_Re400_N96.png}
+\caption{Circle ($n=2$), $Re=400$}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\includegraphics[width=\textwidth]{lbm_fem_ell1.5_Re400_N96.png}
+\caption{Ellipse ($n=1.5$), $Re=400$}
+\end{subfigure}
+\vspace{0.3cm}
+\begin{subfigure}[b]{0.48\textwidth}
+\includegraphics[width=\textwidth]{lbm_fem_ell4_Re400_N96.png}
+\caption{Super-ellipse ($n=4$), $Re=400$}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\includegraphics[width=\textwidth]{lbm_fem_square_Re400_N96.png}
+\caption{Square, $Re=400$}
+\end{subfigure}
+\caption{LBM--FEM velocity-field comparison at $Re=400$ for four cavity geometries
+(lattice $N=96$, finite-element mesh $n_{\mathrm{refs}}=6$, $16\,384$ triangles). The comparison remains within the reported
+discretization-error range, with all interior relative $L_2$ discrepancies
+below $1.5\,\%$ (Table~\ref{tab:lbmfem}).}
+\alttext{LBM--FEM velocity-field comparison at $Re=400$ for four cavity geometries (lattice $N=96$, finite-element mesh $n_{refs}=6$, $16\,384$ triangles). The comparison remains within the reported discretization-error range, with all interior relative $L_2$ discrepancies below $1.5\,\%$ (Table~).}
+
+
+
+\label{fig:lbmfem400}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.70\textwidth]{figS11b_lbm_fem_convergence_N.png}
+\caption{Grid dependence of the LBM--FEM interior relative $L_2$ discrepancy
+for the circular cavity at $Re=100$ as the LBM resolution is refined from
+$N=32$ to $N=96$. The observed decrease is consistent with a reduction of
+discretization error over the tested resolutions.}
+\alttext{Grid dependence of the LBM--FEM interior relative $L_2$ discrepancy for the circular cavity at $Re=100$ as the LBM resolution is refined from $N=32$ to $N=96$. The observed decrease is consistent with a reduction of discretization error over the tested resolutions.}
+
+
+
+\label{fig:lbmfemconv}
+\end{figure}
+
+% ======================================================================
+
+\section{Database quality control}\label{sec:database}
+Every one of the $126$ processed configurations passed the fixed
+quality-control protocol before being accepted into the database; this section details the report for
+the $190$-case physics-analysis subset (all $10$ exponents $n$ at the $19$
+Reynolds numbers of the complete grid, $N=128$). Table~\ref{tab:qc} condenses the
+quality-control report: $190$ cases found
+and analysed, zero failures, maximum relative area error of the discretized
+domain $0.948\,\%$ (below the $1\,\%$ acceptance threshold), maximum LBM residual
+$9.9999\times10^{-9}$ (below $1\times10^{-8}$), and positive minimum density.
+Because the tangential moving-lid boundary condition
+$u_w=U_{\mathrm{lid}}(m_y,-m_x)$ is not invariant under reflection
+$x\mapsto-x$, mirror symmetry is not a valid numerical quality criterion for
+this database and is explicitly excluded from the quality control
+(\emph{not applicable} status). Fig.~\ref{fig:areaerror} shows the spatial
+distribution of the area error over the $n\times Re$ grid.
+
+The database maximum of the finite-difference divergence, $|\nabla\cdot u|=1.67$
+(Table~\ref{tab:qc}), is attained at a single isolated interior cell of the most
+pointed configuration ($n=1.25$, $Re=1000$), at $x\approx-0.953$,
+$y\approx0.024$, i.e.\ about three cell widths from the wall in the sharp
+curved-tip region; its four-point stencil is entirely fluid, so the value is
+not a boundary-stencil artifact, but it is consistent with the strong local
+curvature-approximation error of the curved moving boundary at the sharp
+vertex. It is reported as a local, geometry-specific finite-resolution
+excursion rather than a systematic feature of the database.
+
+Recomputing the same diagnostic on the $50$-case $N=256$ campaign confirms
+this reading. The per-case maximum scales with the stencil length, as expected
+for a finite-difference derivative of a discrete field: its median over the
+database rises from $1.31$ at $N=128$ ($190$ cases) to $2.43$ at $N=256$
+($50$ cases). The individual outlier grows on that same trend, from $1.67$ to
+$2.72$ --- a factor $1.63$, against $1.85$ for the median --- which is what a
+tip-localised structure whose discrete gradient steepens with $h$ does, and not
+what a spurious error does: refining resolves it further instead of removing
+it. The case $(n,Re)=(1.25,1000)$ still carries the largest value,
+$\max|\nabla\cdot u|=2.72$, but now by only $12\,\%$ above the $N=256$ median
+(against $27\,\%$ at $N=128$), and the maximum migrates to the opposite tip
+($x\approx0.977$, $y\approx0.012$) with the left--right asymmetry of the
+tangential drive. The excursion is therefore a resolution-scaling
+finite-difference signature of the sharp tip, not a physical divergence of
+the field. Its weight in the reported observables is negligible: removing the
+single worst cell changes $D/A$ by $-0.06\,\%$ at $N=128$ and $-0.07\,\%$ at
+$N=256$, and removing the $20$ worst cells by $-4.2\,\%$ and $-2.6\,\%$
+respectively.
+% ------------------------------------------------------------------
+\begin{table}[H]
+\centering
+\caption{Database quality-control summary ($190$ cases analysed, $N=128$).}
+\alttext{Database quality-control summary ($190$ cases analysed, $N=128$).}
+
+
+
+\label{tab:qc}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Metric & Value & Status \\
+\midrule
+Cases found / analysed & 190 / 190 & --- \\
+Failed cases & 0 & --- \\
+Max.\ relative area error & $9.479\times10^{-3}$ & pass ($<10^{-2}$) \\
+Max.\ LBM residual & $9.9999\times10^{-9}$ & pass ($<10^{-8}$) \\
+Min.\ density $\rho_{\min}$ & $0.9954$ & pass ($>0$) \\
+Max.\ $|\nabla\cdot u|$ & $1.67$ & reported (no gate) \\
+Mirror symmetry & not applicable & excluded (tangent-lid boundary condition) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{map_area_error.png}
+\caption{Relative area error of the discretized domain over the
+$n\times Re$ grid of the analysed subset. All
+values are below the $1\,\%$ threshold.}
+\alttext{Relative area error of the discretized domain over the $n\times Re$ grid of the analysed subset. All values are below the $1\,\%$ threshold.}
+
+
+
+\label{fig:areaerror}
+\end{figure}
+
+
+\section{Physical observables of the comparison configurations}\label{sec:observables}
+All physical observables reported in this section are computed from the
+$N=128$ LBM reference fields.
+The velocity derivatives are evaluated by second-order central differences on
+the interior nodes whose four-point stencil is entirely fluid; the vorticity
+is $\omega=\partial v/\partial x-\partial u/\partial y$; the streamfunction is
+a diagnostic reconstruction obtained from the Poisson problem
+$\nabla^2\psi=-\omega$ with $\psi=0$ on the discrete fluid boundary
+(convention $u=\psi_y$, $v=-\psi_x$); the kinetic energy is
+$KE=\int_{\Omega}\tfrac{1}{2}|\mathbf{u}|^2\,dA$ over the fluid mask; the
+viscous dissipation is the standard mechanical dissipation of the
+incompressible Newtonian fluid, $D=2\nu\int_{\Omega}S:S\,dA$, which evaluates
+with $\nu=2/Re$ as
+$D=\tfrac{4}{Re}\int_{\Omega}\left[(\partial u/\partial x)^2
++(\partial v/\partial y)^2+\tfrac{1}{2}(\partial u/\partial y+\partial
+v/\partial x)^2\right]dA$ over the valid-gradient mask; and the enstrophy is
+$\mathcal{E}=\tfrac{1}{2}\int_{\Omega}\omega^2\,dA$. The maximum velocity is
+$U_{\max}=\max_{\Omega}|\mathbf{u}|$. Vortex counts are obtained from the
+connected extrema of $\psi$ on the fluid core (nodes at Euclidean distance
+$\geq 2$ from the wall), with threshold
+$\tau=\max\left(\tfrac{q}{100}\,|\psi_{\mathrm{primary}}|,\,10^{-14}\right)$
+for $q\in\{1,3,5\}\,\%$. The area-normalized kinetic energy of Table~\ref{tab:energy30} is obtained by
+dividing $KE$ by the exact cavity area $A(n)=4\,\Gamma(1+1/n)^2/\Gamma(1+2/n)$
+for $a=b=1$ (the area formula in the main manuscript), whereas $D/A$ is
+divided by the area $A_{\rm mask}(n)$ of the discrete integration mask that
+carries the sum defining $D$, so that numerator and denominator share the same
+support.
+
+Table~\ref{tab:observables} provides numerical values of the physical observables
+for four representative configurations spanning the geometry family. These
+values facilitate quantitative inspection of the reference fields and document
+the flow characteristics independently of any surrogate model. The table includes maximum velocity,
+maximum absolute vorticity, primary streamfunction, vortex counts at the
+$1\,\%$ and $5\,\%$ thresholds, dissipation, kinetic energy, enstrophy and the
+root-mean-square divergence of the reference fields. The physical trends over
+the complete $n$--$Re$ parameter space are discussed in the physical-analysis
+sections of the main manuscript.
+% ------------------------------------------------------------------
+\begin{table}[H]
+\centering
+\caption{Physical observables of the four comparison configurations
+($N=128$): maximum speed, maximum
+absolute vorticity, primary streamfunction, vortex count at the $1\,\%$ /
+$5\,\%$ thresholds, dissipation, kinetic energy, enstrophy and
+root-mean-square (RMS) divergence.}
+\alttext{Physical observables of the four comparison configurations ($N=128$): maximum speed, maximum absolute vorticity, primary streamfunction, vortex count at the $1\,\%$ / $5\,\%$ thresholds, dissipation, kinetic energy, enstrophy and root-mean-square (RMS) divergence.}
+
+
+
+\label{tab:observables}
+\tabbox{%
+\begin{tabular}{@{}lcccccccc@{}}
+\toprule
+Case & $U_{\max}$ & $|\omega|_{\max}$ & $\psi_{\mathrm{prim}}$ &
+$n_{\mathrm{vort}}^{1\%}/n_{\mathrm{vort}}^{5\%}$ & Dissipation & KE &
+Enstrophy & RMS$\;|\nabla\cdot u|$ \\
+\midrule
+$n=2,Re=400$           & 0.998 & 21.4  & $-0.337$ & 1 / 1 & 0.0467 & 0.357 & 7.69 & 0.0334 \\
+$n=3,Re=1000$          & 1.039 & 24.6  & $-0.360$ & 1 / 1 & 0.0248 & 0.409 & 9.02 & 0.0408 \\
+$n=5,Re=1000$          & 1.035 & 24.6  & $-0.363$ & 1 / 1 & 0.0265 & 0.422 & 9.33 & 0.0395 \\
+$n=8,Re=1000$          & 1.027 & 24.5  & $-0.361$ & 2 / 1 & 0.0284 & 0.421 & 9.67 & 0.0391 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\subsection{Area-normalized kinetic energy and dissipation}
+Table~\ref{tab:grid190} is the per-case source of the energy and dissipation analysis of the main manuscript, over all 190 cases, Table~\ref{tab:energy30} covering only the 30 of the reference three-Reynolds grid. The interpretation of those columns --- the
+non-monotonicity of $D/A$, the geometry of its sampled minimum, and the
+distinction between minimizing $D$ and minimizing $D/A$ --- is given once, in
+the physical-analysis sections of the main text, and is not repeated here. The
+corresponding curvature and wall/core analyses are given in
+Secs.~\ref{sec:curvature} and~\ref{sec:corewall}.
+
+For reference, the aggregate range over the whole 30-case grid, rather than
+within a single Reynolds number, is $KE/A\in[0.0915,0.1182]$, which is wider
+than the $Re=1000$ band quoted in the main-text energy analysis because the
+three Reynolds numbers occupy slightly different levels. The table is otherwise the numerical
+backing for the main-text statements and is not intended as a second
+presentation of them.
+% ------------------------------------------------------------------
+\begin{table}[H]
+\centering
+\caption{Integrated kinetic energy $KE$ and integrated dissipation
+$D=2\nu\int_{\Omega}S:S\,dA$ with $\nu=2/Re$, together with their
+area-normalized counterparts on the 30-case reference grid ($N=128$).
+$KE/A$ uses the exact cavity area $A(n)$; $D/A$ uses the area $A_{\rm mask}(n)$
+of the discrete integration mask, so that numerator and denominator share the
+same support. Absolute dissipation levels are resolution-sensitive; the table
+is used only for geometry ordering at fixed resolution and observable
+definition.}
+\alttext{Integrated kinetic energy $KE$ and integrated dissipation $D=2\nu\int_{\Omega}S:S\,dA$ with $\nu=2/Re$, together with their area-normalized counterparts on the 30-case reference grid ($N=128$). $KE/A$ uses the exact cavity area $A(n)$; $D/A$ uses the area $A_{\rm mask}(n)$ of the discrete integration mask, so that numerator and denominator share the same support. Absolute dissipation levels are resolution-sensitive; the table is used only for geometry ordering at fixed resolution and observable definition.}
+
+
+
+\label{tab:energy30}
+\begin{tabular}{@{}rrrrrrrr@{}}
+\toprule
+$n$ & $Re$ & $A(n)$ & $A_{\rm mask}(n)$ & $KE$ & $KE/A$ & $D$ & $D/A$ \\
+\midrule
+ 1.25 &  100 &  2.4271 &  2.3530 &  0.2221 &  0.0915 &  0.1873 &  0.07959 \\
+  1.5 &  100 &  2.7379 &  2.6546 &  0.2722 &  0.0994 &  0.1423 &  0.05360 \\
+ 1.75 &  100 &  2.9678 &  2.8808 &  0.3083 &  0.1039 &  0.1245 &  0.04320 \\
+    2 &  100 &  3.1416 &  3.0474 &  0.3313 &  0.1055 &  0.1162 &  0.03814 \\
+  2.5 &  100 &  3.3809 &  3.2796 &  0.3572 &  0.1057 &  0.1122 &  0.03421 \\
+    3 &  100 &  3.5333 &  3.4204 &  0.3669 &  0.1038 &  0.1141 &  0.03335 \\
+    4 &  100 &  3.7081 &  3.5821 &  0.3729 &  0.1006 &  0.1222 &  0.03412 \\
+    5 &  100 &  3.8006 &  3.6654 &  0.3729 &  0.0981 &  0.1309 &  0.03571 \\
+    6 &  100 &  3.8552 &  3.7121 &  0.3709 &  0.0962 &  0.1388 &  0.03739 \\
+    8 &  100 &  3.9138 &  3.7617 &  0.3671 &  0.0938 &  0.1522 &  0.04047 \\
+ 1.25 &  400 &  2.4271 &  2.3530 &  0.2388 &  0.0984 &  0.0643 &  0.02733 \\
+  1.5 &  400 &  2.7379 &  2.6546 &  0.2933 &  0.1071 &  0.0536 &  0.02019 \\
+ 1.75 &  400 &  2.9678 &  2.8808 &  0.3320 &  0.1119 &  0.0491 &  0.01705 \\
+    2 &  400 &  3.1416 &  3.0474 &  0.3567 &  0.1135 &  0.0467 &  0.01534 \\
+  2.5 &  400 &  3.3809 &  3.2796 &  0.3838 &  0.1135 &  0.0455 &  0.01388 \\
+    3 &  400 &  3.5333 &  3.4204 &  0.3941 &  0.1115 &  0.0458 &  0.01340 \\
+    4 &  400 &  3.7081 &  3.5821 &  0.4019 &  0.1084 &  0.0479 &  0.01336 \\
+    5 &  400 &  3.8006 &  3.6654 &  0.4037 &  0.1062 &  0.0501 &  0.01366 \\
+    6 &  400 &  3.8552 &  3.7121 &  0.4032 &  0.1046 &  0.0520 &  0.01400 \\
+    8 &  400 &  3.9138 &  3.7617 &  0.4018 &  0.1027 &  0.0551 &  0.01465 \\
+ 1.25 & 1000 &  2.4271 &  2.3530 &  0.2461 &  0.1014 &  0.0329 &  0.01400 \\
+  1.5 & 1000 &  2.7379 &  2.6546 &  0.3041 &  0.1111 &  0.0285 &  0.01073 \\
+ 1.75 & 1000 &  2.9678 &  2.8808 &  0.3454 &  0.1164 &  0.0266 &  0.00924 \\
+    2 & 1000 &  3.1416 &  3.0474 &  0.3713 &  0.1182 &  0.0255 &  0.00835 \\
+  2.5 & 1000 &  3.3809 &  3.2796 &  0.3986 &  0.1179 &  0.0248 &  0.00757 \\
+    3 & 1000 &  3.5333 &  3.4204 &  0.4090 &  0.1158 &  0.0248 &  0.00725 \\
+    4 & 1000 &  3.7081 &  3.5821 &  0.4186 &  0.1129 &  0.0256 &  0.00714 \\
+    5 & 1000 &  3.8006 &  3.6654 &  0.4216 &  0.1109 &  0.0265 &  0.00723 \\
+    6 & 1000 &  3.8552 &  3.7121 &  0.4211 &  0.1092 &  0.0272 &  0.00733 \\
+    8 & 1000 &  3.9138 &  3.7617 &  0.4208 &  0.1075 &  0.0284 &  0.00755 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Reference flow field atlas}\label{sec:atlas}
+This section complements the main-text reference-flow atlas by providing the reference LBM flow fields at the lower Reynolds number $Re=100$. Figure~\ref{fig:atlas100} shows the velocity magnitude and streamfunction, illustrating the steady characteristics for representative geometries. The corresponding fields and vortex topologies at $Re=1000$ are discussed in the main text.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[b]{0.32\textwidth}
+\includegraphics[width=\textwidth]{se_n1p25_Re100_N128_fields.png}
+\caption{$n=1.25,\;Re=100$}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.32\textwidth}
+\includegraphics[width=\textwidth]{se_n2p0_Re100_N128_fields.png}
+\caption{$n=2,\;Re=100$}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.32\textwidth}
+\includegraphics[width=\textwidth]{se_n4p0_Re100_N128_fields.png}
+\caption{$n=4,\;Re=100$}
+\end{subfigure}
+\caption{Reference LBM velocity and streamfunction fields at $Re=100$ for representative geometry exponents.}
+\alttext{Reference LBM velocity and streamfunction fields at $Re=100$ for representative geometry exponents.}
+
+
+
+\label{fig:atlas100}
+\end{figure}
+
+
+\begin{table}[H]
+\centering
+\caption{Complete $N=128$ grid of the area-normalized kinetic energy $KE/A$
+and area-normalized dissipation $D/A$ in the mechanical convention of
+Table~\ref{tab:energy30}. $KE/A$ uses the exact cavity area $A(n)$; $D/A$ uses
+the area $A_{\rm mask}(n)$ of the discrete integration mask that carries the
+sum defining $D$. Rows are geometry exponents and columns Reynolds numbers.
+The absolute levels are resolution-sensitive; the table is used for geometry
+ordering at fixed resolution only.}
+\alttext{Complete $N=128$ grid of the area-normalized kinetic energy $KE/A$ and area-normalized dissipation $D/A$ in the mechanical convention of Table~. $KE/A$ uses the exact cavity area $A(n)$; $D/A$ uses the area $A_{\rm mask}(n)$ of the discrete integration mask that carries the sum defining $D$. Rows are geometry exponents and columns Reynolds numbers. The absolute levels are resolution-sensitive; the table is used for geometry ordering at fixed resolution only.}
+
+
+
+\label{tab:grid190}
+\scriptsize
+\setlength{\tabcolsep}{3.0pt}
+\tabbox{%
+\begin{tabular}{@{}lrrrrrrrrrrrrrrrrrrr@{}}
+\toprule
+$n$ & 100 & 150 & 200 & 250 & 300 & 350 & 400 & 450 & 500 & 550 & 600 & 650 & 700 & 750 & 800 & 850 & 900 & 950 & 1000 \\
+\midrule
+\multicolumn{20}{l}{\bfseries $KE/A$}\\
+1.25 & 0.0915 & 0.0936 & 0.0951 & 0.0962 & 0.0971 & 0.0978 & 0.0984 & 0.0989 & 0.0993 & 0.0996 & 0.0999 & 0.1002 & 0.1004 & 0.1006 & 0.1008 & 0.1010 & 0.1011 & 0.1013 & 0.1014 \\
+1.5 & 0.0994 & 0.1018 & 0.1035 & 0.1047 & 0.1057 & 0.1065 & 0.1071 & 0.1077 & 0.1081 & 0.1086 & 0.1089 & 0.1093 & 0.1096 & 0.1099 & 0.1101 & 0.1104 & 0.1106 & 0.1109 & 0.1111 \\
+1.75 & 0.1039 & 0.1064 & 0.1081 & 0.1094 & 0.1104 & 0.1112 & 0.1119 & 0.1125 & 0.1130 & 0.1134 & 0.1139 & 0.1142 & 0.1146 & 0.1149 & 0.1152 & 0.1155 & 0.1158 & 0.1161 & 0.1164 \\
+2 & 0.1055 & 0.1080 & 0.1097 & 0.1110 & 0.1120 & 0.1128 & 0.1135 & 0.1141 & 0.1147 & 0.1151 & 0.1156 & 0.1160 & 0.1163 & 0.1167 & 0.1170 & 0.1173 & 0.1176 & 0.1179 & 0.1182 \\
+2.5 & 0.1057 & 0.1082 & 0.1099 & 0.1111 & 0.1121 & 0.1129 & 0.1135 & 0.1141 & 0.1146 & 0.1150 & 0.1154 & 0.1158 & 0.1162 & 0.1165 & 0.1168 & 0.1171 & 0.1174 & 0.1176 & 0.1179 \\
+3 & 0.1038 & 0.1063 & 0.1080 & 0.1092 & 0.1101 & 0.1109 & 0.1115 & 0.1121 & 0.1126 & 0.1130 & 0.1134 & 0.1138 & 0.1141 & 0.1144 & 0.1147 & 0.1150 & 0.1152 & 0.1155 & 0.1158 \\
+4 & 0.1006 & 0.1031 & 0.1048 & 0.1060 & 0.1070 & 0.1077 & 0.1084 & 0.1089 & 0.1094 & 0.1099 & 0.1103 & 0.1107 & 0.1110 & 0.1114 & 0.1117 & 0.1120 & 0.1123 & 0.1126 & 0.1129 \\
+5 & 0.0981 & 0.1007 & 0.1025 & 0.1038 & 0.1047 & 0.1055 & 0.1062 & 0.1068 & 0.1073 & 0.1078 & 0.1082 & 0.1086 & 0.1090 & 0.1093 & 0.1097 & 0.1100 & 0.1103 & 0.1106 & 0.1109 \\
+6 & 0.0962 & 0.0989 & 0.1007 & 0.1021 & 0.1031 & 0.1039 & 0.1046 & 0.1052 & 0.1057 & 0.1062 & 0.1066 & 0.1070 & 0.1074 & 0.1077 & 0.1081 & 0.1084 & 0.1087 & 0.1090 & 0.1092 \\
+8 & 0.0938 & 0.0966 & 0.0985 & 0.0999 & 0.1010 & 0.1019 & 0.1027 & 0.1033 & 0.1039 & 0.1044 & 0.1048 & 0.1052 & 0.1056 & 0.1060 & 0.1063 & 0.1066 & 0.1070 & 0.1072 & 0.1075 \\
+\midrule
+\multicolumn{20}{l}{\bfseries $D/A$}\\
+1.25 & 0.07959 & 0.05743 & 0.04593 & 0.03877 & 0.03382 & 0.03016 & 0.02733 & 0.02507 & 0.02321 & 0.02165 & 0.02032 & 0.01917 & 0.01816 & 0.01727 & 0.01648 & 0.01576 & 0.01512 & 0.01454 & 0.01400 \\
+ 1.5 & 0.05360 & 0.03988 & 0.03255 & 0.02787 & 0.02458 & 0.02212 & 0.02019 & 0.01862 & 0.01733 & 0.01623 & 0.01529 & 0.01447 & 0.01375 & 0.01311 & 0.01254 & 0.01202 & 0.01155 & 0.01112 & 0.01073 \\
+1.75 & 0.04320 & 0.03266 & 0.02692 & 0.02322 & 0.02060 & 0.01861 & 0.01705 & 0.01577 & 0.01471 & 0.01381 & 0.01304 & 0.01236 & 0.01176 & 0.01123 & 0.01075 & 0.01032 & 0.00992 & 0.00957 & 0.00924 \\
+   2 & 0.03814 & 0.02903 & 0.02404 & 0.02080 & 0.01848 & 0.01673 & 0.01534 & 0.01421 & 0.01326 & 0.01246 & 0.01177 & 0.01116 & 0.01062 & 0.01014 & 0.00972 & 0.00933 & 0.00897 & 0.00865 & 0.00835 \\
+ 2.5 & 0.03421 & 0.02613 & 0.02168 & 0.01878 & 0.01671 & 0.01513 & 0.01388 & 0.01286 & 0.01201 & 0.01128 & 0.01066 & 0.01011 & 0.00962 & 0.00919 & 0.00880 & 0.00845 & 0.00813 & 0.00784 & 0.00757 \\
+   3 & 0.03335 & 0.02541 & 0.02104 & 0.01820 & 0.01617 & 0.01462 & 0.01340 & 0.01241 & 0.01157 & 0.01087 & 0.01025 & 0.00972 & 0.00925 & 0.00883 & 0.00845 & 0.00811 & 0.00780 & 0.00751 & 0.00725 \\
+   4 & 0.03412 & 0.02579 & 0.02124 & 0.01829 & 0.01620 & 0.01461 & 0.01336 & 0.01235 & 0.01150 & 0.01078 & 0.01016 & 0.00962 & 0.00915 & 0.00872 & 0.00834 & 0.00800 & 0.00769 & 0.00740 & 0.00714 \\
+   5 & 0.03571 & 0.02678 & 0.02194 & 0.01883 & 0.01663 & 0.01497 & 0.01366 & 0.01260 & 0.01172 & 0.01098 & 0.01033 & 0.00978 & 0.00928 & 0.00885 & 0.00846 & 0.00811 & 0.00779 & 0.00750 & 0.00723 \\
+   6 & 0.03739 & 0.02784 & 0.02271 & 0.01942 & 0.01710 & 0.01536 & 0.01400 & 0.01289 & 0.01197 & 0.01120 & 0.01054 & 0.00996 & 0.00945 & 0.00900 & 0.00860 & 0.00823 & 0.00790 & 0.00760 & 0.00733 \\
+   8 & 0.04047 & 0.02981 & 0.02414 & 0.02053 & 0.01801 & 0.01612 & 0.01465 & 0.01346 & 0.01248 & 0.01165 & 0.01094 & 0.01033 & 0.00979 & 0.00931 & 0.00888 & 0.00850 & 0.00815 & 0.00784 & 0.00755 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\section{Wall-curvature diagnostic}
+\label{sec:curvature}
+
+The wall-curvature diagnostic interpolates the full periodic arclength table,
+uses periodic central differences for the tangent angle and a wrapped angular
+difference for the window curvature
+\begin{equation}
+  \kappa_w(s)=\frac{\operatorname{wrap}\left[\phi(s+w/2)-\phi(s-w/2)\right]}{w},
+  \qquad w=0.05L_c .
+  \label{eq:kappa_window}
+\end{equation}
+The sharp-set threshold is
+$\kappa_w\geq2\langle|\kappa|\rangle_\Gamma$. All $190$ curvature rows were
+recomputed from the archived fields; $D$, $A_{\rm mask}$, $D/A_{\rm mask}$ and
+the curvature-independent wall-band fractions are unchanged.
+
+\begin{table}[H]
+\centering
+\caption{Analytical circle test. For $n=2$, $a=b=1$, the boundary is the unit
+circle and the exact curvature is $\kappa=1$ everywhere.}
+\alttext{Analytical circle test. For $n=2$, $a=b=1$, the boundary is the unit circle and the exact curvature is $\kappa=1$ everywhere.}
+
+
+
+\label{tab:circle}
+\tabbox{\begin{tabular}{@{}rrrrr@{}}
+\toprule
+$n_{\rm samples}$ & $w/L_c$ & $\kappa_{w,\max}$ & $\kappa_{w,\rm rms}$ & $f_{\rm sharp}$ \\
+\midrule
+2\,000  & 0.01 & 1.000000 & 1.000000 & 0.000 \\
+2\,000  & 0.05 & 1.000000 & 1.000000 & 0.000 \\
+5\,000  & 0.05 & 1.000000 & 1.000000 & 0.000 \\
+20\,000 & 0.05 & 1.000000 & 1.000000 & 0.000 \\
+50\,000 & 0.10 & 1.000000 & 1.000000 & 0.000 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Geometry-only curvature metrics (independent of $Re$).}
+\alttext{Geometry-only curvature metrics (independent of $Re$).}
+
+
+
+\label{tab:curvgeom}
+\tabbox{\begin{tabular}{@{}crrrr@{}}
+\toprule
+$n$ & $\kappa_{w,\max}$ & $\kappa_{w,\rm rms}$ & $f_{\rm sharp}$ & $\langle|\kappa|\rangle_\Gamma$ \\
+\midrule
+1.25 & 8.726 & 2.294 & 0.082 & 1.091 \\
+1.50 & 4.394 & 1.393 & 0.084 & 1.058 \\
+1.75 & 2.109 & 1.077 & 0.033 & 1.027 \\
+2.00 & 1.000 & 1.000 & 0.000 & 1.000 \\
+2.50 & 1.397 & 1.023 & 0.000 & 0.960 \\
+3.00 & 1.775 & 1.087 & 0.000 & 0.932 \\
+4.00 & 2.498 & 1.221 & 0.207 & 0.895 \\
+5.00 & 3.192 & 1.345 & 0.215 & 0.873 \\
+6.00 & 3.861 & 1.458 & 0.207 & 0.859 \\
+8.00 & 5.125 & 1.655 & 0.186 & 0.840 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+The corrected maximum curvature is minimal at the circle and rises both at
+sharp tips ($n<2$) and near-square corners ($n>2$), as expected geometrically.
+The sharp set is empty for $n=2,2.5,3$ and non-empty at both ends of the family.
+
+\begin{table}[H]
+\centering
+\caption{Correlations with $D/A_{\rm mask}$ at fixed $Re$. Spearman values
+are shown only for $Re=1000$.}
+\alttext{Correlations with $D/A_{\rm mask}$ at fixed $Re$. Spearman values are shown only for $Re=1000$.}
+
+
+
+\label{tab:currcorr}
+\tabbox{\begin{tabular}{@{}lcccc@{}}
+\toprule
+predictor & $Re=100$, $r$ & $Re=500$, $r$ & $Re=1000$, $r$ & $Re=1000$, $\rho$ \\
+\midrule
+$\kappa_{w,\rm rms}$ & $+0.834$ & $+0.748$ & $+0.709$ & $+0.115$ \\
+$\langle\kappa\rangle_D$ & $+0.667$ & $+0.462$ & $+0.385$ & $+0.636$ \\
+$f_{\rm sharp}$ & $+0.794$ & $-0.068$ & $-0.238$ & $-0.472$ \\
+$f_{0.025}$ & $+0.795$ & $+0.852$ & $+0.848$ & $+0.794$ \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+At fixed $Re$, RMS window curvature remains positively correlated with
+$D/A_{\rm mask}$, but the Pearson coefficient decreases from $+0.834$ at
+$Re=100$ to $+0.709$ at $Re=1000$ and the Spearman coefficient at $Re=1000$
+is only $+0.115$. The sharp-set fraction is negatively correlated at $Re=500$
+and $Re=1000$. These results do not support wall curvature alone as the
+control on the $D/A_{\rm mask}$ minimum.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.96\textwidth]{fig_nearwall_large_axes.png}
+\caption{Wall-curvature diagnostic, wall-band dissipation share and
+$D/A_{\rm mask}$ versus wall-band localization on the reference grid. Axes and
+tick labels are enlarged for review; the panels use the final periodic
+arclength interpolation.}
+\alttext{Wall-curvature diagnostic, wall-band dissipation share and $D/A_{\rm mask}$ versus wall-band localization on the reference grid. Axes and tick labels are enlarged for review; the panels use the final periodic arclength interpolation.}
+
+
+
+\label{fig:nearwall_large}
+\end{figure}
+
+\section{Extended additive wall/core budget}
+\label{sec:corewall}
+
+For every case the same gradient-valid mask $M$ is partitioned into
+$W_\delta=M\cap\{\operatorname{dist}(\mathbf{x},\Gamma)\leq\delta\}$ and
+$C_\delta=M\setminus W_\delta$, with $\delta/L_c\in\{0.025,0.05\}$. Using the
+same integrand as in Eq.~\eqref{eq:mech_factor},
+\[
+  \frac{D_{\rm mask}}{A_{\rm mask}}
+  =\frac{D_{\rm wall}}{A_{\rm mask}}+\frac{D_{\rm core}}{A_{\rm mask}},
+  \qquad A_{\rm mask}=N_M\Delta x^2 .
+\]
+There are $253$ archived cases and two band widths, hence $506$ rows. The
+maximum absolute additivity residual over all rows is $2.78\times10^{-17}$.
+
+\begin{table}[H]
+\centering
+\caption{Additive budget for the detailed case $Re=1000$, $N=256$,
+$\delta=0.05L_c$. All denominators are $A_{\rm mask}$, never $A_{\rm core}$
+or the exact geometric area.}
+\alttext{Additive budget for the detailed case $Re=1000$, $N=256$, $\delta=0.05L_c$. All denominators are $A_{\rm mask}$, never $A_{\rm core}$ or the exact geometric area.}
+
+
+
+\label{tab:budgetcase}
+\tabbox{\input{supp_corewall_target_table}}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth]{fig_supp_corewall_Re100_500_1000.png}
+\caption{Total, wall and core contributions divided by $A_{\rm mask}$ for
+$N=128$, $Re=100,500,1000$. Solid lines use $\delta=0.025L_c$ and dashed
+lines use $\delta=0.05L_c$.}
+\alttext{Total, wall and core contributions divided by $A_{\rm mask}$ for $N=128$, $Re=100,500,1000$. Solid lines use $\delta=0.025L_c$ and dashed lines use $\delta=0.05L_c$.}
+
+
+
+\label{fig:corewall}
+\end{figure}
+
+Table~\ref{tab:budgetcase} gives the detailed target case. From $n=4$ to
+$n=8$, $D/A_{\rm mask}$ rises by $0.000403$, of which $0.000353$ ($87.8\%$) is
+the core contribution and $0.000049$ ($12.2\%$) is the wall contribution. The
+$88\%$ number is the core share of the *increase*, not the core share of the
+total dissipation. The latter is $28.1\%$ at $n=4$ and $30.7\%$ at $n=8$.
+
+\begin{table}[H]
+\centering
+\caption{Core share of the $n=4\to8$ increase wherever both exponents exist.
+The $Re=100$, $N=256$ increment is unavailable because that campaign has no
+$n=8$ field.}
+\alttext{Core share of the $n=4\to8$ increase wherever both exponents exist. The $Re=100$, $N=256$ increment is unavailable because that campaign has no $n=8$ field.}
+
+
+
+\label{tab:budgetrange}
+\tabbox{\input{supp_corewall_changes_table}}
+\end{table}
+
+Table~\ref{tab:budgetrange} qualifies the generalization. Across the ten
+available $(N,Re,\delta)$ combinations the core share of the positive increment
+lies between $61.5\%$ and $99.8\%$. The share depends on resolution, Reynolds
+number and band thickness; no universal causal percentage is claimed. The
+underlying $n$ grids are not uniform across campaigns, so comparisons are made
+only where the same two exponents are present.
+
+\section{Common-support LBM/FEM dissipation}
+\label{sec:common_support}
+
+The archived LBM fields store lid-normalized velocity
+$\mathbf{u}=\mathbf{u}_{\rm LBM}/U_{\rm lid}$, with $U_{\rm lid}=0.05$ in the
+original lattice simulation, on coordinates $x,y\in[-1,1]$ with $a=1$ and
+$L_c=2$. In these paper units the viscosity is $\nu=U_{\rm lid}L_c/Re=2/Re$;
+the value \texttt{nu\_lbm} stored in the archive is the corresponding lattice-unit
+quantity. The LBM integrand used throughout the physics article is
+\begin{equation}
+  2\nu\,S:S = 2\nu\left(u_x^2+v_y^2+\tfrac12(u_y+v_x)^2\right)
+            = \frac{2}{Re}\left(2u_x^2+2v_y^2+(u_y+v_x)^2\right),
+  \label{eq:mech_factor}
+\end{equation}
+so the mechanical factor two in $D=2\int(2S:S/Re)\,dA$ is counted once. The
+FEM form assembled from the P2 degrees of freedom is
+$D_{\rm FEM}^{\Omega}=2\nu\int_\Omega S(\mathbf{u}_h):S(\mathbf{u}_h)\,dA$
+with $U_{\rm lid}=1$ and the same $\nu=2/Re$. No additional velocity rescaling
+or second factor two is applied.
+
+The LBM value $D_{\rm LBM}^{M}$ uses central differences on the gradient-valid
+mask $M$:
+\begin{equation}
+  M=\{\mathbf{x}_{jk}\in\Omega_{\rm fluid}^{\rm grid}:\;
+      \mathbf{x}_{jk\pm1}\in\Omega_{\rm fluid}^{\rm grid}
+      \text{ in both coordinate directions}\},
+  \qquad
+  D_{\rm LBM}^{M}=2\nu\sum_{k\in M}S_{k}:S_{k}\,\Delta x^2 .
+  \label{eq:mask}
+\end{equation}
+For the same-support FEM value, each $k\in M$ is projected onto its containing
+P2 element, the strain is evaluated from the element shape functions, and the
+same lattice weight $\Delta x^2$ is used:
+$D_{\rm FEM}^{M}=2\nu\sum_{k\in M}S_h(\mathbf{x}_k):S_h(\mathbf{x}_k)\Delta x^2$.
+All $9\,488$--$15\,168$ masked nodes were covered by the $n_{\rm ref}=6$ mesh.
+
+\begin{table}[H]
+\centering
+\caption{Common-support dissipation at $N=128$ and $n_{\rm ref}=6$.
+Here $\varepsilon_D=100|D_{\rm LBM}^{M}-D_{\rm FEM}^{M}|/D_{\rm FEM}^{M}$;
+the last column is the same FEM strain integrated over the full P2 domain.}
+\alttext{Common-support dissipation at $N=128$ and $n_{\rm ref}=6$. Here $\varepsilon_D=100|D_{\rm LBM}^{M}-D_{\rm FEM}^{M}|/D_{\rm FEM}^{M}$; the last column is the same FEM strain integrated over the full P2 domain.}
+
+
+
+\label{tab:commonsupport}
+\tabbox{\input{supp_common_support_table}}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.88\textwidth]{fig_supp_common_support_dissipation.png}
+\caption{Comparison of $D_{\rm LBM}^{M}$, $D_{\rm FEM}^{M}$ and
+$D_{\rm FEM}^{\Omega}$ for the eight common-support cases. The difference
+between the two FEM bars is a support effect, not a different velocity
+normalization.}
+\alttext{Comparison of $D_{\rm LBM}^{M}$, $D_{\rm FEM}^{M}$ and $D_{\rm FEM}^{\Omega}$ for the eight common-support cases. The difference between the two FEM bars is a support effect, not a different velocity normalization.}
+
+
+
+\label{fig:commonsupport}
+\end{figure}
+
+Table~\ref{tab:commonsupport} and Fig.~\ref{fig:commonsupport} show
+$\varepsilon_D=0.72$--$20.02\%$, while
+$D_{\rm FEM}^{\Omega}/D_{\rm FEM}^{M}=1.63$--$2.06$. The quantity labelled
+``rel.\ $D$ error'' in the gradient-reconstruction table is
+$|D_{\rm FD,lattice}-D_{\rm exact,lattice}|/D_{\rm exact,lattice}$: it compares
+two gradient reconstructions at lattice points sampled from a saved FEM field,
+and is not an LBM/FEM validation error. The closest common-support agreement
+occurs at $n=2$, $Re=100$; the discrepancy grows for sharper or nearly square
+geometries at higher $Re$. These values are a same-support comparison, not a
+grid-converged absolute validation.
+
+\section{FEM mesh, iteration and junction audit}
+\label{sec:fem_audit}
+
+The independent solver is a Taylor--Hood P2/P1 Navier--Stokes implementation.
+The saddled system is assembled with $\nu=U_{\rm lid}L_c/Re$ and solved by
+Picard iteration with relaxation $1$ and a relative $L_2$ velocity tolerance
+$10^{-9}$. The new verification ladder used $U_{\rm lid}=1$, $a=1$,
+$\nu=2/Re$, quadrature order $4$, $n\in\{1.25,2,4,8\}$,
+$Re\in\{100,400,1000\}$ and $n_{\rm ref}\in\{4,5,6\}$: $12$ cases and $36$
+solves. All $36$ solves converged in $14$--$34$ iterations.
+
+\begin{table}[H]
+\centering
+\caption{Taylor--Hood mesh levels used in the verification ladder. The total
+unknown count is $2(V+E)+V$: vector P2 velocity plus scalar P1 pressure.}
+\alttext{Taylor--Hood mesh levels used in the verification ladder. The total unknown count is $2(V+E)+V$: vector P2 velocity plus scalar P1 pressure.}
+
+
+
+\label{tab:femmesh}
+\tabbox{\begin{tabular}{@{}rrrrr@{}}
+\toprule
+$n_{\rm ref}$ & vertices $V$ & triangles $T$ & velocity DOFs & total unknowns \\
+\midrule
+4 & 545  & 1\,024  & 4\,226  & 4\,771  \\
+5 & 2\,113 & 4\,096  & 16\,642 & 18\,755 \\
+6 & 8\,321 & 16\,384 & 66\,050 & 74\,371 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+The Dirichlet assignment is nodal and discontinuous. For every boundary
+velocity degree of freedom, the FEM code evaluates $y>0$ and imposes
+$U_{\rm lid}(m_y,-m_x)$ if true and $\mathbf{0}$ otherwise; there is no
+interpolation or regularization length. The same strict label is used for LBM
+boundary links. The radial mesh retains cardinal nodes at $(\pm1,0)$ to
+machine precision. A runtime check on the executed meshes gives:
+
+\begin{itemize}
+  \item right junction $(+1,0)$: $y=0$ exactly, assigned to the fixed wall;
+  \item left junction $(-1,0)$: $y=+1.22\times10^{-16}$, assigned to the
+        moving wall by the strict $y>0$ test.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.72\textwidth]{fig_supp_fem_junction_schematic.png}
+\caption{Tangential-lid junction convention. The upper arc is moving and the
+lower arc is fixed. The two junctions are points of velocity discontinuity;
+the FEM assignment is by a strict nodal $y>0$ test, without blending.}
+\alttext{Tangential-lid junction convention. The upper arc is moving and the lower arc is fixed. The two junctions are points of velocity discontinuity; the FEM assignment is by a strict nodal $y>0$ test, without blending.}
+
+
+
+\label{fig:femjunction_supp}
+\end{figure}
+
+This machine-precision asymmetry (Fig.~\ref{fig:femjunction_supp}) is a
+discrete implementation detail, not a physical regularization. The FEM junction
+contribution is therefore mesh-sensitive in the same way as the LBM junction
+diagnostic. Direct 5-to-6 mesh changes in $D_{\rm FEM}$ are $1.32\%$--$8.46\%$;
+they are reported as mesh sensitivity only, with no Richardson extrapolation.
+
+\section{Energy identity, pressure convention and archived-field diagnostic}
+\label{sec:energy}
+
+Three distinct statements must not be confused.
+
+\begin{enumerate}
+  \item \emph{Continuous identity.} For a smooth incompressible Newtonian
+        velocity and pressure,
+        \[
+          \nabla\cdot\left[\left(\tfrac12|\mathbf{u}|^2+p\right)\mathbf{u}
+          -2\nu S\mathbf{u}\right]=-2\nu S:S .
+        \]
+        This is an analytical statement and is not what the archived-field test
+        verifies.
+  \item \emph{Exact discrete LBM balance.} The collision--streaming scheme has
+        its own discrete momentum and energy bookkeeping. That exact discrete
+        balance was not reconstructed from the saved macroscopic fields.
+  \item \emph{Archived-field diagnostic.} Central differences were applied to
+        the saved $(\rho,\mathbf{u})$ pair on the gradient-valid mask, with
+        pressure and interface fluxes evaluated on artificial circular cuts.
+        This is the only quantity tested here, and it does not close.
+\end{enumerate}
+
+In the LBM archive the pressure convention is
+$p_{\rm LBM}=c_s^2(\rho_{\rm LBM}-1)$ with $c_s^2=1/3$. Since the stored
+velocities are lid-normalized with $U_{\rm lid}=0.05$, the pressure entering
+the paper-unit diagnostic is
+$p=(\rho-1)/(3U_{\rm lid}^2)$. For $n=4$, $Re=1000$, the diagnostic gives
+\begin{equation}
+  \frac{\int_{\partial\Omega_{\rm art}}
+        \left[(\tfrac12|\mathbf{u}|^2+p)\mathbf{u}-2\nu S\mathbf{u}\right]\cdot\mathbf{n}\,ds}
+       {-\int_{\Omega_{\rm exc}}2\nu S:S\,dA}
+  =-4.419 ,
+  \label{eq:flux_ratio}
+\end{equation}
+instead of $+1$. Equivalently, the pressure coefficient needed to close the
+archived-field flux is $-0.0783$ instead of $+1$. The likely contributors are
+the weakly compressible LBM pressure field, finite-difference gradients on a
+near-wall mask and interpolation on the artificial cuts. No empirical pressure
+rescaling is applied. No global power-balance closure is claimed, and the
+interface flux is retained only as an unverified diagnostic.
+
+\section{Moving-wall length and lid-power assessment}
+\label{sec:lidpower}
+
+The moving lid is the whole upper arc of $|x|^n+|y|^n=1$. With $p=2/n$ and
+$\theta\in[0,\pi/2]$,
+\begin{equation}
+  x=\cos^p\theta,\qquad y=\sin^p\theta,\qquad
+  L_{\rm mov}=2\int_0^{\pi/2}
+  p\sqrt{\cos^{2p-2}\theta\,\sin^2\theta+
+        \sin^{2p-2}\theta\,\cos^2\theta}\,d\theta .
+  \label{eq:lmov}
+\end{equation}
+The integral has integrable algebraic endpoint singularities for $n>2$;
+an independent Cartesian quadrature with $t=1-u^n$ was used as the
+authoritative value at $60$-digit working precision.
+
+\begin{table}[H]
+\centering
+\caption{Upper-half moving-wall arclength for $L_c=2$. The $n=2$ value is
+$\pi$; the diamond and square limits are validated separately below.}
+\alttext{Upper-half moving-wall arclength for $L_c=2$. The $n=2$ value is $\pi$; the diamond and square limits are validated separately below.}
+
+
+
+\label{tab:lmov}
+\tabbox{\input{supp_lmov_table}}
+\end{table}
+
+The validation cases give $L_{\rm mov}(1)=2\sqrt2$ for the diamond,
+$L_{\rm mov}(2)=\pi$ for the unit circle, and finite-$n$ values
+$3.97797$, $3.99779$ and $3.99978$ at $n=100,1000,10000$ approaching the
+square-limit length $4$. These finite-$n$ limits do not imply that the square
+case has the same lid law: the upper halves of the side walls remain moving in
+the superelliptic family, whereas the classical Ghia condition moves only the
+top wall.
+
+No value of the lid power $P_{\rm lid}$ is quoted as a verified physical
+quantity. In the production LBM post-processing, the MEM link estimate is
+\[
+  P_{\rm lid}^{\rm MEM}=\sum_{\text{moving links}}
+  (\mathbf{e}_q\cdot\mathbf{u}_{\rm wall})
+  \left(f_{\rm new,q}+f_{\rm post,q^{\rm opp}}\right),
+  \label{eq:plid_mem}
+\]
+which requires same-step distribution functions on the moving-wall links. An
+inventory of the archive finds $810$ final \texttt{.npz} fields, of which
+$0$ contain $f$, and $148$ checkpoint files, all of which contain $f$ and
+$it$. Final fields store only \texttt{rho}, \texttt{ux}, \texttt{uy},
+\texttt{fluid}, \texttt{X}, \texttt{Y} and metadata. The only archived
+$P_{\rm lid}$ series was obtained from checkpoint populations or fresh solver
+runs, not from final macroscopic fields; it increases with $N$ and gives
+$P/\Phi=4.268$, $2.439$, $1.778$ and $1.465$ at $N=64,128,256,512$. It is
+therefore not a grid-converged power--dissipation balance.
+
+A stress-based reconstruction from archived $(\rho,\mathbf{u})$ is not a
+substitute. It would require wall traction on $\Gamma_{\rm mov}$, hence pressure
+and velocity gradients at the moving boundary on a common support. The archived
+fields retain a cutoff-defined gradient mask, the two junctions are points of
+discontinuous Dirichlet data, and the pressure diagnostic in
+Sec.~\ref{sec:energy} fails by a large factor. For example, in
+\texttt{data\_all190/se\_n4p0\_Re1000\_N128.npz}, the fluid-cell density lies in
+$[1.08116,1.0858]$, giving $p=(\rho-1)/(3U_{\rm lid}^2)\in[10.82,11.44]$ under
+$U_{\rm lid}=0.05$; this is only a post-processing convention and does not
+restore the populations required by Eq.~\eqref{eq:plid_mem}. Quoting
+$P_{\rm lid}$ from these fields would mix a boundary-extrapolation error with
+the junction cutoff. The required additional data are paired pressure and
+velocity fields at the boundary nodes, the exact wall-normal stress convention
+and an explicit treatment of the two junctions.
+
+\section{Campaign inventory and matched-grid counts}
+\label{sec:campaigns}
+
+All counts below were obtained from the archived \texttt{.npz} fields and their
+internal \texttt{n/Re/N} metadata; checkpoint files were excluded. Metadata
+agreed with file names in all final fields.
+
+\begin{table}[H]
+\centering
+\caption{Verified campaign inventory. ``Distinct'' counts unique $(n,Re)$
+pairs. The projected-lid set has manifests but no final fields.}
+\alttext{Verified campaign inventory. ``Distinct'' counts unique $(n,Re)$ pairs. The projected-lid set has manifests but no final fields.}
+
+
+
+\label{tab:inventory}
+\tabbox{\begin{tabular}{@{}llrrr@{}}
+\toprule
+dataset & $N$ & final fields & distinct $(n,Re)$ & Reynolds numbers \\
+\midrule
+\texttt{data\_all190} & 128 & 190 & 190 & 19: $100$--$1000$ by $50$ \\
+\texttt{data\_refine} & 128 & 50  & 50  & 8: $300,325,350,500,850,875,900,1000$ \\
+\texttt{data\_refine\_seed} & 128 & 28 & 28 & $100,200,1000$ \\
+\texttt{data\_conv256} & 256 & 50 & 50 & $300,500,1000$ \\
+\texttt{data\_conv256\_lowRe} & 256 & 13 & 13 & $100,150,200,250,300$ \\
+\texttt{data\_convHR} & 384,512 & 12 & 6 & $300,1000$ \\
+\texttt{data\_convHR\_extB} & 384,512 & 24 & 12 & $100,150,200,250$ \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+The reference grid contains $190$ fields. The local-refinement campaign
+contains $50$ archived fields at eight Reynolds numbers. The $N=256$ collection contains $63$ distinct fields ($50$ from
+\texttt{data\_conv256} and $13$ from \texttt{data\_conv256\_lowRe}). Of these,
+$62$ have an $N=128$ partner in the union of
+\texttt{data\_all190}, \texttt{data\_refine} and \texttt{data\_refine\_seed}.
+The single unmatched field is $n=4.25$, $Re=300$. Coverage descriptions such
+as ``17 $n$ at 3 $Re$ plus low $Re$'' are not Cartesian products.
+
+\section{Minimum fits, supports and crossing diagnostics}
+\label{sec:fits}
+
+The minimum estimator is the sampled argmin followed by an ordinary-least-squares
+quadratic on either the argmin and one neighbour on each side (three points) or
+two neighbours on each side (five points). Non-finite values are excluded
+before fitting; a vertex is accepted only if $a>0$ and it lies inside the
+support. The $D/A_{\rm mask}$ denominator is $A_{\rm mask}$, the exact support
+of the quadrature.
+
+\begin{table}[H]
+\centering
+\caption{Fit-window sensitivity on the $N=128$ union at the three central
+Reynolds numbers. The margin is the relative depth difference between the
+fitted vertex and the sampled argmin; a negative value means the fitted vertex
+lies above the sample minimum.}
+\alttext{Fit-window sensitivity on the $N=128$ union at the three central Reynolds numbers. The margin is the relative depth difference between the fitted vertex and the sampled argmin; a negative value means the fitted vertex lies above the sample minimum.}
+
+
+
+\label{tab:fit_sens}
+\tabbox{\begin{tabular}{@{}crrrrr@{}}
+\toprule
+$Re$ & quantity & 3-pt $n^*$ & 5-pt $n^*$ & argmin & 5-pt margin (\%) \\
+\midrule
+300  & $D/A_{\rm mask}$ & 3.411 & 3.442 & 3.5 & 0.034 \\
+300  & $D$              & 2.600 & 2.599 & 2.5 & 0.315 \\
+500  & $D/A_{\rm mask}$ & 3.538 & 3.624 & 3.5 & 0.147 \\
+500  & $D$              & 2.680 & 2.598 & 2.75 & 0.164 \\
+1000 & $D/A_{\rm mask}$ & 4.065 & 4.471 & 4 & 1.323 \\
+1000 & $D$              & 2.794 & 2.381 & 3 & $-0.010$ \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+For $D/A_{\rm mask}$, the three-point supports are
+$n=\{3.25,3.5,3.75\}$ at $Re=300,500$ and $n=\{3,4,5\}$ at $Re=1000$; the
+five-point supports are $n=\{3,3.25,3.5,3.75,4\}$ and
+$n=\{2.5,3,4,5,6\}$. For $D$, the three-point supports are
+$\{2.25,2.5,2.75\}$, $\{2.5,2.75,3\}$ and $\{2.5,3,4\}$, and the five-point
+supports are $\{2,2.25,2.5,2.75,3\}$, $\{2.25,2.5,2.75,3,3.25\}$ and
+$\{2.25,2.5,3,4,5\}$, respectively. At $Re=100$, $N=256$ values exist only
+for $n=2.5,3,4$; the reported minimum is therefore a minimum among the
+available matched configurations, not a global minimum over $1.25\le n\le8$.
+
+\begin{table}[H]
+\centering
+\caption{Log-interpolated $1\%$ detection-threshold crossing brackets of
+adjacent-exponent ratios on the sampled Reynolds grids.}
+\alttext{Log-interpolated $1\%$ detection-threshold crossing brackets of adjacent-exponent ratios on the sampled Reynolds grids.}
+
+
+
+\label{tab:crossingdiag}
+\tabbox{\begin{tabular}{@{}lllr@{}}
+\toprule
+group & quantity & exponents & $Re_{\rm cross}$ \\
+\midrule
+$N128$ all190  & $D$              & $2.5/3$ & 893.0 \\
+$N128$ all190  & $D/A_{\rm mask}$ & $3/4$   & 338.2 \\
+$N128$ refine  & $D/A_{\rm mask}$ & $3/4$   & 348.8 \\
+$N128$ union   & $D$              & $2.5/3$ & 892.9 \\
+$N128$ union   & $D/A_{\rm mask}$ & $3/4$   & 337.6 \\
+$N256$ union   & $D/A_{\rm mask}$ & $3/4$   & 272.2 \\
+$N384$ extB    & $D/A_{\rm mask}$ & $3/4$   & 228.3 \\
+$N512$ extB    & $D/A_{\rm mask}$ & $3/4$   & 199.2 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+Other brackets in \texttt{crossing\_diagnostics.csv} have no sign change of the
+ratio over the available Reynolds interval and are reported there as ``no
+crossing''. Absolute $D$ levels are resolution-sensitive; only matched-grid
+fitted locations are compared.
+
+\section{Dedicated corner-eddy study at the near-square end}\label{sec:corner}
+
+The corner structure examined in the near-square section of the main text is
+investigated here on independent realizations of the superelliptic cavity at
+$n=8$ with the tangential lid law, produced with the reference MRT solver of
+Sec.~\ref{sec:solver} and its interpolated bounce-back scheme for curved walls.
+Four uniformly refined grids ($N=64$, $128$, $256$, $512$) at $Re=1000$ and a
+Reynolds sweep $100\le Re\le1000$ in steps of $50$ at $N=128$ use the same
+convergence criterion as the main database. Let $L=L_c/2=1$ denote the cavity
+half-width. On each converged field the streamfunction is recomputed from the
+vorticity. The corner band is the set of fluid points within $0.20\,L_c$ of the
+four corners of the bounding box, and $f_{\mathrm{corner}}$ is the fraction of
+integrated dissipation carried by the union of these bands. Within a search
+radius $0.25\,L_c$ of a corner, $\psi_{\mathrm{corner,max}}$ is the magnitude of
+the strongest non-primary streamfunction extremum, $s_{\mathrm{corner}}$ is its
+distance from the nearest corner in units of $L$, and $n_{\mathrm{vp}}$ counts
+secondary extrema reaching $1\%$ of the primary circulation.
+
+Table~\ref{tab:cornerdiag} lists the multi-resolution diagnostics at $Re=1000$.
+No asymptotic extrapolation is attached to these values; they are reported as a
+grid-sensitivity sequence.
+
+\begin{table}[H]
+\centering
+\caption{Multi-resolution corner diagnostics at $n=8$, $Re=1000$.
+$f_{\mathrm{corner}}$ is the dissipation fraction in the $0.20\,L_c$ corner
+bands; $\psi_{\mathrm{corner,max}}$ is the strongest non-primary extremum within
+$0.25\,L_c$ of a corner; $s_{\mathrm{corner}}$ is its corner distance in units
+of $L$; $n_{\mathrm{vp}}$ is the number of extrema above the $1\%$ threshold.}
+\alttext{Multi-resolution corner diagnostics at $n=8$, $Re=1000$. $f_{corner}$ is the dissipation fraction in the $0.20\,L_c$ corner bands; $\psi_{corner,max}$ is the strongest non-primary extremum within $0.25\,L_c$ of a corner; $s_{corner}$ is its corner distance in units of $L$; $n_{vp}$ is the number of extrema above the $1\%$ threshold.}
+
+
+
+\label{tab:cornerdiag}
+\begin{tabular}{ccccc}
+\toprule
+$N$ & $f_{\mathrm{corner}}$ & $\psi_{\mathrm{corner,max}}$ & $s_{\mathrm{corner}}$ & $n_{\mathrm{vp}}$ \\
+\midrule
+64 & 0.1457 & $4.41\times10^{-3}$ & 0.3175 & 1 \\
+128 & 0.1884 & $3.76\times10^{-3}$ & 0.2786 & 1 \\
+256 & 0.1886 & $3.49\times10^{-3}$ & 0.2723 & 0 \\
+512 & 0.1821 & $3.39\times10^{-3}$ & 0.2717 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+At $N=128$, the $1\%$ count is one only at $Re=1000$, confirming the
+$1\%$ detection-threshold crossing bracket. The corner extremum is recovered on
+all four grids, and its magnitude decreases from $4.41\times10^{-3}$ at $N=64$
+to $3.39\times10^{-3}$ at $N=512$; the $1\%$ count crosses between $N=128$ and
+$N=256$. This is a threshold-sensitivity observation at the $1\%$ detection level. The corner-band dissipation share rises from about $14\%$ at
+$Re=100$ to $18$--$19\%$ at $Re=1000$, and the extremum location settles near
+$0.272\,L$. No causal link between this weak extremum and the dissipation
+increase is inferred.
+
+\section{Corner-eddy vortex maps}
+\label{sec:corner_maps}
+
+The multi-resolution diagnostics of Sec.~\ref{sec:corner} are complemented by
+the vortex map on which the $1\%$ count is evaluated.
+Figure~\ref{fig:cornerbracket} shows the $n=8$ detection-threshold crossing
+bracket. The secondary corner extremum is drawn at the $1\%$ threshold of the primary
+circulation; at the $3\%$ and $5\%$ thresholds no secondary structure is
+detected on these fields.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[b]{0.31\textwidth} \includegraphics[width=\textwidth]{se_n8p0_Re900_N128_vortices.png} \caption{$n=8,\;Re=900$ --- one extremum} \end{subfigure} \hfill \begin{subfigure}[b]{0.31\textwidth} \includegraphics[width=\textwidth]{se_n8p0_Re950_N128_vortices.png} \caption{$n=8,\;Re=950$ --- one extremum} \end{subfigure} \hfill \begin{subfigure}[b]{0.31\textwidth} \includegraphics[width=\textwidth]{se_n8p0_Re1000_N128_vortices.png} \caption{$n=8,\;Re=1000$ --- two extrema} \end{subfigure}
+\caption{Secondary corner extremum at $n=8$. Of the 190 cases on the grid, one
+resolves a second extremum above the $1\%$ threshold of the primary circulation.
+At $N=128$, the count changes from one to two between $Re=950$ and $Re=1000$;
+this is a $1\%$ detection-threshold crossing bracket.}
+\alttext{Secondary corner extremum at $n=8$. Of the 190 cases on the grid, one resolves a second extremum above the $1\%$ threshold of the primary circulation. At $N=128$, the count changes from one to two between $Re=950$ and $Re=1000$; this is a $1\%$ detection-threshold crossing bracket.}
+
+
+
+\label{fig:cornerbracket}
+\end{figure}
+
+\section{Projected-lid boundary-law convention}\label{sec:lidlaw}
+The reference forcing is the tangential law
+$\mathbf{u}_{\rm lid}=U_{\rm lid}(m_y,-m_x)$ on the upper arc. For comparison
+with conventional square-cavity implementations one may define a projected
+tangential law by taking a horizontal translation $\mathbf{e}_x$ and projecting
+it onto the local tangent,
+$\mathbf{u}_{\rm lid}^{\rm proj}=U_{\rm lid}(\mathbf{e}_x\cdot\mathbf{t})\mathbf{t}$.
+This is a kinematic definition only: the present study does not analyse
+converged velocity fields generated with this alternative law, and no
+hydrodynamic sensitivity is inferred from it. Its purpose is to make explicit
+how the superelliptic family differs from the classical Ghia boundary
+condition in the limit $n\to\infty$.
+
+\section*{Data availability}
+The post-processed data, analysis scripts, regenerated figures, result tables,
+the final supplementary document and a description of the directory structure
+are publicly available at
+\url{https://github.com/Ahmedalgeria778/PH13_revision_data}. The repository
+does not contain the manuscript source or the raw simulation fields. It is
+distributed under the MIT License; see the \texttt{LICENSE} and \texttt{README.md}
+files in the repository.
+
+\end{document}
+

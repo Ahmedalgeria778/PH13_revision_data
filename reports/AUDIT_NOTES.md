@@ -96,3 +96,44 @@ Aucune simulation LBM nouvelle n’a été lancée. Les chiffres des rapports so
 
 Le dépôt `https://github.com/Ahmedalgeria778/PH13_revision_data` contient les CSV, scripts, figures et rapports de cette révision, avec un `README.md` de reproduction. Il ne contient **ni source ni PDF du manuscrit**, ni les champs bruts `.npz`. Aucune nouvelle campagne LBM n'a été lancée ; seules ont été exécutées les opérations de post-traitement et les résolutions FEM ciblées.
 
+---
+
+## 8. État final de publication (2026-11-25) — remplace les sections 6 et 7
+
+Les paragraphes précédents décrivent l'état intermédiaire avec supplément enrichi à addendum. La décision finale est la suivante et remplace toute formulation antérieure.
+
+### 8.1 Documents
+
+* `PH13_manuscript_physics_only.tex` / `.pdf` : **19 pages**, **sept sections** ; zéro référence indéfinie. Le texte est physics-only : pas de DeepONet, pas d'Appendix A, pas de description provenance du supplément. La phrase exacte sur la variation de forme avec $n$ est présente dans l'Introduction. Le contrôle à couvercle projeté est une définition cinématique uniquement. Le lien GitHub et la mention MIT figurent dans Data availability.
+* `PH13_supplementary_final.tex` / `.pdf` : **22 pages**, **une seule partie**, sections S1--S15 ; zéro référence indéfinie, texte Alt sous chaque légende. Le supplément ne contient ni addendum, ni langage de révision, ni provenance, ni sections opérateur/DeepONet, ni figures de performance, ni graines, ni coûts d'entraînement, ni métriques OOD.
+* Les fichiers `PH13_supplementary_enriched.*`, `revision_addendum.tex` et `PH13_supplementary_physics_only.*` sont conservés uniquement comme archives et ne sont plus les livrables autoritaires.
+
+### 8.2 Correctifs scientifiques finaux
+
+* Courbure : interpolation périodique complète, test du cercle $\kappa=1.000000$ et $f_{\rm sharp}=0$, 190 lignes recalculées ; corrélations $\kappa_{w,\rm rms}$/$D/A$ $=+0.834$ (`Re=100`) à $+0.709$ (`Re=1000`), Spearman $+0.115`, $f_{\rm sharp}<0$ à `Re=500,1000`.
+* Diagnostic des coins : $0.20L_c$ pour la bande, $0.25L_c$ pour la recherche, $s_{\rm corner}$ en unités de $L=L_c/2$ ; pas de lignes extrapolées ; langage de seuil de détection $1\%$, sans « onset » ni « topologiquement distinct ».
+* Support commun : $\varepsilon_D=0.72$--$20.02\%$ sur 9\,488--15\,168 nœuds ; $D_{\rm FEM}^{\Omega}/D_{\rm FEM}^{M}=1.63$--$2.06$.
+* Bilan cœur/paroi : 506 lignes, résidu maximal $2.78\times10^{-17}$ ; $87.8\%$ est la part de la **montée** $n=4\to8$, pas la part absolue.
+* $P_{\rm lid}$ : non coté ; 810 champs finaux sans $f$, 148 checkpoints avec $f,it$, rapport de flux $-4.419$.
+* Pas de fermeture globale d'énergie ; extrapolations Richardson uniquement diagnostiques.
+
+### 8.3 Dépôt et installation
+
+Le dépôt public contient maintenant le supplément final `.tex`/`.pdf`, les figures finales, les tables, les scripts, les rapports, un `README.md` anglais avec avis de copyright et une licence MIT anglaise dans `LICENSE`. Il ne contient toujours ni source/PDF du manuscrit principal ni champs bruts `.npz`.
+
+L'installation autoritaire est `08_operator_results/PH13_manuscript/`. Les livrables précédents ont été sauvegardés dans `backup_pre_publish_2026-11-25/`. Les journaux de compilation finaux `install_main_pass2.txt` et `install_supp_pass2.txt` ne contiennent aucune référence indéfinie ni erreur fatale.
+
+### 8.4 Réponses aux referees
+
+La lettre formelle anglaise est `RESPONSE_LETTER_FINAL.tex` / `.pdf`, avec les questions en bleu foncé et les réponses en noir. Chaque item suit maintenant le couple « commentaire original → Revision made. » (ou « Justification for no change. » pour le referee 3). Elle couvre les referees 1, 2, 4, 5 et 6 ; aucun rapport séparé du referee 3 n'a été fourni, et cette lacune est explicitement conservée. La matrice finale est `REVIEWER_RESPONSE_MATRIX.md`.
+
+### 8.5 Paquet de soumission Physics of Fluids
+
+Le dossier `08_operator_results/PH13_manuscript/submission_package/` contient les livrables prêts à téléverser, décrits dans `README_Submission.txt` :
+
+* `Article_File.tex` / `.pdf` et `Supplementary_Article_File.tex` / `.pdf` : versions propres ; toutes les figures et tableaux sont incorporés dans le PDF à leur emplacement textuel exact (`[H]`), jamais après les références.
+* `Marked-Up_Manuscript.tex` / `.pdf` et `Marked-Up_Supplementary.tex` / `.pdf` : versions annotées générées contre les soumissions précédentes des 29 et 25 septembre 2026 (texte neuf/révisé en bleu, retrait substantiel en appendice rouge), car `latexdiff` n'était pas utilisable (Perl sans `Algorithm::Diff`).
+* `Alt_Text.txt` : texte alternatif de toutes les figures et tables ; le supplément imprime aussi l'Alt text sous chaque légende.
+* `RESPONSE_LETTER_FINAL.pdf` (avec `.tex`, `.md`, `.html`) et `Highlight_Image.tif` / `.jpeg` : image de mise en relief exactement 2404 x 1882 px à 300 dpi (8.0139 x 6.2739 in), issue de la plage de champs `Re=1000`.
+* Liste des abréviations, nomenclature et section `Supplementary Material` insérée entre `Conclusions` et `Acknowledgments` dans l'article ; tous les acronymes sont définis à leur première apparition, y compris dans l'abstract.
+
