@@ -1,0 +1,8 @@
+item,source,lines,fact
+MEM lid power formula,06_physics/analyse_etape4_puissance.py,15-17,P_lid = sum_links (e_q . u_wall) * (f_new[q] + f_post[opp]); requires f_post and f_new on moving-wall links.
+Final fields lack f,06_physics/analyse_etape4_puissance.py,26-28,"Production script states that final .npz fields do not store f; N=256/512 use checkpoints, N=64/128 are re-run."
+Checkpoint fallback,06_physics/analyse_etape4_puissance.py,148-157,"get_f(N) reads z['f'] and z['it'] from *_ckpt.npz, otherwise runs CurvedLBM from scratch."
+One MEM step,06_physics/analyse_etape4_puissance.py,170-172,"rho,ux,uy = macroscopic(f); f_post = collide(f,S,fluid); stream_force(f_post,la,rho) yields P_lid."
+rho convention,02_LBM/mrt_collision.py,64-69,"rho = f.sum(axis=0), ux = sum(e_x f)/rho, uy = sum(e_y f)/rho; p=(rho-1)/(3 U_lid^2) is in physics_observables.py:327."
+Stress lid power,06_neural_operator/physics_observables.py,325-337,"Alternative post-processing reconstructs du_t/dn and pressure-strain from archived (rho,u); this is an estimate, not MEM."
+Discrete identity failure,corrections for reviewer/02_junction_energy_budget/junction_budget_report.md,60-70,"On n=4, Re=1000, N=128: int(div F)/(-int 2phi) = -4.419 (expected +1); required pressure scale = -0.0783 (expected +1). Archived (rho,u) do not satisfy the discrete identity."

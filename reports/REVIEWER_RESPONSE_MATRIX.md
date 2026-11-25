@@ -1,0 +1,49 @@
+# Matrice de réponse aux six referees (version restructurée)
+
+Les rapports détaillés des referees #4 et #5 ne sont pas présents dans le dossier ; seuls les extraits collés dans la demande sont disponibles. La matrice ci-dessous est donc organisée par **point soulevé**, avec l’identifiant de referee lorsqu’il est connu. Aucune conformité littérale aux rapports #4/#5 ne peut être certifiée.
+
+| # | Point soulevé | Réponse apportée | Preuve exécutée | Où dans le manuscrit |
+|---:|---|---|---|---|
+| 1 | Test du cercle pour la courbure pariétale | Le défaut d’indexation de la table d’arclength est corrigé. Le cercle unité donne $\kappa_{w,\max}=\kappa_{w,\mathrm{rms}}=1.000000$ et $f_{\mathrm{sharp}}=0$ à toutes les résolutions testées ; les 190 cas sont recalculés. | `01_curvature_validation/curvature_fixed.py`, `curvature_corrected_190.csv`, `curvature_before_after.csv`, `curvature_validation_report.md` | Main §4.3 and figure `fig_curvature_corrected.png` ; Suppl. S2, table S1 |
+| 2 | Limite carrée de la condition aux limites | La limite $n\to\infty$ est un carré à couvercle tangentiel par morceaux, pas la cavité de Ghia. Le texte de remplacement est adopté ; le contrôle à couvercle horizontal projeté reste une sensibilité à la loi de forçage. | `00_audit_questions/AUDIT_NOTES.md` §2 ; `02_junction_energy_budget/junction_budget_report.md` §1 | Main §2.1, Discussion |
+| 3 | Jonctions : régularisation et bilan d’énergie | Aucune régularisation n’existe dans le code : la dissipation de jonction est une grandeur à coupure. $f_j=7.3$–$15.5\%$ à $r=0.05L_c$ et $22.6$–$42.6\%$ à $r=0.15L_c$ ($N=128$). Le test d’identité discrète échoue ($-4.419$ au lieu de $+1$) ; aucun bilan global n’est revendiqué. | `02_junction_energy_budget/junction_budget.py`, `junction_budget.csv`, `identity_check.csv`, `junction_budget_report.md` | Main §4.2 and figure `fig_junction_share.png` ; Suppl. S4, table S3 |
+| 4 | Gradients FEM et dissipation intégrée | $D_{\mathrm{FEM}}=2\nu\int S_h:S_h$ est assemblé exactement sur une suite de maillages P2/P1. Les gradients exacts aux points LBM sont comparés à une différence centrale reconstruite à partir des champs échantillonnés archivés ; les deux types de résultats sont étiquetés séparément. Aucune extrapolation de Richardson n’est utilisée. | `03_FEM_dissipation_validation/fem_dissipation_validation.py`, `fem_gradient_reconstruction.py`, `fem_validation_report.md`, CSV associés | Main §5.2 ; Suppl. S5, tableaux `fem_table.tex`, `fem_table_supp.tex` |
+| 5 | Bilan additif cœur/paroi (ref. #4.3 / #5.3) | Partition exacte du même masque $M$ : $D_{\mathrm{mask}}/A_{\mathrm{mask}}=D_{\mathrm{wall}}/A_{\mathrm{mask}}+D_{\mathrm{core}}/A_{\mathrm{mask}}$, avec le même dénominateur pour les trois termes. Résidu maximal $2.78\times10^{-17}$ sur 506 lignes. La remontée au-delà du creux est portée par le cœur ; la couche pariétale ne fixe pas le minimum. | `04_additive_core_wall_budget/core_wall_budget.py`, `core_wall_budget.csv`, `core_wall_budget_report.md` | Main §4.1, tableau budget ; figure `fig_core_wall_budget.png` |
+| 6 | Qualification des minima et des transitions | Argmin échantillonné puis ajustements quadratiques 3 et 5 points avec supports, exclusions et estimateurs tracés. À $Re=1000$, $n^*_{D/A}$ passe de $4.065$ (3 pts) à $4.471$ (5 pts) ; $n^*_D$ de $2.794$ à $2.381$. Les croisements sont des franchissements de seuil à la résolution d’échantillonnage, pas des onsets. | `05_minima_qualification/minima_qualification.py`, `case_metrics.csv`, `fit_diagnostics.csv`, `crossing_diagnostics.csv`, `minima_qualification_report.md` | Main §5.1–5.2, figure `fig_minima_windows.png` |
+| 7 | Restructuration, longueur et DeepONet | Manuscrit principal à sept sections, un seul message physique, DeepONet absent du texte principal. Le supplément enrichi conserve octet pour octet le supplément original et ajoute uniquement un addendum ; aucun matériau original n'est supprimé. | `06_manuscript_restructure/PH13_manuscript_physics_only.tex`, `PH13_supplementary_enriched.tex`, `revision_addendum.tex` | Main : 7 sections ; supplément : original intact + addendum |
+| 8 | Vérification des documents externes | Scan en lecture seule de `C:\\Users\\user\\Documents` hors projet actif : provenance `reference-190`, réserves du bilan d’énergie, Ghia canonique et convergence 18 points recoupés ; les anciens fichiers de courbure défectueux et toutes les métriques opérateur sont explicitement exclus. | `00_audit_questions/DOCUMENTS_SCAN_FINDINGS.md` | Appendix A ; limitations du texte |
+| 9 | Normalisation et facteur deux | Vérification source : la dissipation LBM est $2\\nu\\int S:S$ avec $\\nu=2/Re$ après normalisation par $U_{\\rm lid}=0.05$ ; le FEM utilise le même $\\nu$ avec $U_{\\rm lid}=1$. L'ancienne colonne `rel. D error` est une erreur de reconstruction FD sur grille, pas une validation LBM/FEM. | `03_FEM_dissipation_validation/fem_validation_report.md`, `07_final_scientific_revision/common_support_dissipation.csv` | Main §6, tableau sur support commun ; addendum §1 |
+| 10 | Comparaison LBM/FEM sur support commun | $\\varepsilon_D=0.72$–$20.02\\%$ sur 9\,488–15\,168 nœuds masqués ; $D_{\\rm FEM}^{\\Omega}/D_{\\rm FEM}^{M}=1.63$–$2.06$. L'écart historique est principalement un effet de support. | `07_final_scientific_revision/common_support_fem_lbm.py`, `common_support_dissipation.csv` | Main §6 ; addendum §1 (`tab:rev_common`) |
+| 11 | Maillages, DOF, Picard et jonctions FEM | Niveaux 4/5/6 : 1\,024/4\,096/16\,384 triangles et 4\,771/18\,755/74\,371 inconnues ; tolérance Picard $10^{-9}$, 36/36 solves convergés en 14–34 itérations. Test strict $y>0$ : jonction gauche $y=+1.22\\times10^{-16}$ mobile, jonction droite $y=0$ fixe. | `03_FEM_dissipation_validation/fem_dissipation.csv`, `fem_validation_report.md`, `fig_supp_fem_junction_schematic.png` | Main §6 ; addendum §4 |
+| 12 | Campagnes et appariements | `data_refine` : 50 champs, 8 valeurs de $Re$. $N=256$ : 63 champs, 62 appariés avec $N=128$ ; seul $(n,Re)=(4.25,300)$ est sans partenaire. | `07_final_scientific_revision/campaign_inventory.csv`, `campaign_N256_matching.csv`, `campaign_verification.md` | Main §6 ; addendum §7 |
+| 13 | Longueur du couvercle mobile $L_{\\rm mov}$ | $L_{\\rm mov}=2.8789718432636$ ($n=1.25$), $\\pi$ ($n=2$), $3.5088489717820$ ($n=4$), $3.7389869262423$ ($n=8$) ; validations losange, cercle et limite carrée. | `07_final_scientific_revision/compute_lmov.py`, `l_mov.csv`, `l_mov_validation.csv` | Addendum §6 |
+| 14 | Puissance de couvercle $P_{\\rm lid}$ | Non cotée comme quantité vérifiée : 810 champs finaux sans populations $f$, 148 checkpoints avec $f,it$ ; le bilan de flux archivé donne $-4.419$ au lieu de $+1$. Aucune fermeture globale n'est revendiquée. | `07_final_scientific_revision/audit_plid.py`, `plid_audit_report.md`, `02_junction_energy_budget/identity_check.csv` | Main §4.2 et limitations ; addendum §§5–6 |
+
+## Formulations retirées ou remplacées
+
+* « the drift is not a resolution artefact » → « fitted minimum locations are similar on matched grids, but absolute dissipation remains resolution-sensitive ».
+* « the wall layer sets its location » → « the low-dissipation band results from opposing wall and core trends ».
+* « total momentum content » → « integrated kinetic energy ».
+* « resolution-independent to about 2 % » → « similar fitted locations on matched grids; absolute levels unresolved ».
+* « onset / topologically distinct » → « threshold crossing at the sampling resolution / 1 % detection level ».
+* « $D$ plus faible avec $A$ plus grand mais $D/A$ plus grand » → identité $D=A_{\mathrm{mask}}(D/A_{\mathrm{mask}})$ sur un support commun.
+
+## Limites explicitement conservées
+
+* Aucune fermeture globale du bilan d’énergie à partir des champs macroscopiques archivés.
+* Aucune valeur absolue de dissipation à $N=128$ présentée comme convergée.
+* Aucun optimum universel ou indépendant de la résolution.
+* Aucune inférence topologique à partir d’un croisement sous le pourcent.
+
+## État historique (2026-11-24)
+
+Manuscrit principal : 15 pages, 8 figures, 8 tableaux, zéro référence indéfinie et zéro avertissement de compilation. Supplément physique court : 4 pages, 4 tableaux, zéro référence indéfinie. Cet état a été remplacé par la version finale ci-dessous.
+
+## État final (2026-11-25)
+
+* **Manuscrit principal** `PH13_manuscript_physics_only.tex` : **17 pages**, **sept sections** plus une sous-section `Scope and limitations` ; zéro référence LaTeX indéfinie. Deux compilations `pdflatex` successives : seul l'avertissement bénin `microtype` sur `footnote` subsiste.
+* **Supplément enrichi** `PH13_supplementary_enriched.tex` : **54 pages**. Le préfixe est identique octet pour octet au supplément original ; la seule modification est `\input{revision_addendum}` ajouté immédiatement avant `\end{document}`. Zéro référence indéfinie ; seuls deux avertissements bénins `hyperref` sur des chaînes Unicode héritées du supplément original.
+* **DeepONet** : absent du manuscrit principal ; le supplément enrichi conserve intactes les sections opérateur du supplément original, conformément à la consigne de non-suppression.
+* **Nouveaux résultats** : support commun LBM/FEM, budget cœur/paroi étendu, courbure corrigée, audit FEM/jonctions, conventions d'énergie, `L_mov`, verdict `P_lid`, inventaire des campagnes, supports des ajustements et croisements, tous consignés dans l'addendum.
+* **Données** : `https://github.com/Ahmedalgeria778/PH13_revision_data` contient uniquement CSV, scripts, figures, rapports et `README.md` ; aucun fichier source ni PDF du manuscrit n'y est déposé.
+* **Limites conservées** : pas de fermeture globale du bilan d'énergie, pas de dissipation absolue présentée comme convergée à $N=128$, pas d'optimum universel, pas de $P_{\\rm lid}$ vérifié, et conformité littérale des rapports #4/#5 non certifiable en l'absence des textes complets.
