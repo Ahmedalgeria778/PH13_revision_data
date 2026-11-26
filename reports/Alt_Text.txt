@@ -23,8 +23,8 @@ Caption: Sampled dissipation minima on matched grids. D/A uses A_mask, the exact
 Alt text: Sampled dissipation minima on matched grids. D/A uses A_mask, the exact support of the quadrature. At Re=100, N=256 values exist only for n=2.5,3,4; the reported minimum is therefore the minimum among the available matched configurations, not a global minimum over 1.25≤ n≤8.
 
 [MAIN ARTICLE item 5; Figure; fig:support]
-Caption: Integrated kinetic energy on the sampled exponent grid. The saturation at high n does not by itself determine the location of the dissipation minimum. Two further verification panels are retained in Supplementary Figs. S11 and S14: an LBM--P2/P1 comparison for the circle at Re=100, N=32--96, and wall-band diagnostics that remain resolution-sensitive. They support only the stated velocity-agreement test and ordering, not grid-converged dissipation amplitudes.
-Alt text: Integrated kinetic energy on the sampled exponent grid. The saturation at high n does not by itself determine the location of the dissipation minimum. Two further verification panels are retained in Supplementary Figs. S11 and S14: an LBM--P2/P1 comparison for the circle at Re=100, N=32--96, and wall-band diagnostics that remain resolution-sensitive. They support only the stated velocity-agreement test and ordering, not grid-converged dissipation amplitudes.
+Caption: Integrated kinetic energy on the sampled exponent grid. The saturation at high n does not by itself determine the location of the dissipation minimum. Supplementary Fig. S4 shows the LBM--P2/P1 comparison for the circle at Re=100, N=32--96, and Fig. S14 shows wall-band diagnostics that remain resolution-sensitive. They support only the stated velocity-agreement test and ordering, not grid-converged dissipation amplitudes.
+Alt text: Integrated kinetic energy on the sampled exponent grid. The saturation at high n does not by itself determine the location of the dissipation minimum. Supplementary Fig. S4 shows the LBM--P2/P1 comparison for the circle at Re=100, N=32--96, and Fig. S14 shows wall-band diagnostics that remain resolution-sensitive. They support only the stated velocity-agreement test and ordering, not grid-converged dissipation amplitudes.
 
 [MAIN ARTICLE item 6; Figure; fig:budget]
 Caption: Additive core/wall budget at Re=1000, N=256, δ=0.05L_c. All three curves use A_mask as denominator; in this sampled case the increase from n=4 to n=8 is mostly carried by D_core/A_mask, with 87.8% of the increase (0.000353 of 0.000402) assigned to the core. The supplementary figure extends the same diagnostic to Re=100,500,1000 and both band thicknesses.
@@ -223,9 +223,17 @@ Caption: Directly integrated FEM dissipation at Re=1000 for mesh levels n_ref=4,
 Alt text: Directly integrated FEM dissipation at Re=1000 for mesh levels n_ref=4,5,6, with the lattice reconstruction diagnostics at N=128. The mesh change is reported directly; no Richardson estimate is used.
 
 [SUPPLEMENTARY ONLINE MATERIAL item 41; Table; tab:dr0ladder]
-Caption: Fixed-junction-disk dissipation D_r_0(N) for n=8, Re=1000, computed from the archived final fields. Here r_0=0 denotes the unexcised gradient-valid mask; N=384 has no matching fixed-cutoff entry in the archive.
-Alt text: Fixed-junction-disk dissipation D_r_0(N) for n=8, Re=1000, computed from the archived final fields. Here r_0=0 denotes the unexcised gradient-valid mask; N=384 has no matching fixed-cutoff entry in the archive.
+Caption: Fixed-junction-disk dissipation D_r_0(N) for n=8, Re=1000, computed from the archived final fields, including the N=384 high-resolution field. Here r_0=0 denotes the unexcised gradient-valid mask.
+Alt text: Fixed-junction-disk dissipation D_r_0(N) for n=8, Re=1000, computed from the archived final fields, including the N=384 high-resolution field. Here r_0=0 denotes the unexcised gradient-valid mask.
 
-[SUPPLEMENTARY ONLINE MATERIAL item 42; Figure; fig:wallrefine]
+[SUPPLEMENTARY ONLINE MATERIAL item 42; Table; tab:dr0order]
+Caption: Equal-doubling increments (in 10^-6), observed orders and Richardson limits for the n=8, Re=1000 fixed-junction-disk ladder. Orders use the 64/128/256/512 subset; the N=384 row of the cited table is an intermediate point and is not used in the equal-doubling ratios.
+Alt text: Equal-doubling increments (in 10^-6), observed orders and Richardson limits for the n=8, Re=1000 fixed-junction-disk ladder. Orders use the 64/128/256/512 subset; the N=384 row of the cited table is an intermediate point and is not used in the equal-doubling ratios.
+
+[SUPPLEMENTARY ONLINE MATERIAL item 43; Figure; fig:wallrefine]
 Caption: Resolution sensitivity of the near-wall diagnostics on the archived N=64,128,256 ladder. The three sampled cases are (n,Re)=(1.25,300), (3,1000) and (8,1000); the panels show D/A_mask and the wall-band shares for δ=0.025L_c and δ=0.05L_c. These curves support ordering of the sampled diagnostics only; no asymptotic rate or grid-converged amplitude is claimed.
 Alt text: Resolution sensitivity of the near-wall diagnostics on the archived N=64,128,256 ladder. The three sampled cases are (n,Re)=(1.25,300), (3,1000) and (8,1000); the panels show D/A_mask and the wall-band shares for δ=0.025L_c and δ=0.05L_c. These curves support ordering of the sampled diagnostics only; no asymptotic rate or grid-converged amplitude is claimed.
+
+[SUPPLEMENTARY ONLINE MATERIAL item 44; Table; tab:diffusive]
+Caption: Production-family diffusive-scaling check at n=4, Re=1000: U_lid(N)=0.05×128/N and nearly fixed τ0.519. D_prod and D_diff denote the original production fields and the diffusively scaled reruns; r_0 is the physical junction-disk radius, with r_0=0 the unexcised gradient-valid mask.
+Alt text: Production-family diffusive-scaling check at n=4, Re=1000: U_lid(N)=0.05×128/N and nearly fixed τ0.519. D_prod and D_diff denote the original production fields and the diffusively scaled reruns; r_0 is the physical junction-disk radius, with r_0=0 the unexcised gradient-valid mask.

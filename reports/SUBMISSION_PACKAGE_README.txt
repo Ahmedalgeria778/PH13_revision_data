@@ -65,7 +65,9 @@ folders are not manuscript files to select during upload.
 SCIENTIFIC CONTROLS INCLUDED
 --------------------------------------------------------------------------------
 The revision includes corrected common-support LBM/FEM dissipation, fixed
-physical-wall cutoffs, descriptive logarithmic junction fits, resolution checks
+junction-disk radii with observed orders and a Richardson diagnostic in Table S28,
+a production-family diffusive-scaling check in Table S30,
+descriptive logarithmic junction fits, resolution checks
 through N=512, and the targeted projected-lid campaign at n=1.5, 2, 4 and 8,
 Re=100 and 1000 on N=128 with selected N=256 comparisons. Across the 13
 matched fields, raw projected/tangential D/A_mask ratios are 0.391--0.906;

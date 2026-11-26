@@ -39,7 +39,7 @@
 \begin{document}
 \maketitle
 
-\noindent\textbf{Content.} This document contains supporting fluid-physics material: solver verification, dataset consistency checks, observable definitions, the reference-field atlas, wall-curvature diagnostics, the additive wall/core budget, common-support LBM/FEM dissipation, fixed physical-wall cutoffs and descriptive logarithmic junction fits, junction and energy conventions, moving-wall geometry, campaign inventories, fit and crossing diagnostics up to $N=512$, corner-eddy analysis, and the targeted projected-lid control. Sections, figures and tables are numbered S1, S2, \ldots{} and are cited by these numbers in the main article.
+\noindent\textbf{Content.} This document contains supporting fluid-physics material: solver verification, dataset consistency checks, observable definitions, the reference-field atlas, wall-curvature diagnostics, the additive wall/core budget, common-support LBM/FEM dissipation, fixed junction-disk radii and descriptive logarithmic junction fits, junction and energy conventions, moving-wall geometry, campaign inventories, fit and crossing diagnostics up to $N=512$, corner-eddy analysis, and the targeted projected-lid control, followed by a production-family diffusive-scaling check. Sections, figures and tables are numbered S1, S2, \ldots{} and are cited by these numbers in the main article.
 
 \section{Reference solver verification}\label{sec:solver}
 The reference fields are computed with the lattice-Boltzmann
@@ -168,12 +168,13 @@ through the wall-normal leakage $\max|u\cdot m|$, which decreases from
 $4.41\times10^{-5}$ at $N=32$ to $2.06\times10^{-5}$ at $N=96$. The production
 campaign holds $U_{\mathrm{lid}}=0.05$ at every resolution, so this test
 supports caution about a lattice-Mach offset but does not determine its effect
-on production gradients. No diffusive-scaling test of the production
-superelliptic family was run, and no Mach/acoustic explanation of its resolution
-drift is made. Two reported ranges refer to different sampled sets and should
+on production gradients. A production-family diffusive-scaling check is
+reported in Sec.~\ref{sec:diffusive}: it leaves the junction-excised values
+essentially unchanged and does not support a Mach/acoustic explanation of the
+remaining drift. Two reported ranges refer to different sampled sets and should
 not be mixed: $18.1$--$25.4\,\%$ is an average over seven sampled Reynolds
 numbers, whereas $19.5$--$25.6\,\%$ is a different set of
-representative $N=128$/$256$ pairs quoted in the referee report. In the
+representative $N=128$/$256$ pairs. In the
 fixed-cutoff comparison of Sec.~S8 the median $D_{256}/D_{128}-1$ decreases from
 $21.37\%$ at $r_0=0$ to $8.77\%$ at $r_0=0.5$; none of these ranges is an error
 relative to a converged continuum solution.
@@ -800,7 +801,7 @@ lines use $\delta=0.05L_c$.}
 Table~\ref{tab:budgetcase} gives the detailed target case. From $n=4$ to
 $n=8$, $D/A_{\rm mask}$ rises by $0.000402$, of which $0.000353$ ($87.8\%$) is
 the core contribution and $0.000049$ ($12.2\%$) is the wall contribution. The
-$88\%$ number is the core share of the *increase*, not the core share of the
+$88\%$ number is the core share of the \emph{increase}, not the core share of the
 total dissipation. The latter is $28.1\%$ at $n=4$ and $30.7\%$ at $n=8$.
 Increments in this paragraph and in Table~\ref{tab:budgetrange} are rounded to
 six decimals; the percentages are computed from the unrounded fields.
@@ -969,13 +970,13 @@ contribution is therefore mesh-sensitive in the same way as the LBM junction
 diagnostic. Direct 5-to-6 mesh changes in $D_{\rm FEM}$ are $1.32\%$--$8.46\%$;
 they are reported as mesh sensitivity only, with no Richardson extrapolation.
 
-\subsection{Fixed physical-wall cutoffs and descriptive logarithmic fits}
+\subsection{Fixed junction-disk radii and descriptive logarithmic fits}
 \label{sec:juncut}
 
 The first cutoff test used disk radii proportional to the lattice spacing, so
 it could not distinguish a fixed physical exclusion from a refinement effect.
 We therefore recomputed the comparison on thirty matched cases with a fixed
-physical wall distance
+junction-disk radius
 $r_0\in\{0,0.125,0.25,0.5\}$ measured in the paper coordinates
 $x,y\in[-1,1]$ ($L_c=2$). The two junction disks are excluded from the
 gradient-valid mask $M$:
@@ -999,11 +1000,22 @@ physical wall cutoff $r_0$.}
 \end{table}
 
 The available fixed-cutoff ladder for the representative pointed case
-$n=8$, $Re=1000$ is recorded in Table~\ref{tab:dr0ladder}. The ratio
-$D_{r_0=0.5}(N)/D_{r_0=0}(N)$ falls from $0.674$ at $N=64$ to $0.543$ at
-$N=512$, so the excluded junction layer grows in relative importance with
-refinement; these are cutoff diagnostics, not converged continuum values.
-The $N=384$ ladder has no matching fixed-cutoff entry in the archived CSV.
+$n=8$, $Re=1000$ is recorded in Table~\ref{tab:dr0ladder}, now including the
+archived $N=384$ field. For $r_0=0.5$, $D_{r_0}(N)=0.01397$, $0.01824$,
+$0.02085$, $0.02189$ and $0.02236$ at $N=64$, $128$, $256$, $384$ and $512$.
+The equal-doubling increments are $4277$, $2606$ and $1511$ in units of
+$10^{-6}$, with successive ratios $0.609$ and $0.580$. The corresponding
+observed orders $p=\log_2(\Delta_{\rm coarse}/\Delta_{\rm fine})$ are $0.71$
+and $0.79$: convergence is slow, but it is real on this fixed-radius support.
+A Richardson limit using the last doublings is $D_{r_0=0.5,\infty}\simeq
+0.0244$, so the $N=512$ value remains about $8.5\%$ below it. The $r_0=0.25$
+series behaves similarly ($p\simeq0.61$, $0.80$; limit $\simeq0.0313$;
+$N=512$ about $8.8\%$ below), while $r_0=0.125$ gives $p\simeq0.38$, $0.74$.
+At $r_0=0$ the equal-doubling ratios are only $0.904$ and $0.846$
+($p\simeq0.15$, $0.24$), consistent with logarithmic growth and no finite
+Richardson limit. Table~\ref{tab:dr0order} lists the increments and orders;
+both tables report diagnostics on the archived ladder, not continuum
+certification.
 
 The junction contribution $D_{\rm junction}(r,N)$ was also evaluated on
 artificial disks of radius $r=4h,8h,16h$, and the three-grid values were
@@ -1017,8 +1029,7 @@ from $N=128$ to $N=256$ at $Re=1000$. These values correspond to the
 grid-scaled $D_{\rm excl,16h}$ series, not to the fixed-physical $r_0=0.5$
 series in Table~\ref{tab:juncut}; they follow the shrinking excluded disk
 ($0.252\to0.125$) and are not directly comparable with the fixed-cutoff maximum
-of $14.28\%$. They should be attributed to that grid-scaled support and to the
-three-point fit, not to a fixed physical cutoff. The high $R^2$ values are
+of $14.28\%$. The high $R^2$ values are
 descriptive of the three available grids. They do not establish an asymptotic
 logarithmic law, and the fixed physical cutoff does not remove the cutoff
 dependence of the full-domain quantity.
@@ -1189,6 +1200,12 @@ Projected-lid control & 128,256 & 13 & 8 & $100,1000$ \\
 \bottomrule
 \end{tabular}}
 \end{table}
+
+The labels used in the fit and crossing tables are defined as follows:
+\texttt{all190} is the 190-field reference grid; \texttt{union} is the matched
+union of available fields at a given resolution (reference, dense-$n$ and
+secondary refinements at $N=128$; matched and low-Reynolds refinements at
+$N=256$); \texttt{extB} is the sparse extended $N=384$ and $N=512$ ladder.
 
 The reference grid contains $190$ fields. The dense-$n$ refinement campaign
 contains $50$ fields at eight Reynolds numbers. The $N=256$ collection contains
@@ -1492,9 +1509,10 @@ $+23.1\%$ and $+21.9\%$. The projected family therefore drifts as much as, and
 at the two largest exponents more than, the discontinuous family. The junction
 velocity jump alone cannot explain the resolution sensitivity; near-wall
 gradients and bulk discretization remain plausible contributors. The largest
-fixed-physical-cutoff comparison still leaves $4.33$--$14.28\%$ drift, which
-may motivate a diffusive-scaling ($U\propto1/N$) test, but no such test was run
-here and no Mach/acoustic explanation is established. The sampled shifts and
+fixed-junction-disk comparison still leaves $4.33$--$14.28\%$ drift. The
+diffusive-scaling test described in Sec.~\ref{sec:diffusive} shows that lowering
+the lattice Mach number changes part of this drift but does not eliminate it, so
+no Mach/acoustic explanation is established. The sampled shifts and
 ratios remain descriptive diagnostics within this coupled family; no universal
 optimum or verified lid-power balance follows from them.
 
@@ -1578,17 +1596,38 @@ The mesh change is reported directly; no Richardson estimate is used.}
 \begin{table}[H]
 \centering
 \caption{Fixed-junction-disk dissipation $D_{r_0}(N)$ for $n=8$, $Re=1000$,
-computed from the archived final fields. Here $r_0=0$ denotes the unexcised
-gradient-valid mask; $N=384$ has no matching fixed-cutoff entry in the archive.}
+computed from the archived final fields, including the $N=384$ high-resolution
+field. Here $r_0=0$ denotes the unexcised gradient-valid mask.}
 \label{tab:dr0ladder}
-\tabbox{\begin{tabular}{@{}lcccc@{}}
+\tabbox{\begin{tabular}{@{}lccccc@{}}
 \toprule
-$N$ & $h$ & $D_{r_0=0}$ & $D_{r_0=0.25}$ & $D_{r_0=0.5}$ \\
+$N$ & $h$ & $D_{r_0=0}$ & $D_{r_0=0.125}$ & $D_{r_0=0.25}$ & $D_{r_0=0.5}$ \\
 \midrule
-64  & 0.031746 & 0.020732 & 0.017604 & 0.013966 \\
-128 & 0.015748 & 0.028391 & 0.022969 & 0.018243 \\
-256 & 0.007843 & 0.035312 & 0.026487 & 0.020849 \\
-512 & 0.003914 & 0.041172 & 0.028510 & 0.022360 \\
+64  & 0.031746 & 0.020732 & 0.019702 & 0.017604 & 0.013966 \\
+128 & 0.015748 & 0.028391 & 0.025734 & 0.022968 & 0.018243 \\
+256 & 0.007843 & 0.035312 & 0.030362 & 0.026487 & 0.020849 \\
+384 & 0.005222 & 0.038940 & 0.032227 & 0.027872 & 0.021891 \\
+512 & 0.003914 & 0.041172 & 0.033132 & 0.028510 & 0.022360 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Equal-doubling increments (in $10^{-6}$), observed orders and
+Richardson limits for the $n=8$, $Re=1000$ fixed-junction-disk ladder. Orders
+use the $64/128/256/512$ subset; the $N=384$ row of Table~\ref{tab:dr0ladder}
+is an intermediate point and is not used in the equal-doubling ratios.}
+\label{tab:dr0order}
+\tabbox{\begin{tabular}{@{}lcccccc@{}}
+\toprule
+$r_0$ & $\Delta_{64\to128}$ & $\Delta_{128\to256}$ & $\Delta_{256\to512}$ &
+$p_{128/256}$ & $p_{256/512}$ & $D_\infty^{\rm Rich}$ \\
+\midrule
+$0$     & $7658$ & $6922$ & $5859$ & $0.15$ & $0.24$ & --- \\
+$0.125$ & $6032$ & $4628$ & $2770$ & $0.38$ & $0.74$ & $0.0373$ \\
+$0.25$  & $5364$ & $3518$ & $2024$ & $0.61$ & $0.80$ & $0.0313$ \\
+$0.5$   & $4277$ & $2606$ & $1511$ & $0.71$ & $0.79$ & $0.0244$ \\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -1604,6 +1643,45 @@ of the sampled diagnostics only; no asymptotic rate or grid-converged amplitude
 is claimed.}
 \label{fig:wallrefine}
 \end{figure}
+
+\section{Production-family diffusive-scaling check}
+\label{sec:diffusive}
+To test whether the residual resolution drift of the production family is a
+lattice-Mach effect, we reran the $n=4$, $Re=1000$ cases at $N=128,256,384$
+with $U_{\mathrm{lid}}(N)=0.05\times128/N$ and nearly fixed
+$\tau\simeq0.519$. The lattice Mach number therefore decreases as $1/N$, while
+$Re$ and the gradient-valid quadrature are unchanged. Table~\ref{tab:diffusive}
+compares these fields with the original production fields at the same physical
+junction radii. The $N=128$ fields agree by construction because $U_{\rm lid}$
+and $\tau$ match. At $r_0=0.5$ the diffusive values agree with the production
+values to within $4.1\times10^{-6}$ on all three grids, and the increments on
+$128\to256$ and $256\to384$ remain $2.06\times10^{-3}$ and
+$6.83\times10^{-4}$ (observed order about $1.01$). Lowering the lattice Mach
+number changes the unexcised full-domain level appreciably but leaves the
+junction-excised values essentially unchanged; it does not remove the
+resolution drift. This check is not a continuum certification. It only excludes
+a simple Mach/acoustic explanation of the remaining drift.
+
+\begin{table}[H]
+\centering
+\caption{Production-family diffusive-scaling check at $n=4$, $Re=1000$:
+$U_{\mathrm{lid}}(N)=0.05\times128/N$ and nearly fixed $\tau\simeq0.519$.
+$D_{\rm prod}$ and $D_{\rm diff}$ denote the original production fields and the
+diffusively scaled reruns; $r_0$ is the physical junction-disk radius, with
+$r_0=0$ the unexcised gradient-valid mask.}
+\label{tab:diffusive}
+\tabbox{\begin{tabular}{@{}lccccccccc@{}}
+\toprule
+$N$ & $U_{\rm lid}$ & $\tau$ & $D_{\rm prod}(0)$ & $D_{\rm diff}(0)$ &
+$D_{\rm prod}(0.25)$ & $D_{\rm diff}(0.25)$ &
+$D_{\rm prod}(0.5)$ & $D_{\rm diff}(0.5)$ \\
+\midrule
+128 & 0.05000 & 0.519050 & 0.025590 & 0.025590 & 0.020028 & 0.020029 & 0.015117 & 0.015117 \\
+256 & 0.02500 & 0.519125 & 0.032090 & 0.032623 & 0.023007 & 0.023001 & 0.017179 & 0.017176 \\
+384 & 0.01667 & 0.519150 & 0.035407 & 0.036158 & 0.024015 & 0.024008 & 0.017864 & 0.017859 \\
+\bottomrule
+\end{tabular}}
+\end{table}
 
 \section*{Data availability}
 The post-processed data, analysis scripts, regenerated figures, result tables,
