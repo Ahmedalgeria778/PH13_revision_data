@@ -2,7 +2,7 @@
 
 Projected law: u_w = U_lid (e_x.t) t (impermeable); tangential law: u_w = U_lid t. Same n, Re, N and Mach number. D/A is divided by the gradient-valid integration area A_mask; KE/A uses the exact area.
 
-| N | Re | n | D/A tan | D/A proj | raw ratio | forcing-norm. ratio | KE/A ratio | f_0.25 ratio | umax ratio | relL2 |
+| N | Re | n | D/A tan | D/A proj | raw ratio | forcing-norm. ratio | KE/A ratio | f_0.025 ratio | umax ratio | relL2 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | 128 | 100 | 1.5 | 0.05360 | 0.02095 | 0.391 | 0.782 | 0.509 | 0.700 | 0.957 | 0.333 |
 | 128 | 100 | 2.0 | 0.03814 | 0.01820 | 0.477 | 0.955 | 0.485 | 0.770 | 0.982 | 0.394 |

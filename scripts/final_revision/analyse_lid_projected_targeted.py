@@ -156,7 +156,7 @@ def make_table(rows: list[dict]) -> str:
     header = r"""\begin{tabular}{@{}rrrcccccccr@{}}
 \toprule
 $N$ & $Re$ & $n$ & $D/A_{\rm mask}$ tan. & $D/A_{\rm mask}$ proj. & raw ratio &
-forcing-norm.\ ratio & $KE/A$ ratio & $f_{0.25}$ ratio & $U_{\max}$ ratio & rel. $L_2(u)$ \\
+forcing-norm.\ ratio & $KE/A$ ratio & $f_{0.025}$ ratio & $U_{\max}$ ratio & rel. $L_2(u)$ \\
 \midrule
 """
     body = []

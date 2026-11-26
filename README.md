@@ -18,7 +18,7 @@ All common-support LBM diagnostics were recomputed from archived final fields, a
 
 | Item | Result |
 |---|---|
-| Common-support LBM/FEM dissipation | Corrected derivative index gives `ε_D = 0.06–6.52%`; representative `n=4, Re=1000` values are `D_LBM = 0.0255896185899`, `D_FEM = 0.0246197180024`, `ε_D = 3.9395%` |
+| Common-support LBM/FEM dissipation | Same-support comparison gives `ε_D = 0.06–6.52%`; representative `n=4, Re=1000` values are `D_LBM = 0.0255896185899`, `D_FEM = 0.0246197180024`, `ε_D = 3.9395%`. The ratio `D_FEM^Ω/D_FEM^M = 1.63–2.06` identifies a support effect; no fixed-support FEM/LBM test at `r0>0` was run |
 | Dissipation convention | `D = 2ν ∫ S:S dA`, with `ν = 2/Re` in paper units; LBM velocities are lid-normalized by `U_lid = 0.05`, FEM uses `U_lid = 1` |
 | Meaning of the gradient-reconstruction column | `|D_FD,lattice − D_exact,lattice| / D_exact,lattice`, a gradient-reconstruction diagnostic, not an LBM/FEM validation error |
 | FEM mesh ladder | levels 4/5/6: 1,024/4,096/16,384 triangles and 4,771/18,755/74,371 velocity + pressure unknowns |
@@ -28,8 +28,10 @@ All common-support LBM diagnostics were recomputed from archived final fields, a
 | Core/wall budget | 506 rows; maximum additivity residual `2.78e-17`; for `Re=1000, N=256, δ=0.05L_c`, the core contributes `87.8%` of the `n=4→8` rise, not `87.8%` of absolute dissipation |
 | Projected-lid control | 13 matched fields; raw projected/tangential `D/A_mask` ratios `0.391–0.906`, imposed boundary-velocity integral ratio `0.5`, forcing-normalized ratios `0.782–1.813`, and `KE/A` ratios `0.768–2.291`; sampled argmin moves `n=4→2` but is only bracketed between `n=1.5` and `n=4`; coupled geometry/forcing control only |
 | Campaign counts | `data_all190`: 190 fields; `data_refine`: 50 fields at 8 Reynolds numbers; `N=256`: 63 fields, 62 matched to `N=128`; unmatched case `(n,Re)=(4.25,300)` |
+| Resolution qualification | The `D/A(3)/D/A(4)` crossing drifts with slopes about `−95`, `−108` and `−101` in `Re` per unit `ln N`. No production-family diffusive-scaling test was run, and no Mach/acoustic explanation is claimed |
+| Junction table attribution | The `+18.7%`/`+19.8%` changes belong to the grid-scaled `D_excl,16h` series, not to a fixed physical `r0=0.5` cutoff |
 | Moving-wall length | `L_mov(1.25)=2.8789718432636`, `L_mov(2)=π`, `L_mov(4)=3.5088489717820`, `L_mov(8)=3.7389869262423` |
-| Lid power | **Not quoted as a verified quantity.** 810 final fields have no distribution functions `f`; 148 checkpoints have `f,it`; the archived flux ratio is `-4.419` instead of `+1` |
+| Lid power | **Not quoted as a verified quantity.** The archive contains 810 converged final fields, while the curated analysis inventory contains 380 (`190+50+28+50+13+12+24+13`); no final field has distribution functions `f`, 148 checkpoints have `f,it`, and the archived flux ratio is `-4.419` instead of `+1` |
 | Energy statement | continuous identity, exact discrete LBM balance and archived-field diagnostic are kept distinct; no global energy closure is claimed |
 
 Pressure convention used in the diagnostic: `p_LBM = c_s²(ρ_LBM − 1)` with `c_s² = 1/3`, and `p = (ρ − 1)/(3 U_lid²)` in paper units with `U_lid = 0.05`.
@@ -45,7 +47,7 @@ The publication-ready supplement is a **single coherent document**:
 * `supplement/supp_*.tex`, `supplement/projected_lid_table.tex`, `supplement/kinetic_table.tex`, `supplement/fem_table.tex`, and the junction-cutoff fragments — external table fragments required to compile the supplement
 * `supplement/Marked-Up_Supplementary.tex` / `.pdf` — true word/sentence-level differential against the preceding clean supplementary source (blue additions, red deletions, black unchanged text)
 
-It contains only supporting fluid-physics material: solver verification, dataset consistency checks, observable definitions, the reference-field atlas, wall-curvature diagnostics, the additive wall/core budget, common-support LBM/FEM dissipation, fixed physical-wall cutoffs, descriptive logarithmic junction fits, FEM mesh and junction conventions, energy and pressure conventions, moving-wall geometry, campaign inventory, fit and crossing diagnostics, corner-eddy analysis, and the completed targeted projected-lid control. It contains no addendum, no revision history, no operator-learning material and no training/provenance discussion. Four detailed tables moved out of the main article appear as Tables S24–S27. Neither the article nor the supplement refers to external file names, paths or the repository in the body text; such references appear only in the Data availability statements. No alt-text lines are printed under the captions.
+It contains only supporting fluid-physics material: solver verification, dataset consistency checks, observable definitions, the reference-field atlas, wall-curvature diagnostics, the additive wall/core budget, common-support LBM/FEM dissipation, fixed physical-wall cutoffs, descriptive logarithmic junction fits, FEM mesh and junction conventions, energy and pressure conventions, moving-wall geometry, campaign inventory, fit and crossing diagnostics, corner-eddy analysis, and the completed targeted projected-lid control. It contains no addendum, no revision history, no operator-learning material and no training/provenance discussion. Four detailed tables moved out of the main article appear as Tables S24–S27, followed by an additional fixed-cutoff dissipation ladder as Table S28. Neither the article nor the supplement refers to external file names, paths or the repository in the body text; such references appear only in the Data availability statements. No alt-text lines are printed under the captions.
 
 The supplement figures are in `figures/final_supplement/`, with local copies under `supplement/figs_new/` and `supplement/figs/` so the deposited supplement source can be compiled in place. The final article figures, including `fig_junction_cutoffs.png/pdf` and `fig_lid_projected_targeted.png/pdf`, are in `figures/`. The journal highlight image is supplied as `figures/Highlight_Image.tif` and `figures/Highlight_Image.jpeg` (2404 x 1882 px, 300 dpi).
 
@@ -87,14 +89,14 @@ figures/                   Final article figures, highlight image and figures us
 logs/                      Recorded FEM execution logs
 ```
 
-The reports in `reports/` are the authoritative narrative records. In particular:
+The reports in `reports/` document the revision and its retained limitations. In particular:
 
 * `FINAL_SCIENTIFIC_REVISION_REPORT.md` — consolidated final revision;
 * `campaign_verification.md` — campaign counts and matching;
 * `core_wall_generalization.md` — wall/core partition and the qualified `87.8%` statement;
 * `l_mov_report.md` — upper-half moving-wall arclength;
 * `plid_audit_report.md` — why `P_lid` cannot be recovered from final fields;
-* `ORIGINAL_REFEREE_REPORTS_2026-11-25.txt` — authoritative editor decision and complete reports for Referees 1, 2, 4, 5 and 6;
+* `ORIGINAL_REFEREE_REPORTS_2026-11-25.txt` — editor decision and original reports for Referees 1, 2, 4, 5 and 6;
 * `RESPONSE_LETTER_FINAL.tex` / `.pdf` — 14-page formal point-by-point response with all 54 original comments in dark blue italics, each followed by the revision made;
 * `REVIEWER_RESPONSE_MATRIX.md` and `AUDIT_NOTES.md` — response structure and retained limitations.
 

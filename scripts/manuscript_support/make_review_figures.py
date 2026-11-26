@@ -136,24 +136,33 @@ def fig_curve_dissipation():
 
 
 def fig_map_dissipation():
-    """Figure 2b: same D/A map, sparser x ticks and larger lettering."""
+    """Normalized D/A curves: every Re is plotted, four are highlighted."""
     rows, res, ns, values = read_dissipation()
+    highlighted = (100.0, 300.0, 500.0, 1000.0)
+    colors = {100.0: "#2b6cb0", 300.0: "#2f855a", 500.0: "#c05621", 1000.0: "#6b46c1"}
 
     fig, ax = plt.subplots(figsize=(8.4, 4.8))
-    image = ax.imshow(values, origin="lower", aspect="auto", interpolation="nearest",
-                      extent=[min(ns), max(ns), min(res), max(res)])
-    cb = fig.colorbar(image, ax=ax)
-    cb.set_label(r"$D/A_{\rm mask}$", fontsize=14, labelpad=12)
-    cb.ax.tick_params(labelsize=12, pad=5)
+    for Re in res:
+        sub = sorted((r for r in rows if float(r["Re"]) == Re),
+                     key=lambda r: float(r["n"]))
+        n = np.array([float(r["n"]) for r in sub])
+        da = np.array([float(r["dissipation"]) / float(r["area_mask"]) for r in sub])
+        normalized = da / np.nanmin(da)
+        if Re in highlighted:
+            ax.plot(n, normalized, "o-", ms=5, lw=1.8,
+                    color=colors[Re], label=r"$Re=%d$" % Re)
+        else:
+            ax.plot(n, normalized, "-", lw=0.8, color="0.78", zorder=0)
+    ax.axhline(1.0, color="0.45", lw=1.0, ls=":")
     ax.set_xlabel("superellipse exponent $n$", fontsize=14, labelpad=8)
-    ax.set_ylabel("Reynolds number $Re$", fontsize=14, labelpad=8)
+    ax.set_ylabel(r"$(D/A_{\rm mask})/\min(D/A_{\rm mask})$", fontsize=14, labelpad=8)
     ax.tick_params(axis="both", labelsize=12, pad=6)
-    # Subset + slight rotation: all ten archived n values remain in the data.
     xticks = [n for n in ns if n in (1.25, 2.0, 3.0, 4.0, 5.0, 6.0, 8.0)]
     ax.set_xticks(xticks)
     ax.set_xticklabels(["%g" % n for n in xticks], rotation=30, ha="right")
-    ax.set_yticks([100, 200, 300, 400, 500, 600, 700, 800, 900, 1000])
-    ax.set_yticklabels(["%d" % v for v in (100, 200, 300, 400, 500, 600, 700, 800, 900, 1000)])
+    ax.set_ylim(0.95, None)
+    ax.grid(alpha=0.25)
+    ax.legend(fontsize=10, frameon=False, ncol=2, loc="best")
     fig.tight_layout()
     fig.savefig(FIG / "map_dissipation.png", dpi=220)
     plt.close(fig)

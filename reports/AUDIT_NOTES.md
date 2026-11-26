@@ -89,7 +89,7 @@ Aucune simulation LBM nouvelle n’a été lancée. Les chiffres des rapports so
 * **Budget cœur/paroi** : 506 lignes, résidu additif maximal $2.78\times10^{-17}$. Pour $Re=1000$, $N=256$, $\delta=0.05L_c$, $n=4\to8$, la part du cœur dans l'augmentation est $87.8\%$ ; la part absolue du cœur est $28.1\%$ à $n=4$ et $30.7\%$ à $n=8$. La plage disponible est $61.5$–$99.8\%$.
 * **Campagnes** : `data_all190` = 190 champs ; `data_refine` = 50 champs et 8 valeurs de $Re$ ; $N=256$ = 63 champs et 62 appariés ; seul $(n,Re)=(4.25,300)$ est non apparié.
 * **$L_{\rm mov}$** : $2.8789718432636$ ($n=1.25$), $\pi$ ($n=2$), $3.5088489717820$ ($n=4$), $3.7389869262423$ ($n=8$), avec validation losange/cercle/limite carrée.
-* **$P_{\rm lid}$** : non coté comme grandeur vérifiée. 810 champs finaux sans $f$ ; 148 checkpoints avec $f,it$ ; le rapport de flux archivé est $-4.419$ au lieu de $+1$. La valeur requise $P/\Phi$ varie de $4.268$ à $1.465$ entre $N=64$ et $512$, donc n'est pas convergée.
+* **$P_{\rm lid}$** : non coté comme grandeur vérifiée. L'archive contient 810 champs finaux convergés ; l'inventaire analysé en contient 380 ($190+50+28+50+13+12+24+13$). Aucun champ final n'a $f$ ; 148 checkpoints ont $f,it$ ; le rapport de flux archivé est $-4.419$ au lieu de $+1$. La valeur requise $P/\Phi$ varie de $4.268$ à $1.465$ entre $N=64$ et $512$, donc n'est pas convergée.
 * **Bilan d'énergie** : distinction maintenue entre identité continue, bilan discret LBM exact non reconstruit et diagnostic de champs archivés non fermé. Convention $p_{\rm LBM}=c_s^2(\rho_{\rm LBM}-1)$, $c_s^2=1/3$, et $p=(\rho-1)/(3U_{\rm lid}^2)$ en unités papier.
 
 ### 7.3 Dépôt public
@@ -105,16 +105,17 @@ Les paragraphes précédents décrivent l'état intermédiaire avec supplément 
 ### 8.1 Documents
 
 * `Article_File.tex` / `.pdf` du paquet de soumission : **19 pages**, **sept sections** ; zéro référence indéfinie ni avertissement `Overfull`. Le texte est physics-only : pas de DeepONet, pas d'Appendix A, pas de description provenance du supplément. La phrase exacte sur la variation de forme avec $n$ est présente dans l'Introduction. Le contrôle à couvercle projeté est une campagne LBM achevée de 13 champs appariés (rapports bruts $D/A_{\rm mask}$ projet/tangent $0.391$--$0.906$, rapport du bord $0.5$, rapports normalisés $0.782$--$1.813$, rapports $KE/A$ $0.768$--$2.291$) ; le minimum échantillonné passe de $n=4$ à $n=2$ mais n'est que borné entre $n=1.5$ et $n=4$. Les parts de jonction sont $7.3$--$15.5\%$ ($N=128$) et $11.3$--$20.1\%$ ($N=256$) à $r=0.05L_c$. Le lien GitHub et la mention MIT figurent uniquement dans Data availability.
-* `Supplementary_Article_File.tex` / `.pdf` du paquet de soumission (copié dans le dépôt sous `PH13_supplementary_final.tex` / `.pdf`) : **26 pages**, **une seule partie**, sections S1--S16, Table S23, Fig. S13 et Tables S24--S27 ; zéro référence indéfinie ni avertissement `Overfull`, aucune ligne Alt text sous les légendes. Le supplément ne contient ni addendum, ni langage de révision, ni provenance, ni sections opérateur/DeepONet, ni figures de performance, ni graines, ni coûts d'entraînement, ni métriques OOD.
+* `Supplementary_Article_File.tex` / `.pdf` du paquet de soumission (copié dans le dépôt sous `PH13_supplementary_final.tex` / `.pdf`) : **28 pages**, **une seule partie**, sections S1--S16, Table S23, Fig. S13 et Tables S24--S28 ; zéro référence indéfinie ni avertissement `Overfull`, aucune ligne Alt text sous les légendes. Le supplément ne contient ni addendum, ni langage de révision, ni provenance, ni sections opérateur/DeepONet, ni figures de performance, ni graines, ni coûts d'entraînement, ni métriques OOD.
 * Les fichiers `PH13_supplementary_enriched.*`, `revision_addendum.tex` et `PH13_supplementary_physics_only.*` sont conservés uniquement comme archives et ne sont plus les livrables autoritaires.
 
 ### 8.2 Correctifs scientifiques finaux
 
 * Courbure : interpolation périodique complète, test du cercle $\kappa=1.000000$ et $f_{\rm sharp}=0$, 190 lignes recalculées ; corrélations $\kappa_{w,\rm rms}$/$D/A$ $=+0.834$ (`Re=100`) à $+0.709$ (`Re=1000`), Spearman $+0.115`, $f_{\rm sharp}<0$ à `Re=500,1000`.
 * Diagnostic des coins : $0.20L_c$ pour la bande, $0.25L_c$ pour la recherche, $s_{\rm corner}$ en unités de $L=L_c/2$ ; pas de lignes extrapolées ; langage de seuil de détection $1\%$, sans « onset » ni « topologiquement distinct ».
-* Support commun : $\varepsilon_D=0.06$--$6.52\%$ après correction de l'indice de dérivation ; le cas $n=4$, $Re=1000$ donne $\varepsilon_D=3.9395\%$.
+* Support commun : $\varepsilon_D=0.06$--$6.52\%$ sur support identique ; le cas $n=4$, $Re=1000$ donne $\varepsilon_D=3.9395\%$. Le rapport $D_{\rm FEM}^{\Omega}/D_{\rm FEM}^{M}=1.63$--$2.06$ indique un effet de support ; aucun test FEM/LBM à support physique fixe $r_0>0$ n'a été exécuté.
 * Bilan cœur/paroi : 506 lignes, résidu maximal $2.78\times10^{-17}$ ; $87.8\%$ est la part de la **montée** $n=4\to8$, pas la part absolue.
-* $P_{\rm lid}$ : non coté ; 810 champs finaux sans $f$, 148 checkpoints avec $f,it$, rapport de flux $-4.419$.
+* $P_{\rm lid}$ : non coté ; 810 champs finaux convergés dans l'archive, 380 dans l'inventaire analysé, aucun avec $f$, 148 checkpoints avec $f,it$, rapport de flux $-4.419$.
+* Convergence : les pentes des crossings $D/A(3)/D/A(4)$ sont d'environ $-95$, $-108$ et $-101$ en $Re$ par $\ln N$. Aucun test de scaling diffusif pour la famille superelliptique de production n'a été exécuté ; aucune explication Mach/acoustique n'est avancée. Les ajustements $r=16h$ sont attribués au support $D_{\rm excl,16h}$, pas à un cutoff physique $r_0=0.5$.
 * Pas de fermeture globale d'énergie ; extrapolations Richardson uniquement diagnostiques.
 
 ### 8.3 Dépôt et installation

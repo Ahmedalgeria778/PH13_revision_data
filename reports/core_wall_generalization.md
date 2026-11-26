@@ -15,7 +15,7 @@ Integrity checks: 506 unique (n,Re,N,delta) rows, 253 unique cases, max |D_mask-
 | 6 | 0.008968 | 0.006235 | 0.002733 | 69.5% | 30.5% |
 | 8 | 0.009199 | 0.006378 | 0.002821 | 69.3% | 30.7% |
 
-Delta n=4 -> 8: D/A_mask 0.008797 -> 0.009199 (+0.000403, +4.58%); core/A_mask +0.000353 (87.76% of the rise), wall/A_mask +0.000049 (12.24%). The 88% figure is the **core fraction of the increase**, not the core share of D/A (which is 30.7% at n=8).
+Delta n=4 -> 8: D/A_mask 0.008797 -> 0.009199 (+0.000402, +4.57%); core/A_mask +0.000353 (87.76% of the rise), wall/A_mask +0.000049 (12.24%). The 88% figure is the **core fraction of the increase**, not the core share of D/A (which is 30.7% at n=8).
 
 ## Generalization (Re=100, 500, 1000; N=128/256; delta=0.025/0.05)
 
@@ -50,8 +50,8 @@ Definition used: `n_low` = sampled argmin of D/A_mask on the available n grid; `
 | 100 | 256 | 0.050 | n/a (n=8 absent; grid 2.5,3,4) | n/a | n/a | n/a |
 | 500 | 256 | 0.025 | +0.000992 | +0.000921 | 92.9% | YES |
 | 500 | 256 | 0.050 | +0.000992 | +0.000657 | 66.3% | YES |
-| 1000 | 256 | 0.025 | +0.000403 | +0.000402 | 99.8% | YES |
-| 1000 | 256 | 0.050 | +0.000403 | +0.000353 | 87.8% | YES |
+| 1000 | 256 | 0.025 | +0.000402 | +0.000402 | 99.8% | YES |
+| 1000 | 256 | 0.050 | +0.000402 | +0.000353 | 87.8% | YES |
 
 ### Caveats
 

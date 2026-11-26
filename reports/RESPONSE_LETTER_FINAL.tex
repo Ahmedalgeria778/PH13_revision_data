@@ -1,7 +1,6 @@
 % =====================================================================
 % Point-by-point response to the original referee reports.
-% All quoted comments are transcribed from ORIGINAL_REFEREE_REPORTS_2026-11-25.txt.
-% Line breaks are normalized to spaces; LaTeX escaping is used only for compilation.
+% All quoted comments are transcribed from the original referee reports.
 % =====================================================================
 \documentclass[11pt,a4paper]{article}
 \usepackage[margin=2.4cm]{geometry}
@@ -31,7 +30,7 @@ BENIAICHE Ahmed
 \end{center}
 
 \vspace{3mm}
-We thank the Associate Editor and the reviewers for their careful reports and constructive criticisms. The decision record lists Referees \#1, \#2, \#4, \#5, and \#6. We have lowered the mid-title to ``geometry-induced reorganization of viscous dissipation in continuously deformable superelliptic lid-driven cavities'', removed the DeepONet/operator-learning work from the final main article and supplement in response to Referee \#1 major comment 4, and recentred the paper on the fluid-physics question. The completed targeted LBM projected-lid control consists of $13$ matched fields ($n=1.5,2,4,8$ at $Re=100$ and $Re=1000$ on $N=128$, plus selected $N=256$ fields); raw projected/tangential $D/A_{\rm mask}$ ratios are $0.391$--$0.906$, but normalization by the imposed boundary-velocity integral changes the ratio to $0.782$--$1.813$. The sampled minimum is only bracketed between $n=1.5$ and $n=4$; no optimum at exactly $n=2$ is resolved. It remains a coupled geometry/forcing control, not an isolation of geometry. Grid convergence remains limited, logarithmic junction fits remain descriptive, and sampled crossings and fitted minima remain diagnostics. A separate Microsoft Word alt-text document is supplied, per AIP. Every comment below is reproduced from the authoritative report file with line-break-normalized whitespace; LaTeX escaping is used only where needed for compilation.
+We thank the Associate Editor and the reviewers for their careful reports and constructive criticisms. The decision record lists Referees \#1, \#2, \#4, \#5, and \#6. We have lowered the mid-title to ``geometry-induced reorganization of viscous dissipation in continuously deformable superelliptic lid-driven cavities'', removed the DeepONet/operator-learning work from the final main article and supplement in response to Referee \#1 major comment 4, and recentred the paper on the fluid-physics question. The completed targeted LBM projected-lid control consists of $13$ matched fields ($n=1.5,2,4,8$ at $Re=100$ and $Re=1000$ on $N=128$, plus selected $N=256$ fields); raw projected/tangential $D/A_{\rm mask}$ ratios are $0.391$--$0.906$, but normalization by the imposed boundary-velocity integral changes the ratio to $0.782$--$1.813$. The sampled minimum is only bracketed between $n=1.5$ and $n=4$; no optimum at exactly $n=2$ is resolved. It remains a coupled geometry/forcing control, not an isolation of geometry. Grid convergence remains limited, logarithmic junction fits remain descriptive, and sampled crossings and fitted minima remain diagnostics. A separate Microsoft Word alt-text document is supplied, per AIP. Each original comment is quoted below and followed by the revision made or an explicit justification.
 
 \bigskip
 \ruleline
@@ -40,7 +39,7 @@ We thank the Associate Editor and the reviewers for their careful reports and co
 \medskip
 \noindent\qcomment{\textbf{Summary.} The revision has responded to the editor's concern by foregrounding the fluid physics, and manuscript's investigations are worth publishing. However, in its present form the contribution is obscured by excessive length and writing that is very hard to follow. I recommend major revision.}
 
-\noindent\revwork{Revision made.} The title now uses lowercase ``continuously deformable'' in mid-title. The main article and supplement have been recentred on fluid physics, and the DeepONet/operator-learning material has been removed, explicitly in response to the original Referee \#1 major comment 4. The abstract is about 250 words with a small number of quantitative anchors. Resolution limitations are now stated prominently rather than treated as a minor caveat.
+\noindent\revwork{Revision made.} The title now uses lowercase ``continuously deformable'' in mid-title. The main article and supplement have been recentred on fluid physics, and the DeepONet/operator-learning material has been removed, explicitly in response to the original Referee \#1 major comment 4. The abstract is about 235 words and identifies the sampled dissipation trends, the matched-support comparison, the remaining resolution sensitivity and the qualified projected-lid result. Resolution limitations are stated prominently rather than treated as a minor caveat.
 
 \medskip
 \paragraph{Major comments}
@@ -71,7 +70,7 @@ We thank the Associate Editor and the reviewers for their careful reports and co
 \medskip
 \noindent\qcomment{\textbf{Minor comment 1.} 1. Table III\textasciitilde{}V are excessive, the titles are too long. If possible, these should be included in supplementary material or use a figure or summary where relevant.}
 
-\noindent\revwork{Revision made.} Detailed observable tables are treated as supporting material, with shortened captions and a more compact summary presentation in the main text. The detailed values remain available in the supplement and in the existing data repository.
+\noindent\revwork{Revision made.} Detailed observable tables are treated as supporting material, with shortened captions and a more compact summary presentation in the main text. The detailed values are publicly available in the supplement and in the public data repository.
 
 \medskip
 \paragraph{Recommendation}
@@ -102,7 +101,7 @@ We thank the Associate Editor and the reviewers for their careful reports and co
 \medskip
 \noindent\qcomment{\textbf{Major remark 1.} 1. In Fig. 2, the x-axis tick labels overlap with the x-axis and should be adjusted. The axis labels in Figs. 4, 5, 8, 9, and 10, as well as the legends in Figs. 6 and 7, are too small. Please increase the font sizes to improve readability.}
 
-\noindent\revwork{Revision made.} The final figure set was regenerated with larger axis labels, tick labels, and legends, and the Figure~2 tick-label collision was corrected. In particular, the three panels of Figure~3 were enlarged and the three panels of Figure~5 were regenerated with larger fonts. Dense panels are identified in the separate Microsoft Word alt-text document supplied for AIP.
+\noindent\revwork{Revision made.} The final figure set was regenerated with larger axis labels, tick labels and legends, and the Figure~2 tick-label collision was corrected. The saturating Figure~2(b) heatmap was replaced by curves of $D/A_{\rm mask}$ divided by its sampled minimum versus $n$ for representative Reynolds numbers. In the final layout, Figure~3 is a single full-width kinetic-energy panel, and the supplementary verification panels are labelled with their actual case settings and larger fonts. Dense panels are identified in the separate Microsoft Word alt-text document supplied for AIP.
 
 \medskip
 \noindent\qcomment{\textbf{Major remark 2.} 2. The authors acknowledge that the adissipation changes by approximately 19.5-25.6\% between the 128 x 128 and 256 x 256 grids. This is a substantial numerical discrepancy, particularly because viscous dissipation is the central quantity investigated in this study. A more convincing grid-convergence study, preferably including higher resolutions, is needed.}
@@ -194,7 +193,7 @@ We thank the Associate Editor and the reviewers for their careful reports and co
 \medskip
 \noindent\qcomment{\textbf{Numerical methods comment 6.} 6. Please reconcile the simulation inventory with the data used to fit the extrema. Table II and Table S21 describe a 30-case N = 256 campaign at ten exponents, whereas Figure 6 and Table V appear to use additional closely spaced geometries. Provide the exact exponents, raw observable values, and fitting windows at both resolutions, identifying any additional runs or interpolation. In particular, the Table V caption attributes a missing point in the N = 128, Re = 1000 density fit to n = 2.25, although the reported minimum is near n = 4.05. That point cannot lie within the stated local $\pm$0.5 window. Please correct the caption or explain the actual fitting support. An accessible repository or reviewer access link should be supplied, or the underlying fit data and scripts should accompany the revision.}
 
-\noindent\revwork{Revision made.} The inventory, matched-grid pairs, fitting supports, and sampled extrema are documented in the supplement and in the reproducible data/code. Fitted minima and sampled crossings are presented as diagnostics, not converged optima or thresholds. Caption and support descriptions have been reconciled with the fitting windows. \emph{Data availability:} the data and code remain available in the existing repository, \url{https://github.com/Ahmedalgeria778/PH13_revision_data}.
+\noindent\revwork{Revision made.} The inventory, matched-grid pairs, fitting supports, and sampled extrema are documented in the supplement and in the reproducible data/code. Fitted minima and sampled crossings are presented as diagnostics, not converged optima or thresholds. Caption and support descriptions have been reconciled with the fitting windows. \emph{Data availability:} the post-processed data, scripts, tables and reports are publicly available at \url{https://github.com/Ahmedalgeria778/PH13_revision_data}.
 
 \medskip
 \noindent\qcomment{\textbf{Numerical methods comment 7.} 7. The pressure treatment and the distinction between B1-PI and B1-pinit require clarification. Section S13 specifies a pressure weight of 0.25 and a pressure normalization constant, but the displayed objective contains no explicit loss term corresponding to that weight. It also describes changes to the pressure-head bias and a scalar addend. An additive pressure constant alone leaves $\nabla$p, and hence the stated momentum residual, unchanged. Please provide the complete objective, any pressure supervision or gauge constraint, and the precise initialization changes. If the variants differ only by additive pressure offsets, explain which other loss or implementation feature allows those offsets to affect training; if additional parameters differ, identify them.}
@@ -253,7 +252,7 @@ We thank the Associate Editor and the reviewers for their careful reports and co
 \medskip
 \noindent\qcomment{\textbf{Minor comment 2.} 2. The field labels and color scales in Figures 3 and 9, and the overlaid scales in Figure 11, are difficult to read at normal page size. Please enlarge the relevant panels and identify each plotted quantity clearly. Use comparable color scales when comparing the same quantity across geometries, or explain any necessary differences.}
 
-\noindent\revwork{Revision made.} The final figure set was regenerated with enlarged relevant panels and clearer quantity labels; the enlarged Figure~3 layout and the larger-font Figure~5 panels address the specific readability concern. Comparable color scales are used where the same quantity is compared across geometries, and the separate Microsoft Word alt-text document supplied for AIP identifies each plotted quantity.
+\noindent\revwork{Revision made.} The final figure set was regenerated with enlarged relevant panels and clearer quantity labels. The Figure~2 map now uses normalized curves rather than a saturated color scale; the final Figure~3 is a single full-width panel, and verification panels moved to the supplement carry caption-level case settings. Comparable color scales are used where the same quantity is compared across geometries, and the separate Microsoft Word alt-text document supplied for AIP identifies each plotted quantity.
 
 \bigskip
 \ruleline
@@ -312,7 +311,7 @@ We thank the Associate Editor and the reviewers for their careful reports and co
 \medskip
 \noindent\qcomment{\textbf{Overall assessment.} Overall assessment While the revised manuscript is better organized and contains an extensive numerical investigation, the principal contributions remain largely descriptive, and the central physical interpretations are not sufficiently supported by converged numerical evidence and quantitative mechanistic analysis. Addressing these concerns would require substantial additional investigation rather than further clarification or restructuring of the manuscript. Therefore, I cannot recommend the manuscript for publication in its present form.}
 
-\noindent\revwork{Revision made.} Unsupported claims have been removed or qualified, but we do not claim grid-independent continuum dissipation or a fully established causal mechanism. The remaining limitations are stated in the abstract, results, and conclusion, and the supporting data/code remain available in the existing repository.
+\noindent\revwork{Revision made.} Unsupported claims have been removed or qualified, but we do not claim grid-independent continuum dissipation or a fully established causal mechanism. The remaining limitations are stated in the abstract, results, and conclusion, and the supporting data and code are publicly available in the public repository.
 
 \bigskip
 \ruleline

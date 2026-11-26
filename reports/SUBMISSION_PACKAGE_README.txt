@@ -34,8 +34,8 @@ FILES TO SELECT WHEN UPLOADING
    for the Word document.
 7. Response Letter ...................... RESPONSE_LETTER_FINAL.pdf
    Also supplied as RESPONSE_LETTER_FINAL.tex for editing. Every original
-   referee comment is reproduced from the authoritative report file, followed
-   by the revision made or an explicit justification for no change.
+   referee comment is quoted from the referee reports, followed by the
+   revision made or an explicit justification for no change.
 8. Highlight Image ...................... Highlight_Image.tif
    (Highlight_Image.jpeg is an equivalent alternative.)
    Exact size 8.0139 in x 6.2739 in = 2404 x 1882 px at 300 dpi.
@@ -88,8 +88,7 @@ under the captions in the PDFs.
 --------------------------------------------------------------------------------
 REFEREE REPORTS
 --------------------------------------------------------------------------------
-The editor decision and the full reports for Referees #1, #2, #4, #5 and #6
-were supplied in the audit record and are reproduced verbatim in the response
-letter, with line-break-normalized whitespace. The decision record lists these
-five referees only.
+The editor decision and the original reports for Referees #1, #2, #4, #5 and
+#6 are followed in the response letter. The decision record lists these five
+referees only; no Referee #3 passage is included.
 ================================================================================

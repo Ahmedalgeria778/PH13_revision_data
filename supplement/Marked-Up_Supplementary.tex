@@ -92,8 +92,10 @@ iteration count \color{revred}together \color{revblue}and\color{black} \color{re
 \color{revred}configurations, \color{revblue}lies\color{black} \color{revred}each \color{revblue}strictly\color{black} \color{revred}indexed \color{revblue}below\color{black} \color{revred}by \color{revblue}the\color{black} \color{revred}its \color{revblue}threshold,\color{black} \color{revred}exponent, \color{revblue}spanning\color{black} \color{revred}Reynolds \color{revblue}$7.20\times10^{-9}$\color{black} \color{revred}number, resolution and \color{revblue}to\color{black}
 \color{revred}lid \color{revblue}$9.9999\times10^{-9}$,\color{black} \color{revred}law), every stopping residual stays strictly below \color{revblue}while\color{black} the \color{revred}threshold, \color{revblue}iteration counts needed to reach it span\color{black}
 \color{revred}spanning $7.20\times10^{-9}$ \color{revblue}$3.86\times10^{4}$\color{black} to \color{revred}$9.9999\times10^{-9}$, \color{revblue}$7.76\times10^{5}$.\color{black} \color{revred}while \color{revblue}The\color{black} \color{revred}the \color{revblue}square-cavity\color{black} \color{revred}iteration \color{revblue}baseline of\color{black}
-\color{revred}counts \color{revblue}Table~\ref{tab:ghia}\color{black} \color{revred}needed \color{revblue}obeys\color{black} \color{revred}to \color{revblue}the\color{black} \color{revred}reach \color{revblue}same\color{black} \color{revred}it \color{revblue}convergence-only\color{black} \color{revred}span \color{revblue}policy\color{black} \color{revred}$3.86\times10^{4}$ \color{revblue}through\color{black} \color{revred}to \color{revblue}the\color{black} \color{revred}$7.76\times10^{5}$, 181 \color{revblue}same\color{black}
-\color{revred}of \color{revblue}code path, at\color{black} the \color{revred}376 \color{revblue}stricter\color{black} \color{revred}configurations \color{revblue}threshold\color{black} \color{revred}exceeding \color{revblue}$10^{-9}$.\color{black} \color{revred}$2\times10^{5}$; \color{revblue}The\color{black} \color{revred}the \color{revblue}square-cavity\color{black} \color{revred}longest \color{revblue}baseline\color{black} \color{revred}run is the \color{revblue}of\color{black}
+\color{revred}counts needed to reach it span $3.86\times10^{4}$ to $7.76\times10^{5}$, 181
+\color{black}
+\color{revred}of the 376 configurations exceeding $2\times10^{5}$; the longest run is the
+\color{black}
 \color{revred}$n=2.0$, $Re=1000$ case at $N=512$. The square-cavity baseline of
 \color{black}
 Table~\ref{tab:ghia} obeys the same convergence-only policy through the same
@@ -171,23 +173,23 @@ $1/N$. The error then decreases monotonically, with observed orders $1.88$,
 $1.90$ and $1.93$ between successive grids. The companion
 fixed-$U_{\mathrm{lid}}$ runs corroborate the lattice-Mach interpretation
 through the wall-normal leakage $\max|u\cdot m|$, which decreases from
-$4.41\times10^{-5}$ at $N=32$ to $2.06\times10^{-5}$ at $N=96$. Because the
-production campaign holds $U_{\mathrm{lid}}=0.05$ at every resolution, the same
-lattice-Mach offset (of order $10^{-3}$ in this $L_2$) is present in all of its
-fields; being constant in $N$, it cannot explain the \color{revred}$18.1$--$25.4\,\%$ \color{revblue}resolution\color{black} drift\color{revblue} of\color{black}
-\color{revred}of \color{black}$D/A$ between $N=128$ and $N=256$.\color{revblue} Two published ranges refer to different\color{black}
-sampled sets and should not be mixed: the older $18.1$--$25.4\,\%$ range is an
-\color{revblue}average over seven Reynolds numbers in the earlier archive, whereas the
+$4.41\times10^{-5}$ at $N=32$ to $2.06\times10^{-5}$ at $N=96$. \color{revred}Because \color{revblue}The\color{black} \color{revred}the \color{revblue}production\color{black}
+\color{revred}production \color{black}campaign holds $U_{\mathrm{lid}}=0.05$ at every resolution, \color{revred}the \color{revblue}so\color{black} \color{revred}same \color{revblue}this test\color{black}
+\color{revblue}supports caution about a \color{black}lattice-Mach offset \color{revred}(of \color{revblue}but\color{black} \color{revred}order \color{revblue}does\color{black} \color{revred}$10^{-3}$ \color{revblue}not\color{black} \color{revred}in this $L_2$) is present in all of \color{revblue}determine\color{black} its\color{revblue} effect\color{black}
+\color{revred}fields; \color{revblue}on\color{black} \color{revred}being \color{revblue}production\color{black} \color{revred}constant \color{revblue}gradients.\color{black} \color{revred}in \color{revblue}No\color{black} \color{revred}$N$, \color{revblue}diffusive-scaling\color{black} \color{revred}it \color{revblue}test\color{black} \color{revred}cannot explain \color{revblue}of\color{black} the \color{revred}$18.1$--$25.4\,\%$ drift \color{revblue}production\color{black}
+\color{revred}of \color{revblue}superelliptic\color{black} \color{revred}$D/A$ \color{revblue}family\color{black} \color{revred}between \color{revblue}was\color{black} \color{revred}$N=128$ \color{revblue}run,\color{black} and \color{revred}$N=256$. \color{revblue}no Mach/acoustic explanation of its resolution\color{black}
+drift is made. Two reported ranges refer to different sampled sets and should
+\color{revblue}not be mixed: $18.1$--$25.4\,\%$ is an average over seven sampled Reynolds
 \color{black}
-\color{revblue}$19.5$--$25.6\,\%$ range quoted from the earlier manuscript refers to a
+\color{revblue}numbers, whereas $19.5$--$25.6\,\%$ is a different set of
 \color{black}
-\color{revblue}different set of representative $N=128$/$256$ pairs. In the fixed-cutoff comparison of
+\color{revblue}representative $N=128$/$256$ pairs quoted in the referee report. In the
 \color{black}
-\color{revblue}Sec.~S8 the median $D_{256}/D_{128}-1$ decreases from $21.37\%$ at $r_0=0$ to
+\color{revblue}fixed-cutoff comparison of Sec.~S8 the median $D_{256}/D_{128}-1$ decreases from
 \color{black}
-\color{revblue}$8.77\%$ at $r_0=0.5$; none of these ranges is an error relative to a converged
+\color{revblue}$21.37\%$ at $r_0=0$ to $8.77\%$ at $r_0=0.5$; none of these ranges is an error
 \color{black}
-\color{revblue}continuum solution.
+\color{revblue}relative to a converged continuum solution.
 \color{black}
 \begin{table}[H]
 \centering
@@ -216,9 +218,21 @@ $N$ & $U_{\mathrm{lid}}$ & $L_2$ & $L_\infty$ & Iterations & Residual \\
 \label{sec:solverc}
 
 To validate the MRT-LBM solver across the geometric family, an independent cross-validation is performed against a Taylor--Hood \color{revred}P2/P1 \color{revblue}quadratic-velocity/linear-pressure (P2/P1)\color{black} finite-element solver. Table~\ref{tab:lbmfem} reports interior relative $L_2$ discrepancies at the available $(N,Re)$ comparison levels, including the reference resolution $N=128$ at $Re=400$ for the sharpest\color{revred} ($n=1.25$, $1.39\,$%) and near-square ($n=4$, $0.78\,$%) members. At fixed finite-element mesh, halving the lattice spacing reduces the $n=4$ discrepancy from $1.45\,$% to $0.78\,$%, locating the dominant remaining difference on the lattice side. The pointed tip remains the worst case, consistent with the tighter radius of curvature resolved by the interpolated bounce-back scheme. The additional $N=256$ comparison decreases the discrepancy to $0.60\,$% and $0.25\,$%, but refines both discretisations and therefore does not attribute the residual to either side.\color{black}
-\color{revblue}member ($n=1.25$, discrepancy $1.39\,$%) and the near-square member ($n=4$,
+\color{revblue}member ($n=1.25$, discrepancy $1.39\%$) and the near-square member ($n=4$,
 \color{black}
-\color{revblue}discrepancy $0.78\,$%). At fixed finite-element mesh, halving the lattice spacing reduces the $n=4$ discrepancy from $1.45\,$% to $0.78\,$%, locating the dominant remaining difference on the lattice side. The pointed tip remains the worst case, consistent with the tighter radius of curvature resolved by the interpolated bounce-back scheme. The additional $N=256$ comparison decreases the discrepancy to $0.60\,$% and $0.25\,$%, but refines both discretisations and therefore does not attribute the residual to either side.
+\color{revblue}discrepancy $0.78\%$). At fixed finite-element mesh, halving the lattice spacing
+\color{black}
+\color{revblue}reduces the $n=4$ discrepancy from $1.45\%$ to $0.78\%$, locating the dominant
+\color{black}
+\color{revblue}remaining difference on the lattice side. The pointed tip remains the worst
+\color{black}
+\color{revblue}case, consistent with the tighter radius of curvature resolved by the
+\color{black}
+\color{revblue}interpolated bounce-back scheme. The additional $N=256$ comparison decreases the
+\color{black}
+\color{revblue}discrepancy to $0.60\%$ and $0.25\%$, but refines both discretisations and
+\color{black}
+\color{revblue}therefore does not attribute the residual to either side.
 \color{black}
 
 The resolution study in Fig.~\ref{fig:lbmfemconv} shows that the interior LBM--FEM discrepancy decreases from $1.48\times10^{-2}$ at $N=32$ to $2.20\times10^{-3}$ at $N=96$ on the circle at $Re=100$. This decrease is reported as a sensitivity check over the tested grids; it is not used to claim a converged asymptotic error or to transfer a formal convergence rate to the production cases.
@@ -236,16 +250,17 @@ mesh, so that the finite-element side of every comparison is fully specified.
 $N=64$ at $Re=100$ and $N=96$ at $Re=400$ are the original cross-checks;
 $N=128$ at $Re=400$ brings the comparison to the reference resolution of the
 database and $n=1.25$ to the family, and it is made against the same
-$74\,371$-unknown mesh as the $N=96$ row; $N=256$ at $Re=400$ is an additional refined comparison, and because it refines the
-lattice and the finite-element mesh together ($65\,536$ triangles, $296\,195$
-unknowns) it cannot attribute the residual to either side --- it only checks
-that the discrepancy decreases and that the pointed tip stays the worst of the
-family. At that level the discrepancy is evaluated on the intersection of the
-two discretisations: $24$ of the $60\,132$ LBM fluid nodes of the $n=4$ case
-fall outside the assembled triangulation and are excluded from both metrics,
-against $0$ for $n=1.25$. All LBM residuals below $10^{-8}$;
-every FEM solve converged, in $22$ Picard iterations at
-$n_{\mathrm{refs}}=6$ and in $18$ and $22$ at $n_{\mathrm{refs}}=7$.}
+$74\,371$-unknown mesh as the $N=96$ row; $N=256$ at $Re=400$ is an additional
+refined comparison, and because it refines the lattice and the finite-element
+mesh together ($65\,536$ triangles, $296\,195$ unknowns) it cannot attribute the
+residual to either side --- it only checks that the discrepancy decreases and
+that the pointed tip stays the worst of the family. At that level the
+discrepancy is evaluated on the intersection of the two discretisations: $24$
+of the $60\,132$ LBM fluid nodes of the $n=4$ case fall outside the assembled
+triangulation and are excluded from both metrics, against $0$ for $n=1.25$.
+All LBM residuals are below $10^{-8}$; every FEM solve converged, in $22$ Picard
+iterations at $n_{\mathrm{refs}}=6$ and in $18$ and $22$ at
+$n_{\mathrm{refs}}=7$.}
 
 
 
@@ -705,6 +720,20 @@ The\color{revred} corrected\color{black} maximum curvature is minimal at the cir
 sharp tips ($n<2$) and near-square corners ($n>2$), as expected geometrically.
 The sharp set is empty for $n=2,2.5,3$ and non-empty at both ends of the family.
 
+Let $\phi=2\nu S:S$ denote the dissipation density on the gradient-valid mask
+\color{revblue}$M$. The dissipation-weighted curvature and near-wall share used below are
+\color{black}
+\begin{equation}
+  \langle\kappa\rangle_D=
+  \frac{\int_M\kappa_w\phi\,dA}{\int_M\phi\,dA},
+  \qquad
+  f_\delta=\frac{\int_{M\cap\{{\rm dist}(x,\Gamma)\le\delta L_c\}}\phi\,dA}
+                 {\int_M\phi\,dA},
+  \label{eq:curvweighted}
+\end{equation}
+\color{revblue}so $f_{0.025}$ corresponds to $\delta=0.025L_c$.
+\color{black}
+
 \begin{table}[H]
 \centering
 \caption{Correlations with $D/A_{\rm mask}$ at fixed $Re$. Spearman values
@@ -789,10 +818,14 @@ lines use $\delta=0.05L_c$.}
 \end{figure}
 
 Table~\ref{tab:budgetcase} gives the detailed target case. From $n=4$ to
-$n=8$, $D/A_{\rm mask}$ rises by $0.000403$, of which $0.000353$ ($87.8\%$) is
+$n=8$, $D/A_{\rm mask}$ rises by \color{revred}$0.000403$ \color{revblue}$0.000402$\color{black}, of which $0.000353$ ($87.8\%$) is
 the core contribution and $0.000049$ ($12.2\%$) is the wall contribution. The
 $88\%$ number is the core share of the *increase*, not the core share of the
 total dissipation. The latter is $28.1\%$ at $n=4$ and $30.7\%$ at $n=8$.
+\color{revblue}Increments in this paragraph and in Table~\ref{tab:budgetrange} are rounded to
+\color{black}
+\color{revblue}six decimals; the percentages are computed from the unrounded fields.
+\color{black}
 
 \begin{table}[H]
 \centering
@@ -881,18 +914,24 @@ normalization.}
 
 Table~\ref{tab:commonsupport} and Fig.~\ref{fig:commonsupport} show\color{revblue} the\color{black}
 \color{revred}$\varepsilon_D=0.72$--$20.02\%$, \color{revblue}corrected range $\varepsilon_D=0.06$--$6.52\%$,\color{black} while
-$D_{\rm FEM}^{\Omega}/D_{\rm FEM}^{M}=1.63$--$2.06$. The \color{revred}quantity labelled \color{revblue}earlier\color{black}
-\color{revblue}$0.72$--$20.02\%$ range came from a derivative-index error in the
+$D_{\rm FEM}^{\Omega}/D_{\rm FEM}^{M}=1.63$--$2.06$. The \color{revred}quantity \color{revblue}full-domain\color{black} \color{revred}labelled \color{revblue}FEM\color{black}
+\color{revblue}integral therefore contains about $39$--$52\%$ more dissipation than the
 \color{black}
-\color{revblue}common-support post-processing: the term $\partial v/\partial x$ was formed
+\color{revblue}common-support value, so the layer omitted by $M$ carries approximately
 \color{black}
-\color{revblue}with the wrong neighbour. The script and archived CSV have been regenerated
+\color{revblue}$39$--$52\%$ of $D_{\rm FEM}^{\Omega}$; this is a support mismatch, not
 \color{black}
-\color{revblue}from the saved fields with the same $D=2\nu\int S:S\,dA$ convention in both
+\color{revblue}LBM/FEM disagreement on the sampled mask. A fixed-physical-support comparison
 \color{black}
-\color{revblue}solvers. For $n=4$, $Re=1000$, $D_{\rm LBM}^{M}=0.02558962$,
+\color{revblue}at $r_0>0$, $N=128$/$256$ and $n_{\mathrm{ref}}=6/7$ was not run, so the omitted
 \color{black}
-\color{revblue}$D_{\rm FEM}^{M}=0.02461972$ and $\varepsilon_D=3.94\%$. The quantity labelled
+\color{revblue}layer is not resolved across meshes here. Both solvers use the same
+\color{black}
+\color{revblue}$D=2\nu\int S:S\,dA$ convention. For $n=4$, $Re=1000$,
+\color{black}
+\color{revblue}$D_{\rm LBM}^{M}=0.02558962$, $D_{\rm FEM}^{M}=0.02461972$ and
+\color{black}
+\color{revblue}$\varepsilon_D=3.94\%$. The quantity labelled
 \color{black}
 ``rel.\ $D$ error'' in the gradient-reconstruction table is
 $|D_{\rm FD,lattice}-D_{\rm exact,lattice}|/D_{\rm exact,lattice}$: it compares
@@ -978,9 +1017,19 @@ they are reported as mesh sensitivity only, with no Richardson extrapolation.
 \color{black}
 \color{revblue}$r_0\in\{0,0.125,0.25,0.5\}$ measured in the paper coordinates
 \color{black}
-\color{revblue}$x,y\in[-1,1]$ ($L_c=2$). Table~\ref{tab:juncut} reports the median and the
+\color{revblue}$x,y\in[-1,1]$ ($L_c=2$). The two junction disks are excluded from the
 \color{black}
-\color{revblue}minimum/maximum of $D_{256}/D_{128}-1$ over the thirty cases. The median falls
+\color{revblue}gradient-valid mask $M$:
+\color{black}
+\begin{equation}
+  M_{r_0}=M\setminus\bigcup_{x_j=\pm1}B\bigl((x_j,0),r_0\bigr),
+  \label{eq:junction_mask_supp}
+\end{equation}
+\color{revblue}and $D_{r_0}(N)=2\nu\sum_{k\in M_{r_0}}S:S\,dx^2$. Table~\ref{tab:juncut}
+\color{black}
+\color{revblue}reports the median and the minimum/maximum of $D_{256}/D_{128}-1$ over the
+\color{black}
+\color{revblue}thirty cases. The median falls
 \color{black}
 \color{revblue}from $21.37\%$ at $r_0=0$ to $8.77\%$ at $r_0=0.5$; the largest-cutoff range is
 \color{black}
@@ -996,6 +1045,19 @@ physical wall cutoff $r_0$.}
 \label{tab:juncut}
 \tabbox{\input{junction_cutoff_table}}
 \end{table}
+
+\color{revblue}The available fixed-cutoff ladder for the representative pointed case
+\color{black}
+\color{revblue}$n=8$, $Re=1000$ is recorded in Table~\ref{tab:dr0ladder}. The ratio
+\color{black}
+\color{revblue}$D_{r_0=0.5}(N)/D_{r_0=0}(N)$ falls from $0.674$ at $N=64$ to $0.543$ at
+\color{black}
+\color{revblue}$N=512$, so the excluded junction layer grows in relative importance with
+\color{black}
+\color{revblue}refinement; these are cutoff diagnostics, not converged continuum values.
+\color{black}
+\color{revblue}The $N=384$ ladder has no matching fixed-cutoff entry in the archived CSV.
+\color{black}
 
 \color{revblue}The junction contribution $D_{\rm junction}(r,N)$ was also evaluated on
 \color{black}
@@ -1013,17 +1075,23 @@ physical wall cutoff $r_0$.}
 \color{black}
 \color{revblue}three-point coefficients imply roughly $+18.7\%$ ($n=3$) and $+19.8\%$ ($n=8$)
 \color{black}
-\color{revblue}from $N=128$ to $N=256$ at $Re=1000$, which is not directly comparable with the
+\color{revblue}from $N=128$ to $N=256$ at $Re=1000$. These values correspond to the
 \color{black}
-\color{revblue}fixed-physical-cutoff maximum of $14.28\%$ in Table~\ref{tab:juncut}; it is a
+\color{revblue}grid-scaled $D_{\rm excl,16h}$ series, not to the fixed-physical $r_0=0.5$
 \color{black}
-\color{revblue}property of a three-point fit. The high $R^2$ values are descriptive of the
+\color{revblue}series in Table~\ref{tab:juncut}; they follow the shrinking excluded disk
 \color{black}
-\color{revblue}three available grids. They do not establish an asymptotic logarithmic law, and
+\color{revblue}($0.252\to0.125$) and are not directly comparable with the fixed-cutoff maximum
 \color{black}
-\color{revblue}the fixed physical cutoff does not remove the cutoff dependence of the
+\color{revblue}of $14.28\%$. They should be attributed to that grid-scaled support and to the
 \color{black}
-\color{revblue}full-domain quantity.
+\color{revblue}three-point fit, not to a fixed physical cutoff. The high $R^2$ values are
+\color{black}
+\color{revblue}descriptive of the three available grids. They do not establish an asymptotic
+\color{black}
+\color{revblue}logarithmic law, and the fixed physical cutoff does not remove the cutoff
+\color{black}
+\color{revblue}dependence of the full-domain quantity.
 \color{black}
 
 \begin{table}[H]
@@ -1132,15 +1200,23 @@ quantity. In the production LBM post-processing, the MEM link estimate is
   \left(f_{\rm new,q}+f_{\rm post,q^{\rm opp}}\right),
   \label{eq:plid_mem}
 \]
-which requires same-step distribution functions on the moving-wall links. \color{revred}An \color{revblue}Of\color{black}
-\color{revred}inventory \color{revblue}the\color{black} \color{revred}of \color{revblue}$810$ converged macroscopic fields in\color{black} the \color{revred}archive \color{revblue}dataset,\color{black} \color{revred}finds \color{revblue}none\color{black} \color{revred}$810$ \color{revblue}retains\color{black} \color{revred}final \texttt{.npz} fields, of which \color{revblue}the\color{black}
-\color{revred}$0$ \color{revblue}distribution\color{black} \color{revred}contain \color{revblue}functions\color{black} \color{revred}$f$, \color{revblue}needed\color{black} \color{revred}and \color{revblue}by this expression; the\color{black} $148$ \color{revred}checkpoint files, all of which contain $f$ and \color{revblue}intermediate\color{black}
-\color{revred}$it$. \color{revblue}states\color{black} \color{revred}Final \color{revblue}that\color{black} \color{revred}fields \color{revblue}do\color{black} \color{revred}store \color{revblue}contain\color{black} \color{revred}only \color{revblue}them\color{black} \color{revred}\texttt{rho}, \color{revblue}are\color{black} \color{revred}\texttt{ux}, \color{revblue}not\color{black} \color{revred}\texttt{uy}, \color{revblue}converged fields. The available\color{black}
-\color{revred}\texttt{fluid}, \color{revblue}$P_{\rm lid}$\color{black} \color{revred}\texttt{X}, \color{revblue}series\color{black} \color{revred}\texttt{Y} \color{revblue}was\color{black} \color{revred}and \color{revblue}obtained\color{black} \color{revred}metadata. \color{revblue}either\color{black} \color{revred}The \color{revblue}from\color{black} \color{revred}only \color{revblue}those\color{black} \color{revred}archived \color{revblue}intermediate populations\color{black}
-\color{revred}$P_{\rm lid}$ series was obtained \color{revblue}or\color{black} from \color{revred}checkpoint populations or fresh \color{revblue}dedicated\color{black} solver\color{revblue} runs, and not from the converged macroscopic fields.\color{black}
-\color{revred}runs, not from final macroscopic fields; it \color{revblue}It\color{black} increases with \color{revred}$N$ \color{revblue}resolution\color{black} and gives\color{revblue} $P/\Phi=4.268$, $2.439$, $1.778$ and\color{black}
-\color{revred}$P/\Phi=4.268$, $2.439$, $1.778$ and \color{black}$1.465$ at $N=64,128,256,512$. It is\color{revblue} therefore not a grid-converged\color{black}
-\color{revred}therefore not a grid-converged \color{black}power--dissipation balance.
+which requires same-step distribution functions on the moving-wall links. \color{revred}An \color{revblue}The\color{black}
+\color{revred}inventory of the \color{revblue}full\color{black} archive \color{revred}finds \color{revblue}contains\color{black} $810$ \color{revblue}converged macroscopic \color{black}final\color{revred} \texttt{.npz}\color{black} fields, \color{revred}of \color{revblue}whereas\color{black} \color{revred}which \color{revblue}the\color{black}
+\color{revred}$0$ \color{revblue}curated\color{black} \color{revred}contain \color{revblue}inventory\color{black} \color{revred}$f$, \color{revblue}in\color{black} \color{revred}and \color{revblue}Sec.~\ref{sec:campaigns}\color{black} \color{revred}$148$ \color{revblue}contains\color{black} \color{revred}checkpoint \color{revblue}$380$\color{black} \color{revred}files, all of which contain $f$ and \color{revblue}fields\color{black}
+\color{revred}$it$. \color{revblue}($190+50+28+50+13+12+24+13$);\color{black} \color{revred}Final \color{revblue}the\color{black} \color{revred}fields \color{revblue}difference\color{black} \color{revred}store \color{revblue}consists\color{black} \color{revred}only \color{revblue}of\color{black} \color{revred}\texttt{rho}, \color{revblue}archived\color{black} \color{revred}\texttt{ux}, \color{revblue}runs\color{black} \color{revred}\texttt{uy}, \color{revblue}that\color{black}
+\color{revred}\texttt{fluid}, \color{revblue}were\color{black} \color{revred}\texttt{X}, \color{revblue}not\color{black} \color{revred}\texttt{Y} \color{revblue}retained in the curated analysis\color{black} and \color{revred}metadata. \color{revblue}is\color{black} \color{revred}The \color{revblue}not\color{black} \color{revred}only \color{revblue}used\color{black} \color{revred}archived \color{revblue}in any diagnostic.\color{black}
+\color{revred}$P_{\rm lid}$ \color{revblue}None\color{black} \color{revred}series \color{revblue}of\color{black} \color{revred}was \color{revblue}these\color{black} \color{revred}obtained \color{revblue}converged\color{black} \color{revred}from \color{revblue}fields\color{black} \color{revred}checkpoint \color{revblue}retains\color{black} \color{revred}populations \color{revblue}the\color{black} \color{revred}or \color{revblue}distribution\color{black} \color{revred}fresh \color{revblue}functions\color{black} \color{revred}solver \color{revblue}needed by\color{black}
+\color{revred}runs, \color{revblue}Eq.~\eqref{eq:plid_mem};\color{black} \color{revred}not \color{revblue}the\color{black} \color{revred}from \color{revblue}$148$\color{black} \color{revred}final \color{revblue}intermediate\color{black} \color{revred}macroscopic \color{revblue}states\color{black} \color{revred}fields; \color{revblue}that\color{black} \color{revred}it \color{revblue}do\color{black} \color{revred}increases \color{revblue}contain\color{black} \color{revred}with $N$ and gives \color{revblue}them\color{black}
+\color{revred}$P/\Phi=4.268$, \color{revblue}are\color{black} \color{revred}$2.439$, \color{revblue}not\color{black} \color{revred}$1.778$ \color{revblue}converged\color{black} \color{revred}and \color{revblue}fields.\color{black} \color{revred}$1.465$ \color{revblue}The\color{black} \color{revred}at \color{revblue}available\color{black} \color{revred}$N=64,128,256,512$. \color{revblue}$P_{\rm lid}$\color{black} \color{revred}It \color{revblue}series\color{black} \color{revred}is \color{revblue}was obtained\color{black}
+\color{revred}therefore \color{revblue}either\color{black} \color{revred}not \color{revblue}from\color{black} \color{revred}a \color{revblue}those\color{black} \color{revred}grid-converged \color{revblue}intermediate\color{black} \color{revred}power--dissipation balance. \color{revblue}populations\color{black}
+\color{revblue}or from dedicated solver runs, and not from the converged macroscopic fields.
+\color{black}
+\color{revblue}It increases with resolution and gives $P/\Phi=4.268$, $2.439$, $1.778$ and
+\color{black}
+\color{revblue}$1.465$ at $N=64,128,256,512$. It is therefore not a grid-converged
+\color{black}
+\color{revblue}power--dissipation balance.
+\color{black}
 
 A stress-based reconstruction from \color{revred}archived \color{black}$(\rho,\mathbf{u})$ is not a\color{revblue} substitute. It\color{black}
 \color{revred}substitute. It \color{black}would require wall traction on $\Gamma_{\rm mov}$, hence pressure\color{revblue} and velocity\color{black}
@@ -1295,11 +1371,13 @@ Re=1000:&\quad \{3.25,3.5,3.75,4,4.25\}.
 \color{black}
 \color{revblue}three cases. The sparse $N=384$ and $N=512$ supports are $\{3,4,8\}$ (local)
 \color{black}
-\color{revblue}and $\{2,3,4,8\}$ (wider). These fits are diagnostics of the sampled supports,
+\color{revblue}and $\{2,3,4,8\}$ (wider). Their $D/A_{\rm mask}$ vertices ($5.026$, $5.097$
 \color{black}
-\color{revblue}not converged continuous optima; the absolute $D$ levels remain
+\color{revblue}locally and $5.530$, $5.544$ in the wider windows) lie outside the sampled
 \color{black}
-\color{revblue}resolution-sensitive.
+\color{revblue}supports and are retained only as flagged diagnostics. These fits are not
+\color{black}
+\color{revblue}converged continuous optima; the absolute $D$ levels remain resolution-sensitive.
 \color{black}
 
 \begin{table}[H]
@@ -1520,9 +1598,17 @@ and $n=4$.}
 \color{black}
 \color{revblue}$4.1\%$ at $N=256$, $Re=1000$. Near-wall dissipation is not uniformly reduced:
 \color{black}
-\color{revblue}the $f_{0.25}$ ratio spans $0.700$--$1.449$, and the relative field difference
+\color{revblue}the $f_{0.025}=D_\delta/D$ ratio spans $0.700$--$1.449$ with
 \color{black}
-\color{revblue}spans $0.306$--$0.577$.
+\color{revblue}$\delta=0.025L_c$, and the relative field difference spans $0.306$--$0.577$.
+\color{black}
+\color{revblue}Here ``depth'' is
+\color{black}
+\color{revblue}$100\,[1-D/A(n_{\rm argmin})/D/A(n=1.5)]$, so it measures the sampled drop
+\color{black}
+\color{revblue}from the smallest tested exponent rather than a drop from an asymptotic
+\color{black}
+\color{revblue}reference.
 \color{black}
 
 \color{revblue}Resolution drift is not removed by eliminating the tangential-law junction
@@ -1634,6 +1720,36 @@ The mesh change is reported directly; no Richardson estimate is used.}
 \label{tab:fem_moved}
 \tabbox{\input{fem_table}}
 \end{table}
+
+\begin{table}[H]
+\centering
+\caption{Fixed-junction-disk dissipation $D_{r_0}(N)$ for $n=8$, $Re=1000$,
+computed from the archived final fields. Here $r_0=0$ denotes the unexcised
+gradient-valid mask; $N=384$ has no matching fixed-cutoff entry in the archive.}
+\label{tab:dr0ladder}
+\tabbox{\begin{tabular}{@{}lcccc@{}}
+\toprule
+$N$ & $h$ & $D_{r_0=0}$ & $D_{r_0=0.25}$ & $D_{r_0=0.5}$ \\
+\midrule
+64  & 0.031746 & 0.020732 & 0.017604 & 0.013966 \\
+128 & 0.015748 & 0.028391 & 0.022969 & 0.018243 \\
+256 & 0.007843 & 0.035312 & 0.026487 & 0.020849 \\
+512 & 0.003914 & 0.041172 & 0.028510 & 0.022360 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\textwidth]{convergence_paroi.png}
+\caption{Resolution sensitivity of the near-wall diagnostics on the archived
+$N=64,128,256$ ladder. The three sampled cases are $(n,Re)=(1.25,300)$,
+$(3,1000)$ and $(8,1000)$; the panels show $D/A_{\rm mask}$ and the wall-band
+shares for $\delta=0.025L_c$ and $\delta=0.05L_c$. These curves support ordering
+of the sampled diagnostics only; no asymptotic rate or grid-converged amplitude
+is claimed.}
+\label{fig:wallrefine}
+\end{figure}
 
 \section*{Data availability}
 The post-processed data, analysis scripts, regenerated figures, result tables,

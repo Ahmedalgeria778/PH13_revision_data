@@ -51,7 +51,7 @@ Target case: `Re=1000, N=256, δ/L_c=0.05`.
 | 6 | 0.008968 | 0.006235 | 0.002733 | 69.5% | 30.5% |
 | 8 | 0.009199 | 0.006378 | 0.002821 | 69.3% | 30.7% |
 
-`n=4 -> 8`: `D/A_mask` rises `0.008797 -> 0.009199` (+`0.000403`, +4.58%). Core rises +`0.000353`; wall rises +`0.000049`. Hence the core supplies **87.7597%** of the rise and the wall **12.2403%**. The “88%” statement is therefore the **core fraction of the increase**, not the core share of `D/A` (30.7% at `n=8`).
+`n=4 -> 8`: `D/A_mask` rises `0.008797 -> 0.009199` (+`0.000402`, +4.57%). Core rises +`0.000353`; wall rises +`0.000049`. Hence the core supplies **87.7597%** of the rise and the wall **12.2403%**. The “88%” statement is therefore the **core fraction of the increase**, not the core share of `D/A` (30.7% at `n=8`).
 
 Qualified generalization (`Re=100,500,1000`; `N=128,256`; `δ/L_c=0.025,0.05`): for every fixed `n=4 -> 8` comparison where `n=8` exists, the core share of a positive `D/A` rise exceeds 50%, ranging from 61.5% to 99.8%. At `Re=100,N=256` only `n={2.5,3,4}` exists, so no `n=4->8` claim is possible. Sampled-minimum-to-maximum comparisons can exceed 100% when the wall term decreases; such values are not shares of `D/A`. Absolute `D/A` levels are resolution- and band-dependent.
 
