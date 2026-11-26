@@ -7,6 +7,7 @@
       "DA_tan": 0.05360354424941775,
       "DA_proj": 0.020945955606187526,
       "DA_ratio": 0.3907569154145072,
+      "DA_ratio_norm": 0.7815138308290144,
       "KE_tan": 0.09940964369291427,
       "KE_proj": 0.05059801615704558,
       "KE_ratio": 0.5089849865406177,
@@ -24,8 +25,9 @@
       "iters_proj": 43700,
       "res_tan": 9.729259068530505e-09,
       "res_proj": 8.589280606208227e-09,
-      "path_tan": "se_n1p5_Re100_N128.npz",
-      "path_proj": "se_n1p5_Re100_N128_proj.npz"
+      "path_tan": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_all190/se_n1p5_Re100_N128.npz",
+      "path_proj": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_lid_projected_targeted/se_n1p5_Re100_N128_proj.npz",
+      "lid_proj": "tangential"
     },
     {
       "N": 128,
@@ -34,6 +36,7 @@
       "DA_tan": 0.03814335652887009,
       "DA_proj": 0.01820489471432788,
       "DA_ratio": 0.4772756351567773,
+      "DA_ratio_norm": 0.9545512703135546,
       "KE_tan": 0.10546837269183777,
       "KE_proj": 0.05119961453268064,
       "KE_ratio": 0.48544993371878387,
@@ -51,8 +54,9 @@
       "iters_proj": 50200,
       "res_tan": 9.690765886798125e-09,
       "res_proj": 9.480587950111419e-09,
-      "path_tan": "se_n2p0_Re100_N128.npz",
-      "path_proj": "se_n2p0_Re100_N128_proj.npz"
+      "path_tan": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_all190/se_n2p0_Re100_N128.npz",
+      "path_proj": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_lid_projected_targeted/se_n2p0_Re100_N128_proj.npz",
+      "lid_proj": "tangential"
     },
     {
       "N": 128,
@@ -61,6 +65,7 @@
       "DA_tan": 0.034115507324612486,
       "DA_proj": 0.026296503182211276,
       "DA_ratio": 0.7708079182876397,
+      "DA_ratio_norm": 1.5416158365752795,
       "KE_tan": 0.1005683332539333,
       "KE_proj": 0.04234314951016308,
       "KE_ratio": 0.4210385927670429,
@@ -78,8 +83,9 @@
       "iters_proj": 51300,
       "res_tan": 8.251181828067278e-09,
       "res_proj": 9.857736175955534e-09,
-      "path_tan": "se_n4p0_Re100_N128.npz",
-      "path_proj": "se_n4p0_Re100_N128_proj.npz"
+      "path_tan": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_all190/se_n4p0_Re100_N128.npz",
+      "path_proj": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_lid_projected_targeted/se_n4p0_Re100_N128_proj.npz",
+      "lid_proj": "tangential"
     },
     {
       "N": 128,
@@ -88,6 +94,7 @@
       "DA_tan": 0.04047156600492206,
       "DA_proj": 0.03576896215405797,
       "DA_ratio": 0.8838047470094887,
+      "DA_ratio_norm": 1.7676094940189775,
       "KE_tan": 0.09378472996163614,
       "KE_proj": 0.036176129323795485,
       "KE_ratio": 0.3857358158262416,
@@ -105,8 +112,9 @@
       "iters_proj": 51800,
       "res_tan": 9.743181157706449e-09,
       "res_proj": 7.730182619014592e-09,
-      "path_tan": "se_n8p0_Re100_N128.npz",
-      "path_proj": "se_n8p0_Re100_N128_proj.npz"
+      "path_tan": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_all190/se_n8p0_Re100_N128.npz",
+      "path_proj": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_lid_projected_targeted/se_n8p0_Re100_N128_proj.npz",
+      "lid_proj": "tangential"
     },
     {
       "N": 128,
@@ -115,6 +123,7 @@
       "DA_tan": 0.010732184401659257,
       "DA_proj": 0.004740925715201229,
       "DA_ratio": 0.44174843981140083,
+      "DA_ratio_norm": 0.8834968796228017,
       "KE_tan": 0.11108880758137044,
       "KE_proj": 0.0568352395484734,
       "KE_ratio": 0.5116198542939862,
@@ -132,8 +141,9 @@
       "iters_proj": 259400,
       "res_tan": 9.978556037015807e-09,
       "res_proj": 9.986103041703664e-09,
-      "path_tan": "se_n1p5_Re1000_N128.npz",
-      "path_proj": "se_n1p5_Re1000_N128_proj.npz"
+      "path_tan": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_all190/se_n1p5_Re1000_N128.npz",
+      "path_proj": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_lid_projected_targeted/se_n1p5_Re1000_N128_proj.npz",
+      "lid_proj": "tangential"
     },
     {
       "N": 128,
@@ -142,6 +152,7 @@
       "DA_tan": 0.008354421323103864,
       "DA_proj": 0.00450624138326258,
       "DA_ratio": 0.5393840230203287,
+      "DA_ratio_norm": 1.0787680460406575,
       "KE_tan": 0.11820054095194245,
       "KE_proj": 0.058373325784246734,
       "KE_ratio": 0.4938499038509473,
@@ -159,8 +170,9 @@
       "iters_proj": 296200,
       "res_tan": 9.990845387108926e-09,
       "res_proj": 9.975711460011305e-09,
-      "path_tan": "se_n2p0_Re1000_N128.npz",
-      "path_proj": "se_n2p0_Re1000_N128_proj.npz"
+      "path_tan": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_all190/se_n2p0_Re1000_N128.npz",
+      "path_proj": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_lid_projected/se_n2p0_Re1000_N128_proj.npz",
+      "lid_proj": "tangential"
     },
     {
       "N": 128,
@@ -169,6 +181,7 @@
       "DA_tan": 0.00714370946822924,
       "DA_proj": 0.0056157474142285585,
       "DA_ratio": 0.786110834882619,
+      "DA_ratio_norm": 1.572221669765238,
       "KE_tan": 0.11288388947882814,
       "KE_proj": 0.05157941661345137,
       "KE_ratio": 0.45692451643531745,
@@ -186,8 +199,9 @@
       "iters_proj": 293500,
       "res_tan": 9.983472052527143e-09,
       "res_proj": 9.982180828455034e-09,
-      "path_tan": "se_n4p0_Re1000_N128.npz",
-      "path_proj": "se_n4p0_Re1000_N128_proj.npz"
+      "path_tan": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_all190/se_n4p0_Re1000_N128.npz",
+      "path_proj": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_lid_projected/se_n4p0_Re1000_N128_proj.npz",
+      "lid_proj": "tangential"
     },
     {
       "N": 128,
@@ -196,6 +210,7 @@
       "DA_tan": 0.007547356937338495,
       "DA_proj": 0.006440171711475513,
       "DA_ratio": 0.8533015948423633,
+      "DA_ratio_norm": 1.7066031896847267,
       "KE_tan": 0.10752423732201834,
       "KE_proj": 0.04688033819122418,
       "KE_ratio": 0.4359978676326238,
@@ -213,8 +228,9 @@
       "iters_proj": 260100,
       "res_tan": 9.993860804885513e-09,
       "res_proj": 9.998907431196802e-09,
-      "path_tan": "se_n8p0_Re1000_N128.npz",
-      "path_proj": "se_n8p0_Re1000_N128_proj.npz"
+      "path_tan": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_all190/se_n8p0_Re1000_N128.npz",
+      "path_proj": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_lid_projected/se_n8p0_Re1000_N128_proj.npz",
+      "lid_proj": "tangential"
     },
     {
       "N": 256,
@@ -223,6 +239,7 @@
       "DA_tan": 0.039400170746314155,
       "DA_proj": 0.028198017670450434,
       "DA_ratio": 0.7156826261492364,
+      "DA_ratio_norm": 1.4313652522984728,
       "KE_tan": 0.10138831267146713,
       "KE_proj": 0.04278489528463143,
       "KE_ratio": 0.4219904065596708,
@@ -240,8 +257,9 @@
       "iters_proj": 100800,
       "res_tan": 9.235689449327289e-09,
       "res_proj": 8.163296904336453e-09,
-      "path_tan": "se_n4p0_Re100_N256.npz",
-      "path_proj": "se_n4p0_Re100_N256_proj.npz"
+      "path_tan": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_conv256_lowRe/se_n4p0_Re100_N256.npz",
+      "path_proj": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_lid_projected_targeted/se_n4p0_Re100_N256_proj.npz",
+      "lid_proj": "tangential"
     },
     {
       "N": 256,
@@ -250,6 +268,7 @@
       "DA_tan": 0.013530419974360223,
       "DA_proj": 0.0055139655203654625,
       "DA_ratio": 0.40752360464895226,
+      "DA_ratio_norm": 0.8150472092979045,
       "KE_tan": 0.11145889262632418,
       "KE_proj": 0.056920887242000284,
       "KE_ratio": 0.5106895098342006,
@@ -267,8 +286,9 @@
       "iters_proj": 476500,
       "res_tan": 8.674199268587923e-09,
       "res_proj": 9.987726055926682e-09,
-      "path_tan": "se_n1p5_Re1000_N256.npz",
-      "path_proj": "se_n1p5_Re1000_N256_proj.npz"
+      "path_tan": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_conv256/se_n1p5_Re1000_N256.npz",
+      "path_proj": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_lid_projected_targeted/se_n1p5_Re1000_N256_proj.npz",
+      "lid_proj": "tangential"
     },
     {
       "N": 256,
@@ -277,6 +297,7 @@
       "DA_tan": 0.01028948132725264,
       "DA_proj": 0.0052864093116258845,
       "DA_ratio": 0.5137682982741163,
+      "DA_ratio_norm": 1.0275365965482326,
       "KE_tan": 0.11775182221075783,
       "KE_proj": 0.05828031444320475,
       "KE_ratio": 0.4949419325239134,
@@ -294,8 +315,9 @@
       "iters_proj": 542500,
       "res_tan": 7.764326119541476e-09,
       "res_proj": 9.980681225929544e-09,
-      "path_tan": "se_n2p0_Re1000_N256.npz",
-      "path_proj": "se_n2p0_Re1000_N256_proj.npz"
+      "path_tan": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_conv256/se_n2p0_Re1000_N256.npz",
+      "path_proj": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_lid_projected_targeted/se_n2p0_Re1000_N256_proj.npz",
+      "lid_proj": "tangential"
     },
     {
       "N": 256,
@@ -304,6 +326,7 @@
       "DA_tan": 0.00879693188958968,
       "DA_proj": 0.007018794395785218,
       "DA_ratio": 0.7978684482133235,
+      "DA_ratio_norm": 1.595736896426647,
       "KE_tan": 0.11244055864157228,
       "KE_proj": 0.05169018211593166,
       "KE_ratio": 0.4597111819828723,
@@ -321,8 +344,9 @@
       "iters_proj": 534100,
       "res_tan": 9.02113908574087e-09,
       "res_proj": 9.999832841986467e-09,
-      "path_tan": "se_n4p0_Re1000_N256.npz",
-      "path_proj": "se_n4p0_Re1000_N256_proj.npz"
+      "path_tan": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_conv256/se_n4p0_Re1000_N256.npz",
+      "path_proj": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_lid_projected_targeted/se_n4p0_Re1000_N256_proj.npz",
+      "lid_proj": "tangential"
     },
     {
       "N": 256,
@@ -331,6 +355,7 @@
       "DA_tan": 0.009199485680233254,
       "DA_proj": 0.008337389692665948,
       "DA_ratio": 0.9062886755267554,
+      "DA_ratio_norm": 1.8125773510535108,
       "KE_tan": 0.1079062110407126,
       "KE_proj": 0.04713465903073116,
       "KE_ratio": 0.4368113621647547,
@@ -348,8 +373,9 @@
       "iters_proj": 470300,
       "res_tan": 8.565978599643686e-09,
       "res_proj": 9.986243800635952e-09,
-      "path_tan": "se_n8p0_Re1000_N256.npz",
-      "path_proj": "se_n8p0_Re1000_N256_proj.npz"
+      "path_tan": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_conv256/se_n8p0_Re1000_N256.npz",
+      "path_proj": "C:/Users/user/Documents/Default Project/GIRVD (revised)/05_dataset/data_lid_projected_targeted/se_n8p0_Re1000_N256_proj.npz",
+      "lid_proj": "tangential"
     }
   ],
   "shape": {
@@ -426,5 +452,17 @@
   "n_cases": 13,
   "convention": "D=2 sum_{valid} (S:S/Re) dx^2; A_mask=count(valid) dx^2; KE/A uses A_exact",
   "controls": "coupled geometry/forcing control; no causal isolation of curvature, confinement or wall kinematics",
-  "path_note": "Raw .npz fields are not deposited; path_tan and path_proj are archive basenames only. All 13 rows analyse projected-law fields against matched tangential-law partners."
+  "boundary_velocity_integral_ratio": 0.5,
+  "DA_ratio_raw_range": [
+    0.3907569154145072,
+    0.9062886755267554
+  ],
+  "DA_ratio_forcing_normalized_range": [
+    0.7815138308290144,
+    1.8125773510535108
+  ],
+  "KE_ratio_range": [
+    0.3857358158262416,
+    0.5116198542939862
+  ]
 }

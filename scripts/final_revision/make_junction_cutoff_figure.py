@@ -17,12 +17,26 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
+plt.rcParams.update({
+    "font.size": 11,
+    "axes.titlesize": 12,
+    "axes.labelsize": 11,
+    "xtick.labelsize": 10,
+    "ytick.labelsize": 10,
+    "legend.fontsize": 8.5,
+})
+
 ROOT = Path(__file__).resolve().parents[4]
 V2 = ROOT / "06_physics" / "results_jonction_v2"
 J = ROOT / "06_physics" / "results_jonction"
 OUTS = [
     ROOT / "08_operator_results" / "PH13_manuscript" / "submission_package" / "figs_new",
     ROOT / "corrections for reviewer" / "PH13_revision_data" / "figures" / "final_supplement",
+    ROOT / "corrections for reviewer" / "PH13_revision_data" / "supplement" / "figs_new",
+]
+FRAG_OUTS = [
+    ROOT / "08_operator_results" / "PH13_manuscript" / "submission_package",
+    ROOT / "corrections for reviewer" / "PH13_revision_data" / "supplement",
 ]
 
 summary = json.loads((V2 / "A1v2_summary.json").read_text(encoding="utf-8"))
@@ -41,7 +55,7 @@ pct = np.array([
     [summary["cases30"][k]["max_pct"] for k in keys30],
 ])
 
-fig, axes = plt.subplots(1, 3, figsize=(14.2, 4.3))
+fig, axes = plt.subplots(1, 3, figsize=(16.0, 5.0))
 ax = axes[0]
 ax.fill_between(r0, pct[1], pct[2], color="#dce6f2", label="30-case min--max")
 ax.plot(r0, pct[0], "o-", color="#1f4e79", lw=1.8, label="30-case median")
@@ -56,7 +70,7 @@ ax.set_xlabel(r"fixed physical cutoff $r_0$")
 ax.set_ylabel(r"$D_{256}/D_{128}-1$ (%)")
 ax.set_title("(a) Fixed-wall-cutoff comparison")
 ax.grid(alpha=0.25)
-ax.legend(fontsize=7, loc="upper right")
+ax.legend(fontsize=8.5, loc="upper right")
 
 ax = axes[1]
 selected = [
@@ -76,7 +90,7 @@ ax.set_xlabel(r"$\ln(r/h)$")
 ax.set_ylabel(r"$D_{\rm junction}(r,N)$")
 ax.set_title("(b) Junction contribution versus cutoff")
 ax.grid(alpha=0.25)
-ax.legend(fontsize=7, loc="upper left")
+ax.legend(fontsize=8.5, loc="upper left")
 
 ax = axes[2]
 Ns = np.array([64.0, 128.0, 256.0])
@@ -88,17 +102,17 @@ for name, nval, colour in zip(series_names, ns, colours):
         p = fit["series"][name][kind]
         y = p["a"] + p["b"] * np.log(Ns)
         ax.plot(np.log(Ns), y, style, color=colour, lw=width,
-                label=f"n={nval:g}, " + ("total" if kind == "D_total" else "r0=0.5"))
+                label=f"n={nval:g}, " + ("total" if kind == "D_total" else r"r=16h"))
         ax.plot(np.log(Ns), y, "o" if kind == "D_total" else "s",
                 color=colour, ms=4)
 ax.set_xlabel(r"$\ln N$")
 ax.set_ylabel(r"$D(N)$")
 ax.set_title(r"(c) Descriptive fits $D=a+b\ln N$")
 ax.grid(alpha=0.25)
-ax.legend(fontsize=6.5, loc="upper left", ncol=2)
+ax.legend(fontsize=8.0, loc="upper left", ncol=2)
 
 fig.suptitle("Junction cutoff diagnostics (descriptive; not grid-independent dissipation)",
-             fontsize=10.5)
+             fontsize=12.5)
 fig.tight_layout(rect=(0, 0, 1, 0.93))
 for out in OUTS:
     out.mkdir(parents=True, exist_ok=True)
@@ -119,10 +133,17 @@ lines = [r"\begin{tabular}{@{}llrrr@{}}", r"\toprule",
          r"case & support & $a$ & $b$ & $R^2$ \\", r"\midrule"]
 for name, nval in zip(series_names, ns):
     Re = 300 if nval == 1.25 else 1000
-    for kind, lab in [("D_total", "total"), ("D_excl_16h", r"$r_0=0.5$")]:
+    for kind, lab in [("D_total", "total"), ("D_excl_16h", r"$r=16h$")]:
         p = fit["series"][name][kind]
         lines.append(f"$n={nval:g}, Re={Re}$ & {lab} & "
                      f"{p['a']:.6f} & {p['b']:.6f} & {p['R2']:.4f} \\\\")
 lines += [r"\bottomrule", r"\end{tabular}"]
 (V2 / "junction_logfit_table.tex").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+for name in ("junction_cutoff_table.tex", "junction_logfit_table.tex"):
+    text = (V2 / name).read_text(encoding="utf-8")
+    for out in FRAG_OUTS:
+        out.mkdir(parents=True, exist_ok=True)
+        (out / name).write_text(text, encoding="utf-8")
+        print("wrote", out / name)
 print("wrote LaTeX table fragments")

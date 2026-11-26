@@ -2,7 +2,7 @@
 
 **Repository:** <https://github.com/Ahmedalgeria778/PH13_revision_data>  
 **Prepared:** 2026-11-25  
-**Companion article:** *Geometry-induced reorganization of viscous dissipation in Continuously Deformable superelliptic lid-driven cavities* (PH13).
+**Companion article:** *Geometry-induced reorganization of viscous dissipation in continuously deformable superelliptic lid-driven cavities* (PH13).
 
 This repository contains the reproducible post-processing outputs, scripts, figures, result tables, reports and the **final single-part supplementary document** for PH13. The main article source and compiled main-article PDF are **not** included. Raw archived `.npz` fields are **not** included because of their size.
 
@@ -26,7 +26,7 @@ All common-support LBM diagnostics were recomputed from archived final fields, a
 | Junction convention | strict nodal test `y > 0`; left junction `y = +1.22e-16` moving, right junction `y = 0` fixed; no blending |
 | Curvature | unit-circle test gives `κ = 1.000000` and `f_sharp = 0`; 190 rows recomputed with `w = 0.05 L_c` and threshold `κ_w ≥ 2⟨|κ|⟩_Γ` |
 | Core/wall budget | 506 rows; maximum additivity residual `2.78e-17`; for `Re=1000, N=256, δ=0.05L_c`, the core contributes `87.8%` of the `n=4→8` rise, not `87.8%` of absolute dissipation |
-| Projected-lid control | 13 matched fields; projected/tangential `D/A_mask` ratios `0.391–0.906`; sampled argmin `n=4→2` on the three complete ladders; coupled geometry/forcing control only |
+| Projected-lid control | 13 matched fields; raw projected/tangential `D/A_mask` ratios `0.391–0.906`, imposed boundary-velocity integral ratio `0.5`, forcing-normalized ratios `0.782–1.813`, and `KE/A` ratios `0.768–2.291`; sampled argmin moves `n=4→2` but is only bracketed between `n=1.5` and `n=4`; coupled geometry/forcing control only |
 | Campaign counts | `data_all190`: 190 fields; `data_refine`: 50 fields at 8 Reynolds numbers; `N=256`: 63 fields, 62 matched to `N=128`; unmatched case `(n,Re)=(4.25,300)` |
 | Moving-wall length | `L_mov(1.25)=2.8789718432636`, `L_mov(2)=π`, `L_mov(4)=3.5088489717820`, `L_mov(8)=3.7389869262423` |
 | Lid power | **Not quoted as a verified quantity.** 810 final fields have no distribution functions `f`; 148 checkpoints have `f,it`; the archived flux ratio is `-4.419` instead of `+1` |
@@ -42,14 +42,14 @@ The publication-ready supplement is a **single coherent document**:
 
 * `supplement/PH13_supplementary_final.tex`
 * `supplement/PH13_supplementary_final.pdf`
-* `supplement/supp_*.tex`, `supplement/projected_lid_table.tex` — external table fragments required to compile the supplement
+* `supplement/supp_*.tex`, `supplement/projected_lid_table.tex`, `supplement/kinetic_table.tex`, `supplement/fem_table.tex`, and the junction-cutoff fragments — external table fragments required to compile the supplement
 * `supplement/Marked-Up_Supplementary.tex` / `.pdf` — true word/sentence-level differential against the preceding clean supplementary source (blue additions, red deletions, black unchanged text)
 
-It contains only supporting fluid-physics material: solver verification, dataset consistency checks, observable definitions, the reference-field atlas, wall-curvature diagnostics, the additive wall/core budget, common-support LBM/FEM dissipation, fixed physical-wall cutoffs, descriptive logarithmic junction fits, FEM mesh and junction conventions, energy and pressure conventions, moving-wall geometry, campaign inventory, fit and crossing diagnostics, corner-eddy analysis, and the completed targeted projected-lid control. It contains no addendum, no revision history, no operator-learning material and no training/provenance discussion. Neither the article nor the supplement refers to external file names, paths or the repository in the body text; such references appear only in the Data availability statements.
+It contains only supporting fluid-physics material: solver verification, dataset consistency checks, observable definitions, the reference-field atlas, wall-curvature diagnostics, the additive wall/core budget, common-support LBM/FEM dissipation, fixed physical-wall cutoffs, descriptive logarithmic junction fits, FEM mesh and junction conventions, energy and pressure conventions, moving-wall geometry, campaign inventory, fit and crossing diagnostics, corner-eddy analysis, and the completed targeted projected-lid control. It contains no addendum, no revision history, no operator-learning material and no training/provenance discussion. Four detailed tables moved out of the main article appear as Tables S24–S27. Neither the article nor the supplement refers to external file names, paths or the repository in the body text; such references appear only in the Data availability statements. No alt-text lines are printed under the captions.
 
 The supplement figures are in `figures/final_supplement/`, with local copies under `supplement/figs_new/` and `supplement/figs/` so the deposited supplement source can be compiled in place. The final article figures, including `fig_junction_cutoffs.png/pdf` and `fig_lid_projected_targeted.png/pdf`, are in `figures/`. The journal highlight image is supplied as `figures/Highlight_Image.tif` and `figures/Highlight_Image.jpeg` (2404 x 1882 px, 300 dpi).
 
-Accessibility alt text for every figure and table is supplied as the required Microsoft Word document `reports/Alt_Text.docx`, with a plain-text mirror in `reports/Alt_Text.txt`; the Supplementary Online Material PDF also prints the alt text beneath each caption.
+Accessibility alt text for every figure and table is supplied as the required separate Microsoft Word document `reports/Alt_Text.docx`, with a plain-text mirror in `reports/Alt_Text.txt`. No alt-text lines are printed beneath captions in the article or supplement PDFs.
 
 ---
 
@@ -157,4 +157,4 @@ The produced CSV files are already deposited under `data/`, so the reports and f
 
 ## 6. Provenance and reviewer responses
 
-Numerical values derive from read-only post-processing of the archived PH13 fields, the targeted FEM solves recorded in `logs/`, and the completed targeted projected-lid LBM campaign. The formal point-by-point response is `reports/RESPONSE_LETTER_FINAL.tex/pdf`; `reports/REVIEWER_RESPONSE_MATRIX.md` and `reports/AUDIT_NOTES.md` retain the supporting audit trail. The editor decision and full original reports for reviewers 1, 2, 4, 5 and 6 are transcribed in `reports/ORIGINAL_REFEREE_REPORTS_2026-11-25.txt`; no separate report for reviewer 3 was supplied, and no reply was fabricated for that number.
+Numerical values derive from read-only post-processing of the archived PH13 fields, the targeted FEM solves recorded in `logs/`, and the completed targeted projected-lid LBM campaign. The formal point-by-point response is `reports/RESPONSE_LETTER_FINAL.tex/pdf`; `reports/REVIEWER_RESPONSE_MATRIX.md` and `reports/AUDIT_NOTES.md` retain the supporting audit trail. The editor decision and full original reports for reviewers 1, 2, 4, 5 and 6 are transcribed in `reports/ORIGINAL_REFEREE_REPORTS_2026-11-25.txt`.

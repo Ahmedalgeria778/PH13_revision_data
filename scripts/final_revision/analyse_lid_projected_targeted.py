@@ -12,8 +12,8 @@ Two N=128/Re=1000 projected fields (n=2,4,8) are reused from the earlier
 control archive; all other projected fields come from data_lid_projected_targeted.
 
 Outputs are written to 06_physics/results_lid_projected_targeted; the table
-fragment is copied to the submission package root and the two figure files are
-copied into its figs_new folder.
+fragment (including the forcing-normalized dissipation ratio) is copied to the
+submission package root and the figure files are copied into its figs_new folder.
 """
 from __future__ import annotations
 
@@ -153,10 +153,10 @@ def rel_l2(p: dict, t: dict) -> tuple[float, float]:
 
 
 def make_table(rows: list[dict]) -> str:
-    header = r"""\begin{tabular}{@{}rrrccccccr@{}}
+    header = r"""\begin{tabular}{@{}rrrcccccccr@{}}
 \toprule
-$N$ & $Re$ & $n$ & $D/A_{\rm mask}$ tan. & $D/A_{\rm mask}$ proj. & ratio &
-$KE/A$ ratio & $f_{0.25}$ ratio & $U_{\max}$ ratio & rel. $L_2(u)$ \\
+$N$ & $Re$ & $n$ & $D/A_{\rm mask}$ tan. & $D/A_{\rm mask}$ proj. & raw ratio &
+forcing-norm.\ ratio & $KE/A$ ratio & $f_{0.25}$ ratio & $U_{\max}$ ratio & rel. $L_2(u)$ \\
 \midrule
 """
     body = []
@@ -164,8 +164,8 @@ $KE/A$ ratio & $f_{0.25}$ ratio & $U_{\max}$ ratio & rel. $L_2(u)$ \\
         body.append(
             f"{r['N']:d} & {r['Re']:.0f} & {r['n']:.1f} & "
             f"{r['DA_tan']:.5f} & {r['DA_proj']:.5f} & {r['DA_ratio']:.3f} & "
-            f"{r['KE_ratio']:.3f} & {r['f025_ratio']:.3f} & "
-            f"{r['umax_ratio']:.3f} & {r['relL2']:.3f} \\\\"
+            f"{r['DA_ratio_norm']:.3f} & {r['KE_ratio']:.3f} & "
+            f"{r['f025_ratio']:.3f} & {r['umax_ratio']:.3f} & {r['relL2']:.3f} \\\\"
         )
     return header + "\n".join(body) + "\n" + r"\bottomrule" + "\n" + r"\end{tabular}" + "\n"
 
@@ -187,6 +187,7 @@ def main() -> int:
             "N": N, "Re": re, "n": n,
             "DA_tan": dt["D_A_mask"], "DA_proj": dp["D_A_mask"],
             "DA_ratio": dp["D_A_mask"] / dt["D_A_mask"],
+            "DA_ratio_norm": (dp["D_A_mask"] / dt["D_A_mask"]) / 0.5,
             "KE_tan": dt["KE_A_exact"], "KE_proj": dp["KE_A_exact"],
             "KE_ratio": dp["KE_A_exact"] / dt["KE_A_exact"],
             "f025_tan": dt["f0.025"], "f025_proj": dp["f0.025"],
@@ -239,6 +240,15 @@ def main() -> int:
                        "A_mask=count(valid) dx^2; KE/A uses A_exact"),
         "controls": ("coupled geometry/forcing control; no causal isolation "
                      "of curvature, confinement or wall kinematics"),
+        "boundary_velocity_integral_ratio": 0.5,
+        "DA_ratio_raw_range": [min(r["DA_ratio"] for r in rows),
+                               max(r["DA_ratio"] for r in rows)],
+        "DA_ratio_forcing_normalized_range": [
+            min(r["DA_ratio_norm"] for r in rows),
+            max(r["DA_ratio_norm"] for r in rows),
+        ],
+        "KE_ratio_range": [min(r["KE_ratio"] for r in rows),
+                           max(r["KE_ratio"] for r in rows)],
     }
     (OUT / "synthese.json").write_text(
         json.dumps(synth, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -248,14 +258,16 @@ def main() -> int:
         "Projected law: u_w = U_lid (e_x.t) t (impermeable); tangential law: "
         "u_w = U_lid t. Same n, Re, N and Mach number. D/A is divided by the "
         "gradient-valid integration area A_mask; KE/A uses the exact area.", "",
-        "| N | Re | n | D/A tan | D/A proj | ratio | KE/A ratio | "
-        "f_0.25 ratio | umax ratio | relL2 |", "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+        "| N | Re | n | D/A tan | D/A proj | raw ratio | forcing-norm. ratio | "
+        "KE/A ratio | f_0.25 ratio | umax ratio | relL2 |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for r in rows:
         lines.append(
             f"| {r['N']} | {r['Re']:.0f} | {r['n']:.1f} | {r['DA_tan']:.5f} | "
-            f"{r['DA_proj']:.5f} | {r['DA_ratio']:.3f} | {r['KE_ratio']:.3f} | "
-            f"{r['f025_ratio']:.3f} | {r['umax_ratio']:.3f} | {r['relL2']:.3f} |")
+            f"{r['DA_proj']:.5f} | {r['DA_ratio']:.3f} | {r['DA_ratio_norm']:.3f} | "
+            f"{r['KE_ratio']:.3f} | {r['f025_ratio']:.3f} | "
+            f"{r['umax_ratio']:.3f} | {r['relL2']:.3f} |")
     lines += ["", "## Geometry-relative shape, normalized by smallest sampled n", ""]
     for key, s in shape.items():
         lines.append(
@@ -265,8 +277,8 @@ def main() -> int:
             f"max |difference| {s['max_abs_shape_diff']:.3f}.")
     (OUT / "rapport.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
-    fig, axes = plt.subplots(1, 2, figsize=(11.0, 4.2), constrained_layout=True)
-    for ax, N in zip(axes, (128, 256)):
+    fig, axes = plt.subplots(1, 3, figsize=(15.0, 4.2), constrained_layout=True)
+    for ax, N in zip(axes[:2], (128, 256)):
         for re, ls in ((100.0, "-"), (1000.0, "--")):
             sub = [r for r in rows if r["N"] == N and r["Re"] == re]
             if not sub:
@@ -285,6 +297,26 @@ def main() -> int:
         ax.set_title(f"$N={N}$")
         ax.grid(alpha=0.25)
         ax.legend(fontsize=8, frameon=False)
+
+    ax = axes[2]
+    for N, marker in ((128, "o"), (256, "s")):
+        for re, ls in ((100.0, "-"), (1000.0, "--")):
+            sub = [r for r in rows if r["N"] == N and r["Re"] == re]
+            if not sub:
+                continue
+            ax.plot([r["n"] for r in sub],
+                    [r["DA_ratio_norm"] for r in sub], ls, marker=marker,
+                    ms=5, lw=1.8,
+                    label=f"$N={N}$, Re={re:.0f}")
+    ax.axhline(1.0, color="0.35", lw=1.0, ls=":")
+    ax.set_xscale("log", base=2)
+    ax.set_xticks([1.5, 2.0, 4.0, 8.0])
+    ax.set_xticklabels(["1.5", "2", "4", "8"])
+    ax.set_xlabel("superelliptic exponent $n$")
+    ax.set_ylabel("forcing-normalized ratio")
+    ax.set_title(r"$D/A$ ratio / $\int u_{\rm lid}^2ds$ ratio")
+    ax.grid(alpha=0.25)
+    ax.legend(fontsize=7.5, frameon=False)
     fig.suptitle("Tangential versus projected impermeable lid", fontsize=12)
     for ext in ("png", "pdf"):
         fig.savefig(OUT / f"fig_lid_projected_targeted.{ext}", dpi=220,

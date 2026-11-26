@@ -1,5 +1,5 @@
 ALT TEXT FOR FIGURES AND TABLES
-Alt text for figures and tables: Geometry-induced reorganization of viscous dissipation in Continuously Deformable superelliptic lid-driven cavities
+Alt text for figures and tables: Geometry-induced reorganization of viscous dissipation in continuously deformable superelliptic lid-driven cavities
 
 Upload the companion Microsoft Word document (Alt_Text.docx) to AIP.
 
@@ -23,58 +23,38 @@ Caption: Sampled dissipation minima on matched grids. D/A uses A_mask, the exact
 Alt text: Sampled dissipation minima on matched grids. D/A uses A_mask, the exact support of the quadrature. At Re=100, N=256 values exist only for n=2.5,3,4; the reported minimum is therefore the minimum among the available matched configurations, not a global minimum over 1.25≤ n≤8.
 
 [MAIN ARTICLE item 5; Figure; fig:support]
-Caption: Complementary evidence. (a) Integrated kinetic energy saturates at high n. (b) The independent P2/P1 solver agrees with the LBM field; the independent comparison at Re=400, N=128 reports 1.39% at n=1.25 and 0.78% at n=4. (c) The wall-band diagnostics remain resolution-sensitive, so the reference grid is used for ordering rather than converged amplitudes.
-Alt text: Complementary evidence. (a) Integrated kinetic energy saturates at high n. (b) The independent P2/P1 solver agrees with the LBM field; the independent comparison at Re=400, N=128 reports 1.39% at n=1.25 and 0.78% at n=4. (c) The wall-band diagnostics remain resolution-sensitive, so the reference grid is used for ordering rather than converged amplitudes.
+Caption: Complementary evidence at larger display size. (a) Integrated kinetic energy saturates at high n. (b) The independent P2/P1 solver agrees with the LBM field; at Re=400, N=128 the interior discrepancy is 1.39% at n=1.25 and 0.78% at n=4. (c) Wall-band diagnostics remain resolution-sensitive, so the reference grid is used for ordering rather than converged amplitudes.
+Alt text: Complementary evidence at larger display size. (a) Integrated kinetic energy saturates at high n. (b) The independent P2/P1 solver agrees with the LBM field; at Re=400, N=128 the interior discrepancy is 1.39% at n=1.25 and 0.78% at n=4. (c) Wall-band diagnostics remain resolution-sensitive, so the reference grid is used for ordering rather than converged amplitudes.
 
-[MAIN ARTICLE item 6; Table; tab:kinetic]
-Caption: Integrated kinetic energy at Re=1000, N=128, with the two area normalizations kept distinct.
-Alt text: Integrated kinetic energy at Re=1000, N=128, with the two area normalizations kept distinct.
-
-[MAIN ARTICLE item 7; Figure; fig:budget]
+[MAIN ARTICLE item 6; Figure; fig:budget]
 Caption: Additive core/wall budget at N=256, δ=0.05L_c. All three curves use A_mask as denominator; in this detailed case the increase from n=4 to n=8 is mostly carried by D_core/A_mask. The supplementary figure extends the same budget to Re=100,500,1000 and both band thicknesses.
 Alt text: Additive core/wall budget at N=256, δ=0.05L_c. All three curves use A_mask as denominator; in this detailed case the increase from n=4 to n=8 is mostly carried by D_core/A_mask. The supplementary figure extends the same budget to Re=100,500,1000 and both band thicknesses.
 
-[MAIN ARTICLE item 8; Table; tab:budget]
+[MAIN ARTICLE item 7; Table; tab:budget]
 Caption: Additive budget at Re=1000, N=256, δ=0.05L_c. Values are per unit A_mask.
 Alt text: Additive budget at Re=1000, N=256, δ=0.05L_c. Values are per unit A_mask.
 
-[MAIN ARTICLE item 9; Figure; fig:juncut]
-Caption: Fixed-wall-cutoff comparison, junction contribution versus (r/h), and descriptive D(N)=a+b N fits. These panels quantify cutoff sensitivity; they are not evidence of converged continuum dissipation or an asymptotic logarithmic law.
-Alt text: Fixed-wall-cutoff comparison, junction contribution versus (r/h), and descriptive D(N)=a+b N fits. These panels quantify cutoff sensitivity; they are not evidence of converged continuum dissipation or an asymptotic logarithmic law.
+[MAIN ARTICLE item 8; Figure; fig:juncut]
+Caption: Fixed-wall-cutoff comparison, junction contribution versus (r/h), and descriptive D(N)=a+b N fits. The excluded fit support is r=16h and is not a fixed physical r_0=0.5. These panels quantify cutoff sensitivity; they are not evidence of converged continuum dissipation or an asymptotic logarithmic law.
+Alt text: Fixed-wall-cutoff comparison, junction contribution versus (r/h), and descriptive D(N)=a+b N fits. The excluded fit support is r=16h and is not a fixed physical r_0=0.5. These panels quantify cutoff sensitivity; they are not evidence of converged continuum dissipation or an asymptotic logarithmic law.
 
-[MAIN ARTICLE item 10; Figure; fig:junction]
+[MAIN ARTICLE item 9; Figure; fig:junction]
 Caption: Dissipation inside the two junction disks, normalized by the total on the gradient-valid mask. The dependence on excision radius is the expected consequence of a discontinuous lid law without regularization.
 Alt text: Dissipation inside the two junction disks, normalized by the total on the gradient-valid mask. The dependence on excision radius is the expected consequence of a discontinuous lid law without regularization.
 
-[MAIN ARTICLE item 11; Figure; fig:curvature]
+[MAIN ARTICLE item 10; Figure; fig:curvature]
 Caption: Window curvature and dissipation-weighted curvature from the final periodic arclength interpolation.
 Alt text: Window curvature and dissipation-weighted curvature from the final periodic arclength interpolation.
 
-[MAIN ARTICLE item 12; Table; tab:fits]
-Caption: Fit-window sensitivity on matched fields. Fit supports, exclusions and the estimator are reported in Supplementary Sec. S12; a dash means the vertex was rejected.
-Alt text: Fit-window sensitivity on matched fields. Fit supports, exclusions and the estimator are reported in Supplementary Sec. S12; a dash means the vertex was rejected.
-
-[MAIN ARTICLE item 13; Table; tab:crossings]
-Caption: Bracketed crossings of adjacent-exponent ratios. ``No crossing'' means the ratio keeps its sign over the available bracket; the estimator is linear interpolation of (ratio).
-Alt text: Bracketed crossings of adjacent-exponent ratios. ``No crossing'' means the ratio keeps its sign over the available bracket; the estimator is linear interpolation of (ratio).
-
-[MAIN ARTICLE item 14; Figure; fig:minima]
+[MAIN ARTICLE item 11; Figure; fig:minima]
 Caption: Fit-window sensitivity of n^*_D/A on the same computed fields.
 Alt text: Fit-window sensitivity of n^*_D/A on the same computed fields.
 
-[MAIN ARTICLE item 15; Table; tab:common]
-Caption: Common-support dissipation at N=128 and n_ref=6. Here ε_D=100|D_LBM^M-D_FEM^M|/D_FEM^M; the last column integrates the same FEM strain over the full domain.
-Alt text: Common-support dissipation at N=128 and n_ref=6. Here ε_D=100|D_LBM^M-D_FEM^M|/D_FEM^M; the last column integrates the same FEM strain over the full domain.
-
-[MAIN ARTICLE item 16; Figure; fig:femjunction]
+[MAIN ARTICLE item 12; Figure; fig:femjunction]
 Caption: The two tangential-lid junctions. The FEM Dirichlet assignment uses y>0 without interpolation; at the right junction y=0 is fixed, while the mapped left-junction coordinate has y=+1.2×10^-16 and is assigned to the moving wall.
 Alt text: The two tangential-lid junctions. The FEM Dirichlet assignment uses y>0 without interpolation; at the right junction y=0 is fixed, while the mapped left-junction coordinate has y=+1.2×10^-16 and is assigned to the moving wall.
 
-[MAIN ARTICLE item 17; Table; tab:fem]
-Caption: Directly integrated FEM dissipation at Re=1000 for mesh levels n_ref=4,5,6, with the lattice reconstruction diagnostics at N=128. The mesh change is reported directly; no Richardson estimate is used.
-Alt text: Directly integrated FEM dissipation at Re=1000 for mesh levels n_ref=4,5,6, with the lattice reconstruction diagnostics at N=128. The mesh change is reported directly; no Richardson estimate is used.
-
-[MAIN ARTICLE item 18; Figure; fig:fem]
+[MAIN ARTICLE item 13; Figure; fig:fem]
 Caption: Directly integrated FEM dissipation across mesh levels and lattice reconstruction errors from sampled FEM fields. The reconstruction panel is a post-processing test, not an independent FEM solve.
 Alt text: Directly integrated FEM dissipation across mesh levels and lattice reconstruction errors from sampled FEM fields. The reconstruction panel is a post-processing test, not an independent FEM solve.
 
@@ -94,7 +74,7 @@ Alt text: Square-cavity LBM center-line velocity profiles versus Ghia et al.\ (1
 Caption: Curved-boundary verification on the exact rigid-rotation solution u=(y,-x) of a rotating disk at Re=100, in diffusive scaling U_lid(N)=0.05×32/N: L_2/L_∞ errors, lid velocity, iterations and final residual.
 Alt text: Curved-boundary verification on the exact rigid-rotation solution u=(y,-x) of a rotating disk at Re=100, in diffusive scaling U_lid(N)=0.05×32/N: L_2/L_∞ errors, lid velocity, iterations and final residual.
 
-[SUPPLEMENTARY ONLINE MATERIAL item 4; Table; unlabelled]
+[SUPPLEMENTARY ONLINE MATERIAL item 4; Table; tab:lbmfem]
 Caption: Interior relative L_2 discrepancy (%) between MRT-LBM and the independent Taylor--Hood P_2/P_1 FEM solution, tabulated by comparison level. The lattice resolution N and the finite-element refinement n_refs are independent discretisation levels and are not matched to one another; each row therefore states the mesh it actually used, as triangle and total-unknown counts (2(V+E)+V) measured on the assembled mesh, so that the finite-element side of every comparison is fully specified. N=64 at Re=100 and N=96 at Re=400 are the original cross-checks; N=128 at Re=400 brings the comparison to the reference resolution of the database and n=1.25 to the family, and it is made against the same 74\,371-unknown mesh as the N=96 row; N=256 at Re=400 is an additional refined comparison, and because it refines the lattice and the finite-element mesh together (65\,536 triangles, 296\,195 unknowns) it cannot attribute the residual to either side --- it only checks that the discrepancy decreases and that the pointed tip stays the worst of the family. At that level the discrepancy is evaluated on the intersection of the two discretisations: 24 of the 60\,132 LBM fluid nodes of the n=4 case fall outside the assembled triangulation and are excluded from both metrics, against 0 for n=1.25. All LBM residuals below 10^-8; every FEM solve converged, in 22 Picard iterations at n_refs=6 and in 18 and 22 at n_refs=7.
 Alt text: Interior relative L_2 discrepancy (%) between MRT-LBM and the independent Taylor--Hood P_2/P_1 FEM solution, tabulated by comparison level. The lattice resolution N and the finite-element refinement n_refs are independent discretisation levels and are not matched to one another; each row therefore states the mesh it actually used, as triangle and total-unknown counts (2(V+E)+V) measured on the assembled mesh, so that the finite-element side of every comparison is fully specified. N=64 at Re=100 and N=96 at Re=400 are the original cross-checks; N=128 at Re=400 brings the comparison to the reference resolution of the database and n=1.25 to the family, and it is made against the same 74\,371-unknown mesh as the N=96 row; N=256 at Re=400 is an additional refined comparison, and because it refines the lattice and the finite-element mesh together (65\,536 triangles, 296\,195 unknowns) it cannot attribute the residual to either side --- it only checks that the discrepancy decreases and that the pointed tip stays the worst of the family. At that level the discrepancy is evaluated on the intersection of the two discretisations: 24 of the 60\,132 LBM fluid nodes of the n=4 case fall outside the assembled triangulation and are excluded from both metrics, against 0 for n=1.25. All LBM residuals below 10^-8; every FEM solve converged, in 22 Picard iterations at n_refs=6 and in 18 and 22 at n_refs=7.
 
@@ -180,15 +160,15 @@ Alt text: Tangential-lid junction convention. The upper arc is moving and the lo
 
 [SUPPLEMENTARY ONLINE MATERIAL item 25; Table; tab:juncut]
 Caption: Thirty-case refinement difference D_256/D_128-1 with a fixed physical wall cutoff r_0.
-Alt text: Thirty-case refinement difference with fixed physical wall cutoffs. The median falls from 21.37 percent at zero cutoff to 8.77 percent at the largest cutoff of 0.5.
+Alt text: Thirty-case refinement difference D_256/D_128-1 with a fixed physical wall cutoff r_0.
 
 [SUPPLEMENTARY ONLINE MATERIAL item 26; Table; tab:logfit]
-Caption: Descriptive fits D(N)=a+b N on the N=64,128,256 ladder. The ``total'' support includes the near-junction cells; the r_0=0.5 support excludes them.
-Alt text: Descriptive logarithmic fit coefficients for total and cutoff-excluded dissipation on three grids. High R-squared values describe the sampled ladder only.
+Caption: Descriptive fits D(N)=a+b N on the N=64,128,256 ladder. The ``total'' support includes the near-junction cells; the r=16h support excludes them. The latter is grid-scaled, not a fixed physical r_0=0.5.
+Alt text: Descriptive fits D(N)=a+b N on the N=64,128,256 ladder. The ``total'' support includes the near-junction cells; the r=16h support excludes them. The latter is grid-scaled, not a fixed physical r_0=0.5.
 
 [SUPPLEMENTARY ONLINE MATERIAL item 27; Figure; fig:juncut]
-Caption: (a) Thirty-case fixed-wall-cutoff refinement comparison. (b) D_junction(r,N) versus (r/h). (c) Descriptive D(N)=a+b N fits on the three-grid ladder. None of the panels establishes converged continuum dissipation or asymptotic log scaling.
-Alt text: Three-panel junction diagnostic: fixed physical cutoffs reduce the median refinement difference, junction dissipation varies with the logarithm of the cutoff scaled by grid spacing, and three-grid logarithmic fits have high R-squared values. These are descriptive diagnostics.
+Caption: (a) Thirty-case fixed-wall-cutoff refinement comparison. (b) D_junction(r,N) versus (r/h). (c) Descriptive D(N)=a+b N fits on the three-grid ladder; the excluded support is r=16h, not a fixed physical r_0=0.5. None of the panels establishes converged continuum dissipation or asymptotic log scaling.
+Alt text: (a) Thirty-case fixed-wall-cutoff refinement comparison. (b) D_junction(r,N) versus (r/h). (c) Descriptive D(N)=a+b N fits on the three-grid ladder; the excluded support is r=16h, not a fixed physical r_0=0.5. None of the panels establishes converged continuum dissipation or asymptotic log scaling.
 
 [SUPPLEMENTARY ONLINE MATERIAL item 28; Table; tab:lmov]
 Caption: Upper-half moving-wall arclength for L_c=2. The n=2 value is ; the diamond and square limits are validated separately below.
@@ -196,7 +176,7 @@ Alt text: Upper-half moving-wall arclength for L_c=2. The n=2 value is ; the dia
 
 [SUPPLEMENTARY ONLINE MATERIAL item 29; Table; tab:inventory]
 Caption: Campaign inventory. ``Distinct'' counts unique (n,Re) pairs. The targeted projected-lid control contributes 13 converged fields at eight (n,Re) pairs.
-Alt text: Campaign inventory. ``Distinct'' counts unique Reynolds--exponent pairs. The targeted projected-lid control contributes thirteen converged fields at eight such pairs.
+Alt text: Campaign inventory. ``Distinct'' counts unique (n,Re) pairs. The targeted projected-lid control contributes 13 converged fields at eight (n,Re) pairs.
 
 [SUPPLEMENTARY ONLINE MATERIAL item 30; Table; tab:fit_sens]
 Caption: Fit-window sensitivity on the N=128 union at the three central Reynolds numbers. The margin is the relative depth difference between the fitted vertex and the sampled argmin; a negative value means the fitted vertex lies above the sample minimum.
@@ -204,11 +184,11 @@ Alt text: Fit-window sensitivity on the N=128 union at the three central Reynold
 
 [SUPPLEMENTARY ONLINE MATERIAL item 31; Table; tab:fit_fine]
 Caption: Fit diagnostics on matched N=256 fields and on the extended N=384/N=512 ladders. A dash means that no valid convex vertex was obtained; the N=384/N=512 entries use four-point supports on the sparse high-resolution set.
-Alt text: Fit diagnostics on finer grids. The five-point N=256 D minima remain near n=2.6--2.7, while the area-normalized centres move toward n=3.5--4.0 and the sparse high-resolution fits are used only as diagnostics.
+Alt text: Fit diagnostics on matched N=256 fields and on the extended N=384/N=512 ladders. A dash means that no valid convex vertex was obtained; the N=384/N=512 entries use four-point supports on the sparse high-resolution set.
 
 [SUPPLEMENTARY ONLINE MATERIAL item 32; Table; tab:crossingdiag]
 Caption: Log-interpolated crossing brackets of adjacent-exponent ratios on the sampled Reynolds grids. ``No crossing'' means that the ratio keeps its sign over the available bracket. All entries are descriptive of the sampled sets.
-Alt text: Crossing diagnostics for adjacent-exponent ratios on sampled grids. The area-normalized three-to-four crossing drifts from 338 on the N=128 set to 199 on the N=512 set, while integrated-dissipation crossings disappear on finer sets.
+Alt text: Log-interpolated crossing brackets of adjacent-exponent ratios on the sampled Reynolds grids. ``No crossing'' means that the ratio keeps its sign over the available bracket. All entries are descriptive of the sampled sets.
 
 [SUPPLEMENTARY ONLINE MATERIAL item 33; Table; tab:cornerdiag]
 Caption: Multi-resolution corner diagnostics at n=8, Re=1000. f_corner is the dissipation fraction in the 0.20\,L_c corner bands; ψ_corner,max is the strongest non-primary extremum within 0.25\,L_c of a corner; s_corner is its corner distance in units of L; n_vp is the number of extrema above the 1% threshold.
@@ -219,9 +199,25 @@ Caption: Secondary corner extremum at n=8. Of the 190 cases on the grid, one res
 Alt text: Secondary corner extremum at n=8. Of the 190 cases on the grid, one resolves a second extremum above the 1% threshold of the primary circulation. At N=128, the count changes from one to two between Re=950 and Re=1000; this is a 1% detection-threshold crossing bracket.
 
 [SUPPLEMENTARY ONLINE MATERIAL item 35; Table; tab:projtarget]
-Caption: Targeted tangential/projected lid comparison. Ratios are projected over tangential; D/A_mask uses the gradient-valid area and KE/A uses the exact geometric area. The velocity norm is evaluated on the common fluid support.
-Alt text: Targeted lid-law comparison table for thirteen matched fields. Projected over tangential ratios of dissipation density range from 0.391 to 0.906; relative velocity differences range from 0.306 to 0.577.
+Caption: Targeted tangential/projected lid comparison. Ratios are projected over tangential; D/A_mask uses the gradient-valid area and KE/A uses the exact geometric area. The last column divides the D/A ratio by the ∈t u_lid^2ds ratio (0.5 on the sampled geometries), giving a direct forcing-normalized comparison. The velocity norm uses the common fluid support.
+Alt text: Targeted tangential/projected lid comparison. Ratios are projected over tangential; D/A_mask uses the gradient-valid area and KE/A uses the exact geometric area. The last column divides the D/A ratio by the ∈t u_lid^2ds ratio (0.5 on the sampled geometries), giving a direct forcing-normalized comparison. The velocity norm uses the common fluid support.
 
 [SUPPLEMENTARY ONLINE MATERIAL item 36; Figure; fig:projtarget]
-Caption: Dissipation density versus n for the tangential and projected lid laws: (a) N=128 and (b) N=256. Solid lines are Re=100, dashed lines are Re=1000; circles denote tangential and squares projected results. The projected law shifts the sampled low-loss band toward n=2.
-Alt text: Two log-log panels compare dissipation density against superelliptic exponent for tangential and projected lid laws on 128 and 256 grids. In every complete ladder the tangential sampled minimum at n equals four moves to n equals two under projection, with a shallower relative depth.
+Caption: Dissipation density versus n for the tangential and projected lid laws: (a) N=128 and (b) N=256; (c) forcing-normalized D/A ratio (raw ratio divided by 0.5), with the dotted line at unity. Solid lines are Re=100, dashed lines are Re=1000; circles denote tangential and squares projected results in (a,b), while markers in (c) distinguish N=128 (circles) from N=256 (squares). The sampled low-loss band moves toward n=2, but the projected continuous argmin is only bracketed by the sampled exponents n=1.5 and n=4.
+Alt text: Dissipation density versus n for the tangential and projected lid laws: (a) N=128 and (b) N=256; (c) forcing-normalized D/A ratio (raw ratio divided by 0.5), with the dotted line at unity. Solid lines are Re=100, dashed lines are Re=1000; circles denote tangential and squares projected results in (a,b), while markers in (c) distinguish N=128 (circles) from N=256 (squares). The sampled low-loss band moves toward n=2, but the projected continuous argmin is only bracketed by the sampled exponents n=1.5 and n=4.
+
+[SUPPLEMENTARY ONLINE MATERIAL item 37; Table; tab:kinetic_moved]
+Caption: Integrated kinetic energy at Re=1000, N=128, with the two area normalizations kept distinct.
+Alt text: Integrated kinetic energy at Re=1000, N=128, with the two area normalizations kept distinct.
+
+[SUPPLEMENTARY ONLINE MATERIAL item 38; Table; tab:fit_moved]
+Caption: Fit-window sensitivity on matched fields. Supports, exclusions and the estimator are described in Sec. the cited reference; a dash means the vertex was rejected.
+Alt text: Fit-window sensitivity on matched fields. Supports, exclusions and the estimator are described in Sec. the cited reference; a dash means the vertex was rejected.
+
+[SUPPLEMENTARY ONLINE MATERIAL item 39; Table; tab:crossing_moved]
+Caption: Bracketed crossings of adjacent-exponent ratios. ``No crossing'' means the ratio keeps its sign over the available bracket; the estimator is linear interpolation of (ratio).
+Alt text: Bracketed crossings of adjacent-exponent ratios. ``No crossing'' means the ratio keeps its sign over the available bracket; the estimator is linear interpolation of (ratio).
+
+[SUPPLEMENTARY ONLINE MATERIAL item 40; Table; tab:fem_moved]
+Caption: Directly integrated FEM dissipation at Re=1000 for mesh levels n_ref=4,5,6, with the lattice reconstruction diagnostics at N=128. The mesh change is reported directly; no Richardson estimate is used.
+Alt text: Directly integrated FEM dissipation at Re=1000 for mesh levels n_ref=4,5,6, with the lattice reconstruction diagnostics at N=128. The mesh change is reported directly; no Richardson estimate is used.
