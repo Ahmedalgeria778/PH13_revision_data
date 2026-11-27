@@ -3,7 +3,8 @@
 
 All quantitative panels are generated from the archived CSVs and the saved
 N=128 fields.  No numeric value is typed by hand.  The readability edits in
-this version change fonts, tick selection and layout only: the plotted data
+this version use distinct markers and line styles for every case, so that the
+figures remain interpretable after black-and-white printing; the plotted data
 and the plotted samples are unchanged.
 
 Set PH13_FIG_DIR to write into a different figs_new directory; --only limits
@@ -22,6 +23,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.lines import Line2D
 
 OUT = Path(__file__).resolve().parent
 FIG = Path(os.environ.get("PH13_FIG_DIR", str(OUT / "figs_new")))
@@ -30,6 +32,15 @@ ROOT = Path(r"C:\Users\user\Documents\Default Project\GIRVD (revised)")
 DATA = ROOT / "corrections for reviewer" / "PH13_revision_data" / "data"
 FIELD_DATA = ROOT / "05_dataset" / "data"
 _PHYSICS = None
+
+# Distinct marker/line-style pairs so that colour is never the only discriminator
+# when the figures are printed in black and white.
+RE_STYLES = {
+    100.0: ("o", "-"),
+    300.0: ("s", "--"),
+    500.0: ("^", "-."),
+    1000.0: ("D", ":"),
+}
 
 
 def readcsv(path):
@@ -55,11 +66,11 @@ def fig_budget():
         sub.sort(key=lambda r: float(r["n"]))
         n = [float(r["n"]) for r in sub]
         ax.plot(n, [float(r["Dmask_over_A"]) for r in sub], "k-o", lw=1.8,
-                label=r"$D/A_{\rm mask}$")
-        ax.plot(n, [float(r["Dwall_over_A"]) for r in sub], "s--", ms=4,
-                label=r"$D_{\rm wall}/A_{\rm mask}$")
-        ax.plot(n, [float(r["Dcore_over_A"]) for r in sub], "^--", ms=4,
-                label=r"$D_{\rm core}/A_{\rm mask}$")
+                ms=4, label=r"$D/A_{\rm mask}$")
+        ax.plot(n, [float(r["Dwall_over_A"]) for r in sub], "ks--", lw=1.6,
+                ms=4, label=r"$D_{\rm wall}/A_{\rm mask}$")
+        ax.plot(n, [float(r["Dcore_over_A"]) for r in sub], "k^:", lw=1.8,
+                ms=5, label=r"$D_{\rm core}/A_{\rm mask}$")
         ax.set_title("(%s) $Re=%d,\\ N=256$" % ("abc"[i], Re), fontsize=13)
         ax.set_xlabel(r"$n$", fontsize=13)
         ax.tick_params(labelsize=11, pad=5)
@@ -76,13 +87,21 @@ def fig_budget():
 def fig_junction():
     rows = readcsv(DATA / "junction" / "junction_budget.csv")
     fig, axes = plt.subplots(1, 2, figsize=(11.5, 4.4), sharey=True)
+    n_styles = {
+        1.25: ("o", "-"),
+        2.0: ("s", "--"),
+        4.0: ("^", "-."),
+        8.0: ("D", ":"),
+    }
     for i, (ax, Re) in enumerate(zip(axes, (100.0, 1000.0))):
         for n in (1.25, 2.0, 4.0, 8.0):
             sub = [r for r in rows if float(r["Re"]) == Re and abs(float(r["n"]) - n) < 1e-9]
             sub.sort(key=lambda r: float(r["r_over_Lc"]))
+            marker, ls = n_styles[n]
             ax.plot([float(r["r_over_Lc"]) for r in sub],
-                    [100 * float(r["f_junction"]) for r in sub], "o-",
-                    ms=4, label=r"$n=%g$" % n)
+                    [100 * float(r["f_junction"]) for r in sub],
+                    marker=marker, linestyle=ls, color="k", lw=1.5, ms=4.5,
+                    label=r"$n=%g$" % n)
         ax.set_title("(%s) $Re=%d$" % ("ab"[i], Re), fontsize=13)
         ax.set_xlabel(r"excision radius $r/L_c$", fontsize=13)
         ax.tick_params(labelsize=11, pad=5)
@@ -122,7 +141,9 @@ def fig_curve_dissipation():
         n = [float(r["n"]) for r in sub]
         d = [float(r["dissipation"]) for r in sub]
         if Re in highlighted:
-            ax.plot(n, d, "o-", ms=4.5, lw=1.8, color=colors[Re], label=r"$Re=%d$" % Re)
+            marker, ls = RE_STYLES[Re]
+            ax.plot(n, d, marker=marker, linestyle=ls, ms=4.5, lw=1.8,
+                    color=colors[Re], label=r"$Re=%d$" % Re)
         else:
             ax.plot(n, d, "-", lw=0.8, color="0.78", zorder=0)
     ax.set_xlabel("superellipse exponent $n$", fontsize=11)
@@ -149,7 +170,8 @@ def fig_map_dissipation():
         da = np.array([float(r["dissipation"]) / float(r["area_mask"]) for r in sub])
         normalized = da / np.nanmin(da)
         if Re in highlighted:
-            ax.plot(n, normalized, "o-", ms=5, lw=1.8,
+            marker, ls = RE_STYLES[Re]
+            ax.plot(n, normalized, marker=marker, linestyle=ls, ms=5, lw=1.8,
                     color=colors[Re], label=r"$Re=%d$" % Re)
         else:
             ax.plot(n, normalized, "-", lw=0.8, color="0.78", zorder=0)
@@ -266,10 +288,13 @@ def fig_curvature():
     axes[0].legend(fontsize=10, frameon=False)
     axes[0].grid(alpha=0.3)
 
-    for Re, marker in ((100.0, "o"), (500.0, "s"), (1000.0, "^")):
+    for Re, (marker, ls) in ((100.0, RE_STYLES[100.0]),
+                             (500.0, RE_STYLES[500.0]),
+                             (1000.0, RE_STYLES[1000.0])):
         s = sorted((r for r in rows if float(r["Re"]) == Re), key=lambda r: float(r["n"]))
         axes[1].plot([float(r["kappa_w_rms"]) for r in s],
-                     [float(r["D_over_A_mask"]) for r in s], marker + "-", ms=4,
+                     [float(r["D_over_A_mask"]) for r in s],
+                     marker=marker, linestyle=ls, ms=4.5, lw=1.6,
                      label=r"$Re=%d$" % Re)
     axes[1].set_xlabel(r"$\kappa_{w,\rm rms}$", fontsize=12)
     axes[1].set_ylabel(r"$D/A_{\rm mask}$", fontsize=12)
@@ -298,16 +323,20 @@ def fig_nearwall_large_axes():
     axes[0].legend(fontsize=9, frameon=False)
     axes[0].grid(alpha=0.3)
 
+    re_markers = {100.0: "o", 500.0: "s", 1000.0: "^"}
     for Re in res:
         s = sorted((r for r in rows if float(r["Re"]) == Re), key=lambda r: float(r["n"]))
         axes[1].plot([float(r["n"]) for r in s], [float(r["f_band_0.025"]) for r in s],
-                     "o-", ms=4, label=r"$Re=%d$" % Re)
+                     marker=re_markers[Re], linestyle="-", ms=4.5, lw=1.6,
+                     label=r"$Re=%d$, $\delta=0.025L_c$" % Re)
         axes[1].plot([float(r["n"]) for r in s], [float(r["f_band_0.05"]) for r in s],
-                     "s--", ms=3.5, alpha=0.7)
+                     marker=re_markers[Re], linestyle="--", ms=3.5, lw=1.4,
+                     alpha=0.85,
+                     label=r"$Re=%d$, $\delta=0.05L_c$" % Re)
     axes[1].set_title("Wall-band dissipation share", fontsize=12)
     axes[1].set_xlabel(r"$n$", fontsize=12)
     axes[1].set_ylabel(r"$D_\delta/D$", fontsize=12)
-    axes[1].legend(fontsize=9, frameon=False)
+    axes[1].legend(fontsize=7.5, frameon=False, ncol=2)
     axes[1].grid(alpha=0.3)
 
     for Re in res:
@@ -341,12 +370,13 @@ def fig_minima():
     if not selected:
         return
     fig, ax = plt.subplots(figsize=(8.2, 4.4))
-    for est, marker in (("OLS quadratic, 3 points", "o"),
-                        ("OLS quadratic, 5 points", "s")):
+    for est, marker, ls in (("OLS quadratic, 3 points", "o", "-"),
+                            ("OLS quadratic, 5 points", "s", "--")):
         s = [r for r in selected if r["estimator"] == est]
         s.sort(key=lambda r: float(r["Re"]))
         ax.plot([float(r["Re"]) for r in s], [float(r["n_star"]) for r in s],
-                marker + "-", ms=5, label=est.replace("OLS quadratic, ", ""))
+                marker=marker, linestyle=ls, color="k", ms=5, lw=1.6,
+                label=est.replace("OLS quadratic, ", ""))
     ax.set_xlabel(r"$Re$", fontsize=13)
     ax.set_ylabel(r"fitted $n^*_{D/A}$", fontsize=13)
     ax.tick_params(labelsize=11, pad=5)
@@ -366,38 +396,51 @@ def fig_fem():
     if not rows:
         return
     fig, axes = plt.subplots(1, 2, figsize=(12.0, 4.6))
+    n_markers = {1.25: "o", 2.0: "s", 4.0: "^", 8.0: "D"}
+    re_styles = {100.0: "-", 400.0: "--", 1000.0: "-."}
     for Re in (100.0, 400.0, 1000.0):
         s = [r for r in rows if float(r["Re"]) == Re]
         s.sort(key=lambda r: (float(r["n"]), int(r["nrefs"])))
         for n in (1.25, 2.0, 4.0, 8.0):
             t = [r for r in s if abs(float(r["n"]) - n) < 1e-9]
             axes[0].plot([int(r["nrefs"]) for r in t],
-                         [float(r["D_FEM_exact"]) for r in t], "o-", ms=3,
-                         label=r"$n=%g$" % n if Re == 1000.0 else None)
+                         [float(r["D_FEM_exact"]) for r in t],
+                         marker=n_markers[n], linestyle=re_styles[Re],
+                         color="0.25", ms=4, lw=1.4)
+    n_handles = [Line2D([], [], color="0.25", marker=n_markers[n],
+                        linestyle="None", ms=5, label=r"$n=%g$" % n)
+                 for n in (1.25, 2.0, 4.0, 8.0)]
+    re_handles = [Line2D([], [], color="0.25", linestyle=re_styles[Re],
+                         lw=1.6, label=r"$Re=%d$" % Re)
+                  for Re in (100.0, 400.0, 1000.0)]
+    axes[0].legend(handles=n_handles + re_handles, fontsize=8, frameon=False,
+                   ncol=2, handlelength=2.4)
     axes[0].set_xlabel("mesh refinement level", fontsize=13)
     axes[0].set_ylabel(r"$D_{\rm FEM}=2\nu\int S:S$", fontsize=13)
     axes[0].tick_params(labelsize=11, pad=5)
     axes[0].grid(alpha=0.3)
-    axes[0].legend(fontsize=10, frameon=False)
     axes[0].set_title("(a) Exact integrated dissipation, P2/P1", fontsize=13)
 
     q = DATA / "fem" / "fem_gradient_reconstruction.csv"
     if q.exists():
         rr = [r for r in readcsv(q) if int(r["n_points"]) >= 1000]
+        re_markers = {100.0: "o", 400.0: "s", 1000.0: "^"}
         for Re in (100.0, 400.0, 1000.0):
             s = [r for r in rr if float(r["Re"]) == Re]
             s.sort(key=lambda r: float(r["n"]))
             axes[1].plot([float(r["n"]) for r in s],
-                         [100 * float(r["eps_grad"]) for r in s], "o-", ms=4,
+                         [100 * float(r["eps_grad"]) for r in s],
+                         marker=re_markers[Re], linestyle="-", ms=4.5, lw=1.5,
                          label=r"$Re=%d$, grad" % Re)
             axes[1].plot([float(r["n"]) for r in s],
-                         [100 * float(r["rel_D_lattice_error"]) for r in s], "s--",
-                         ms=3, label=r"$Re=%d$, $D$" % Re)
+                         [100 * float(r["rel_D_lattice_error"]) for r in s],
+                         marker=re_markers[Re], linestyle="--", ms=3.5, lw=1.3,
+                         label=r"$Re=%d$, $D$" % Re)
     axes[1].set_xlabel(r"$n$", fontsize=13)
     axes[1].set_ylabel("relative error [%]", fontsize=13)
     axes[1].tick_params(labelsize=11, pad=5)
     axes[1].grid(alpha=0.3)
-    axes[1].legend(fontsize=9, frameon=False)
+    axes[1].legend(fontsize=7.5, frameon=False, ncol=2)
     axes[1].set_title("(b) FD reconstruction from sampled FEM field", fontsize=13)
     fig.tight_layout()
     fig.savefig(FIG / "fig_fem_validation.png", dpi=200)

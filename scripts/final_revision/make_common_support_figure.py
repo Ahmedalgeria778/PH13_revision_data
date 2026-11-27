@@ -29,15 +29,19 @@ eps = np.array([float(r["eps_D_percent"]) for r in rows])
 
 fig, (ax, ax2) = plt.subplots(2, 1, figsize=(9.6, 6.6), sharex=True,
                               gridspec_kw={"height_ratios": [3, 1.4]})
-ax.bar(x - w, lbm, w, label=r"$D_{\rm LBM}^{M}$", color="#1f4e79")
-ax.bar(x, fem_m, w, label=r"$D_{\rm FEM}^{M}$", color="#2e8b57")
-ax.bar(x + w, fem_o, w, label=r"$D_{\rm FEM}^{\Omega}$", color="#b22222")
+# Grayscale-safe bars: fill level and hatch both encode the series.
+ax.bar(x - w, lbm, w, label=r"$D_{\rm LBM}^{M}$", color="0.82",
+       edgecolor="k", linewidth=0.8, hatch="//")
+ax.bar(x, fem_m, w, label=r"$D_{\rm FEM}^{M}$", color="white",
+       edgecolor="k", linewidth=0.8, hatch="..")
+ax.bar(x + w, fem_o, w, label=r"$D_{\rm FEM}^{\Omega}$", color="0.45",
+       edgecolor="k", linewidth=0.8, hatch="\\\\")
 ax.set_ylabel("dissipation $D$")
 ax.set_title("Common-support dissipation and full-domain FEM support effect")
 ax.grid(axis="y", alpha=0.25)
 ax.legend(fontsize=9, ncol=3)
 
-ax2.bar(x, eps, 0.5, color="#6a3d9a")
+ax2.bar(x, eps, 0.5, color="white", edgecolor="k", linewidth=0.8, hatch="xx")
 for i, value in enumerate(eps):
     ax2.text(i, value + 0.12, f"{value:.2f}%", ha="center", fontsize=7.5)
 ax2.set_ylabel(r"$\varepsilon_D$ (%)")

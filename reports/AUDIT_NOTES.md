@@ -145,10 +145,40 @@ Une dernière passe de rédaction a retiré du corps de l'article et du supplém
 
 ### 8.7 Provenance des figures après l'audit final
 
-* `convergence_paroi.png` a été régénéré depuis `06_physics/etude_convergence_paroi.py` (`CASES=(1.25,300), (3,1000), (8,1000)`, `NS=64,128,256`) et synchronisé dans `submission_package/figs_new`, `submission_package/figs`, la racine de `PH13_manuscript`, `REV/figures/final_supplement` et `REV/supplement/figs_new`. La copie finale fait 166 143 octets et a pour SHA-256 `78fd46f8cea28f90d22ca236cb1d42c68435c93e145c0653b0096007dec5caa4`; elle remplace l'ancienne figure six cas qui était incompatible avec la légende S14. Le hachage diffère de l'ancien exemplaire de septembre parce que la figure a été recalculée avec l'environnement Matplotlib courant, mais le script et les trois cas sont canoniques.
-* `curve_kinetic_energy_vs_n.png` est une figure legacy validée, produite par `05_dataset/data/analyse_physique_mapping.py` et conservée dans `06_physics/results_190`. Elle est désormais copiée explicitement dans `figs_new` et dans les dossiers de supplément final (SHA-256 `caa5d180c3af7101e94cd5cd258dc461ef770b24cfeb8d52c72b5770f34d8c0c`) plutôt que résolue seulement par le repli `figs/`.
-* `fig_supp_corewall_Re100_500_1000.png` et `fig_supp_fem_junction_schematic.png` n'ont pas de générateur vérifié dans le dépôt. Leurs copies finales sont les exemplaires archivés `figures/final_supplement` / `figs_new`, dont les valeurs ont été recoupées avec `data/core_wall/core_wall_budget.csv` et avec la convention de jonction FEM (`y=0` à droite, `y=+1.22e-16` à gauche). L'étiquette du panneau est volontairement arrondie à deux chiffres significatifs; les légendes le précisent.
+* `convergence_paroi.png` a été régénéré depuis `06_physics/etude_convergence_paroi.py` (`CASES=(1.25,300), (3,1000), (8,1000)`, `NS=64,128,256`) et synchronisé dans `submission_package/figs_new`, `submission_package/figs`, la racine de `PH13_manuscript`, `REV/figures/final_supplement`, `REV/figures` et `REV/supplement/figs_new` / `figs`. La copie finale fait 164 881 octets et a pour SHA-256 `3a27d81b88a417323ad0a9893a9389d8d8a4c11f7064db7d6864f8a5b509600b`; elle remplace l'ancienne figure six cas qui était incompatible avec la légende S14.
+* `curve_kinetic_energy_vs_n.png` est produite par `scripts/final_revision/make_kinetic_energy_figure.py`, qui importe `_plot_curves` de `05_dataset/data/analyse_physique_mapping.py` et relit `06_physics/results_190/physics_observables.csv`. La copie finale fait 206 075 octets et a pour SHA-256 `c9d9f83ed5c7b92dd1512f83a96e8142376f4ca4e9065cfb93112a389033332a`.
+* `fig_supp_corewall_Re100_500_1000.png` est désormais produite par `scripts/final_revision/make_corewall_supp_figure.py` depuis `data/core_wall/core_wall_budget.csv` (`N=128`, `Re=100,500,1000`, les deux épaisseurs de bande). `fig_supp_fem_junction_schematic.png` est produite par `scripts/final_revision/make_fem_junction_schematic.py` avec la convention archivée (`y=0` à droite, `y=+1.22e-16` à gauche, arrondi à deux chiffres significatifs dans l'étiquette). Leurs hachages sont donnés au §8.8.
+* `figS11b_lbm_fem_convergence_N.png` est désormais produite par `scripts/final_revision/make_lbm_fem_convergence_figure.py` depuis `04_reference_FEM/validation/results/lbm_vs_fem_convergence/convergence.csv`. Le panneau (b) de Mach était déjà présent dans l'exemplaire archivé; la légende et le texte alternatif le mentionnent désormais explicitement, sans changer les valeurs.
 * Les panneaux de vortex `Re=900`, `Re=950` et `Re=1000` restent les exemplaires autoritaires archivés dans `08_operator_results/PH13_manuscript_190/figs`; les champs NPZ sources sont présents, mais l'ancien chemin de script `results_190/vortices` est obsolète. Aucun résultat n'a été régénéré à partir de ce chemin.
-* Les générateurs `make_common_support_figure.py` et `make_junction_cutoff_figure.py` n'écrivent pas tous les dossiers de copie finale; les exemplaires identiques ont été vérifiés octet pour octet. Les copies relocalisées de `analyse_lid_projected_targeted.py` et `etude_convergence_paroi.py` sous `scripts/final_revision` ont un chemin `ROOT` obsolète: utiliser les scripts sous `06_physics`.
+* Les générateurs `make_common_support_figure.py` et `make_junction_cutoff_figure.py` n'écrivent pas tous les dossiers de copie finale; les exemplaires identiques ont été vérifiés octet pour octet après la passe de synchronisation décrite au §8.8.
 * L'incrément exact `n=4 -> 8` du budget cœur/paroi vaut `0.0004025537906435731`, donc `0.000403` après arrondi. Les entrées du tableau affichées à six décimales donnent une différence visuelle de `0.000402`; le texte précise que l'incrément est calculé avant arrondi.
+
+### 8.8 Impression noir et blanc et traçabilité des figures (2026-11-27)
+
+Toutes les figures quantitatives à plusieurs séries ont été régénérées avec des marqueurs, des styles de trait ou des hachures distincts. La couleur ne constitue jamais le seul moyen de distinguer les cas; aucun point, aucune valeur et aucune convention physique n'ont été modifiés. Les champs scalaires et les cartes de vitesses conservent une colormap monotone, déjà lisible en niveaux de gris; les profils Ghia et les cartes de vortex conservaient déjà des marqueurs ouverts/solides distincts.
+
+Générateurs modifiés : `scripts/manuscript_support/make_review_figures.py` (neuf figures), `scripts/final_revision/make_common_support_figure.py` (barres hachées), `scripts/final_revision/make_junction_cutoff_figure.py` (trois panneaux), `06_physics/etude_convergence_paroi.py` et sa copie `scripts/final_revision/etude_convergence_paroi.py`, ainsi que `05_dataset/data/analyse_physique_mapping.py::_plot_curves`. Générateurs ajoutés et vérifiés : `make_kinetic_energy_figure.py`, `make_corewall_supp_figure.py`, `make_fem_junction_schematic.py` et `make_lbm_fem_convergence_figure.py`, tous dans `scripts/final_revision/`.
+
+Les deux figures dont le rapport largeur/hauteur aurait changé (`fig_supp_corewall_Re100_500_1000.png` et `fig_supp_fem_junction_schematic.png`) ont été complétées par des marges blanches afin de conserver exactement le rapport des exemplaires archivés; aucun contenu graphique n'a été rogné ni déplacé. Les exemplaires autoritaires sont dans `submission_package/figs_new`; des copies octet pour octet ont été synchronisées dans `submission_package/figs`, `REV/figures/final_supplement`, `REV/figures`, `REV/supplement/figs_new` et `REV/supplement/figs`. Les hachages SHA-256 des exemplaires `figs_new` sont :
+
+| Figure | SHA-256 |
+|---|---|
+| `fig_core_wall_budget.png` | `c6309459f0ae1acc29acb30f86408b254469a5cc1ba92db030a896c24ade2e1d` |
+| `fig_junction_share.png` | `5878ae71f6c4ca93fddef5828cde7424e506d15fa9e05bc7e3261636d63dd6b0` |
+| `curve_dissipation_vs_n.png` | `1a1e4c0121e26d38fc25dd25d148dd2f991d8ecbb0b847c1993d7886cb90cbc6` |
+| `map_dissipation.png` | `49ca4dada6b2c07a4ecc68b87e4930306078f678004c79cc067263ef9fe736d4` |
+| `fig_fields_plate.png` | `0b0160df2b6e139a0d3dff171f74058bd5072be696e78294deb6b77c2d310ff9` |
+| `fig_curvature.png` | `1b412e5ceed05703f43f35072f89fbdf868048c927da820854a398365afec9a2` |
+| `fig_nearwall_large_axes.png` | `5cc225171b2c4ddaae6d8a3b9261027b880bddded0bd779192f13e3b3577cf52` |
+| `fig_minima_windows.png` | `2d31857f85148e1f922f32fb5fa71b16d526e51d0e9150b00dcab75409bd7c72` |
+| `fig_fem_validation.png` | `e5ff746680032d22132ce9b84061c32f341aef1be3842179255c8bdc8ca6fe75` |
+| `fig_supp_common_support_dissipation.png` | `b520202336ac8e04d590198faac4b8b4f749e862f208fc0f6db4e0f2db78fafe` |
+| `fig_junction_cutoffs.png` | `5c8c39bd9e357c302ba233ac9b63e96381d37d54848378f1d885a4294104bfca` |
+| `convergence_paroi.png` | `3a27d81b88a417323ad0a9893a9389d8d8a4c11f7064db7d6864f8a5b509600b` |
+| `curve_kinetic_energy_vs_n.png` | `c9d9f83ed5c7b92dd1512f83a96e8142376f4ca4e9065cfb93112a389033332a` |
+| `fig_supp_corewall_Re100_500_1000.png` | `562561e7905b1eb036eb86f497a2f4a993ca799b80107710f745deb09294aa08` |
+| `fig_supp_fem_junction_schematic.png` | `163bd8cd7f62c06bfd030c38c04806d64933c16a5b8cf3ee898c512e9b0a249b` |
+| `figS11b_lbm_fem_convergence_N.png` | `240ad8c121a04065578f3583817070b909d6dd78f4a07ddcdb02c572cedb7d3c` |
+
+La légende et le texte alternatif de la figure S11b mentionnent maintenant le panneau de contrôle de la dépendance au Mach à $N$ fixe qui figurait déjà dans l'image archivée. `Alt_Text.txt` et `Alt_Text.docx` ont été régénérés après cette modification; le nombre d'entrées reste de 13 pour l'article et 45 pour le supplément.
 

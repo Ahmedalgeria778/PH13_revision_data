@@ -87,8 +87,8 @@ Caption: LBM--FEM velocity-field comparison at Re=400 for four cavity geometries
 Alt text: LBM--FEM velocity-field comparison at Re=400 for four cavity geometries (lattice N=96, finite-element mesh n_refs=6, 16 384 triangles). The comparison remains within the reported discretization-error range, with all interior relative L_2 discrepancies below 1.5 % (the cited table).
 
 [SUPPLEMENTARY ONLINE MATERIAL item 7; Figure; fig:lbmfemconv]
-Caption: Grid dependence of the LBM--FEM interior relative L_2 discrepancy for the circular cavity at Re=100 as the LBM resolution is refined from N=32 to N=96. The observed decrease is consistent with a reduction of discretization error over the tested resolutions.
-Alt text: Grid dependence of the LBM--FEM interior relative L_2 discrepancy for the circular cavity at Re=100 as the LBM resolution is refined from N=32 to N=96. The observed decrease is consistent with a reduction of discretization error over the tested resolutions.
+Caption: Grid dependence of the LBM--FEM interior relative L_2 discrepancy for the circular cavity at Re=100 as the LBM resolution is refined from N=32 to N=96 (a), together with the fixed-resolution Mach-dependence control at N=64 (b). The decrease in (a) is consistent with a reduction of discretization error over the tested resolutions; panel (b) is a separate control and is not used to claim convergence.
+Alt text: Grid dependence of the LBM--FEM interior relative L_2 discrepancy for the circular cavity at Re=100 from N=32 to N=96 (a), with solid-circle data and dashed and dotted O(h) and O(h^2) guides, and the fixed-resolution Mach-dependence control at N=64 (b), with solid-square data and a dashed O(|U-0.05|) guide. The decrease in (a) is consistent with reduced discretization error over the tested resolutions; panel (b) is a separate control, not a convergence claim.
 
 [SUPPLEMENTARY ONLINE MATERIAL item 8; Table; tab:qc]
 Caption: Dataset consistency-check summary (190 cases analyzed, N=128).

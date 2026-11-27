@@ -59,12 +59,12 @@ fig, axes = plt.subplots(1, 3, figsize=(16.0, 5.0))
 ax = axes[0]
 ax.fill_between(r0, pct[1], pct[2], color="#dce6f2", label="30-case min--max")
 ax.plot(r0, pct[0], "o-", color="#1f4e79", lw=1.8, label="30-case median")
-for key, marker, colour in [("n1.25_Re300", "s", "#b22222"),
-                            ("n3.0_Re1000", "^", "#2e8b57"),
-                            ("n8.0_Re1000", "d", "#8b4513")]:
+for key, marker, ls, colour in [("n1.25_Re300", "s", "--", "#b22222"),
+                                ("n3.0_Re1000", "^", ":", "#2e8b57"),
+                                ("n8.0_Re1000", "d", "-.", "#8b4513")]:
     vals = [100 * summary["series"][key][k]["var_128_256"]
             for k in keys30]
-    ax.plot(r0, vals, marker + "--", color=colour, ms=4.5, lw=1.0,
+    ax.plot(r0, vals, marker=marker, linestyle=ls, color=colour, ms=4.5, lw=1.2,
             label=key.replace("_", " "))
 ax.set_xlabel(r"fixed physical cutoff $r_0$")
 ax.set_ylabel(r"$D_{256}/D_{128}-1$ (%)")
@@ -74,18 +74,18 @@ ax.legend(fontsize=8.5, loc="upper right")
 
 ax = axes[1]
 selected = [
-    ("se_n4p0_Re1000_N128", "n=4, Re=1000, N=128", "o"),
-    ("se_n4p0_Re1000_N256", "n=4, Re=1000, N=256", "s"),
-    ("se_n8p0_Re1000_N128", "n=8, Re=1000, N=128", "^"),
+    ("se_n4p0_Re1000_N128", "n=4, Re=1000, N=128", "o", "-"),
+    ("se_n4p0_Re1000_N256", "n=4, Re=1000, N=256", "s", "--"),
+    ("se_n8p0_Re1000_N128", "n=8, Re=1000, N=128", "^", "-."),
 ]
-for cid, label, marker in selected:
+for cid, label, marker, ls in selected:
     rows = sorted([r for r in budget if r["case_id"] == cid],
                   key=lambda r: float(r["r_physical"]))
     N = int(rows[0]["N"])
     h = 2.0 / (N - 1)
     x = np.log(np.array([float(r["r_physical"]) / h for r in rows]))
     y = np.array([float(r["D_junction"]) for r in rows])
-    ax.plot(x, y, marker + "-", lw=1.6, ms=5, label=label)
+    ax.plot(x, y, marker=marker, linestyle=ls, lw=1.6, ms=5, label=label)
 ax.set_xlabel(r"$\ln(r/h)$")
 ax.set_ylabel(r"$D_{\rm junction}(r,N)$")
 ax.set_title("(b) Junction contribution versus cutoff")
@@ -95,16 +95,15 @@ ax.legend(fontsize=8.5, loc="upper left")
 ax = axes[2]
 Ns = np.array([64.0, 128.0, 256.0])
 ns = np.array([1.25, 3.0, 8.0])
-colours = ["#b22222", "#2e8b57", "#1f4e79"]
+markers = ["o", "s", "d"]
 series_names = ["n1.25_Re300", "n3.0_Re1000", "n8.0_Re1000"]
-for name, nval, colour in zip(series_names, ns, colours):
-    for kind, style, width in [("D_total", "-", 1.8), ("D_excl_16h", "--", 1.2)]:
+for name, nval, marker in zip(series_names, ns, markers):
+    for kind, style, width in [("D_total", "-", 1.8), ("D_excl_16h", "--", 1.4)]:
         p = fit["series"][name][kind]
         y = p["a"] + p["b"] * np.log(Ns)
-        ax.plot(np.log(Ns), y, style, color=colour, lw=width,
+        ax.plot(np.log(Ns), y, marker=marker, linestyle=style, color="k",
+                lw=width, ms=4.5,
                 label=f"n={nval:g}, " + ("total" if kind == "D_total" else r"r=16h"))
-        ax.plot(np.log(Ns), y, "o" if kind == "D_total" else "s",
-                color=colour, ms=4)
 ax.set_xlabel(r"$\ln N$")
 ax.set_ylabel(r"$D(N)$")
 ax.set_title(r"(c) Descriptive fits $D=a+b\ln N$")

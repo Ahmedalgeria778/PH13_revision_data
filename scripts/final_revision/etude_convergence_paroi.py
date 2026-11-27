@@ -313,13 +313,17 @@ def main() -> int:
 
     # figure : log10(q) vs log10(N) pour 3 diagnostics sur les 3 cas
     fig, axes = plt.subplots(1, 3, figsize=(13.6, 4.2), constrained_layout=True)
+    # Distinct marker/line-style pairs keep the three cases identifiable after
+    # black-and-white printing; no numerical diagnostic is changed here.
     markers = {1.25: "o", 3.0: "s", 8.0: "^"}
+    linestyles = {1.25: "-", 3.0: "--", 8.0: "-."}
     for ax, diag in zip(axes, ("D_A", "f_delta_025", "f_delta_05")):
         for n, Re in CASES:
             vals = {N: cases_rows[(n, Re)][N][diag] for N in NS
                     if N in cases_rows[(n, Re)]}
             ax.loglog(list(vals.keys()), list(vals.values()),
-                      marker=markers[n], label=f"n={n}, Re={Re:g}", lw=1.6)
+                      marker=markers[n], linestyle=linestyles[n],
+                      label=f"n={n}, Re={Re:g}", lw=1.6)
         ax.set_title(diag)
         ax.set_xlabel("N")
         ax.grid(which="both", alpha=0.3)
