@@ -1,7 +1,7 @@
 ALT TEXT FOR FIGURES AND TABLES
 Alt text for figures and tables: Geometry-induced reorganization of viscous dissipation in continuously deformable superelliptic lid-driven cavities
 
-Upload the companion Microsoft Word document (Alt_Text.docx) to AIP.
+Upload the companion Microsoft Word document (Alt_Text.docx) to AIP. The same alt text is also printed immediately after every figure and table in the clean article and supplementary PDFs.
 
 ========================================================================
 MAIN ARTICLE
