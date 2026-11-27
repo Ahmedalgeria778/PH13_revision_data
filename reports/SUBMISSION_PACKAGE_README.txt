@@ -31,7 +31,7 @@ FILES TO SELECT WHEN UPLOADING
 6. Alt Text (Microsoft Word) ............ Alt_Text.docx
    Upload this Word file for the AIP accessibility requirement. A plain-text
    mirror, Alt_Text.txt, is included for convenience but is not a substitute
-   for the Word document. Alt text is supplied only in the Word document and is not printed in the PDFs.
+   for the Word document. Alt text is printed beneath every figure and table in the clean and marked-up PDFs and is also supplied in the Word document.
 7. Response Letter ...................... RESPONSE_LETTER_FINAL.pdf
    Also supplied as RESPONSE_LETTER_FINAL.tex for editing. Every original
    referee comment is quoted from the referee reports, followed by the
@@ -84,7 +84,7 @@ ACCESSIBILITY
 --------------------------------------------------------------------------------
 Alt_Text.docx is the separate Microsoft Word alt-text document required by
 AIP. It lists alt text for every figure and table in the clean Article File
-and in the Supplementary Online Material. It is not printed in the PDFs.
+and in the Supplementary Online Material. The same text is printed beneath every float in the clean and marked-up PDFs.
 
 --------------------------------------------------------------------------------
 REFEREE REPORTS

@@ -47,10 +47,10 @@ an explicit justification.
 
 ## 3. Final document state
 
-* Clean main article: `Article_File.tex` / `.pdf`, **19 pages**, seven physics-only sections, no undefined references or overfull warnings.
-* Clean supplement: `Supplementary_Article_File.tex` / `.pdf`, **29 pages**, one coherent S1–S17 document, no undefined references or overfull warnings.
-* Marked-up main article: `Marked-Up_Manuscript.tex` / `.pdf`, **21 pages**, true word/sentence-level differential (blue additions, red deletions, black unchanged text).
-* Marked-up supplement: `Marked-Up_Supplementary.tex` / `.pdf`, **31 pages**, generated from the same clean-source lineage.
+* Clean main article: `Article_File.tex` / `.pdf`, **22 pages**, seven physics-only sections, no undefined references or overfull warnings.
+* Clean supplement: `Supplementary_Article_File.tex` / `.pdf`, **32 pages**, one coherent S1–S17 document, no undefined references or overfull warnings.
+* Marked-up main article: `Marked-Up_Manuscript.tex` / `.pdf`, **23 pages**, true word/sentence-level differential (blue additions, red deletions, black unchanged text).
+* Marked-up supplement: `Marked-Up_Supplementary.tex` / `.pdf`, **34 pages**, generated from the same clean-source lineage.
 * Response letter: `RESPONSE_LETTER_FINAL.tex` / `.pdf`, **14 pages**, 54 verbatim comments.
 * Repository: <https://github.com/Ahmedalgeria778/PH13_revision_data>, with English MIT `LICENSE`.
 
