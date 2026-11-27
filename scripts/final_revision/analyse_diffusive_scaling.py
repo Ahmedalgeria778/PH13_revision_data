@@ -21,14 +21,24 @@ from pathlib import Path
 import numpy as np
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parent
+
+
+def _find_repo_root(start: Path) -> Path:
+    """Locate the directory containing 05_dataset (works inside the package copy)."""
+    for cand in (start,) + tuple(start.parents):
+        if (cand / "05_dataset").is_dir():
+            return cand
+    return start.parent.parent
+
+
+ROOT = _find_repo_root(HERE)
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
 from etude_convergence_paroi import gradient_valid_mask  # noqa: E402
 
 RES = HERE / "results_diffusive"
 R0 = (0.0, 0.25, 0.5)
-NS = (128, 256, 384)
+NS = (128, 256, 384, 512)
 N_REF = 128
 U_REF = 0.05
 RE = 1000.0
@@ -38,6 +48,7 @@ PROD_FILES = {
     128: ROOT / "05_dataset/data_all190/se_n4p0_Re1000_N128.npz",
     256: ROOT / "05_dataset/data_conv256/se_n4p0_Re1000_N256.npz",
     384: ROOT / "05_dataset/data_convHR/se_n4p0_Re1000_N384.npz",
+    512: ROOT / "05_dataset/data_convHR/se_n4p0_Re1000_N512.npz",
 }
 DIFF_FILES = {
     N: ROOT / "05_dataset/data_diffusive" / f"se_n4p0_Re1000_N{N}_diffusive.npz"
@@ -104,6 +115,8 @@ def observed_order(d1: float, d2: float, d3: float) -> float:
 
 
 def main() -> int:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     RES.mkdir(parents=True, exist_ok=True)
     prod = {N: dissipation(p) for N, p in PROD_FILES.items()}
     diff = {N: dissipation(p) for N, p in DIFF_FILES.items()}
@@ -152,16 +165,21 @@ def main() -> int:
         key = f"D{r0:g}"
         dp = [prod[N][key] for N in NS]
         dd = [diff[N][key] for N in NS]
-        ip = [dp[1] - dp[0], dp[2] - dp[1]]
-        idd = [dd[1] - dd[0], dd[2] - dd[1]]
-        p_prod = observed_order(*dp)
-        p_diff = observed_order(*dd)
+        ip = [dp[i + 1] - dp[i] for i in range(len(NS) - 1)]
+        idd = [dd[i + 1] - dd[i] for i in range(len(NS) - 1)]
+        p_prod = observed_order(*dp[:3])
+        p_diff = observed_order(*dd[:3])
+        q_prod = math.log2(ip[0] / ip[2]) if ip[0] > 0 and ip[2] > 0 else float("nan")
+        q_diff = math.log2(idd[0] / idd[2]) if idd[0] > 0 and idd[2] > 0 else float("nan")
         lines += [
-            f"- r0={r0:g}: production increments {ip[0]:.6f}, {ip[1]:.6f} "
-            f"(ratio {ip[1]/ip[0]:.3f}); diffusive increments "
-            f"{idd[0]:.6f}, {idd[1]:.6f} (ratio {idd[1]/idd[0]:.3f}).",
-            f"  Observed order fitted to the 128/256/384 increments: "
-            f"production {p_prod:.2f}; diffusive {p_diff:.2f}.",
+            f"- r0={r0:g}: production increments "
+            f"{ip[0]:.6f}, {ip[1]:.6f}, {ip[2]:.6f}; diffusive increments "
+            f"{idd[0]:.6f}, {idd[1]:.6f}, {idd[2]:.6f} "
+            f"(128→256, 256→384, 384→512).",
+            f"  Equal-doubling order from 256/512: production {q_prod:.2f}; "
+            f"diffusive {q_diff:.2f}.",
+            f"  128/256/384 fitted order: production {p_prod:.2f}; "
+            f"diffusive {p_diff:.2f}.",
         ]
     lines += [
         "",

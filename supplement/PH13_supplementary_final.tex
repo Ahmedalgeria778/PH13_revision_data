@@ -1647,18 +1647,19 @@ is claimed.}
 \section{Production-family diffusive-scaling check}
 \label{sec:diffusive}
 To test whether the residual resolution drift of the production family is a
-lattice-Mach effect, we reran the $n=4$, $Re=1000$ cases at $N=128,256,384$
+lattice-Mach effect, we reran the $n=4$, $Re=1000$ cases at $N=128,256,384,512$
 with $U_{\mathrm{lid}}(N)=0.05\times128/N$ and nearly fixed
 $\tau\simeq0.519$. The lattice Mach number therefore decreases as $1/N$, while
 $Re$ and the gradient-valid quadrature are unchanged. Table~\ref{tab:diffusive}
 compares these fields with the original production fields at the same physical
 junction radii. The $N=128$ fields agree by construction because $U_{\rm lid}$
 and $\tau$ match. At $r_0=0.5$ the diffusive values agree with the production
-values to within $4.1\times10^{-6}$ on all three grids, and the increments on
-$128\to256$ and $256\to384$ remain $2.06\times10^{-3}$ and
-$6.83\times10^{-4}$ (observed order about $1.01$). Lowering the lattice Mach
-number changes the unexcised full-domain level appreciably but leaves the
-junction-excised values essentially unchanged; it does not remove the
+values to within $5.23\times10^{-6}$ on all four grids, and the increments on
+$128\to256$, $256\to384$ and $384\to512$ remain $2.06\times10^{-3}$,
+$6.85\times10^{-4}$ and $3.21\times10^{-4}$ (observed order about $1.01$ on $128/256/384$; the diffusive ladder
+gives $1.01$ and an increment-ratio order of $2.69$). Lowering
+the lattice Mach number changes the unexcised full-domain level appreciably but
+leaves the junction-excised values essentially unchanged; it does not remove the
 resolution drift. This check is not a continuum certification. It only excludes
 a simple Mach/acoustic explanation of the remaining drift.
 
@@ -1679,6 +1680,7 @@ $D_{\rm prod}(0.5)$ & $D_{\rm diff}(0.5)$ \\
 128 & 0.05000 & 0.519050 & 0.025590 & 0.025590 & 0.020028 & 0.020029 & 0.015117 & 0.015117 \\
 256 & 0.02500 & 0.519125 & 0.032090 & 0.032623 & 0.023007 & 0.023001 & 0.017179 & 0.017176 \\
 384 & 0.01667 & 0.519150 & 0.035407 & 0.036158 & 0.024015 & 0.024008 & 0.017864 & 0.017859 \\
+512 & 0.01250 & 0.519162 & 0.037509 & 0.038374 & 0.024482 & 0.024473 & 0.018184 & 0.018179 \\
 \bottomrule
 \end{tabular}}
 \end{table}

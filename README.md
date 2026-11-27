@@ -14,7 +14,7 @@ Copyright (c) 2026 BENIAICHE Ahmed. All files in this repository are provided un
 
 ## 1. Scope and key conclusions
 
-All common-support LBM diagnostics were recomputed from archived final fields, and the targeted Taylor–Hood P2/P1 finite-element (FEM) verification cases are retained. A separate targeted LBM projected-lid campaign was subsequently completed: ten new fields plus three reused fields give 13 matched tangential/projected design fields. A final production-family diffusive-scaling campaign at `n=4, Re=1000`, `N=128/256/384`, with `U_lid=0.05*128/N` and nearly fixed `tau ≈ 0.519`, was also converged and analysed.
+All common-support LBM diagnostics were recomputed from archived final fields, and the targeted Taylor–Hood P2/P1 finite-element (FEM) verification cases are retained. A separate targeted LBM projected-lid campaign was subsequently completed: ten new fields plus three reused fields give 13 matched tangential/projected design fields. A final production-family diffusive-scaling campaign at `n=4, Re=1000`, `N=128/256/384/512`, with `U_lid=0.05*128/N` and nearly fixed `tau ≈ 0.519`, was also converged and analysed.
 
 | Item | Result |
 |---|---|
@@ -28,7 +28,7 @@ All common-support LBM diagnostics were recomputed from archived final fields, a
 | Core/wall budget | 506 rows; maximum additivity residual `2.78e-17`; for `Re=1000, N=256, δ=0.05L_c`, the core contributes `87.8%` of the `n=4→8` rise, not `87.8%` of absolute dissipation |
 | Projected-lid control | 13 matched fields; raw projected/tangential `D/A_mask` ratios `0.391–0.906`, imposed boundary-velocity integral ratio `0.5`, forcing-normalized ratios `0.782–1.813`, and `KE/A` ratios `0.768–2.291`; sampled argmin moves `n=4→2` but is only bracketed between `n=1.5` and `n=4`; coupled geometry/forcing control only |
 | Campaign counts | `data_all190`: 190 fields; `data_refine`: 50 fields at 8 Reynolds numbers; secondary refinement: 28 fields at 3 Reynolds numbers; `N=256`: 63 fields, 62 matched to `N=128`; unmatched case `(n,Re)=(4.25,300)` |
-| Resolution qualification | The `D/A(3)/D/A(4)` crossing drifts with slopes about `−95`, `−108` and `−101` in `Re` per unit `ln N`. A production-family diffusive-scaling check leaves the `r0=0.5` values unchanged to within `4.1e-6` on `N=128/256/384`; the observed order remains about `1.01`, so lowering the lattice Mach number does not remove the junction-excised drift. No Mach/acoustic explanation is established |
+| Resolution qualification | The `D/A(3)/D/A(4)` crossing drifts with slopes about `−95`, `−108` and `−101` in `Re` per unit `ln N`. A production-family diffusive-scaling check leaves the `r0=0.5` values unchanged to within `5.2e-06` on `N=128/256/384/512`; the observed order remains about `1.01`, so lowering the lattice Mach number does not remove the junction-excised drift. No Mach/acoustic explanation is established |
 | Junction table attribution | The `+18.7%`/`+19.8%` changes belong to the grid-scaled `D_excl,16h` series, not to a fixed physical `r0=0.5` cutoff |
 | Moving-wall length | `L_mov(1.25)=2.8789718432636`, `L_mov(2)=π`, `L_mov(4)=3.5088489717820`, `L_mov(8)=3.7389869262423` |
 | Lid power | **Not quoted as a verified quantity.** The archive contains 810 converged final fields, while the curated analysis inventory contains 380 (`190+50+28+50+13+12+24+13`); no final field has distribution functions `f`, 148 checkpoints have `f,it`, and the archived flux ratio is `-4.419` instead of `+1` |

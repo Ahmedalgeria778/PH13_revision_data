@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Diffusive-scaling campaign for n=4, Re=1000 at N=128, 256, 384.
+"""Diffusive-scaling campaign for n=4, Re=1000 at N=128, 256, 384, 512.
 
 U_lid(N) = U_REF128 * 128 / N, with U_REF128 = 0.05.  With L_char = N-1
 this keeps nu_lbm = U_lid (N-1) / Re essentially constant and lowers the
@@ -21,7 +21,15 @@ from pathlib import Path
 
 import numpy as np
 
-ROOT = Path(__file__).resolve().parent.parent
+def _find_repo_root(start: Path) -> Path:
+    """Locate the directory containing 05_dataset (works inside the package copy)."""
+    for cand in (start,) + tuple(start.parents):
+        if (cand / "05_dataset").is_dir():
+            return cand
+    return start.parent.parent
+
+
+ROOT = _find_repo_root(Path(__file__).resolve())
 for p in (ROOT / "01_geometry", ROOT / "02_LBM", ROOT / "06_physics"):
     if str(p) not in sys.path:
         sys.path.insert(0, str(p))
@@ -34,7 +42,7 @@ OUT_DIR = ROOT / "05_dataset" / "data_diffusive"
 RES_DIR = ROOT / "06_physics" / "results_diffusive"
 N_REF = 128
 U_REF = 0.05
-N_LIST = (128, 256, 384)
+N_LIST = (128, 256, 384, 512)
 N = 4.0
 RE = 1000.0
 TOL = 1.0e-8
@@ -46,6 +54,7 @@ SEEDS = {
     128: ROOT / "05_dataset/data_all190/se_n4p0_Re1000_N128.npz",
     256: ROOT / "05_dataset/data_conv256/se_n4p0_Re1000_N256.npz",
     384: ROOT / "05_dataset/data_convHR/se_n4p0_Re1000_N384.npz",
+    512: ROOT / "05_dataset/data_convHR/se_n4p0_Re1000_N512.npz",
 }
 R0 = (0.0, 0.25, 0.5)
 JUNC = ((1.0, 0.0), (-1.0, 0.0))
@@ -210,8 +219,12 @@ def main() -> int:
         print("[diffusive] " + " ".join(
             f"D_r{r0:g}={row[f'D_r{r0:g}']:.9f}" for r0 in R0), flush=True)
     rows = []
-    for Nn in args.N_list:
-        rows.append(analyse(OUT_DIR / f"{case_id(Nn)}.npz"))
+    for Nn in N_LIST:
+        p = OUT_DIR / f"{case_id(Nn)}.npz"
+        if not p.exists():
+            print(f"[diffusive] {case_id(Nn)} not available, abort", flush=True)
+            return 1
+        rows.append(analyse(p))
     fields = ["N", "h"] + [k for r0 in R0 for k in
                            (f"D_r{r0:g}", f"A_r{r0:g}")]
     with (RES_DIR / "diffusive_scaling.csv").open(
