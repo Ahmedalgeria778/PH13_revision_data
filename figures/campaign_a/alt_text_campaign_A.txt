@@ -1,0 +1,7 @@
+fig_campaign_a_delta_r0_sensitivity.png: Panels (a)-(b): production-scaled dissipation at n=4, Re=1000 and N=512 versus wall thickness delta/Lc and junction radius r0. Panel (c): dissipation at delta/Lc=0.05 and r0=0.0625 against N for n=2, 4 and 8. Panel (d): paired difference D(4)-D(2) against r0 at N=512. Symbols and line styles distinguish parameter values in black and white.
+
+fig_campaign_a_paired_differences.png: Paired geometry differences of fixed-support dissipation at Re=1000. Panels (a)-(b): D(2)-D(4) and D(4)-D(8) versus N for three wall thicknesses. Panel (c): differences between neighboring exponents at delta/Lc=0.05. Panel (d): differences versus junction radius at N=512. The zero line is shown; no sign reversal is imposed.
+
+fig_campaign_a_minimum_stability.png: Gap between the lowest and second-lowest sampled geometry versus N at Re=1000, delta/Lc=0.05 and r0=0.0625, compared with twice the largest consecutive-grid resolution spread. A minimum is called identifiable only when the gap exceeds this numerical scale.
+
+fig_campaign_a_junction_annuli.png: Annular viscous dissipation around the two tangential-lid junctions and mean r|S| versus ln r for n=4 and Re=1000 at N=128, 256, 384 and 512. Distinct greys, markers and line styles encode the resolution. The innermost annuli are limited by the five-point gradient-valid mask.
