@@ -1,7 +1,7 @@
 ALT TEXT FOR FIGURES AND TABLES
 Alt text for figures and tables: Geometry-induced reorganization of viscous dissipation in continuously deformable superelliptic lid-driven cavities
 
-Upload the companion Microsoft Word document (Alt_Text.docx) to AIP. The same alt text is also printed immediately after every figure and table in the clean article and supplementary PDFs.
+Upload the companion Microsoft Word document (Alt_Text.docx) to AIP. Alt text is supplied only in this Word document and is not printed in the PDFs.
 
 ========================================================================
 MAIN ARTICLE
@@ -35,8 +35,8 @@ Caption: Additive budget at Re=1000, N=256, δ=0.05L_c. Values are per unit A_ma
 Alt text: Additive budget at Re=1000, N=256, δ=0.05L_c. Values are per unit A_mask.
 
 [MAIN ARTICLE item 8; Figure; fig:juncut]
-Caption: Fixed-wall-cutoff comparison, junction contribution versus (r/h), and descriptive D(N)=a+b N fits. The excluded fit support is r=16h and is not a fixed physical r_0=0.5. These panels quantify cutoff sensitivity; they are not evidence of converged continuum dissipation or an asymptotic logarithmic law.
-Alt text: Fixed-wall-cutoff comparison, junction contribution versus (r/h), and descriptive D(N)=a+b N fits. The excluded fit support is r=16h and is not a fixed physical r_0=0.5. These panels quantify cutoff sensitivity; they are not evidence of converged continuum dissipation or an asymptotic logarithmic law.
+Caption: Fixed-wall-cutoff comparison, junction contribution versus ln(r/h), and descriptive D(N)=a+b ln N fits. The excluded fit support is r=16h and is not a fixed physical r_0=0.5. These panels quantify cutoff sensitivity; they are not evidence of converged continuum dissipation or an asymptotic logarithmic law.
+Alt text: Fixed-wall-cutoff comparison, junction contribution versus ln(r/h), and descriptive D(N)=a+b ln N fits. The excluded fit support is r=16h and is not a fixed physical r_0=0.5. These panels quantify cutoff sensitivity; they are not evidence of converged continuum dissipation or an asymptotic logarithmic law.
 
 [MAIN ARTICLE item 9; Figure; fig:junction]
 Caption: Dissipation inside the two junction disks, normalized by the total on the gradient-valid mask. The dependence on excision radius is the expected consequence of a discontinuous lid law without regularization.
@@ -171,8 +171,8 @@ Caption: (a) Thirty-case fixed-wall-cutoff refinement comparison. (b) D_junction
 Alt text: (a) Thirty-case fixed-wall-cutoff refinement comparison. (b) D_junction(r,N) versus (r/h). (c) Descriptive D(N)=a+b N fits on the three-grid ladder; the excluded support is r=16h, not a fixed physical r_0=0.5. None of the panels establishes converged continuum dissipation or asymptotic log scaling.
 
 [SUPPLEMENTARY ONLINE MATERIAL item 28; Table; tab:lmov]
-Caption: Upper-half moving-wall arclength for L_c=2. The n=2 value is ; the diamond and square limits are validated separately below.
-Alt text: Upper-half moving-wall arclength for L_c=2. The n=2 value is ; the diamond and square limits are validated separately below.
+Caption: Upper-half moving-wall arclength for L_c=2. The n=2 value is π; the diamond and square limits are validated separately below.
+Alt text: Upper-half moving-wall arclength for L_c=2. The n=2 value is π; the diamond and square limits are validated separately below.
 
 [SUPPLEMENTARY ONLINE MATERIAL item 29; Table; tab:inventory]
 Caption: Campaign inventory. ``Distinct'' counts unique (n,Re) pairs. The targeted projected-lid control contributes 13 converged fields at eight (n,Re) pairs.
@@ -235,5 +235,9 @@ Caption: Resolution sensitivity of the near-wall diagnostics on the archived N=6
 Alt text: Resolution sensitivity of the near-wall diagnostics on the archived N=64,128,256 ladder. The three sampled cases are (n,Re)=(1.25,300), (3,1000) and (8,1000); the panels show D/A_mask and the wall-band shares for δ=0.025L_c and δ=0.05L_c. These curves support ordering of the sampled diagnostics only; no asymptotic rate or grid-converged amplitude is claimed.
 
 [SUPPLEMENTARY ONLINE MATERIAL item 44; Table; tab:diffusive]
-Caption: Production-family diffusive-scaling check at n=4, Re=1000: U_lid(N)=0.05×128/N and nearly fixed τ0.519. D_prod and D_diff denote the original production fields and the diffusively scaled reruns; r_0 is the physical junction-disk radius, with r_0=0 the unexcised gradient-valid mask.
-Alt text: Production-family diffusive-scaling check at n=4, Re=1000: U_lid(N)=0.05×128/N and nearly fixed τ0.519. D_prod and D_diff denote the original production fields and the diffusively scaled reruns; r_0 is the physical junction-disk radius, with r_0=0 the unexcised gradient-valid mask.
+Caption: Production-family diffusive-scaling check at n=4, Re=1000: U_lid(N)=0.05×128/N and nearly fixed τ ≃ 0.519. D_prod and D_diff denote the original production fields and the diffusively scaled reruns; r_0 is the physical junction-disk radius, with r_0=0 the unexcised gradient-valid mask.
+Alt text: Production-family diffusive-scaling check at n=4, Re=1000: U_lid(N)=0.05×128/N and nearly fixed τ ≃ 0.519. D_prod and D_diff denote the original production fields and the diffusively scaled reruns; r_0 is the physical junction-disk radius, with r_0=0 the unexcised gradient-valid mask.
+
+[SUPPLEMENTARY ONLINE MATERIAL item 45; Table; tab:dcore]
+Caption: Dissipation on a core support of fixed physical wall thickness, D_core(δ) = 2ν Σ S:S Δx² over M ∩ {dist(x, Γ) > δ}, with dist the exact distance to the superellipse boundary (n = 4, Re = 1000). δ = 0.05 and 0.1 (L_c = 2). Observed orders use successive doublings. This diagnostic separates the wall-support effect from the resolved-gradient drift and is not a continuum certification.
+Alt text: Dissipation on a core support of fixed physical wall thickness, D_core(δ) = 2ν Σ S:S Δx² over M ∩ {dist(x, Γ) > δ}, with dist the exact distance to the superellipse boundary (n = 4, Re = 1000). δ = 0.05 and 0.1 (L_c = 2). Observed orders use successive doublings. This diagnostic separates the wall-support effect from the resolved-gradient drift and is not a continuum certification.

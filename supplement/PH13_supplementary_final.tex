@@ -137,7 +137,6 @@ $2.81\times10^{-2}$ & 794\,000 & $9.64\times10^{-10}$ \\
 \bottomrule
 \end{tabular}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Square-cavity LBM baseline versus Ghia et al.\ (1982): center-line $L_2$/$L_\infty$ errors in $u$ and $v$ at $N=256$, with solver iterations and final residual ($\mathrm{res}<\mathrm{tol}=10^{-9}$ for $Re=100$; $Re=1000$ stopped at the same tolerance).\par}
 
 
 \begin{figure}[H]
@@ -153,7 +152,6 @@ Table~\ref{tab:ghia}.}
 
 \label{fig:ghia}
 \end{figure}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Square-cavity LBM center-line velocity profiles versus Ghia et al.\ (1982), $Re=100$ (left) and $Re=1000$ (right), uniform lid, $N=256$. The in-panel $L_2$ values correspond to the center-line errors reported in Table~\ref{tab:ghia}.\par}
 
 
 
@@ -205,7 +203,6 @@ $N$ & $U_{\mathrm{lid}}$ & $L_2$ & $L_\infty$ & Iterations & Residual \\
 \bottomrule
 \end{tabular}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Curved-boundary verification on the exact rigid-rotation solution $u=(y,-x)$ of a rotating disk at $Re=100$, in diffusive scaling $U_{\mathrm{lid}}(N)=0.05\times32/N$: $L_2$/$L_\infty$ errors, lid velocity, iterations and final residual.\par}
 
 
 \subsection{LBM--FEM cross-validation over the superelliptic family}
@@ -266,7 +263,6 @@ $Re=400$, $N=256$, $n_{\mathrm{refs}}=7$, $65\,536$ triangles, $296\,195$ unknow
 \end{tabular}%
 }
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Interior relative $L_2$ discrepancy (\%) between MRT-LBM and the independent Taylor--Hood $\mathbb{P}_2/\mathbb{P}_1$ FEM solution, tabulated by comparison level. The lattice resolution $N$ and the finite-element refinement $n_{\mathrm{refs}}$ are independent discretisation levels and are not matched to one another; each row therefore states the mesh it actually used, as triangle and total-unknown counts ($2(V+E)+V$) measured on the assembled mesh, so that the finite-element side of every comparison is fully specified. $N=64$ at $Re=100$ and $N=96$ at $Re=400$ are the original cross-checks; $N=128$ at $Re=400$ brings the comparison to the reference resolution of the database and $n=1.25$ to the family, and it is made against the same $74\,371$-unknown mesh as the $N=96$ row; $N=256$ at $Re=400$ is an additional refined comparison, and because it refines the lattice and the finite-element mesh together ($65\,536$ triangles, $296\,195$ unknowns) it cannot attribute the residual to either side --- it only checks that the discrepancy decreases and that the pointed tip stays the worst of the family. At that level the discrepancy is evaluated on the intersection of the two discretisations: $24$ of the $60\,132$ LBM fluid nodes of the $n=4$ case fall outside the assembled triangulation and are excluded from both metrics, against $0$ for $n=1.25$. All LBM residuals are below $10^{-8}$; every FEM solve converged, in $22$ Picard iterations at $n_{\mathrm{refs}}=6$ and in $18$ and $22$ at $n_{\mathrm{refs}}=7$.\par}
 
 
 \begin{figure}[H]
@@ -300,7 +296,6 @@ $L_2$ discrepancies are reported in Table~\ref{tab:lbmfem}.}
 
 \label{fig:lbmfem100}
 \end{figure}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }LBM--FEM velocity-field comparison at $Re=100$ for four cavity geometries (lattice $N=64$, finite-element mesh $n_{\mathrm{refs}}=5$, $4\,096$ triangles). Each panel overlays the LBM and FEM streamlines on the LBM velocity magnitude. The corresponding interior relative $L_2$ discrepancies are reported in Table~\ref{tab:lbmfem}.\par}
 
 
 \begin{figure}[H]
@@ -334,7 +329,6 @@ below $1.5\,\%$ (Table~\ref{tab:lbmfem}).}
 
 \label{fig:lbmfem400}
 \end{figure}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }LBM--FEM velocity-field comparison at $Re=400$ for four cavity geometries (lattice $N=96$, finite-element mesh $n_{\mathrm{refs}}=6$, $16\,384$ triangles). The comparison remains within the reported discretization-error range, with all interior relative $L_2$ discrepancies below $1.5\,\%$ (Table~\ref{tab:lbmfem}).\par}
 
 
 \begin{figure}[H]
@@ -350,7 +344,6 @@ discretization error over the tested resolutions.}
 
 \label{fig:lbmfemconv}
 \end{figure}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Grid dependence of the LBM--FEM interior relative $L_2$ discrepancy for the circular cavity at $Re=100$ as the LBM resolution is refined from $N=32$ to $N=96$. The observed decrease is consistent with a reduction of discretization error over the tested resolutions.\par}
 
 
 % ======================================================================
@@ -423,7 +416,6 @@ Mirror symmetry & not applicable & excluded (tangent-lid boundary condition) \\
 \bottomrule
 \end{tabular}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Dataset consistency-check summary ($190$ cases analysed, $N=128$).\par}
 
 
 \begin{figure}[H]
@@ -438,7 +430,6 @@ values are below the $1\,\%$ threshold.}
 
 \label{fig:areaerror}
 \end{figure}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Relative area error of the discretized domain over the $n\times Re$ grid of the analysed subset. All values are below the $1\,\%$ threshold.\par}
 
 
 
@@ -507,7 +498,6 @@ $n=8,Re=1000$          & 1.027 & 24.5  & $-0.361$ & 2 / 1 & 0.0284 & 0.421 & 9.6
 \end{tabular}%
 }
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Physical observables of the four comparison configurations ($N=128$): maximum speed, maximum absolute vorticity, primary streamfunction, vortex count at the $1\,\%$ / $5\,\%$ thresholds, dissipation, kinetic energy, enstrophy and root-mean-square (RMS) divergence.\par}
 
 
 \subsection{Area-normalized kinetic energy and dissipation}
@@ -578,7 +568,6 @@ $n$ & $Re$ & $A(n)$ & $A_{\rm mask}(n)$ & $KE$ & $KE/A$ & $D$ & $D/A$ \\
 \bottomrule
 \end{tabular}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Integrated kinetic energy $KE$ and integrated dissipation $D=2\nu\int_{\Omega}S:S\,dA$ with $\nu=2/Re$, together with their area-normalized counterparts on the 30-case reference grid ($N=128$). $KE/A$ uses the exact cavity area $A(n)$; $D/A$ uses the area $A_{\rm mask}(n)$ of the discrete integration mask, so that numerator and denominator share the same support. Absolute dissipation levels are resolution-sensitive; the table is used only for geometry ordering at fixed resolution and observable definition.\par}
 
 
 \section{Reference flow field atlas}\label{sec:atlas}
@@ -607,7 +596,6 @@ This section complements the main-text reference-flow atlas by providing the ref
 
 \label{fig:atlas100}
 \end{figure}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Reference LBM velocity and streamfunction fields at $Re=100$ for representative geometry exponents.\par}
 
 
 
@@ -658,7 +646,6 @@ $n$ & 100 & 150 & 200 & 250 & 300 & 350 & 400 & 450 & 500 & 550 & 600 & 650 & 70
 \bottomrule
 \end{tabular}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Complete $N=128$ grid of the area-normalized kinetic energy $KE/A$ and area-normalized dissipation $D/A$ in the mechanical convention of Table~\ref{tab:energy30}. $KE/A$ uses the exact cavity area $A(n)$; $D/A$ uses the area $A_{\rm mask}(n)$ of the discrete integration mask that carries the sum defining $D$. Rows are geometry exponents and columns Reynolds numbers. The absolute levels are resolution-sensitive; the table is used for geometry ordering at fixed resolution only.\par}
 
 
 \section{Wall-curvature diagnostic}
@@ -698,7 +685,6 @@ $n_{\rm samples}$ & $w/L_c$ & $\kappa_{w,\max}$ & $\kappa_{w,\rm rms}$ & $f_{\rm
 \bottomrule
 \end{tabular}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Analytical circle test. For $n=2$, $a=b=1$, the boundary is the unit circle and the exact curvature is $\kappa=1$ everywhere.\par}
 
 
 \begin{table}[H]
@@ -726,7 +712,6 @@ $n$ & $\kappa_{w,\max}$ & $\kappa_{w,\rm rms}$ & $f_{\rm sharp}$ & $\langle|\kap
 \bottomrule
 \end{tabular}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Geometry-only curvature metrics (independent of $Re$).\par}
 
 
 The maximum curvature is minimal at the circle and rises both at
@@ -765,7 +750,6 @@ $f_{0.025}$ & $+0.795$ & $+0.852$ & $+0.848$ & $+0.794$ \\
 \bottomrule
 \end{tabular}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Correlations with $D/A_{\rm mask}$ at fixed $Re$. Spearman values are shown only for $Re=1000$.\par}
 
 
 At fixed $Re$, RMS window curvature remains positively correlated with
@@ -788,7 +772,6 @@ arclength interpolation.}
 
 \label{fig:nearwall_large}
 \end{figure}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Wall-curvature diagnostic, wall-band dissipation share and $D/A_{\rm mask}$ versus wall-band localization on the reference grid. Axes and tick labels are enlarged for clarity; the panels use the periodic arclength interpolation.\par}
 
 
 \section{Extended additive wall/core budget}
@@ -818,7 +801,6 @@ or the exact geometric area.}
 \label{tab:budgetcase}
 \tabbox{\input{supp_corewall_target_table}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Additive budget for the detailed case $Re=1000$, $N=256$, $\delta=0.05L_c$. All denominators are $A_{\rm mask}$, never $A_{\rm core}$ or the exact geometric area.\par}
 
 
 \begin{figure}[H]
@@ -833,7 +815,6 @@ lines use $\delta=0.05L_c$.}
 
 \label{fig:corewall}
 \end{figure}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Total, wall and core contributions divided by $A_{\rm mask}$ for $N=128$, $Re=100,500,1000$. Solid lines use $\delta=0.025L_c$ and dashed lines use $\delta=0.05L_c$.\par}
 
 
 Table~\ref{tab:budgetcase} gives the detailed target case. From $n=4$ to
@@ -856,7 +837,6 @@ $n=8$ field.}
 \label{tab:budgetrange}
 \tabbox{\input{supp_corewall_changes_table}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Core share of the $n=4\to8$ increase wherever both exponents exist. The $Re=100$, $N=256$ increment is unavailable because that campaign has no $n=8$ field.\par}
 
 
 Table~\ref{tab:budgetrange} qualifies the generalization. Across the ten
@@ -912,7 +892,6 @@ the last column is the same FEM strain integrated over the full P2 domain.}
 \label{tab:commonsupport}
 \tabbox{\input{supp_common_support_table}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Common-support dissipation at $N=128$ and $n_{\rm ref}=6$. Here $\varepsilon_D=100|D_{\rm LBM}^{M}-D_{\rm FEM}^{M}|/D_{\rm FEM}^{M}$; the last column is the same FEM strain integrated over the full P2 domain.\par}
 
 
 \begin{figure}[H]
@@ -928,7 +907,6 @@ normalization.}
 
 \label{fig:commonsupport}
 \end{figure}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Comparison of $D_{\rm LBM}^{M}$, $D_{\rm FEM}^{M}$ and $D_{\rm FEM}^{\Omega}$ for the eight common-support cases. The difference between the two FEM bars is a support effect, not a different velocity normalization.\par}
 
 
 Table~\ref{tab:commonsupport} and Fig.~\ref{fig:commonsupport} show the
@@ -981,7 +959,6 @@ $n_{\rm ref}$ & vertices $V$ & triangles $T$ & velocity DOFs & total unknowns \\
 \bottomrule
 \end{tabular}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Taylor--Hood mesh levels used in the verification ladder. The total unknown count is $2(V+E)+V$: vector P2 velocity plus scalar P1 pressure.\par}
 
 
 The Dirichlet assignment is nodal and discontinuous. For every boundary
@@ -1009,7 +986,6 @@ the FEM assignment is by a strict nodal $y>0$ test, without blending.}
 
 \label{fig:femjunction_supp}
 \end{figure}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Tangential-lid junction convention. The upper arc is moving and the lower arc is fixed. The two junctions are points of velocity discontinuity; the FEM assignment is by a strict nodal $y>0$ test, without blending.\par}
 
 
 This machine-precision asymmetry (Fig.~\ref{fig:femjunction_supp}) is a
@@ -1046,7 +1022,6 @@ physical wall cutoff $r_0$.}
 \label{tab:juncut}
 \tabbox{\input{junction_cutoff_table}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Thirty-case refinement difference $D_{256}/D_{128}-1$ with a fixed physical wall cutoff $r_0$.\par}
 
 
 The available fixed-cutoff ladder for the representative pointed case
@@ -1092,7 +1067,6 @@ excludes them. The latter is grid-scaled, not a fixed physical $r_0=0.5$.}
 \label{tab:logfit}
 \tabbox{\input{junction_logfit_table}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Descriptive fits $D(N)=a+b\ln N$ on the $N=64,128,256$ ladder. The ``total'' support includes the near-junction cells; the $r=16h$ support excludes them. The latter is grid-scaled, not a fixed physical $r_0=0.5$.\par}
 
 
 \begin{figure}[H]
@@ -1105,7 +1079,6 @@ excluded support is $r=16h$, not a fixed physical $r_0=0.5$. None of the panels
 establishes converged continuum dissipation or asymptotic log scaling.}
 \label{fig:juncut}
 \end{figure}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }(a) Thirty-case fixed-wall-cutoff refinement comparison. (b) $D_{\rm junction}(r,N)$ versus $\ln(r/h)$. (c) Descriptive $D(N)=a+b\ln N$ fits on the three-grid ladder; the excluded support is $r=16h$, not a fixed physical $r_0=0.5$. None of the panels establishes converged continuum dissipation or asymptotic log scaling.\par}
 
 
 \section{Energy identity, pressure convention and field-data diagnostic}
@@ -1177,7 +1150,6 @@ $\pi$; the diamond and square limits are validated separately below.}
 \label{tab:lmov}
 \tabbox{\input{supp_lmov_table}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Upper-half moving-wall arclength for $L_c=2$. The $n=2$ value is $\pi$; the diamond and square limits are validated separately below.\par}
 
 
 The validation cases give $L_{\rm mov}(1)=2\sqrt2$ for the diamond,
@@ -1194,6 +1166,7 @@ quantity. In the production LBM post-processing, the MEM link estimate is
   P_{\rm lid}^{\rm MEM}=\sum_{\text{moving links}}
   (\mathbf{e}_q\cdot\mathbf{u}_{\rm wall})
   \left(f_{\rm new,q}+f_{\rm post,q^{\rm opp}}\right),
+  \tag{S10}
   \label{eq:plid_mem}
 \]
 which requires same-step distribution functions on the moving-wall links. The
@@ -1256,7 +1229,6 @@ Projected-lid control & 128,256 & 13 & 8 & $100,1000$ \\
 \bottomrule
 \end{tabular}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Campaign inventory. ``Distinct'' counts unique $(n,Re)$ pairs. The targeted projected-lid control contributes $13$ converged fields at eight $(n,Re)$ pairs.\par}
 
 
 The labels used in the fit and crossing tables are defined as follows:
@@ -1311,7 +1283,6 @@ $Re$ & quantity & 3-pt $n^*$ & 5-pt $n^*$ & argmin & 5-pt margin (\%) \\
 \bottomrule
 \end{tabular}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Fit-window sensitivity on the $N=128$ union at the three central Reynolds numbers. The margin is the relative depth difference between the fitted vertex and the sampled argmin; a negative value means the fitted vertex lies above the sample minimum.\par}
 
 
 For $D/A_{\rm mask}$, the three-point supports are
@@ -1353,7 +1324,6 @@ $N=512$ & 1000 & $D$              & 3 & 2.897 & 2.533 \\
 \bottomrule
 \end{tabular}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Fit diagnostics on matched $N=256$ fields and on the extended $N=384$/$N=512$ ladders. A dash means that no valid convex vertex was obtained; the $N=384$/$N=512$ entries use four-point supports on the sparse high-resolution set.\par}
 
 
 For $N=256$, the wider $D/A_{\rm mask}$ supports are
@@ -1398,7 +1368,6 @@ $N512$ extB    & $D$ & $2.5/3$ & no crossing & -- & $0.9852$, $0.9885$ \\
 \bottomrule
 \end{tabular}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Log-interpolated crossing brackets of adjacent-exponent ratios on the sampled Reynolds grids. ``No crossing'' means that the ratio keeps its sign over the available bracket. All entries are descriptive of the sampled sets.\par}
 
 
 The $D/A_{\rm mask}(3)/D/A_{\rm mask}(4)$ crossing drifts from $338.2$ on the
@@ -1451,7 +1420,6 @@ $N$ & $f_{\mathrm{corner}}$ & $\psi_{\mathrm{corner,max}}$ & $s_{\mathrm{corner}
 \bottomrule
 \end{tabular}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Multi-resolution corner diagnostics at $n=8$, $Re=1000$. $f_{\mathrm{corner}}$ is the dissipation fraction in the $0.20\,L_c$ corner bands; $\psi_{\mathrm{corner,max}}$ is the strongest non-primary extremum within $0.25\,L_c$ of a corner; $s_{\mathrm{corner}}$ is its corner distance in units of $L$; $n_{\mathrm{vp}}$ is the number of extrema above the $1\%$ threshold.\par}
 
 
 At $N=128$, the $1\%$ count is one only at $Re=1000$, confirming the
@@ -1486,7 +1454,6 @@ this is a $1\%$ detection-threshold crossing bracket.}
 
 \label{fig:cornerbracket}
 \end{figure}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Secondary corner extremum at $n=8$. Of the 190 cases on the grid, one resolves a second extremum above the $1\%$ threshold of the primary circulation. At $N=128$, the count changes from one to two between $Re=950$ and $Re=1000$; this is a $1\%$ detection-threshold crossing bracket.\par}
 
 
 \section{Targeted projected-lid control}\label{sec:lidlaw}
@@ -1526,7 +1493,6 @@ support.}
 \label{tab:projtarget}
 \tabbox{\input{projected_lid_table}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Targeted tangential/projected lid comparison. Ratios are projected over tangential; $D/A_{\rm mask}$ uses the gradient-valid area and $KE/A$ uses the exact geometric area. The last column divides the $D/A$ ratio by the $\int u_{\rm lid}^2ds$ ratio ($0.5$ on the sampled geometries), giving a direct forcing-normalized comparison. The velocity norm uses the common fluid support.\par}
 
 
 \begin{figure}[H]
@@ -1542,7 +1508,6 @@ projected continuous argmin is only bracketed by the sampled exponents $n=1.5$
 and $n=4$.}
 \label{fig:projtarget}
 \end{figure}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Dissipation density versus $n$ for the tangential and projected lid laws: (a) $N=128$ and (b) $N=256$; (c) forcing-normalized $D/A$ ratio (raw ratio divided by $0.5$), with the dotted line at unity. Solid lines are $Re=100$, dashed lines are $Re=1000$; circles denote tangential and squares projected results in (a,b), while markers in (c) distinguish $N=128$ (circles) from $N=256$ (squares). The sampled low-loss band moves toward $n=2$, but the projected continuous argmin is only bracketed by the sampled exponents $n=1.5$ and $n=4$.\par}
 
 
 The projected law lowers raw $D/A_{\rm mask}$ at every sampled design, with
@@ -1604,7 +1569,6 @@ normalizations kept distinct.}
 \label{tab:kinetic_moved}
 \tabbox{\input{kinetic_table}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Integrated kinetic energy at $Re=1000$, $N=128$, with the two area normalizations kept distinct.\par}
 
 
 \begin{table}[H]
@@ -1633,7 +1597,6 @@ $N=256$ & 1000 & $D$              & 2.5  & 2.613 & 2.670 \\
 \bottomrule
 \end{tabular}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Fit-window sensitivity on matched fields. Supports, exclusions and the estimator are described in Sec.~\ref{sec:fits}; a dash means the vertex was rejected.\par}
 
 
 \begin{table}[H]
@@ -1659,7 +1622,6 @@ $N=512$ extB & $D$ & $2.5/3$ & no crossing & -- & $0.9852$, $0.9885$ \\
 \bottomrule
 \end{tabular}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Bracketed crossings of adjacent-exponent ratios. ``No crossing'' means the ratio keeps its sign over the available bracket; the estimator is linear interpolation of $\log$(ratio).\par}
 
 
 \begin{table}[H]
@@ -1670,7 +1632,6 @@ The mesh change is reported directly; no Richardson estimate is used.}
 \label{tab:fem_moved}
 \tabbox{\input{fem_table}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Directly integrated FEM dissipation at $Re=1000$ for mesh levels $n_{\rm ref}=4,5,6$, with the lattice reconstruction diagnostics at $N=128$. The mesh change is reported directly; no Richardson estimate is used.\par}
 
 
 \begin{table}[H]
@@ -1691,7 +1652,6 @@ $N$ & $h$ & $D_{r_0=0}$ & $D_{r_0=0.125}$ & $D_{r_0=0.25}$ & $D_{r_0=0.5}$ \\
 \bottomrule
 \end{tabular}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Fixed-junction-disk dissipation $D_{r_0}(N)$ for $n=8$, $Re=1000$, computed from the archived final fields, including the $N=384$ high-resolution field. Here $r_0=0$ denotes the unexcised gradient-valid mask.\par}
 
 
 \begin{table}[H]
@@ -1713,7 +1673,6 @@ $0.5$   & $4277$ & $2606$ & $1511$ & $0.71$ & $0.79$ & $0.0244$ \\
 \bottomrule
 \end{tabular}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Equal-doubling increments (in $10^{-6}$), observed orders and Richardson limits for the $n=8$, $Re=1000$ fixed-junction-disk ladder. Orders use the $64/128/256/512$ subset; the $N=384$ row of Table~\ref{tab:dr0ladder} is an intermediate point and is not used in the equal-doubling ratios.\par}
 
 
 \begin{figure}[H]
@@ -1727,7 +1686,6 @@ of the sampled diagnostics only; no asymptotic rate or grid-converged amplitude
 is claimed.}
 \label{fig:wallrefine}
 \end{figure}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Resolution sensitivity of the near-wall diagnostics on the archived $N=64,128,256$ ladder. The three sampled cases are $(n,Re)=(1.25,300)$, $(3,1000)$ and $(8,1000)$; the panels show $D/A_{\rm mask}$ and the wall-band shares for $\delta=0.025L_c$ and $\delta=0.05L_c$. These curves support ordering of the sampled diagnostics only; no asymptotic rate or grid-converged amplitude is claimed.\par}
 
 
 \section{Production-family diffusive-scaling check}
@@ -1740,7 +1698,7 @@ $Re$ and the gradient-valid quadrature are unchanged. Table~\ref{tab:diffusive}
 compares these fields with the original production fields at the same physical
 junction radii. The $N=128$ fields agree by construction because $U_{\rm lid}$
 and $\tau$ match. At $r_0=0.5$ the diffusive values agree with the production
-values to within $5.23\times10^{-6}$ on all four grids, and the increments on
+values to within $5.3\times10^{-6}$ on $N=128$--$512$, and the increments on
 $128\to256$, $256\to384$ and $384\to512$ remain $2.06\times10^{-3}$,
 $6.85\times10^{-4}$ and $3.21\times10^{-4}$ (observed order about $1.01$ on $128/256/384$; the diffusive ladder
 gives $1.01$ and an increment-ratio order of $2.69$). Lowering
@@ -1770,8 +1728,32 @@ $D_{\rm prod}(0.5)$ & $D_{\rm diff}(0.5)$ \\
 \bottomrule
 \end{tabular}}
 \end{table}
-{\par\medskip\noindent\footnotesize\textsf{Alt text: }Production-family diffusive-scaling check at $n=4$, $Re=1000$: $U_{\mathrm{lid}}(N)=0.05\times128/N$ and nearly fixed $\tau\simeq0.519$. $D_{\rm prod}$ and $D_{\rm diff}$ denote the original production fields and the diffusively scaled reruns; $r_0$ is the physical junction-disk radius, with $r_0=0$ the unexcised gradient-valid mask.\par}
 
+
+
+\subsection*{Fixed-physical-wall-support diagnostic}
+To separate a wall-support effect from a resolved-gradient drift, we recomputed
+$D$ on $M\cap\{\mathrm{dist}(x,\Gamma)>\delta\}$ for $n=4$, $Re=1000$,
+$N=128$--$512$, with $\delta=0.05L_c$ and $0.10L_c$. The distance to $\Gamma$
+($n=4$, $a=b=1$, $L_c=2$) is evaluated by a dense boundary sampling and a
+KD-tree query in physical coordinates, so it does not depend on the lattice
+spacing. Table~\ref{tab:dcore} reports $D_{\rm core}$ and the complementary
+wall contribution; additivity $D_{\rm core}+D_{\rm wall}=D_M$ is exact. The
+junction-excised $D_{r_0=0.5}$ increases by $16.9\%$ from $N=128$ to $512$ and
+retains an observed order of about $1.01$ (equal-doubling order $1.04$),
+whereas $D_{\rm core}$ changes by only $2.8\%$ at $\delta=0.05L_c$ and $6.7\%$
+at $\delta=0.10L_c$ and shows no positive fitted order. The remaining
+resolution drift is therefore associated with the near-wall support that
+remains after junction excision, not with a first-order drift of the core
+gradients on a fixed physical support. This diagnostic is not a continuum
+certification.
+
+\begin{table}[H]
+\centering
+\caption{Dissipation on a core support of fixed physical wall thickness, $D_{\rm core}(\delta)=2\nu\sum_{M\cap\{\mathrm{dist}(x,\Gamma)>\delta\}}S:S\,\Delta x^2$, with $\mathrm{dist}$ the exact distance to the superellipse boundary ($n=4$, $Re=1000$). $\delta=0.05$ and $0.1$ ($L_c=2$). Observed orders use successive doublings. This diagnostic separates the wall-support effect from the resolved-gradient drift and is not a continuum certification.}
+\label{tab:dcore}
+\tabbox{\input{dcore_fixed_wall_table}}
+\end{table}
 
 \section*{Data availability}
 The post-processed data, analysis scripts, regenerated figures, result tables,

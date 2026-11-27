@@ -31,7 +31,7 @@ FILES TO SELECT WHEN UPLOADING
 6. Alt Text (Microsoft Word) ............ Alt_Text.docx
    Upload this Word file for the AIP accessibility requirement. A plain-text
    mirror, Alt_Text.txt, is included for convenience but is not a substitute
-   for the Word document. The clean article and supplementary PDFs also carry an Alt text line immediately after every figure and table.
+   for the Word document. Alt text is supplied only in the Word document and is not printed in the PDFs.
 7. Response Letter ...................... RESPONSE_LETTER_FINAL.pdf
    Also supplied as RESPONSE_LETTER_FINAL.tex for editing. Every original
    referee comment is quoted from the referee reports, followed by the
@@ -66,7 +66,7 @@ SCIENTIFIC CONTROLS INCLUDED
 --------------------------------------------------------------------------------
 The revision includes corrected common-support LBM/FEM dissipation, fixed
 junction-disk radii with observed orders and a Richardson diagnostic in Table S28,
-a production-family diffusive-scaling check in Table S30,
+a production-family diffusive-scaling check in Table S30 and a fixed-wall-support diagnostic in Table S31,
 descriptive logarithmic junction fits, resolution checks
 through N=512, and the targeted projected-lid campaign at n=1.5, 2, 4 and 8,
 Re=100 and 1000 on N=128 with selected N=256 comparisons. Across the 13
@@ -84,9 +84,7 @@ ACCESSIBILITY
 --------------------------------------------------------------------------------
 Alt_Text.docx is the separate Microsoft Word alt-text document required by
 AIP. It lists alt text for every figure and table in the clean Article File
-and in the Supplementary Online Material. The same alt text is also printed
-immediately after each float in Article_File.pdf and in the clean
-supplementary PDF.
+and in the Supplementary Online Material. It is not printed in the PDFs.
 
 --------------------------------------------------------------------------------
 REFEREE REPORTS

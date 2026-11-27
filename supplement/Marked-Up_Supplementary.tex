@@ -1220,6 +1220,7 @@ quantity. In the production LBM post-processing, the MEM link estimate is
   P_{\rm lid}^{\rm MEM}=\sum_{\text{moving links}}
   (\mathbf{e}_q\cdot\mathbf{u}_{\rm wall})
   \left(f_{\rm new,q}+f_{\rm post,q^{\rm opp}}\right),
+  \tag{S10}
   \label{eq:plid_mem}
 \]
 which requires same-step distribution functions on the moving-wall links. \color{revred}An \color{revblue}The\color{black}
@@ -1811,7 +1812,7 @@ is claimed.}
 \label{sec:diffusive}
 \color{revblue}To test whether the residual resolution drift of the production family is a
 \color{black}
-\color{revblue}lattice-Mach effect, we reran the $n=4$, $Re=1000$ cases at $N=128,256,384,512$
+\color{revblue}lattice-Mach effect, we reran the $n=4$, $Re=1000$ cases at $N=128$--$512$
 \color{black}
 \color{revblue}with $U_{\mathrm{lid}}(N)=0.05\times128/N$ and nearly fixed
 \color{black}
@@ -1825,7 +1826,7 @@ is claimed.}
 \color{black}
 \color{revblue}and $\tau$ match. At $r_0=0.5$ the diffusive values agree with the production
 \color{black}
-\color{revblue}values to within $5.23\times10^{-6}$ on all four grids, and the increments on
+\color{revblue}values to within $5.3\times10^{-6}$ on $N=128$--$512$, and the increments on
 \color{black}
 \color{revblue}$128\to256$, $256\to384$ and $384\to512$ remain $2.06\times10^{-3}$,
 \color{black}
@@ -1862,6 +1863,31 @@ $D_{\rm prod}(0.5)$ & $D_{\rm diff}(0.5)$ \\
 512 & 0.01250 & 0.519162 & 0.037509 & 0.038374 & 0.024482 & 0.024473 & 0.018184 & 0.018179 \\
 \bottomrule
 \end{tabular}}
+\end{table}
+
+
+\subsection*{Fixed-physical-wall-support diagnostic}
+\color{revblue}To separate a wall-support effect from a resolved-gradient drift, we recomputed
+$D$ on $M\cap\{\mathrm{dist}(x,\Gamma)>\delta\}$ for $n=4$, $Re=1000$,
+$N=128$--$512$, with $\delta=0.05L_c$ and $0.10L_c$. The distance to $\Gamma$
+($n=4$, $a=b=1$, $L_c=2$) is evaluated by a dense boundary sampling and a
+KD-tree query in physical coordinates, so it does not depend on the lattice
+spacing. Table~\ref{tab:dcore} reports $D_{\rm core}$ and the complementary
+wall contribution; additivity $D_{\rm core}+D_{\rm wall}=D_M$ is exact. The
+junction-excised $D_{r_0=0.5}$ increases by $16.9\%$ from $N=128$ to $512$ and
+retains an observed order of about $1.01$ (equal-doubling order $1.04$),
+whereas $D_{\rm core}$ changes by only $2.8\%$ at $\delta=0.05L_c$ and $6.7\%$
+at $\delta=0.10L_c$ and shows no positive fitted order. The remaining
+resolution drift is therefore associated with the near-wall support that
+remains after junction excision, not with a first-order drift of the core
+gradients on a fixed physical support. This diagnostic is not a continuum
+certification.\color{black}
+
+\begin{table}[H]
+\centering
+\caption{Dissipation on a core support of fixed physical wall thickness, $D_{\rm core}(\delta)=2\nu\sum_{M\cap\{\mathrm{dist}(x,\Gamma)>\delta\}}S:S\,\Delta x^2$, with $\mathrm{dist}$ the exact distance to the superellipse boundary ($n=4$, $Re=1000$). $\delta=0.05$ and $0.1$ ($L_c=2$). Observed orders use successive doublings. This diagnostic separates the wall-support effect from the resolved-gradient drift and is not a continuum certification.}
+\label{tab:dcore}
+\tabbox{\input{dcore_fixed_wall_table}}
 \end{table}
 
 \section*{Data availability}
