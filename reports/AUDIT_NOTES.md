@@ -177,7 +177,7 @@ Les deux figures dont le rapport largeur/hauteur aurait changé (`fig_supp_corew
 | `convergence_paroi.png` | `3a27d81b88a417323ad0a9893a9389d8d8a4c11f7064db7d6864f8a5b509600b` |
 | `curve_kinetic_energy_vs_n.png` | `c9d9f83ed5c7b92dd1512f83a96e8142376f4ca4e9065cfb93112a389033332a` |
 | `fig_supp_corewall_Re100_500_1000.png` | `562561e7905b1eb036eb86f497a2f4a993ca799b80107710f745deb09294aa08` |
-| `fig_supp_fem_junction_schematic.png` | `163bd8cd7f62c06bfd030c38c04806d64933c16a5b8cf3ee898c512e9b0a249b` |
+| `fig_supp_fem_junction_schematic.png` | `89d4c621e25968c62f58f72a5e15f17c3553c901a8a3357bc62dcffe0680d6cd` |
 | `figS11b_lbm_fem_convergence_N.png` | `240ad8c121a04065578f3583817070b909d6dd78f4a07ddcdb02c572cedb7d3c` |
 
 La légende et le texte alternatif de la figure S11b mentionnent maintenant le panneau de contrôle de la dépendance au Mach à $N$ fixe qui figurait déjà dans l'image archivée. `Alt_Text.txt` et `Alt_Text.docx` ont été régénérés après cette modification; le nombre d'entrées était alors de 13 pour l'article et 45 pour le supplément. La version finale porte le nombre d'entrées principales à 14 (voir §8.9).
@@ -212,4 +212,13 @@ Cette section consigne les seules corrections ciblées appliquées après l'audi
 * `count_abstract_pdf2.py` : 238 tokens alphanumériques dans le résumé du PDF, soit moins que la limite de 250 mots; la lettre indique correctement « approximately 238 words ».
 * `check_orders_all.py` : ordres recomputés $0.26/0.29$, $1.01/1.01$ et $1.04/1.04$, cohérents avec les sources corrigées.
 * Après ces vérifications, les fichiers `.aux`, `.log`, `.out` et les dossiers `__pycache__` générés ont été supprimés, ainsi que le dossier temporaire `scripts/manuscript_support/figs_new`; seuls les exemplaires synchronisés dans `submission_package/figs_new`, `REV/figures`, `REV/figures/final_supplement`, `REV/supplement/figs` et `REV/supplement/figs_new` subsistent.
+
+### 8.10 Correction de lisibilité de la figure S10 (2026-11-27)
+
+*À la demande de l'auteur, seul le dessin de la figure S10 a été réagencé; la légende, le texte alternatif et les données scientifiques sont inchangés.*
+
+* `scripts/final_revision/make_fem_junction_schematic.py` place désormais les définitions des symboles dans une légende distincte en pied de figure. Les deux annotations de jonction sont déportées à l'extérieur du cercle (texte à gauche de la jonction gauche, à droite de la jonction droite), et les étiquettes « moving upper arc » / « fixed lower arc » sont séparées de la légende. Un contrôle des boîtes englobantes après rendu confirme qu'aucune annotation, étiquette d'arc, jonction ou entrée de légende ne se superpose; toutes les boîtes restent dans le canevas conservé par `bbox_inches="tight"`.
+* L'image finale fait exactement $1343\times978$ pixels, soit le rapport archivé $1343/978$. Son SHA-256 est `89d4c621e25968c62f58f72a5e15f17c3553c901a8a3357bc62dcffe0680d6cd` (il remplace `163bd8cd7f62c06bfd030c38c04806d64933c16a5b8cf3ee898c512e9b0a249b` au §8.8). Les six exemplaires (`submission_package/figs_new`, `submission_package/figs`, `REV/figures/final_supplement`, `REV/figures`, `REV/supplement/figs_new`, `REV/supplement/figs`) sont octet pour octet identiques.
+* Les quatre PDF contenant S10 (`Supplementary_Article_File.pdf` et `Marked-Up_Supplementary.pdf` dans `submission_package`, ainsi que `supplement/PH13_supplementary_final.pdf` et `supplement/Marked-Up_Supplementary.pdf` dans `REV`) ont été recompilés deux fois; le pilote complet a reconstruit les huit PDF sans erreur fatale. Deux PDF ouverts dans un lecteur Windows local étaient verrouillés; ils ont été renommés en `.locked-old`, recompilés, puis les anciens exemplaires ont été supprimés.
+* Vérifications relancées après cette correction : `verify_final_package.py` tous contrôles passés (textes alternatifs 14/45, 4 tableaux et 10 figures dans l'article, aucune étiquette dupliquée, journaux LaTeX propres); `verify_pdf_garble.py` aucune chaîne corrompue interdite; `check_final_hashes.py` 16/16 hachages conformes. Le résumé reste à 238 mots et les ordres à $0.26/0.29$, $1.01/1.01$, $1.04/1.04$.
 
