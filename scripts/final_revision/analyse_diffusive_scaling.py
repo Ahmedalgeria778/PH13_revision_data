@@ -169,14 +169,16 @@ def main() -> int:
         idd = [dd[i + 1] - dd[i] for i in range(len(NS) - 1)]
         p_prod = observed_order(*dp[:3])
         p_diff = observed_order(*dd[:3])
-        q_prod = math.log2(ip[0] / ip[2]) if ip[0] > 0 and ip[2] > 0 else float("nan")
-        q_diff = math.log2(idd[0] / idd[2]) if idd[0] > 0 and idd[2] > 0 else float("nan")
+        q_prod = (math.log2(ip[0] / (ip[1] + ip[2]))
+                  if ip[0] > 0 and (ip[1] + ip[2]) > 0 else float("nan"))
+        q_diff = (math.log2(idd[0] / (idd[1] + idd[2]))
+                  if idd[0] > 0 and (idd[1] + idd[2]) > 0 else float("nan"))
         lines += [
             f"- r0={r0:g}: production increments "
             f"{ip[0]:.6f}, {ip[1]:.6f}, {ip[2]:.6f}; diffusive increments "
             f"{idd[0]:.6f}, {idd[1]:.6f}, {idd[2]:.6f} "
             f"(128→256, 256→384, 384→512).",
-            f"  Equal-doubling order from 256/512: production {q_prod:.2f}; "
+            f"  Equal-doubling order from 128/256/512: production {q_prod:.2f}; "
             f"diffusive {q_diff:.2f}.",
             f"  128/256/384 fitted order: production {p_prod:.2f}; "
             f"diffusive {p_diff:.2f}.",

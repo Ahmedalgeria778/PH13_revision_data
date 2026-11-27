@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import csv
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -16,15 +17,38 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+from PIL import Image
 
 plt.rcParams.update({
-    "font.size": 11,
-    "axes.titlesize": 12,
-    "axes.labelsize": 11,
-    "xtick.labelsize": 10,
-    "ytick.labelsize": 10,
-    "legend.fontsize": 8.5,
+    "font.size": 12,
+    "axes.titlesize": 13,
+    "axes.labelsize": 12,
+    "xtick.labelsize": 11,
+    "ytick.labelsize": 11,
+    "legend.fontsize": 10,
 })
+
+TARGET_SIZE = (5073, 1577)  # archived dimensions; keeps the typeset float unchanged
+
+
+def match_archived_aspect(path, size):
+    """Restore the archived aspect exactly, without cropping plotted content."""
+    image = Image.open(path).convert("RGB")
+    width, height = image.size
+    target_width, target_height = size
+    if (width, height) == size:
+        return
+    ratio, target_ratio = width / height, target_width / target_height
+    if abs(ratio - target_ratio) < 0.05:
+        image = image.resize(size, Image.Resampling.LANCZOS)
+        image.save(path)
+        return
+    scale = max(width / target_width, height / target_height)
+    canvas_size = (math.ceil(target_width * scale), math.ceil(target_height * scale))
+    canvas = Image.new("RGB", canvas_size, "white")
+    canvas.paste(image, ((canvas_size[0] - width) // 2,
+                         (canvas_size[1] - height) // 2))
+    canvas.save(path)
 
 ROOT = Path(__file__).resolve().parents[4]
 V2 = ROOT / "06_physics" / "results_jonction_v2"
@@ -70,7 +94,7 @@ ax.set_xlabel(r"fixed physical cutoff $r_0$")
 ax.set_ylabel(r"$D_{256}/D_{128}-1$ (%)")
 ax.set_title("(a) Fixed-wall-cutoff comparison")
 ax.grid(alpha=0.25)
-ax.legend(fontsize=8.5, loc="upper right")
+ax.legend(fontsize=10, loc="upper right")
 
 ax = axes[1]
 selected = [
@@ -90,7 +114,7 @@ ax.set_xlabel(r"$\ln(r/h)$")
 ax.set_ylabel(r"$D_{\rm junction}(r,N)$")
 ax.set_title("(b) Junction contribution versus cutoff")
 ax.grid(alpha=0.25)
-ax.legend(fontsize=8.5, loc="upper left")
+ax.legend(fontsize=10, loc="upper left")
 
 ax = axes[2]
 Ns = np.array([64.0, 128.0, 256.0])
@@ -108,14 +132,15 @@ ax.set_xlabel(r"$\ln N$")
 ax.set_ylabel(r"$D(N)$")
 ax.set_title(r"(c) Descriptive fits $D=a+b\ln N$")
 ax.grid(alpha=0.25)
-ax.legend(fontsize=8.0, loc="upper left", ncol=2)
+ax.legend(fontsize=9.5, loc="upper left", ncol=2)
 
 fig.suptitle("Junction cutoff diagnostics (descriptive; not grid-independent dissipation)",
-             fontsize=12.5)
+             fontsize=13)
 fig.tight_layout(rect=(0, 0, 1, 0.93))
 for out in OUTS:
     out.mkdir(parents=True, exist_ok=True)
     fig.savefig(out / "fig_junction_cutoffs.png", dpi=320, bbox_inches="tight")
+    match_archived_aspect(out / "fig_junction_cutoffs.png", TARGET_SIZE)
     fig.savefig(out / "fig_junction_cutoffs.pdf", bbox_inches="tight")
     print("wrote", out / "fig_junction_cutoffs.png")
 

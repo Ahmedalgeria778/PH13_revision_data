@@ -354,7 +354,7 @@ control and is not used to claim convergence.}
 
 \label{fig:lbmfemconv}
 \end{figure}
-\noindent{\small\textit{Alt text:} Grid dependence of the LBM--FEM interior relative $L_2$ discrepancy for the circular cavity at $Re=100$ from $N=32$ to $N=96$ (a), with solid-circle data and dashed and dotted $O(h)$ and $O(h^2)$ guides, and the fixed-resolution Mach-dependence control at $N=64$ (b), with solid-square data and a dashed $O(|U-0.05|)$ guide. The decrease in (a) is consistent with reduced discretization error over the tested resolutions; panel (b) is a separate control, not a convergence claim.}\par
+\noindent{\small\textit{Alt text:} Grid dependence of the LBM--FEM interior relative $L_2$ discrepancy for the circular cavity at $Re=100$ as the LBM resolution is refined from $N=32$ to $N=96$ (a), together with the fixed-resolution Mach-dependence control at $N=64$ (b). The decrease in (a) is consistent with a reduction of discretization error over the tested resolutions; panel (b) is a separate control and is not used to claim convergence.}\par
 
 
 % ======================================================================
@@ -1240,7 +1240,9 @@ excluded, and the recorded parameters agree with the field labels throughout.
 \centering
 \caption{Campaign inventory. ``Distinct'' counts unique $(n,Re)$
 pairs. The targeted projected-lid control contributes $13$ converged fields at
-eight $(n,Re)$ pairs.}
+eight $(n,Re)$ pairs. The diffusive-scaling control is a separate auxiliary
+campaign; its $N=128$ field is reused from production and is not
+double-counted.}
 
 
 
@@ -1257,11 +1259,18 @@ Matched refinement & 256 & 50 & 50 & $300,500,1000$ \\
 Low-Reynolds refinement & 256 & 13 & 13 & $100,150,200,250,300$ \\
 High-resolution ladder & 384,512 & 12 & 6 & $300,1000$ \\
 Extended ladder & 384,512 & 24 & 12 & $100,150,200,250$ \\
+Diffusive-scaling control & 128,256,384,512 & 4 levels; $N=128$ reused & 1 & 1000 \\
 Projected-lid control & 128,256 & 13 & 8 & $100,1000$ \\
 \bottomrule
 \end{tabular}}
 \end{table}
-\noindent{\small\textit{Alt text:} Campaign inventory. ``Distinct'' counts unique $(n,Re)$ pairs. The targeted projected-lid control contributes $13$ converged fields at eight $(n,Re)$ pairs.}\par
+\noindent{\small\textit{Alt text:} Campaign inventory. ``Distinct'' counts unique $(n,Re)$ pairs. The targeted projected-lid control contributes $13$ converged fields at eight $(n,Re)$ pairs. The diffusive-scaling control is a separate auxiliary campaign; its $N=128$ field is reused from production and is not double-counted.}\par
+
+The diffusive-scaling control is a separate auxiliary campaign at $n=4$ and
+$Re=1000$, distinct from the production inventory. Its $N=128$ field is the
+unmodified production field, reused rather than recomputed; only the
+$N=256$, $384$ and $512$ fields are additional diffusively scaled runs. The
+$N=128$ field is therefore not counted twice in the campaign totals.
 
 
 The labels used in the fit and crossing tables are defined as follows:
@@ -1747,8 +1756,8 @@ junction radii. The $N=128$ fields agree by construction because $U_{\rm lid}$
 and $\tau$ match. At $r_0=0.5$ the diffusive values agree with the production
 values to within $5.3\times10^{-6}$ on $N=128$--$512$, and the increments on
 $128\to256$, $256\to384$ and $384\to512$ remain $2.06\times10^{-3}$,
-$6.85\times10^{-4}$ and $3.21\times10^{-4}$ (observed order about $1.01$ on $128/256/384$; the diffusive ladder
-gives $1.01$ and an increment-ratio order of $2.69$). Lowering
+$6.85\times10^{-4}$ and $3.21\times10^{-4}$ (observed order about $1.01$ on
+$128/256/384$; the equal-doubling order on $128/256/512$ is $1.04$). Lowering
 the lattice Mach number changes the unexcised full-domain level appreciably but
 leaves the junction-excised values essentially unchanged; it does not remove the
 resolution drift. This check is not a continuum certification. It only excludes

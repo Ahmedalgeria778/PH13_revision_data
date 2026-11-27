@@ -71,12 +71,12 @@ def fig_budget():
                 ms=4, label=r"$D_{\rm wall}/A_{\rm mask}$")
         ax.plot(n, [float(r["Dcore_over_A"]) for r in sub], "k^:", lw=1.8,
                 ms=5, label=r"$D_{\rm core}/A_{\rm mask}$")
-        ax.set_title("(%s) $Re=%d,\\ N=256$" % ("abc"[i], Re), fontsize=13)
-        ax.set_xlabel(r"$n$", fontsize=13)
-        ax.tick_params(labelsize=11, pad=5)
+        ax.set_title("(%s) $Re=%d,\\ N=256$" % ("abc"[i], Re), fontsize=14)
+        ax.set_xlabel(r"$n$", fontsize=14)
+        ax.tick_params(labelsize=12, pad=5)
         ax.grid(alpha=0.3)
-    axes[0].set_ylabel(r"dissipation per unit $A_{\rm mask}$", fontsize=13)
-    axes[0].legend(fontsize=10, loc="best", frameon=False)
+    axes[0].set_ylabel(r"dissipation per unit $A_{\rm mask}$", fontsize=14)
+    axes[0].legend(fontsize=11, loc="best", frameon=False)
     fig.suptitle("Additive core/wall budget: the rise beyond the low-loss band is core-driven",
                  fontsize=13)
     fig.tight_layout(rect=(0, 0, 1, 0.92))
@@ -377,11 +377,11 @@ def fig_minima():
         ax.plot([float(r["Re"]) for r in s], [float(r["n_star"]) for r in s],
                 marker=marker, linestyle=ls, color="k", ms=5, lw=1.6,
                 label=est.replace("OLS quadratic, ", ""))
-    ax.set_xlabel(r"$Re$", fontsize=13)
-    ax.set_ylabel(r"fitted $n^*_{D/A}$", fontsize=13)
-    ax.tick_params(labelsize=11, pad=5)
+    ax.set_xlabel(r"$Re$", fontsize=14)
+    ax.set_ylabel(r"fitted $n^*_{D/A}$", fontsize=14)
+    ax.tick_params(labelsize=12, pad=5)
     ax.grid(alpha=0.3)
-    ax.legend(fontsize=10, frameon=False)
+    ax.legend(fontsize=11, frameon=False)
     ax.set_title("Fit-window sensitivity (same archived fields)", fontsize=13)
     fig.tight_layout()
     fig.savefig(FIG / "fig_minima_windows.png", dpi=200)
@@ -413,13 +413,13 @@ def fig_fem():
     re_handles = [Line2D([], [], color="0.25", linestyle=re_styles[Re],
                          lw=1.6, label=r"$Re=%d$" % Re)
                   for Re in (100.0, 400.0, 1000.0)]
-    axes[0].legend(handles=n_handles + re_handles, fontsize=8, frameon=False,
+    axes[0].legend(handles=n_handles + re_handles, fontsize=10, frameon=False,
                    ncol=2, handlelength=2.4)
-    axes[0].set_xlabel("mesh refinement level", fontsize=13)
-    axes[0].set_ylabel(r"$D_{\rm FEM}=2\nu\int S:S$", fontsize=13)
-    axes[0].tick_params(labelsize=11, pad=5)
+    axes[0].set_xlabel("mesh refinement level", fontsize=14)
+    axes[0].set_ylabel(r"$D_{\rm FEM}=2\nu\int S:S$", fontsize=14)
+    axes[0].tick_params(labelsize=12, pad=5)
     axes[0].grid(alpha=0.3)
-    axes[0].set_title("(a) Exact integrated dissipation, P2/P1", fontsize=13)
+    axes[0].set_title("(a) Exact integrated dissipation, P2/P1", fontsize=14)
 
     q = DATA / "fem" / "fem_gradient_reconstruction.csv"
     if q.exists():
@@ -436,12 +436,12 @@ def fig_fem():
                          [100 * float(r["rel_D_lattice_error"]) for r in s],
                          marker=re_markers[Re], linestyle="--", ms=3.5, lw=1.3,
                          label=r"$Re=%d$, $D$" % Re)
-    axes[1].set_xlabel(r"$n$", fontsize=13)
-    axes[1].set_ylabel("relative error [%]", fontsize=13)
-    axes[1].tick_params(labelsize=11, pad=5)
+    axes[1].set_xlabel(r"$n$", fontsize=14)
+    axes[1].set_ylabel("relative error [%]", fontsize=14)
+    axes[1].tick_params(labelsize=12, pad=5)
     axes[1].grid(alpha=0.3)
-    axes[1].legend(fontsize=7.5, frameon=False, ncol=2)
-    axes[1].set_title("(b) FD reconstruction from sampled FEM field", fontsize=13)
+    axes[1].legend(fontsize=9.5, frameon=False, ncol=2)
+    axes[1].set_title("(b) FD reconstruction from sampled FEM field", fontsize=14)
     fig.tight_layout()
     fig.savefig(FIG / "fig_fem_validation.png", dpi=200)
     plt.close(fig)

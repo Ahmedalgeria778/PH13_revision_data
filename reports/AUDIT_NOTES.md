@@ -163,22 +163,53 @@ Les deux figures dont le rapport largeur/hauteur aurait changé (`fig_supp_corew
 
 | Figure | SHA-256 |
 |---|---|
-| `fig_core_wall_budget.png` | `c6309459f0ae1acc29acb30f86408b254469a5cc1ba92db030a896c24ade2e1d` |
+| `fig_core_wall_budget.png` | `56c179409d97891b97e5e37010ff337d41c3214a2e740574700891bd678ea0cb` |
 | `fig_junction_share.png` | `5878ae71f6c4ca93fddef5828cde7424e506d15fa9e05bc7e3261636d63dd6b0` |
 | `curve_dissipation_vs_n.png` | `1a1e4c0121e26d38fc25dd25d148dd2f991d8ecbb0b847c1993d7886cb90cbc6` |
 | `map_dissipation.png` | `49ca4dada6b2c07a4ecc68b87e4930306078f678004c79cc067263ef9fe736d4` |
 | `fig_fields_plate.png` | `0b0160df2b6e139a0d3dff171f74058bd5072be696e78294deb6b77c2d310ff9` |
 | `fig_curvature.png` | `1b412e5ceed05703f43f35072f89fbdf868048c927da820854a398365afec9a2` |
 | `fig_nearwall_large_axes.png` | `5cc225171b2c4ddaae6d8a3b9261027b880bddded0bd779192f13e3b3577cf52` |
-| `fig_minima_windows.png` | `2d31857f85148e1f922f32fb5fa71b16d526e51d0e9150b00dcab75409bd7c72` |
-| `fig_fem_validation.png` | `e5ff746680032d22132ce9b84061c32f341aef1be3842179255c8bdc8ca6fe75` |
+| `fig_minima_windows.png` | `ca7502578c055edf5687d3b2871ff67afb22796b43cf1b10bdbf36392b6b2720` |
+| `fig_fem_validation.png` | `2cf18490df20cf253f1a5fe9e72546ee9018f44cfcc190933d06be1ea849512a` |
 | `fig_supp_common_support_dissipation.png` | `b520202336ac8e04d590198faac4b8b4f749e862f208fc0f6db4e0f2db78fafe` |
-| `fig_junction_cutoffs.png` | `5c8c39bd9e357c302ba233ac9b63e96381d37d54848378f1d885a4294104bfca` |
+| `fig_junction_cutoffs.png` | `c47c12f8a3b54e2863899b23e4afb656e078d3f71e6e11eb9182a937fe7d80fd` |
 | `convergence_paroi.png` | `3a27d81b88a417323ad0a9893a9389d8d8a4c11f7064db7d6864f8a5b509600b` |
 | `curve_kinetic_energy_vs_n.png` | `c9d9f83ed5c7b92dd1512f83a96e8142376f4ca4e9065cfb93112a389033332a` |
 | `fig_supp_corewall_Re100_500_1000.png` | `562561e7905b1eb036eb86f497a2f4a993ca799b80107710f745deb09294aa08` |
 | `fig_supp_fem_junction_schematic.png` | `163bd8cd7f62c06bfd030c38c04806d64933c16a5b8cf3ee898c512e9b0a249b` |
 | `figS11b_lbm_fem_convergence_N.png` | `240ad8c121a04065578f3583817070b909d6dd78f4a07ddcdb02c572cedb7d3c` |
 
-La légende et le texte alternatif de la figure S11b mentionnent maintenant le panneau de contrôle de la dépendance au Mach à $N$ fixe qui figurait déjà dans l'image archivée. `Alt_Text.txt` et `Alt_Text.docx` ont été régénérés après cette modification; le nombre d'entrées reste de 13 pour l'article et 45 pour le supplément.
+La légende et le texte alternatif de la figure S11b mentionnent maintenant le panneau de contrôle de la dépendance au Mach à $N$ fixe qui figurait déjà dans l'image archivée. `Alt_Text.txt` et `Alt_Text.docx` ont été régénérés après cette modification; le nombre d'entrées était alors de 13 pour l'article et 45 pour le supplément. La version finale porte le nombre d'entrées principales à 14 (voir §8.9).
+
+### 8.9 Corrections finales de resoumission et vérification (2026-11-27)
+
+Cette section consigne les seules corrections ciblées appliquées après l'audit final, sans nouvelle restructuration ni réécriture générale.
+
+**Corrections ciblées appliquées.**
+
+* La phrase de la section 2.2 sur $\mathrm{Ma}=0.0866$ est désormais explicitement limitée aux simulations de production. Le texte ajoute que le contrôle distinct de mise à l'échelle diffusive fait varier $U_{\rm lid}$ avec la résolution tout en maintenant $Re$ approximativement constant (article propre et article marqué).
+* Le tableau I et sa légende comportent maintenant une ligne « Diffusive-scaling control » ($N=128$--$512$, quatre niveaux, $n=4$, $Re=1000$). Le tableau `tab:fixedwall` et son interprétation ont été insérés dans l'article principal : $D_{\rm diff}(r_0=0.5)=0.015117,0.017176,0.017859,0.018179$, $D_{\rm core}(0.05L_c)=0.008958,0.008796,0.008674,0.008714$ et $D_{\rm core}(0.10L_c)=0.002817,0.002675,0.002645,0.002641$ pour $N=128,256,384,512$. Le diagnostic est présenté comme une sensibilité spatiale, pas comme une certification du continu.
+* L'inventaire S18 comprend une ligne « Diffusive-scaling control » et une note précisant que $N=128$ est le champ de production inchangé, réutilisé et non compté deux fois; seuls $N=256,384,512$ sont des runs additionnels. Cette clarification figure dans les deux versions du supplément.
+* L'ordre invalide « increment-ratio order of $2.69$ » a été supprimé de toutes les sources de soumission. La cause était le calcul `log2(ip[0] / ip[2])` sur des intervalles inégaux dans `scripts/final_revision/analyse_diffusive_scaling.py`; la formule correcte est `log2(ip[0] / (ip[1] + ip[2]))`. Les ordres vérifiables sont $0.26/0.29$ ($r_0=0$), $1.01/1.01$ ($r_0=0.25$) et $1.04/1.04$ ($r_0=0.5$), les derniers correspondant aux doublements égaux $128/256/512$. Les deux copies de `diffusive_comparison.md` ont été corrigées.
+* La lettre de réponse retire explicitement les anciennes discordances globales de $20.8\%$ et $31.3\%$ comme résultats de bilan énergétique validés, précise l'absence de flux d'interface et de distribution functions conservées, et indique qu'aucune clôture globale n'est revendiquée. Le compte du résumé y est désormais « approximately 238 words ».
+* La section 7 a été remplacée par le texte proposé, que ce soit dans l'article propre ou en bleu dans l'article marqué. L'ancienne conclusion, y compris « support redistribution of viscous loss as the robust mechanism », ne subsiste que comme texte rouge supprimé dans `Marked-Up_Manuscript.tex`; elle n'apparaît dans aucune version propre ni dans aucun PDF propre.
+* Les polices des figures 4, 5, 8 et 10 ont été agrandies (`fig_core_wall_budget.png`, `fig_junction_cutoffs.png`, `fig_minima_windows.png`, `fig_fem_validation.png`) sans modifier les données tracées. `make_junction_cutoff_figure.py` restaure exactement les dimensions archivées `(5073, 1577)` par `match_archived_aspect()`. Les rapports d'aspect vérifiés sont respectivement $2640/880$, $5073/1577$, $1640/880$ et $2400/920$, identiques aux exemplaires archivés. Les nouveaux hachages SHA-256 sont consignés au §8.8 et vérifiés 16/16 par `check_final_hashes.py`.
+* Deux accolades surnuméraires dans les légendes des fichiers marqués (tableau I de `Marked-Up_Manuscript.tex` et tableau S18 de `Marked-Up_Supplementary.tex`) ont été corrigées avant la dernière compilation. La direction de synchronisation a été respectée : sources supplément/réponse de `submission_package` vers `REV`, et `Alt_Text.txt`/`.docx` de `REV` vers `submission_package`.
+
+**Textes alternatifs et administration AIP.**
+
+* `alt_text_pipeline.py` a été mis à jour pour 14 flottants principaux. Les textes alternatifs ont été régénérés puis synchronisés : 14 entrées pour l'article propre, 14 pour l'article marqué, 45 pour chaque supplément. `Alt_Text.txt` et `Alt_Text.docx` sont complets et présents dans `submission_package` et `REV/reports`.
+* Les fichiers administratifs AIP sont présents et non vides dans `submission_package` : `Article_File.pdf`, `Supplementary_Article_File.pdf`, `RESPONSE_LETTER_FINAL.pdf`, `Marked-Up_Manuscript.pdf`, les sources `.tex` correspondantes, `Alt_Text.docx`, `Alt_Text.txt` et `Highlight_Image.jpeg`/`.tif`. `Marked-Up_Supplementary.pdf` y est également fourni.
+* Les deux images de mise en évidence ont été ouvertes et vérifiées : `Highlight_Image.jpeg` (JPEG, RGB, $2404\times1882$, 998817 octets, SHA-256 `71a49bdf61632e36e7b918d419d265a7ee1975b4e5aea1a91219396bd4a8046c`) et `Highlight_Image.tif` (TIFF, RGB, $2404\times1882$, 2559460 octets, SHA-256 `bb3fb76c3cef050c5e70d069d08edf04419f78b2339647930a5b5ae3ed8af4d5`).
+* Trois PDF de la soumission étaient verrouillés par des processus Windows locaux; les anciens exemplaires ont été renommés en `.locked-old`, les PDF ont été recompilés, puis les anciens exemplaires ont été supprimés. Aucun fichier `.locked-old` ne subsiste.
+
+**Vérifications finales.**
+
+* Les huit PDF ont été recompilés deux fois avec succès après les corrections d'accolades : article propre 23 pages, article marqué 25 pages, supplément propre 32 pages, supplément marqué 34 pages, lettre de réponse 14 pages, plus les trois copies `REV` (32, 34 et 14 pages). Aucune compilation ne présente d'erreur fatale.
+* `verify_final_package.py` : tous les contrôles automatiques sont passés (textes alternatifs 14/45, absence de `??` sauf points d'interrogation légitimes, étiquettes uniques, journaux LaTeX propres, 4 tableaux et 10 figures dans l'article, chaînes critiques présentes et phrases interdites absentes).
+* `verify_pdf_garble.py` : aucune chaîne corrompue interdite dans les huit PDF. Les seuls `?` sont ceux de la question légitime du titre et de la citation littérale d'une question de reviewer dans la lettre de réponse.
+* `count_abstract_pdf2.py` : 238 tokens alphanumériques dans le résumé du PDF, soit moins que la limite de 250 mots; la lettre indique correctement « approximately 238 words ».
+* `check_orders_all.py` : ordres recomputés $0.26/0.29$, $1.01/1.01$ et $1.04/1.04$, cohérents avec les sources corrigées.
+* Après ces vérifications, les fichiers `.aux`, `.log`, `.out` et les dossiers `__pycache__` générés ont été supprimés, ainsi que le dossier temporaire `scripts/manuscript_support/figs_new`; seuls les exemplaires synchronisés dans `submission_package/figs_new`, `REV/figures`, `REV/figures/final_supplement`, `REV/supplement/figs` et `REV/supplement/figs_new` subsistent.
 

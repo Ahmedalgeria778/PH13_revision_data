@@ -14,13 +14,13 @@ gradient-valid quadrature and physical junction radii.
 ## Increment diagnostics
 
 - r0=0: production increments 0.006500, 0.003317, 0.002102; diffusive increments 0.007033, 0.003535, 0.002216 (128→256, 256→384, 384→512).
-  Equal-doubling order from 256/512: production 1.63; diffusive 1.67.
+  Equal-doubling order from 128/256/512: production 0.26; diffusive 0.29.
   128/256/384 fitted order: production 0.25; diffusive 0.27.
 - r0=0.25: production increments 0.002979, 0.001008, 0.000467; diffusive increments 0.002972, 0.001007, 0.000466 (128→256, 256→384, 384→512).
-  Equal-doubling order from 256/512: production 2.67; diffusive 2.67.
+  Equal-doubling order from 128/256/512: production 1.01; diffusive 1.01.
   128/256/384 fitted order: production 0.97; diffusive 0.97.
 - r0=0.5: production increments 0.002062, 0.000685, 0.000321; diffusive increments 0.002059, 0.000683, 0.000319 (128→256, 256→384, 384→512).
-  Equal-doubling order from 256/512: production 2.69; diffusive 2.69.
+  Equal-doubling order from 128/256/512: production 1.04; diffusive 1.04.
   128/256/384 fitted order: production 1.01; diffusive 1.01.
 
 The N=128 fields agree by construction because U_lid and tau match.
